@@ -7,7 +7,6 @@ Working on `exchange` endpoints first.
 ### TODO
 - [ ] define `PandaToken` in `exchange/exchange.yaml` under `abis`
 - [x] update contract addresses for `contants/config/mainnet.json`
-        + add avax/eth address
 - [ ] update `exchange` and remove/rename constants
 
 ### (README)

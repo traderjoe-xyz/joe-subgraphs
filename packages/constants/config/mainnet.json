@@ -1,5 +1,8 @@
 {
     "factory_address": "0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699",
+    "wavax_address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "avax_eth_pair_address": "0x083E14c8C0E122E374E4c6fF2169D8DB7e6728BE", 
+    "avax_usdt_pair_address": "0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2",
     "bambooV2_token_address": "0x9a928D7dcD8D7E5Cb6860B7768eC2D87B8934267", 
     "bambooV2_avax_pair_address": "0xAc3757c2305D6d1AB30f46b9278d7946Da2B92F7",
     "bambooV2_eth_pair_address": "0xc9214C2ABB20a8Ce59c0bE1a3f853502eAcE507A",
