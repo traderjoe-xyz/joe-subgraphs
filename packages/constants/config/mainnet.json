@@ -1,6 +1,7 @@
 {
     "factory_address": "0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699",
     "wavax_address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "usdt_address": "0xde3A24028580884448a5397872046a019649b084",
     "avax_eth_pair_address": "0x083E14c8C0E122E374E4c6fF2169D8DB7e6728BE", 
     "avax_usdt_pair_address": "0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2",
     "bambooV2_token_address": "0x9a928D7dcD8D7E5Cb6860B7768eC2D87B8934267", 
@@ -8,5 +9,7 @@
     "bambooV2_eth_pair_address": "0xc9214C2ABB20a8Ce59c0bE1a3f853502eAcE507A",
     "bambooV2_btc_pair_address": "0x2036b7453814dc785Ab76486f2aA4d3BCDB33a04",
     "bambooV2_usdt_pair_address": "0x9D180ee4d3bbf4FDA53677b5833d7f33F04bFA2e",
-    "bambooV2_dai_pair_address": "0x9eEcAAc711bdf4be130727B2E97DeE80ACB019eC"
+    "bambooV2_dai_pair_address": "0x9eEcAAc711bdf4be130727B2E97DeE80ACB019eC", 
+    "pandaswap_start_block": "800000",
+    "pandaswap_wavax_usdt_pair_address": "0x2545b379dcBb673E36c612CFdB8D6f1d61480bCA"
 }

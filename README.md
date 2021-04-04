@@ -5,9 +5,14 @@ Forked from `sushiswap-subgraph`.
 Working on `exchange` endpoints first. 
 
 ### TODO
-- [ ] define `PandaToken` in `exchange/exchange.yaml` under `abis`
-- [x] update contract addresses for `contants/config/mainnet.json`
+- [x] update `constants` 
+    + update contract addresses for `contants/config/mainnet.json`
+    + update `index.ts`
+- [x] update `pricing`
+    + add `pandaswap_wavax_usdt_pair_address` in `constants/config/mainnet.json`
+    + update the starting block for pandaswap
 - [ ] update `exchange` and remove/rename constants
+- [ ] define `PandaToken` in `exchange/exchange.yaml` under `abis`
 
 ### (README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
