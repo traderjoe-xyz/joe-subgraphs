@@ -24,31 +24,38 @@ export const FACTORY_ADDRESS = Address.fromString('{{ factory_address }}')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
 
-export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
+export const BAMBOOV2_TOKEN_ADDRESS = Address.fromString('{{ bambooV2_token_address }}')
+export const BAMBOOV2_AVAX_ADDRESS = Address.fromString('{{ bambooV2_avax_pair_address }}')
+export const BAMBOOV2_ETH_ADDRESS = Address.fromString('{{ bambooV2_eth_pair_address }}')
+export const BAMBOOV2_BTC_ADDRESS = Address.fromString('{{ bambooV2_btc_pair_address }}')
+export const BAMBOOV2_USDT_ADDRESS = Address.fromString('{{ bambooV2_usdt_pair_address }}')
+export const BAMBOOV2_DAI_ADDRESS = Address.fromString('{{ bambooV2_dai_pair_address }}')
 
-export const SUSHI_BAR_ADDRESS = Address.fromString('{{ sushi_bar_address }}')
+// export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
 
-export const SUSHI_MAKER_ADDRESS = Address.fromString('{{ sushi_maker_address }}')
+// export const SUSHI_BAR_ADDRESS = Address.fromString('{{ sushi_bar_address }}')
 
-export const SUSHI_TOKEN_ADDRESS = Address.fromString('{{ sushi_token_address }}')
+// export const SUSHI_MAKER_ADDRESS = Address.fromString('{{ sushi_maker_address }}')
 
-export const SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ sushi_usdt_pair_address }}')
+// export const SUSHI_TOKEN_ADDRESS = Address.fromString('{{ sushi_token_address }}')
 
-export const XSUSHI_USDC_PAIR_ADDRESS = Address.fromString('{{ xsushi_usdc_pair_address }}')
+// export const SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ sushi_usdt_pair_address }}')
 
-export const XSUSHI_WETH_PAIR_ADDRESS = Address.fromString('{{ xsushi_weth_pair_address }}')
+// export const XSUSHI_USDC_PAIR_ADDRESS = Address.fromString('{{ xsushi_usdc_pair_address }}')
 
-export const SUSHI_DISTRIBUTOR_ADDRESS = Address.fromString('{{ sushi_distributor_address }}')
+// export const XSUSHI_WETH_PAIR_ADDRESS = Address.fromString('{{ xsushi_weth_pair_address }}')
+
+// export const SUSHI_DISTRIBUTOR_ADDRESS = Address.fromString('{{ sushi_distributor_address }}')
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
 
-export const USDC_WETH_PAIR = '{{ usdc_weth_pair }}'
+// export const USDC_WETH_PAIR = '{{ usdc_weth_pair }}'
 
-export const DAI_WETH_PAIR = '{{ dai_weth_pair }}'
+// export const DAI_WETH_PAIR = '{{ dai_weth_pair }}'
 
-export const USDT_WETH_PAIR = '{{ usdt_weth_pair }}'
+// export const USDT_WETH_PAIR = '{{ usdt_weth_pair }}'
 
-export const SUSHI_USDT_PAIR = '{{ sushi_usdt_pair }}'
+// export const SUSHI_USDT_PAIR = '{{ sushi_usdt_pair }}'
 
 export const WHITELIST: string[] = [
   '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', // WETH
@@ -75,20 +82,20 @@ export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 // minimum liquidity for price to get tracked
 export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
-export const WETH_ADDRESS = Address.fromString('{{ weth_address }}')
+// export const WETH_ADDRESS = Address.fromString('{{ weth_address }}')
 
-export const SUSHISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ sushiswap_weth_usdt_pair_address }}')
+// export const SUSHISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ sushiswap_weth_usdt_pair_address }}')
 
-export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
+// export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(10750000)
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(800000)
 
-export const UNISWAP_FACTORY_ADDRESS = Address.fromString('{{ uniswap_factory_address }}')
+// export const UNISWAP_FACTORY_ADDRESS = Address.fromString('{{ uniswap_factory_address }}')
 
-export const UNISWAP_SUSHI_ETH_PAIR_FIRST_LIQUDITY_BLOCK = BigInt.fromI32(10750005)
+// export const UNISWAP_SUSHI_ETH_PAIR_FIRST_LIQUDITY_BLOCK = BigInt.fromI32(10750005)
 
-export const UNISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_weth_usdt_pair_address }}')
+// export const UNISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_weth_usdt_pair_address }}')
 
-export const UNISWAP_SUSHI_ETH_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_eth_pair_address }}')
+// export const UNISWAP_SUSHI_ETH_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_eth_pair_address }}')
 
-export const UNISWAP_SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_usdt_pair_address }}')
+// export const UNISWAP_SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_usdt_pair_address }}')

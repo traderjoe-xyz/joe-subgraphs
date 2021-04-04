@@ -1,5 +1,16 @@
-# SushiSwap Subgraph
+# PandaSwap (AVAX) Subgraph
 
+Forked from `sushiswap-subgraph`. 
+
+Working on `exchange` endpoints first. 
+
+### TODO
+- [ ] define `PandaToken` in `exchange/exchange.yaml` under `abis`
+- [x] update contract addresses for `contants/config/mainnet.json`
+        + add avax/eth address
+- [ ] update `exchange` and remove/rename constants
+
+### (README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
 
 The Graph exposes a GraphQL endpoint to query the events and entities within the SushiSwap ecosytem.

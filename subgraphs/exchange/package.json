@@ -2,17 +2,17 @@
     "name": "exchange",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "SushiSwap",
+    "author": "PandaSwap",
     "files": [
         "generated"
     ],
     "scripts": {
         "codegen": "graph codegen exchange.yaml",
         "build": "graph build exchange.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sushiswap/exchange exchange.yaml",
-        "create-local": "graph create --node http://localhost:8020/ /sushiswap/sushiswap",
-        "remove-local": "graph remove --node http://localhost:8020/ /sushiswap/sushiswap",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /sushiswap/sushiswap",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ pandaswap/exchange exchange.yaml",
+        "create-local": "graph create --node http://localhost:8020/ /cryptofish7/pandaswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /cryptofish7/pandaswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /cryptofish7/pandaswap",
 
         "prepare:bsc": "mustache config/bsc.json exchange.template.yaml > exchange.yaml",
         "prepare:fantom": "mustache config/fantom.json exchange.template.yaml > exchange.yaml",
