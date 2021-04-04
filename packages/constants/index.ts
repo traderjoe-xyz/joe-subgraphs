@@ -36,7 +36,7 @@ export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('0x083E14c8C0E122E374E4c
 export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
 export const WAVAX_ADDRESS = Address.fromString('0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7')
 
-// export const MASTER_CHEF_ADDRESS = Address.fromString('')
+export const MASTER_CHEF_ADDRESS = Address.fromString('0x124737ce6a43A98CAAF095AcCb9A9D6fccBb0E73')
 
 // export const SUSHI_BAR_ADDRESS = Address.fromString('')
 

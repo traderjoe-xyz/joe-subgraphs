@@ -36,7 +36,7 @@ export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('{{ avax_eth_pair_addres
 export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
 export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 
-// export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
+export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
 
 // export const SUSHI_BAR_ADDRESS = Address.fromString('{{ sushi_bar_address }}')
 
