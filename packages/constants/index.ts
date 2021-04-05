@@ -23,7 +23,7 @@ export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 export const FACTORY_ADDRESS = Address.fromString('0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
-export const PANDASWAP_START_BLOCK = BigInt.fromString('800000')
+export const PANDASWAP_START_BLOCK = BigInt.fromI32(80000)
 
 export const BAMBOOV2_TOKEN_ADDRESS = Address.fromString('0x9a928D7dcD8D7E5Cb6860B7768eC2D87B8934267')
 export const BAMBOOV2_AVAX_PAIR_ADDRESS = Address.fromString('0xAc3757c2305D6d1AB30f46b9278d7946Da2B92F7')
@@ -103,7 +103,7 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 export const PANDASWAP_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
 export const USDT_ADDRESS = Address.fromString('0xde3A24028580884448a5397872046a019649b084')
 
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32('800000')
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(80000)
 
 // export const UNISWAP_FACTORY_ADDRESS = Address.fromString('')
 

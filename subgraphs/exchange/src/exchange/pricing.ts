@@ -70,7 +70,7 @@ export function findAvaxPerToken(token: Token): BigDecimal {
     return BIG_DECIMAL_ZERO
   }
 
-  const pair = Pair.bind(address)
+  const pair = PairContract.bind(address)
 
   const reserves = pair.getReserves()
 
