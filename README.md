@@ -12,13 +12,12 @@ Working on `exchange` endpoints first.
     + add `pandaswap_wavax_usdt_pair_address` in `constants/config/mainnet.json`
     + update the starting block for pandaswap
 - [ ] update `exchange` and remove/rename constants
-    + update `config/mainnet.json`
+    + [x] update `config/mainnet.json`
+    + [x] add `pandaswap-sdk` and update ABIs
+    + [x] update `exchange.template.yaml`
     + refactor ETH to AVAX basis `exchange.graphql`
-    + update `exchange.template.yaml`
     + refactor/pull `pricing.ts`
     + update `pair.ts`
-
-- [ ] define `PandaToken` in `exchange/exchange.yaml` under `abis`
 
 ### (README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
