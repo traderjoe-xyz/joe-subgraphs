@@ -23,8 +23,8 @@ export function createLiquidityPositionSnapshot(position: LiquidityPosition, blo
   snapshot.block = block.number.toI32()
   snapshot.user = position.user
   snapshot.pair = position.pair
-  snapshot.token0PriceUSD = token0.derivedETH.times(bundle.ethPrice)
-  snapshot.token1PriceUSD = token1.derivedETH.times(bundle.ethPrice)
+  snapshot.token0PriceUSD = token0.derivedAVAX.times(bundle.avaxPrice)
+  snapshot.token1PriceUSD = token1.derivedAVAX.times(bundle.avaxPrice)
   snapshot.reserve0 = pair.reserve0
   snapshot.reserve1 = pair.reserve1
   snapshot.reserveUSD = pair.reserveUSD

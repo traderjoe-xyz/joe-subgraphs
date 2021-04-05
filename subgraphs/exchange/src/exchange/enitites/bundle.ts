@@ -7,7 +7,7 @@ export function getBundle(): Bundle {
 
   if (bundle === null) {
     bundle = new Bundle('1')
-    bundle.ethPrice = BIG_DECIMAL_ZERO
+    bundle.avaxPrice = BIG_DECIMAL_ZERO
     bundle.save()
   }
 

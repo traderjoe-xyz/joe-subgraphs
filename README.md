@@ -17,15 +17,15 @@ Working on `exchange` endpoints first.
     + [x] update `exchange.template.yaml`
     + [x] refactor ETH to AVAX basis `exchange.graphql`
     + [x] refactor/pull `pricing.ts`
-    + [x] update `mappings/pair.ts`
-    + add whitelist of tokens
-    + update `entities`: 
-        - `token.ts`
-        - `token-day-data.ts`
-        - `pair.ts`
-        - `liquidity-position-snapshot.ts`
-        - `factory.ts`
-        - `bundle.ts`
+    + [ ] update `mappings/pair.ts`
+        - add whitelist of tokens
+    + [x] update `entities`: 
+        - [x] `token.ts`
+        - [x] `token-day-data.ts`
+        - [x] `pair.ts`
+        - [x] `liquidity-position-snapshot.ts`
+        - [x] `factory.ts`
+        - [x] `bundle.ts`
 
 
 ### (README)
