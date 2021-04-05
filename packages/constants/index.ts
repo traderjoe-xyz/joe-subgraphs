@@ -91,10 +91,10 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
 // export const SUSHISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('')
 
-export const PANDASWAP_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0x2545b379dcBb673E36c612CFdB8D6f1d61480bCA')
+export const PANDASWAP_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
 export const USDT_ADDRESS = Address.fromString('0xde3A24028580884448a5397872046a019649b084')
 
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(800000)
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32('800000')
 
 // export const UNISWAP_FACTORY_ADDRESS = Address.fromString('')
 
