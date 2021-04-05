@@ -78,7 +78,7 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   return avax.div(BIG_DECIMAL_1E18)
 }
 
-export function getAvaxPrice(block: ethereum.Block): BigDecimal {
+export function getBambooV2Price(block: ethereum.Block): BigDecimal {
 
   if (block.number.lt(PANDASWAP_START_BLOCK)) {
     return BIG_DECIMAL_ZERO

@@ -16,8 +16,16 @@ Working on `exchange` endpoints first.
     + [x] add `pandaswap-sdk` and update ABIs
     + [x] update `exchange.template.yaml`
     + [x] refactor ETH to AVAX basis `exchange.graphql`
-    + refactor/pull `pricing.ts`
-    + update `pair.ts`
+    + [x] refactor/pull `pricing.ts`
+    + update `mappings/pair.ts`
+    + update `entities`: 
+        - `token.ts`
+        - `token-day-data.ts`
+        - `pair.ts`
+        - `liquidity-position-snapshot.ts`
+        - `factory.ts`
+        - `bundle.ts`
+
 
 ### (README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
