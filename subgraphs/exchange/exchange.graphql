@@ -29,7 +29,7 @@ type User @entity {
 # Bundle
 type Bundle @entity {
   id: ID!
-  ethPrice: BigDecimal! # price of ETH usd
+  avaxPrice: BigDecimal! # price of AVAX usd
 }
 
 # Factory
@@ -43,8 +43,8 @@ type Factory @entity {
   # Volume USD
   volumeUSD: BigDecimal!
 
-  # Volume ETH
-  volumeETH: BigDecimal!
+  # Volume AVAX
+  volumeAVAX: BigDecimal!
 
   # Untracked volume
   untrackedVolumeUSD: BigDecimal!
@@ -52,8 +52,8 @@ type Factory @entity {
   # Liquidity USD
   liquidityUSD: BigDecimal!
 
-  # Liquidity ETH
-  liquidityETH: BigDecimal!
+  # Liquidity AVAX
+  liquidityAVAX: BigDecimal!
 
   # Transaction count
   txCount: BigInt!
@@ -89,12 +89,12 @@ type HourData @entity {
   factory: Factory!
 
   # volume
-  volumeETH: BigDecimal!
+  volumeAVAX: BigDecimal!
   volumeUSD: BigDecimal!
   untrackedVolume: BigDecimal!
 
   # liquidity
-  liquidityETH: BigDecimal!
+  liquidityAVAX: BigDecimal!
   liquidityUSD: BigDecimal!
 
   # tx count
@@ -113,12 +113,12 @@ type DayData @entity {
   factory: Factory!
 
   # volume
-  volumeETH: BigDecimal!
+  volumeAVAX: BigDecimal!
   volumeUSD: BigDecimal!
   untrackedVolume: BigDecimal!
 
   # liquidity
-  liquidityETH: BigDecimal!
+  liquidityAVAX: BigDecimal!
   liquidityUSD: BigDecimal!
 
   # tx count
@@ -152,7 +152,7 @@ type Token @entity {
   # liquidity across all pairs
   liquidity: BigDecimal!
 
-  derivedETH: BigDecimal!
+  derivedAVAX: BigDecimal!
 
   # Token hour data
   hourData: [TokenHourData!]! @derivedFrom(field: "token")
@@ -186,7 +186,7 @@ type TokenHourData @entity {
 
   # volume
   volume: BigDecimal!
-  volumeETH: BigDecimal!
+  volumeAVAX: BigDecimal!
   volumeUSD: BigDecimal!
 
   # tx count
@@ -194,7 +194,7 @@ type TokenHourData @entity {
 
   # liquidity
   liquidity: BigDecimal!
-  liquidityETH: BigDecimal!
+  liquidityAVAX: BigDecimal!
   liquidityUSD: BigDecimal!
 
   # price usd
@@ -214,7 +214,7 @@ type TokenDayData @entity {
 
   # volume
   volume: BigDecimal!
-  volumeETH: BigDecimal!
+  volumeAVAX: BigDecimal!
   volumeUSD: BigDecimal!
 
   # tx count
@@ -222,7 +222,7 @@ type TokenDayData @entity {
 
   # liquidity
   liquidity: BigDecimal!
-  liquidityETH: BigDecimal!
+  liquidityAVAX: BigDecimal!
   liquidityUSD: BigDecimal!
 
   # price usd
@@ -249,11 +249,11 @@ type Pair @entity {
   totalSupply: BigDecimal!
 
   # derived liquidity
-  reserveETH: BigDecimal!
+  reserveAVAX: BigDecimal!
   reserveUSD: BigDecimal!
 
   # used for separating per pair reserves and global
-  trackedReserveETH: BigDecimal!
+  trackedReserveAVAX: BigDecimal!
 
   # Price in terms of the asset pair
   token0Price: BigDecimal!
@@ -449,7 +449,7 @@ type Burn @entity {
   # derived amount based on available prices of tokens
   amountUSD: BigDecimal
 
-  # mark uncomplete in ETH case
+  # mark uncomplete in AVAX case
   complete: Boolean!
 
   # optional fee fields, if a Transfer event is fired in _mintFee

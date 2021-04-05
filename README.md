@@ -15,7 +15,7 @@ Working on `exchange` endpoints first.
     + [x] update `config/mainnet.json`
     + [x] add `pandaswap-sdk` and update ABIs
     + [x] update `exchange.template.yaml`
-    + refactor ETH to AVAX basis `exchange.graphql`
+    + [x] refactor ETH to AVAX basis `exchange.graphql`
     + refactor/pull `pricing.ts`
     + update `pair.ts`
 
