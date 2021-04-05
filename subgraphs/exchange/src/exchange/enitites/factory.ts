@@ -7,10 +7,10 @@ export function getFactory(id: Address = FACTORY_ADDRESS): Factory {
 
   if (factory === null) {
     factory = new Factory(id.toHex())
-    factory.volumeETH = BIG_DECIMAL_ZERO
+    factory.volumeAVAX = BIG_DECIMAL_ZERO
     factory.volumeUSD = BIG_DECIMAL_ZERO
     factory.untrackedVolumeUSD = BIG_DECIMAL_ZERO
-    factory.liquidityETH = BIG_DECIMAL_ZERO
+    factory.liquidityAVAX = BIG_DECIMAL_ZERO
     factory.liquidityUSD = BIG_DECIMAL_ZERO
     factory.pairCount = BIG_INT_ZERO
     factory.txCount = BIG_INT_ZERO
@@ -33,10 +33,10 @@ export function getDayData(event: ethereum.Event): DayData {
     dayData.factory = factory.id
     dayData.date = id * 86400
     dayData.volumeUSD = BIG_DECIMAL_ZERO
-    dayData.volumeETH = BIG_DECIMAL_ZERO
+    dayData.volumeAVAX = BIG_DECIMAL_ZERO
     dayData.untrackedVolume = BIG_DECIMAL_ZERO
     dayData.liquidityUSD = factory.liquidityUSD
-    dayData.liquidityETH = factory.liquidityETH
+    dayData.liquidityAVAX = factory.liquidityAVAX
     dayData.txCount = factory.txCount
   }
 
@@ -49,7 +49,7 @@ export function updateDayData(event: ethereum.Event): DayData {
   const dayData = getDayData(event)
 
   dayData.liquidityUSD = factory.liquidityUSD
-  dayData.liquidityETH = factory.liquidityETH
+  dayData.liquidityAVAX = factory.liquidityAVAX
   dayData.txCount = factory.txCount
 
   dayData.save()

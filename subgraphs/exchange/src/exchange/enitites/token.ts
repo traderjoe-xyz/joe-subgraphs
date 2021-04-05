@@ -29,7 +29,7 @@ export function getToken(address: Address): Token | null {
     }
 
     token.decimals = decimals
-    token.derivedETH = BIG_DECIMAL_ZERO
+    token.derivedAVAX = BIG_DECIMAL_ZERO
     token.volume = BIG_DECIMAL_ZERO
     token.volumeUSD = BIG_DECIMAL_ZERO
     token.untrackedVolumeUSD = BIG_DECIMAL_ZERO
@@ -112,7 +112,7 @@ export function getTotalSupply(address: Address): BigInt {
 }
 
 export function getDecimals(address: Address): BigInt {
-  // hardcode overrides
+  // hardcode overrides NOTE: AAVE
   if (address.toHex() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
     return BigInt.fromI32(18)
   }

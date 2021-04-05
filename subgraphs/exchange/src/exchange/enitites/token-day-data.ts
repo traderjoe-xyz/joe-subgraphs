@@ -19,9 +19,9 @@ export function getTokenDayData(token: Token, event: ethereum.Event): TokenDayDa
     tokenDayData = new TokenDayData(id)
     tokenDayData.date = date
     tokenDayData.token = token.id
-    tokenDayData.priceUSD = token.derivedETH.times(bundle.ethPrice)
+    tokenDayData.priceUSD = token.derivedAVAX.times(bundle.avaxPrice)
     tokenDayData.volume = BIG_DECIMAL_ZERO
-    tokenDayData.volumeETH = BIG_DECIMAL_ZERO
+    tokenDayData.volumeAVAX = BIG_DECIMAL_ZERO
     tokenDayData.volumeUSD = BIG_DECIMAL_ZERO
     tokenDayData.liquidityUSD = BIG_DECIMAL_ZERO
     tokenDayData.txCount = BigInt.fromI32(0)
@@ -35,10 +35,10 @@ export function updateTokenDayData(token: Token, event: ethereum.Event): TokenDa
 
   const tokenDayData = getTokenDayData(token, event)
 
-  tokenDayData.priceUSD = token.derivedETH.times(bundle.ethPrice)
+  tokenDayData.priceUSD = token.derivedAVAX.times(bundle.avaxPrice)
   tokenDayData.liquidity = token.liquidity
-  tokenDayData.liquidityETH = token.liquidity.times(token.derivedETH as BigDecimal)
-  tokenDayData.liquidityUSD = tokenDayData.liquidityETH.times(bundle.ethPrice)
+  tokenDayData.liquidityAVAX = token.liquidity.times(token.derivedAVAX as BigDecimal)
+  tokenDayData.liquidityUSD = tokenDayData.liquidityAVAX.times(bundle.avaxPrice)
   tokenDayData.txCount = tokenDayData.txCount.plus(BigInt.fromI32(1))
 
   tokenDayData.save()
