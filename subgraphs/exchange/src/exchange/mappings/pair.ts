@@ -22,7 +22,7 @@ import {
   updatePairHourData,
   updateTokenDayData,
 } from '../enitites'
-import { findEthPerToken, getEthPrice } from '../pricing'
+import { findAvaxPerToken, getAvaxPrice } from '../pricing'
 
 /**
  * Accepts tokens and amounts, return tracked amount based on token whitelist
@@ -38,8 +38,8 @@ export function getTrackedVolumeUSD(
   pair: Pair
 ): BigDecimal {
   const bundle = getBundle()
-  const price0 = token0.derivedETH.times(bundle.ethPrice)
-  const price1 = token1.derivedETH.times(bundle.ethPrice)
+  const price0 = token0.derivedAVAX.times(bundle.avaxPrice)
+  const price1 = token1.derivedAVAX.times(bundle.avaxPrice)
 
   // if less than 5 LPs, require high minimum reserve amount amount or return 0
   if (pair.liquidityProviderCount.lt(BigInt.fromI32(5))) {
@@ -94,8 +94,8 @@ export function getTrackedLiquidityUSD(
   token1: Token
 ): BigDecimal {
   const bundle = getBundle()
-  const price0 = token0.derivedETH.times(bundle.ethPrice)
-  const price1 = token1.derivedETH.times(bundle.ethPrice)
+  const price0 = token0.derivedAVAX.times(bundle.avaxPrice)
+  const price1 = token1.derivedAVAX.times(bundle.avaxPrice)
 
   // both are whitelist tokens, take average of both amounts
   if (WHITELIST.includes(token0.id) && WHITELIST.includes(token1.id)) {
@@ -294,7 +294,7 @@ export function onSync(event: SyncEvent): void {
   const factory = getFactory()
 
   // reset factory liquidity by subtracting only tracked liquidity
-  factory.liquidityETH = factory.liquidityETH.minus(pair.trackedReserveETH as BigDecimal)
+  factory.liquidityAVAX = factory.liquidityAVAX.minus(pair.trackedReserveAVAX as BigDecimal)
 
   // reset token total liquidity amounts
   token0.liquidity = token0.liquidity.minus(pair.reserve0)
@@ -320,34 +320,34 @@ export function onSync(event: SyncEvent): void {
   // update ETH price now that reserves could have changed
   const bundle = getBundle()
   // Pass the block so we can get accurate price data before migration
-  bundle.ethPrice = getEthPrice(event.block)
+  bundle.avaxPrice = getAvaxPrice(event.block)
   bundle.save()
 
-  token0.derivedETH = findEthPerToken(token0 as Token)
-  token1.derivedETH = findEthPerToken(token1 as Token)
+  token0.derivedAVAX = findAvaxPerToken(token0 as Token)
+  token1.derivedAVAX = findAvaxPerToken(token1 as Token)
   token0.save()
   token1.save()
 
   // get tracked liquidity - will be 0 if neither is in whitelist
-  let trackedLiquidityETH: BigDecimal
-  if (bundle.ethPrice.notEqual(BIG_DECIMAL_ZERO)) {
-    trackedLiquidityETH = getTrackedLiquidityUSD(pair.reserve0, token0 as Token, pair.reserve1, token1 as Token).div(
-      bundle.ethPrice
+  let trackedLiquidityAVAX: BigDecimal
+  if (bundle.avaxPrice.notEqual(BIG_DECIMAL_ZERO)) {
+    trackedLiquidityAVAX = getTrackedLiquidityUSD(pair.reserve0, token0 as Token, pair.reserve1, token1 as Token).div(
+      bundle.avaxPrice
     )
   } else {
-    trackedLiquidityETH = BIG_DECIMAL_ZERO
+    trackedLiquidityAVAX = BIG_DECIMAL_ZERO
   }
 
   // use derived amounts within pair
-  pair.trackedReserveETH = trackedLiquidityETH
-  pair.reserveETH = pair.reserve0
-    .times(token0.derivedETH as BigDecimal)
-    .plus(pair.reserve1.times(token1.derivedETH as BigDecimal))
-  pair.reserveUSD = pair.reserveETH.times(bundle.ethPrice)
+  pair.trackedReserveAVAX = trackedLiquidityAVAX
+  pair.reserveAVAX = pair.reserve0
+    .times(token0.derivedAVAX as BigDecimal)
+    .plus(pair.reserve1.times(token1.derivedAVAX as BigDecimal))
+  pair.reserveUSD = pair.reserveAVAX.times(bundle.avaxPrice)
 
   // use tracked amounts globally
-  factory.liquidityETH = factory.liquidityETH.plus(trackedLiquidityETH)
-  factory.liquidityUSD = factory.liquidityETH.times(bundle.ethPrice)
+  factory.liquidityAVAX = factory.liquidityAVAX.plus(trackedLiquidityAVAX)
+  factory.liquidityUSD = factory.liquidityAVAX.times(bundle.avaxPrice)
 
   // now correctly set liquidity amounts for each token
   token0.liquidity = token0.liquidity.plus(pair.reserve0)
@@ -384,10 +384,10 @@ export function onMint(event: MintEvent): void {
 
   // get new amounts of USD and ETH for tracking
   const bundle = getBundle()
-  const amountTotalUSD = token1.derivedETH
+  const amountTotalUSD = token1.derivedAVAX
     .times(token1Amount)
-    .plus(token0.derivedETH.times(token0Amount))
-    .times(bundle.ethPrice)
+    .plus(token0.derivedAVAX.times(token0Amount))
+    .times(bundle.avaxPrice)
 
   // update txn counts
   pair.txCount = pair.txCount.plus(BigInt.fromI32(1))
@@ -450,10 +450,10 @@ export function onBurn(event: BurnEvent): void {
 
   // get new amounts of USD and ETH for tracking
   const bundle = getBundle()
-  const amountTotalUSD = token1.derivedETH
+  const amountTotalUSD = token1.derivedAVAX
     .times(token1Amount)
-    .plus(token0.derivedETH.times(token0Amount))
-    .times(bundle.ethPrice)
+    .plus(token0.derivedAVAX.times(token0Amount))
+    .times(bundle.avaxPrice)
 
   // update txn counts
   factory.txCount = factory.txCount.plus(BigInt.fromI32(1))
@@ -513,11 +513,11 @@ export function onSwap(event: SwapEvent): void {
   const bundle = getBundle()
 
   // get total amounts of derived USD and ETH for tracking
-  const derivedAmountETH = token1.derivedETH
+  const derivedAmountETH = token1.derivedAVAX
     .times(amount1Total)
-    .plus(token0.derivedETH.times(amount0Total))
+    .plus(token0.derivedAVAX.times(amount0Total))
     .div(BigDecimal.fromString('2'))
-  const derivedAmountUSD = derivedAmountETH.times(bundle.ethPrice)
+  const derivedAmountUSD = derivedAmountETH.times(bundle.avaxPrice)
 
   // only accounts for volume through white listed tokens
   const trackedAmountUSD = getTrackedVolumeUSD(
@@ -530,10 +530,10 @@ export function onSwap(event: SwapEvent): void {
 
   let trackedAmountETH: BigDecimal
 
-  if (bundle.ethPrice.equals(BIG_DECIMAL_ZERO)) {
+  if (bundle.avaxPrice.equals(BIG_DECIMAL_ZERO)) {
     trackedAmountETH = BIG_DECIMAL_ZERO
   } else {
-    trackedAmountETH = trackedAmountUSD.div(bundle.ethPrice)
+    trackedAmountETH = trackedAmountUSD.div(bundle.avaxPrice)
   }
 
   // update token0 global volume and token liquidity stats
@@ -561,7 +561,7 @@ export function onSwap(event: SwapEvent): void {
   // update global values, only used tracked amounts for volume
   const factory = getFactory()
   factory.volumeUSD = factory.volumeUSD.plus(trackedAmountUSD)
-  factory.volumeETH = factory.volumeETH.plus(trackedAmountETH)
+  factory.volumeAVAX = factory.volumeAVAX.plus(trackedAmountETH)
   factory.untrackedVolumeUSD = factory.untrackedVolumeUSD.plus(derivedAmountUSD)
   factory.txCount = factory.txCount.plus(BigInt.fromI32(1))
 
@@ -616,7 +616,7 @@ export function onSwap(event: SwapEvent): void {
 
   // swap specific updating
   dayData.volumeUSD = dayData.volumeUSD.plus(trackedAmountUSD)
-  dayData.volumeETH = dayData.volumeETH.plus(trackedAmountETH)
+  dayData.volumeAVAX = dayData.volumeAVAX.plus(trackedAmountETH)
   dayData.untrackedVolume = dayData.untrackedVolume.plus(derivedAmountUSD)
   dayData.save()
 
@@ -634,17 +634,17 @@ export function onSwap(event: SwapEvent): void {
 
   // swap specific updating for token0
   token0DayData.volume = token0DayData.volume.plus(amount0Total)
-  token0DayData.volumeETH = token0DayData.volumeETH.plus(amount0Total.times(token1.derivedETH as BigDecimal))
+  token0DayData.volumeAVAX = token0DayData.volumeAVAX.plus(amount0Total.times(token1.derivedAVAX as BigDecimal))
   token0DayData.volumeUSD = token0DayData.volumeUSD.plus(
-    amount0Total.times(token0.derivedETH as BigDecimal).times(bundle.ethPrice)
+    amount0Total.times(token0.derivedAVAX as BigDecimal).times(bundle.avaxPrice)
   )
   token0DayData.save()
 
   // swap specific updating
   token1DayData.volume = token1DayData.volume.plus(amount1Total)
-  token1DayData.volumeETH = token1DayData.volumeETH.plus(amount1Total.times(token1.derivedETH as BigDecimal))
+  token1DayData.volumeAVAX = token1DayData.volumeAVAX.plus(amount1Total.times(token1.derivedAVAX as BigDecimal))
   token1DayData.volumeUSD = token1DayData.volumeUSD.plus(
-    amount1Total.times(token1.derivedETH as BigDecimal).times(bundle.ethPrice)
+    amount1Total.times(token1.derivedAVAX as BigDecimal).times(bundle.avaxPrice)
   )
   token1DayData.save()
 }
