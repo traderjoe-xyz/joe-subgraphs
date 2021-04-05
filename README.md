@@ -17,8 +17,8 @@ Working on `exchange` endpoints first.
     + [x] update `exchange.template.yaml`
     + [x] refactor ETH to AVAX basis `exchange.graphql`
     + [x] refactor/pull `pricing.ts`
-    + [ ] update `mappings/pair.ts`
-        - add whitelist of tokens
+    + [x] update `mappings/pair.ts`
+        - [x] add whitelist of tokens
     + [x] update `entities`: 
         - [x] `token.ts`
         - [x] `token-day-data.ts`
