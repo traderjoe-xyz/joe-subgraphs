@@ -9,11 +9,12 @@
     "scripts": {
         "codegen": "graph codegen exchange.yaml",
         "build": "graph build exchange.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ pandaswap/exchange exchange.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/pandaswap exchange.yaml",
         "create-local": "graph create --node http://localhost:8020/ /cryptofish7/pandaswap",
         "remove-local": "graph remove --node http://localhost:8020/ /cryptofish7/pandaswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /cryptofish7/pandaswap",
 
+        "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.yaml",
         "prepare:bsc": "mustache config/bsc.json exchange.template.yaml > exchange.yaml",
         "prepare:fantom": "mustache config/fantom.json exchange.template.yaml > exchange.yaml",
         "prepare:goerli": "mustache config/goerli.json exchange.template.yaml > exchange.yaml",
