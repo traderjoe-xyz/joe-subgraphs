@@ -9,7 +9,7 @@
     "scripts": {
         "codegen": "graph codegen exchange.yaml",
         "build": "graph build exchange.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/pandaswap exchange.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/pandaswapAvax exchange.yaml",
         "create-local": "graph create --node http://localhost:8020/ /cryptofish7/pandaswap",
         "remove-local": "graph remove --node http://localhost:8020/ /cryptofish7/pandaswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /cryptofish7/pandaswap",
