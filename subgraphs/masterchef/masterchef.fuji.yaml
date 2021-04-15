@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: MasterChef
-    network: {{ network }}
+    network: fuji
     source:
-      address: '{{ address }}'
+      address: '0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae'
       abi: MasterChef
-      startBlock: {{ startBlock }}
+      startBlock: 800000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

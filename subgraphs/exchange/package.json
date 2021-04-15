@@ -7,15 +7,20 @@
         "generated"
     ],
     "scripts": {
-        "codegen": "graph codegen exchange.yaml",
-        "build": "graph build exchange.yaml",
+        "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
+        "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml",
+
+        "codegen:avax": "graph codegen exchange.avax.yaml",
+        "codegen:fuji": "graph codegen exchange.fuji.yaml",
+
+        "build:avax": "graph build exchange.avax.yaml",
+        "build:fuji": "graph build exchange.fuji.yaml",
+
         "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiExchangeFuji exchange.avax.yaml",
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiExchangeAvax exchange.fuji.yaml",
         "create-local": "graph create --node http://localhost:8020/ /0xmurloc/joeDefi",
         "remove-local": "graph remove --node http://localhost:8020/ /0xmurloc/joeDefi",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /0xmurloc/joeDefi",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /0xmurloc/joeDefi"
 
-        "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
-        "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml"
     }
 }

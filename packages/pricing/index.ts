@@ -26,7 +26,7 @@ export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   //    let address = block.number.le(BigInt.fromI32(10829344))
   //      ? UNISWAP_WETH_USDT_PAIR_ADDRESS
   //      : SUSHISWAP_WETH_USDT_PAIR_ADDRESS
-  if (block.number.le(BigInt.fromI32(TRADERJOE_START_BLOCK))) {
+  if (block.number.le(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
   }
 
@@ -54,7 +54,7 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
 
   // TODO: add fallback, e.g. pangolin
   //    block.number.le(BigInt.fromI32(10829344)) ? UNISWAP_FACTORY_ADDRESS : FACTORY_ADDRESS
-  if (block.number.le(BigInt.fromI32(TRADERJOE_START_BLOCK))) {
+  if (block.number.le(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
   }
   const factory = FactoryContract.bind(FACTORY_ADDRESS)
