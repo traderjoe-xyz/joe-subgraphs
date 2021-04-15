@@ -6,15 +6,11 @@ import {
   // DAI_WETH_PAIR,
   FACTORY_ADDRESS,
   MINIMUM_LIQUIDITY_THRESHOLD_ETH,
-  // SUSHI_USDT_PAIR,
-  // USDC_WETH_PAIR,
-  // USDT_WETH_PAIR,
-  // WETH_ADDRESS,
   // WHITELIST,
-  BAMBOOV2_TOKEN_ADDRESS,
-  BAMBOOV2_USDT_PAIR_ADDRESS,
-  PANDASWAP_START_BLOCK, 
-  PANDASWAP_WAVAX_USDT_PAIR_ADDRESS,
+  JOE_TOKEN_ADDRESS,
+  JOE_USDT_PAIR_ADDRESS,
+  TRADERJOE_START_BLOCK, 
+  TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
   USDT_ADDRESS,
   WAVAX_ADDRESS,
 } from 'const'
@@ -24,13 +20,13 @@ import { Pair, Token } from '../../generated/schema'
 import { Factory as FactoryContract } from '../../generated/Factory/Factory'
 import { Pair as PairContract } from '../../generated/Factory/Pair'
 
-// export const uniswapFactoryContract = FactoryContract.bind(Address.fromString("0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"))
+// export const uniswapFactoryContract = FactoryContract.bind(Address.fromString("<>"))
 
 export const factoryContract = FactoryContract.bind(FACTORY_ADDRESS)
 
-export function getBambooV2Price(): BigDecimal {
+export function getJoePrice(): BigDecimal {
   
-  const pair = Pair.load(BAMBOOV2_USDT_PAIR_ADDRESS.toString())
+  const pair = Pair.load(JOE_USDT_PAIR_ADDRESS.toString())
 
   if (pair) {
     return pair.token1Price
@@ -42,12 +38,12 @@ export function getBambooV2Price(): BigDecimal {
 export function getAvaxPrice(block: ethereum.Block = null): BigDecimal {
 
   // TODO: fallback to e.g. pangolin
-  if (block !== null && block.number.le(PANDASWAP_START_BLOCK)) {
+  if (block !== null && block.number.le(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
   }
 
   // TODO: get weighted average prices across many avax/stable pairs
-  const avaxUsdtPair = Pair.load(PANDASWAP_WAVAX_USDT_PAIR_ADDRESS.toString()) 
+  const avaxUsdtPair = Pair.load(TRADERJOE_WAVAX_USDT_PAIR_ADDRESS.toString()) 
   
   if (avaxUsdtPair == null) {
     log.warning('No eth pair...', [])

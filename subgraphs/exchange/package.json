@@ -2,27 +2,20 @@
     "name": "exchange",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "PandaSwap",
+    "author": "Joe Defi",
     "files": [
         "generated"
     ],
     "scripts": {
         "codegen": "graph codegen exchange.yaml",
         "build": "graph build exchange.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/pandaswapAvax exchange.yaml",
-        "create-local": "graph create --node http://localhost:8020/ /cryptofish7/pandaswap",
-        "remove-local": "graph remove --node http://localhost:8020/ /cryptofish7/pandaswap",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /cryptofish7/pandaswap",
+        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiExchangeFuji exchange.avax.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiExchangeAvax exchange.fuji.yaml",
+        "create-local": "graph create --node http://localhost:8020/ /0xmurloc/joeDefi",
+        "remove-local": "graph remove --node http://localhost:8020/ /0xmurloc/joeDefi",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /0xmurloc/joeDefi",
 
-        "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.yaml",
-        "prepare:bsc": "mustache config/bsc.json exchange.template.yaml > exchange.yaml",
-        "prepare:fantom": "mustache config/fantom.json exchange.template.yaml > exchange.yaml",
-        "prepare:goerli": "mustache config/goerli.json exchange.template.yaml > exchange.yaml",
-        "prepare:kovan": "mustache config/kovan.json exchange.template.yaml > exchange.yaml",
-        "prepare:mainnet": "mustache config/mainnet.json exchange.template.yaml > exchange.yaml",
-        "prepare:matic": "mustache config/matic.json exchange.template.yaml > exchange.yaml",
-        "prepare:rinkeby": "mustache config/rinkeby.json exchange.template.yaml > exchange.yaml",
-        "prepare:ropsten": "mustache config/ropsten.json exchange.template.yaml > exchange.yaml",
-        "prepare:xdai": "mustache config/xdai.json exchange.template.yaml > exchange.yaml"
+        "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
+        "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml"
     }
 }

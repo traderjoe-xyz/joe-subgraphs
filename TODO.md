@@ -1,13 +1,12 @@
 ### TODO
-- [x] update `constants` 
-    + update contract addresses for `contants/config/mainnet.json`
-    + update `index.ts`
+- [ ] update to `@joe-defi/core`
+- [ ] update `constants` 
+    + update contract addresses for `contants/config/avax.json`
 - [x] update `pricing`
-    + add `pandaswap_wavax_usdt_pair_address` in `constants/config/mainnet.json`
-    + update the starting block for pandaswap
+    + update the starting block for TraderJoe
 - [ ] update `exchange` and remove/rename constants
-    + [x] update `config/mainnet.json`
-    + [x] add `pandaswap-sdk` and update ABIs
+    + [x] update `config/avax.json`
+    + [x] add `joe/sdk` and update ABIs
     + [x] update `exchange.template.yaml`
     + [x] refactor ETH to AVAX basis `exchange.graphql`
     + [x] refactor/pull `pricing.ts`

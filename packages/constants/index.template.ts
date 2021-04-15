@@ -23,14 +23,14 @@ export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 export const FACTORY_ADDRESS = Address.fromString('{{ factory_address }}')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
-export const PANDASWAP_START_BLOCK = BigInt.fromI32(800000)
+export const TRADERJOE_START_BLOCK = BigInt.fromI32(800000)
 
-export const BAMBOOV2_TOKEN_ADDRESS = Address.fromString('{{ bambooV2_token_address }}')
-export const BAMBOOV2_AVAX_PAIR_ADDRESS = Address.fromString('{{ bambooV2_avax_pair_address }}')
-export const BAMBOOV2_ETH_PAIR_ADDRESS = Address.fromString('{{ bambooV2_eth_pair_address }}')
-export const BAMBOOV2_BTC_PAIR_ADDRESS = Address.fromString('{{ bambooV2_btc_pair_address }}')
-export const BAMBOOV2_USDT_PAIR_ADDRESS = Address.fromString('{{ bambooV2_usdt_pair_address }}')
-export const BAMBOOV2_DAI_PAIR_ADDRESS = Address.fromString('{{ bambooV2_dai_pair_address }}')
+export const JOE_TOKEN_ADDRESS = Address.fromString('{{ joe_token_address }}')
+export const JOE_AVAX_PAIR_ADDRESS = Address.fromString('{{ joe_avax_pair_address }}')
+export const JOE_ETH_PAIR_ADDRESS = Address.fromString('{{ joe_eth_pair_address }}')
+export const JOE_BTC_PAIR_ADDRESS = Address.fromString('{{ joe_btc_pair_address }}')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')
+export const JOE_DAI_PAIR_ADDRESS = Address.fromString('{{ joe_dai_pair_address }}')
 
 export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('{{ avax_eth_pair_address }}')
 export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
@@ -38,19 +38,6 @@ export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 
 export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
 
-// export const SUSHI_BAR_ADDRESS = Address.fromString('{{ sushi_bar_address }}')
-
-// export const SUSHI_MAKER_ADDRESS = Address.fromString('{{ sushi_maker_address }}')
-
-// export const SUSHI_TOKEN_ADDRESS = Address.fromString('{{ sushi_token_address }}')
-
-// export const SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ sushi_usdt_pair_address }}')
-
-// export const XSUSHI_USDC_PAIR_ADDRESS = Address.fromString('{{ xsushi_usdc_pair_address }}')
-
-// export const XSUSHI_WETH_PAIR_ADDRESS = Address.fromString('{{ xsushi_weth_pair_address }}')
-
-// export const SUSHI_DISTRIBUTOR_ADDRESS = Address.fromString('{{ sushi_distributor_address }}')
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
 
@@ -98,19 +85,7 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
 // export const WETH_ADDRESS = Address.fromString('{{ weth_address }}')
 
-// export const SUSHISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ sushiswap_weth_usdt_pair_address }}')
-
-export const PANDASWAP_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
 export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(800000)
-
-// export const UNISWAP_FACTORY_ADDRESS = Address.fromString('{{ uniswap_factory_address }}')
-
-// export const UNISWAP_SUSHI_ETH_PAIR_FIRST_LIQUDITY_BLOCK = BigInt.fromI32(10750005)
-
-// export const UNISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_weth_usdt_pair_address }}')
-
-// export const UNISWAP_SUSHI_ETH_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_eth_pair_address }}')
-
-// export const UNISWAP_SUSHI_USDT_PAIR_ADDRESS = Address.fromString('{{ uniswap_sushi_usdt_pair_address }}')

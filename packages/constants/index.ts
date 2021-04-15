@@ -20,37 +20,24 @@ export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 
-export const FACTORY_ADDRESS = Address.fromString('0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699')
+export const FACTORY_ADDRESS = Address.fromString('0x7eeccb3028870540EEc3D88C2259506f2d34fEE0')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
-export const PANDASWAP_START_BLOCK = BigInt.fromI32(800000)
+export const TRADERJOE_START_BLOCK = BigInt.fromI32(800000)
 
-export const BAMBOOV2_TOKEN_ADDRESS = Address.fromString('0x9a928D7dcD8D7E5Cb6860B7768eC2D87B8934267')
-export const BAMBOOV2_AVAX_PAIR_ADDRESS = Address.fromString('0xAc3757c2305D6d1AB30f46b9278d7946Da2B92F7')
-export const BAMBOOV2_ETH_PAIR_ADDRESS = Address.fromString('0xc9214C2ABB20a8Ce59c0bE1a3f853502eAcE507A')
-export const BAMBOOV2_BTC_PAIR_ADDRESS = Address.fromString('0x2036b7453814dc785Ab76486f2aA4d3BCDB33a04')
-export const BAMBOOV2_USDT_PAIR_ADDRESS = Address.fromString('0x9D180ee4d3bbf4FDA53677b5833d7f33F04bFA2e')
-export const BAMBOOV2_DAI_PAIR_ADDRESS = Address.fromString('0x9eEcAAc711bdf4be130727B2E97DeE80ACB019eC')
+export const JOE_TOKEN_ADDRESS = Address.fromString('0xcee9d937E3627E55F08240072D63f32c3a60fF2D')
+export const JOE_AVAX_PAIR_ADDRESS = Address.fromString('0xAc3757c2305D6d1AB30f46b9278d7946Da2B92F7')
+export const JOE_ETH_PAIR_ADDRESS = Address.fromString('0xc9214C2ABB20a8Ce59c0bE1a3f853502eAcE507A')
+export const JOE_BTC_PAIR_ADDRESS = Address.fromString('0x2036b7453814dc785Ab76486f2aA4d3BCDB33a04')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x9D180ee4d3bbf4FDA53677b5833d7f33F04bFA2e')
+export const JOE_DAI_PAIR_ADDRESS = Address.fromString('0x9eEcAAc711bdf4be130727B2E97DeE80ACB019eC')
 
 export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('0x083E14c8C0E122E374E4c6fF2169D8DB7e6728BE')
 export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
 export const WAVAX_ADDRESS = Address.fromString('0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7')
 
-export const MASTER_CHEF_ADDRESS = Address.fromString('0x124737ce6a43A98CAAF095AcCb9A9D6fccBb0E73')
+export const MASTER_CHEF_ADDRESS = Address.fromString('0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae')
 
-// export const SUSHI_BAR_ADDRESS = Address.fromString('')
-
-// export const SUSHI_MAKER_ADDRESS = Address.fromString('')
-
-// export const SUSHI_TOKEN_ADDRESS = Address.fromString('')
-
-// export const SUSHI_USDT_PAIR_ADDRESS = Address.fromString('')
-
-// export const XSUSHI_USDC_PAIR_ADDRESS = Address.fromString('')
-
-// export const XSUSHI_WETH_PAIR_ADDRESS = Address.fromString('')
-
-// export const SUSHI_DISTRIBUTOR_ADDRESS = Address.fromString('')
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
 
@@ -98,19 +85,7 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
 // export const WETH_ADDRESS = Address.fromString('0x71fe4e867A57AFd4A55bd593DCcc7B5dc01DD265')
 
-// export const SUSHISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('')
-
-export const PANDASWAP_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
 export const USDT_ADDRESS = Address.fromString('0xde3A24028580884448a5397872046a019649b084')
 
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(800000)
-
-// export const UNISWAP_FACTORY_ADDRESS = Address.fromString('')
-
-// export const UNISWAP_SUSHI_ETH_PAIR_FIRST_LIQUDITY_BLOCK = BigInt.fromI32(10750005)
-
-// export const UNISWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString('')
-
-// export const UNISWAP_SUSHI_ETH_PAIR_ADDRESS = Address.fromString('')
-
-// export const UNISWAP_SUSHI_USDT_PAIR_ADDRESS = Address.fromString('')

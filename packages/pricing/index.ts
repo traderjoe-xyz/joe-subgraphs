@@ -5,10 +5,10 @@ import {
   BIG_DECIMAL_ONE,
   BIG_DECIMAL_ZERO,
   FACTORY_ADDRESS,
-  BAMBOOV2_TOKEN_ADDRESS,
-  BAMBOOV2_USDT_PAIR_ADDRESS,
-  PANDASWAP_START_BLOCK, 
-  PANDASWAP_WAVAX_USDT_PAIR_ADDRESS,
+  JOE_TOKEN_ADDRESS,
+  JOE_USDT_PAIR_ADDRESS,
+  TRADERJOE_START_BLOCK, 
+  TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
   USDT_ADDRESS,
   WAVAX_ADDRESS,
 } from 'const'
@@ -26,11 +26,11 @@ export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   //    let address = block.number.le(BigInt.fromI32(10829344))
   //      ? UNISWAP_WETH_USDT_PAIR_ADDRESS
   //      : SUSHISWAP_WETH_USDT_PAIR_ADDRESS
-  if (block.number.le(BigInt.fromI32(PANDASWAP_START_BLOCK))) {
+  if (block.number.le(BigInt.fromI32(TRADERJOE_START_BLOCK))) {
     return BIG_DECIMAL_ZERO
   }
 
-  let address = PANDASWAP_WAVAX_USDT_PAIR_ADDRESS
+  let address = TRADERJOE_WAVAX_USDT_PAIR_ADDRESS
 
   const tokenPriceAVAX = getAvaxRate(token, block)
 
@@ -54,7 +54,7 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
 
   // TODO: add fallback, e.g. pangolin
   //    block.number.le(BigInt.fromI32(10829344)) ? UNISWAP_FACTORY_ADDRESS : FACTORY_ADDRESS
-  if (block.number.le(BigInt.fromI32(PANDASWAP_START_BLOCK))) {
+  if (block.number.le(BigInt.fromI32(TRADERJOE_START_BLOCK))) {
     return BIG_DECIMAL_ZERO
   }
   const factory = FactoryContract.bind(FACTORY_ADDRESS)
@@ -62,7 +62,7 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   const address = factory.getPair(token, WAVAX_ADDRESS)
 
   if (address == ADDRESS_ZERO) {
-    log.info('Adress ZERO...', [])
+    log.info('Address ZERO...', [])
     return BIG_DECIMAL_ZERO
   }
 
@@ -78,21 +78,21 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   return avax.div(BIG_DECIMAL_1E18)
 }
 
-export function getBambooV2Price(block: ethereum.Block): BigDecimal {
+export function getJoePrice(block: ethereum.Block): BigDecimal {
 
-  if (block.number.lt(PANDASWAP_START_BLOCK)) {
+  if (block.number.lt(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
   }
   // TODO: fallback on token price
   //    if (block.number.lt(SOME_BLOCK)) {
-  //        return getUSDRate(BAMBOOV2_TOKEN_ADDRESS, block)
+  //        return getUSDRate(JOE_TOKEN_ADDRESS, block)
   //    } 
 
   // TODO: fallback on e.g. pangolin
   //    if (block.number.le(SOME_BLOCK)) {
   //        pair = PairContract.bind(SOME_ADDRESS) 
   //    }
-  const pair = PairContract.bind(BAMBOOV2_USDT_PAIR_ADDRESS)
+  const pair = PairContract.bind(JOE_USDT_PAIR_ADDRESS)
 
   const reserves = pair.getReserves()
   return reserves.value1

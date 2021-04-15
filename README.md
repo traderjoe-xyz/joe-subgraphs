@@ -1,8 +1,8 @@
-# PandaSwap (AVAX) Subgraph
+# Joe Defi (AVAX) Subgraph
 
-Subgraph for Pandaswap on AVAX chain. Currently only `exchange` subgraph available. 
+Subgraph for Joe Defi on AVAX chain. Currently only `exchange` subgraph available. 
 
-URL: https://thegraph.com/explorer/subgraph/0xmurloc/pandaswapavax
+URL: https://thegraph.com/explorer/subgraph/0xmurloc/joeDefiAvax
 
 Forked from `sushiswap-subgraph`. 
 
@@ -18,6 +18,16 @@ $ yarn build
 $ yarn deploy
 ````
 
+### Test
+
+(Doesn't work)
+
+```
+graph init \
+  --from-contract 0x7eeccb3028870540EEc3D88C2259506f2d34fEE0 \
+  --network fuji \
+  0xmurloc/joeFactoryFuji joe-factory-graph-test
+```
 
 ### (SUSHISWAP-SUBGRAPH README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
