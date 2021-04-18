@@ -18,5 +18,6 @@
     "joe_bar_address": "0x171B28d39De22EF001029117F3d241fF78c7DC5C",
     "joe_router_address": "0x5db0735cf88F85E78ed742215090c465979B5006",
     "joe_maker_address": "0x4EC505F60C041dF9A8351aF6d4532Fd96cFa641f",
-    "traderjoe_start_block": "800000"
+    "master_chef_start_block": "123846", 
+    "trader_joe_start_block": "122614"
 }
