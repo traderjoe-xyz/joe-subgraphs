@@ -15,8 +15,8 @@
 
         "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiMasterChefFuji masterchef.avax.yaml",
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joeDefiMasterChefAvax masterchef.fuji.yaml",
-        "create-local": "graph create --node http://localhost:8020/ /0xmurloc/joeDefi",
-        "remove-local": "graph remove --node http://localhost:8020/ /0xmurloc/joeDefi",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /0xmurloc/joeDefi"
+        "create-local": "graph create --node http://localhost:8020/ 0xmurloc/joe-defi-masterchef",
+        "remove-local": "graph remove --node http://localhost:8020/ 0xmurloc/joe-defi-masterchef",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token 6830146c4e7348f1bcf765cfb8c1fb10 0xmurloc/joe-defi-masterchef masterchef.fuji.yaml"
     }
 }
