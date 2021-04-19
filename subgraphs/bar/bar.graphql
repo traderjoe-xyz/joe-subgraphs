@@ -9,41 +9,41 @@ type Bar @entity {
   # Name
   name: String!
 
-  # Sushi token
-  sushi: Bytes!
+  # Joe token
+  joe: Bytes!
 
   # Symbol
   symbol: String!
 
-  # Total xSushi supply
+  # Total xJoe supply
   totalSupply: BigDecimal!
 
-  # Ratio xSushi per Sushi
+  # Ratio xJoe per Joe
   ratio: BigDecimal!
 
-  # xSushi minted
-  xSushiMinted: BigDecimal!
+  # xJoe minted
+  xJoeMinted: BigDecimal!
 
-  # xSushi burned
-  xSushiBurned: BigDecimal!
+  # xJoe burned
+  xJoeBurned: BigDecimal!
 
-  # Sushi staked
-  sushiStaked: BigDecimal!
+  # Joe staked
+  joeStaked: BigDecimal!
 
-  # Sushi staked USD
-  sushiStakedUSD: BigDecimal!
+  # Joe staked USD
+  joeStakedUSD: BigDecimal!
 
-  # Sushi harvested
-  sushiHarvested: BigDecimal!
+  # Joe harvested
+  joeHarvested: BigDecimal!
 
-  # Sushi harvested USD
-  sushiHarvestedUSD: BigDecimal!
+  # Joe harvested USD
+  joeHarvestedUSD: BigDecimal!
 
-  # xSushi age
-  xSushiAge: BigDecimal!
+  # xJoe age
+  xJoeAge: BigDecimal!
 
-  # xSushi age destroyed
-  xSushiAgeDestroyed: BigDecimal!
+  # xJoe age destroyed
+  xJoeAgeDestroyed: BigDecimal!
 
   # Users in the bar
   users: [User!]! @derivedFrom(field: "bar")
@@ -60,49 +60,49 @@ type User @entity {
   # Bar
   bar: Bar
 
-  # xSushi (balance)
-  xSushi: BigDecimal!
+  # xJoe (balance)
+  xJoe: BigDecimal!
 
-  # xSushi In
-  xSushiIn: BigDecimal!
+  # xJoe In
+  xJoeIn: BigDecimal!
 
-  # xSushi Out
-  xSushiOut: BigDecimal!
+  # xJoe Out
+  xJoeOut: BigDecimal!
 
   # Minted
-  xSushiMinted: BigDecimal!
+  xJoeMinted: BigDecimal!
 
   # Burned
-  xSushiBurned: BigDecimal!
+  xJoeBurned: BigDecimal!
 
-  # xSushi offset
-  xSushiOffset: BigDecimal!
+  # xJoe offset
+  xJoeOffset: BigDecimal!
 
-  # xSushi age
-  xSushiAge: BigDecimal!
+  # xJoe age
+  xJoeAge: BigDecimal!
 
-  # xSushi age destroyed
-  xSushiAgeDestroyed: BigDecimal!
+  # xJoe age destroyed
+  xJoeAgeDestroyed: BigDecimal!
 
   # Staked
-  sushiStaked: BigDecimal!
+  joeStaked: BigDecimal!
 
   # Sum of $ at time of staking
-  sushiStakedUSD: BigDecimal!
+  joeStakedUSD: BigDecimal!
 
   # Harvested
-  sushiHarvested: BigDecimal!
+  joeHarvested: BigDecimal!
 
   # Sum of $ at time of harvesting
-  sushiHarvestedUSD: BigDecimal!
+  joeHarvestedUSD: BigDecimal!
 
-  # To get bar pending sushi (xSushi * staked / bar.totalSupply)
+  # To get bar pending joe (xJoe * staked / bar.totalSupply)
 
-  # Sushi Out
-  sushiOut: BigDecimal!
+  # Joe Out
+  joeOut: BigDecimal!
 
-  # Sushi In
-  sushiIn: BigDecimal!
+  # Joe In
+  joeIn: BigDecimal!
 
   # USD Out
   usdOut: BigDecimal!
@@ -113,8 +113,8 @@ type User @entity {
   # Updated at
   updatedAt: BigInt!
 
-  # sushi offset
-  sushiOffset: BigDecimal!
+  # joe offset
+  joeOffset: BigDecimal!
 
   # usd offset
   usdOffset: BigDecimal!
@@ -129,14 +129,14 @@ type History @entity {
   id: ID!
   date: Int!
   timeframe: Timeframe!
-  sushiStaked: BigDecimal!
-  sushiStakedUSD: BigDecimal!
-  sushiHarvested: BigDecimal!
-  sushiHarvestedUSD: BigDecimal!
-  xSushiAge: BigDecimal!
-  xSushiAgeDestroyed: BigDecimal!
-  xSushiMinted: BigDecimal!
-  xSushiBurned: BigDecimal!
-  xSushiSupply: BigDecimal!
+  joeStaked: BigDecimal!
+  joeStakedUSD: BigDecimal!
+  joeHarvested: BigDecimal!
+  joeHarvestedUSD: BigDecimal!
+  xJoeAge: BigDecimal!
+  xJoeAgeDestroyed: BigDecimal!
+  xJoeMinted: BigDecimal!
+  xJoeBurned: BigDecimal!
+  xJoeSupply: BigDecimal!
   ratio: BigDecimal!
 }
