@@ -9,7 +9,8 @@
     "build": "yarn workspaces run build",
     "codegen": "yarn workspaces run codegen",
     "prepare:avax": "yarn workspaces run prepare:avax",
-    "prepare:fuji": "yarn workspaces run prepare:avax"
+    "prepare:fuji": "yarn workspaces run prepare:fuji", 
+    "prepare:rinkeby": "yarn workspaces run prepare:rinkeby"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.19.0",

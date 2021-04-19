@@ -5,16 +5,16 @@
     "author": "SushiSwap",
     "scripts": {
         "prepare:avax": "mustache config/avax.json masterchef.template.yaml > masterchef.avax.yaml",
-        "prepare:fuji": "mustache config/fuji.json masterchef.template.yaml > masterchef.fuji.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json masterchef.template.yaml > masterchef.rinkeby.yaml",
 
         "codegen:avax": "graph codegen masterchef.avax.yaml",
-        "codegen:fuji": "graph codegen masterchef.fuji.yaml",
+        "codegen:rinkeby": "graph codegen masterchef.rinkeby.yaml",
 
         "build:avax": "graph build masterchef.avax.yaml",
-        "build:fuji": "graph build masterchef.fuji.yaml",
+        "build:rinkeby": "graph build masterchef.rinkeby.yaml",
 
-        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-masterchef-avax masterchef.avax.yaml",
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-masterchef-fuji masterchef.fuji.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-masterchef-avax masterchef.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-masterchef-rinkeby masterchef.rinkeby.yaml",
         "create-local": "graph create --node http://localhost:8020/ 0xmurloc/joe-defi-masterchef",
         "remove-local": "graph remove --node http://localhost:8020/ 0xmurloc/joe-defi-masterchef",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token 6830146c4e7348f1bcf765cfb8c1fb10 0xmurloc/joe-defi-masterchef masterchef.fuji.yaml"

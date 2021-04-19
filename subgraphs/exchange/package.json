@@ -9,15 +9,15 @@
     "scripts": {
     	"graph:help": "graph deploy -h", 
 	    "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
-        "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json exchange.template.yaml > exchange.rinkeby.yaml",
 
         "codegen:avax": "graph codegen exchange.avax.yaml",
-        "codegen:fuji": "graph codegen exchange.fuji.yaml",
+        "codegen:rinkeby": "graph codegen exchange.rinkeby.yaml",
 
         "build:avax": "graph build exchange.avax.yaml",
-        "build:fuji": "graph build exchange.fuji.yaml",
+        "build:rinkeby": "graph build exchange.rinkeby.yaml",
 
-        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-exchange-fuji exchange.fuji.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-exchange-rinkeby exchange.rinkeby.yaml",
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-exchange-avax exchange.avax.yaml",
         "create-local": "graph create --node http://localhost:8020/ 0xmurloc/joe-defi-exchange --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
         "remove-local": "graph remove --node http://localhost:8020/ 0xmurloc/joe-defi-exchange",

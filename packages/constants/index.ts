@@ -20,23 +20,23 @@ export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 
-export const FACTORY_ADDRESS = Address.fromString('0x7eeccb3028870540EEc3D88C2259506f2d34fEE0')
+export const FACTORY_ADDRESS = Address.fromString('0xE2eCc226Fd2D5CEad96F3f9f00eFaE9fAfe75eB8')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
-export const TRADERJOE_START_BLOCK = BigInt.fromI32(800000)
+export const TRADERJOE_START_BLOCK = BigInt.fromI32(8438448)
 
-export const JOE_TOKEN_ADDRESS = Address.fromString('0xcee9d937E3627E55F08240072D63f32c3a60fF2D')
-export const JOE_AVAX_PAIR_ADDRESS = Address.fromString('0xAc3757c2305D6d1AB30f46b9278d7946Da2B92F7')
-export const JOE_ETH_PAIR_ADDRESS = Address.fromString('0xc9214C2ABB20a8Ce59c0bE1a3f853502eAcE507A')
-export const JOE_BTC_PAIR_ADDRESS = Address.fromString('0x2036b7453814dc785Ab76486f2aA4d3BCDB33a04')
-export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x9D180ee4d3bbf4FDA53677b5833d7f33F04bFA2e')
-export const JOE_DAI_PAIR_ADDRESS = Address.fromString('0x9eEcAAc711bdf4be130727B2E97DeE80ACB019eC')
+export const JOE_TOKEN_ADDRESS = Address.fromString('0x60aE616a2155Ee3d9A68541Ba4544862310933d4')
+export const JOE_AVAX_PAIR_ADDRESS = Address.fromString('')
+export const JOE_ETH_PAIR_ADDRESS = Address.fromString('')
+export const JOE_BTC_PAIR_ADDRESS = Address.fromString('')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('')
+export const JOE_DAI_PAIR_ADDRESS = Address.fromString('')
 
-export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('0x083E14c8C0E122E374E4c6fF2169D8DB7e6728BE')
-export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
-export const WAVAX_ADDRESS = Address.fromString('0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7')
+// export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('')
+// export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('')
+export const WAVAX_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
 
-export const MASTER_CHEF_ADDRESS = Address.fromString('0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae')
+export const MASTER_CHEF_ADDRESS = Address.fromString('0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd')
 
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
@@ -69,12 +69,12 @@ export const NULL_CALL_RESULT_VALUE = '0x000000000000000000000000000000000000000
 // ]
 
 export const WHITELIST: string[] = [
-    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', // WAVAX
-    '0x71fe4e867A57AFd4A55bd593DCcc7B5dc01DD265', // WETH
-    '0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab', // WBTC
-    '0xde3A24028580884448a5397872046a019649b084', // USDT
-    '0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a', // DAI
-    '0xb3fe5374f67d7a22886a0ee082b2e2f9d2651651', // LINK
+    '0xc778417e063141139fce010982780140aa0cd5ab', // WAVAX
+    '0xc778417e063141139fce010982780140aa0cd5ab', // WETH
+    '0x5af59f281b3cfd0c12770e4633e6c16dd08ea543', // WBTC
+    '0x1a37dd375096820a5fde14342720102c07100f26', // USDT
+    '0x1521e5c11bdd02ca6cd1b35a34e176d87d9bdcd2', // DAI
+    '0xd87fea54f506972e3267239ec8e159548892074a', // LINK
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
@@ -83,9 +83,11 @@ export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 // minimum liquidity for price to get tracked
 export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
-// export const WETH_ADDRESS = Address.fromString('0x71fe4e867A57AFd4A55bd593DCcc7B5dc01DD265')
+// export const WETH_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
 
-export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xa3D9daDb140E2328E36d9122ef3F8085cFa3D2C2')
-export const USDT_ADDRESS = Address.fromString('0xde3A24028580884448a5397872046a019649b084')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('')
+export const USDT_ADDRESS = Address.fromString('0x1a37dd375096820a5fde14342720102c07100f26')
 
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(800000)
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(8438455)
+
+export const JOE_BAR_ADDRESS = Address.fromString('0x1C4b41bA54492F551e98eD0A9A59B952a962C452')

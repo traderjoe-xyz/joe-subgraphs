@@ -1,0 +1,75 @@
+specVersion: 0.0.3
+description: Exchange
+repository: https://github.com/joe-defi/joe-subgraph
+schema:
+  file: ./exchange.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: rinkeby
+    source:
+      address: '0xE2eCc226Fd2D5CEad96F3f9f00eFaE9fAfe75eB8'
+      abi: Factory
+      startBlock: 8438447
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/exchange/mappings/factory.ts
+      entities:
+        - Factory
+      abis:
+        - name: Factory
+          file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
+        - name: Pair
+          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+        - name: JoeToken
+          file: ../../node_modules/@joe-defi/core/abi/JoeToken.json
+        - name: ERC20
+          file: ../../node_modules/@joe-defi/core/abi/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ../../packages/abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ../../packages/abis/ERC20NameBytes.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: onPairCreated
+templates:
+  - kind: ethereum/contract
+    name: Pair
+    network: rinkeby
+    source:
+      abi: Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/exchange/mappings/pair.ts
+      entities:
+        - Bundle
+        - Burn
+        - LiquidityPosition
+        - LiquidityPositionSnapshot
+        - Mint
+        - Pair
+        - Swap
+        - Sync
+        - Token
+        - Transaction
+        - User
+      abis:
+        - name: Pair
+          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+        - name: Factory
+          file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256,uint256)
+          handler: onMint
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: onBurn
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: onSwap
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: onTransfer
+        - event: Sync(uint112,uint112)
+          handler: onSync

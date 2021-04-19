@@ -23,7 +23,7 @@ export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 export const FACTORY_ADDRESS = Address.fromString('{{ factory_address }}')
 
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
-export const TRADERJOE_START_BLOCK = BigInt.fromI32({{ traderjoe_start_block }})
+export const TRADERJOE_START_BLOCK = BigInt.fromI32({{ trader_joe_start_block }})
 
 export const JOE_TOKEN_ADDRESS = Address.fromString('{{ joe_token_address }}')
 export const JOE_AVAX_PAIR_ADDRESS = Address.fromString('{{ joe_avax_pair_address }}')
@@ -32,8 +32,8 @@ export const JOE_BTC_PAIR_ADDRESS = Address.fromString('{{ joe_btc_pair_address 
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')
 export const JOE_DAI_PAIR_ADDRESS = Address.fromString('{{ joe_dai_pair_address }}')
 
-export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('{{ avax_eth_pair_address }}')
-export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
+// export const AVAX_ETH_PAIR_ADDRESS = Address.fromString('{{ avax_eth_pair_address }}')
+// export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
 export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 
 export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
@@ -89,3 +89,5 @@ export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usd
 export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32({{ master_chef_start_block }})
+
+export const JOE_BAR_ADDRESS = Address.fromString('{{ joe_bar_address }}')

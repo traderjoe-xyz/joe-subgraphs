@@ -9,6 +9,7 @@
     "codegen": ".",
     "build": ".",
     "prepare:avax": "mustache config/avax.json index.template.ts > index.ts",
+    "prepare:rinkeby": "mustache config/rinkeby.json index.template.ts > index.ts",
     "prepare:fuji": "mustache config/fuji.json index.template.ts > index.ts"
   }
 }

@@ -194,13 +194,13 @@ export function transfer(event: TransferEvent): void {
     const barDays = event.block.timestamp.minus(bar.updatedAt).divDecimal(BigDecimal.fromString('86400'))
     const barXJoe = bar.xJoeMinted.minus(bar.xJoeBurned)
     bar.xJoeMinted = bar.xJoeMinted.plus(value)
-    bar.xJoeAged = bar.xJoeAged.plus(barDays.times(barXJoe))
+    bar.xJoeAge = bar.xJoeAge.plus(barDays.times(barXJoe))
     bar.joeStaked = bar.joeStaked.plus(what)
     bar.joeStakedUSD = bar.joeStakedUSD.plus(joeStakedUSD)
     bar.updatedAt = event.block.timestamp
 
     const history = getHistory(event.block)
-    history.xJoeAged = bar.xJoeAged
+    history.xJoeAge = bar.xJoeAge
     history.xJoeMinted = history.xJoeMinted.plus(value)
     history.xJoeSupply = bar.totalSupply
     history.joeStaked = history.joeStaked.plus(what)
@@ -225,16 +225,16 @@ export function transfer(event: TransferEvent): void {
 
     const days = event.block.timestamp.minus(user.updatedAt).divDecimal(BigDecimal.fromString('86400'))
 
-    const xJoeAged = days.times(user.xJoe)
+    const xJoeAge = days.times(user.xJoe)
 
-    user.xJoeAged = user.xJoeAged.plus(xJoeAged)
+    user.xJoeAge = user.xJoeAge.plus(xJoeAge)
 
-    const xJoeAgedDestroyed = user.xJoeAged.div(user.xJoe).times(value)
+    const xJoeAgeDestroyed = user.xJoeAge.div(user.xJoe).times(value)
 
-    user.xJoeAgedDestroyed = user.xJoeAgedDestroyed.plus(xJoeAgedDestroyed)
+    user.xJoeAgeDestroyed = user.xJoeAgeDestroyed.plus(xJoeAgeDestroyed)
 
-    // remove xJoeAged
-    user.xJoeAged = user.xJoeAged.minus(xJoeAgedDestroyed)
+    // remove xJoeAge
+    user.xJoeAge = user.xJoeAge.minus(xJoeAgeDestroyed)
     // Update xJoe last
     user.xJoe = user.xJoe.minus(value)
 
@@ -250,8 +250,8 @@ export function transfer(event: TransferEvent): void {
     const barDays = event.block.timestamp.minus(bar.updatedAt).divDecimal(BigDecimal.fromString('86400'))
     const barXJoe = bar.xJoeMinted.minus(bar.xJoeBurned)
     bar.xJoeBurned = bar.xJoeBurned.plus(value)
-    bar.xJoeAged = bar.xJoeAged.plus(barDays.times(barXJoe)).minus(xJoeAgedDestroyed)
-    bar.xJoeAgedDestroyed = bar.xJoeAgedDestroyed.plus(xJoeAgedDestroyed)
+    bar.xJoeAge = bar.xJoeAge.plus(barDays.times(barXJoe)).minus(xJoeAgeDestroyed)
+    bar.xJoeAgeDestroyed = bar.xJoeAgeDestroyed.plus(xJoeAgeDestroyed)
     bar.joeHarvested = bar.joeHarvested.plus(what)
     bar.joeHarvestedUSD = bar.joeHarvestedUSD.plus(joeHarvestedUSD)
     bar.updatedAt = event.block.timestamp
@@ -259,8 +259,8 @@ export function transfer(event: TransferEvent): void {
     const history = getHistory(event.block)
     history.xJoeSupply = bar.totalSupply
     history.xJoeBurned = history.xJoeBurned.plus(value)
-    history.xJoeAged = bar.xJoeAged
-    history.xJoeAgedDestroyed = history.xJoeAgedDestroyed.plus(xJoeAgedDestroyed)
+    history.xJoeAge = bar.xJoeAge
+    history.xJoeAgeDestroyed = history.xJoeAgeDestroyed.plus(xJoeAgeDestroyed)
     history.joeHarvested = history.joeHarvested.plus(what)
     history.joeHarvestedUSD = history.joeHarvestedUSD.plus(joeHarvestedUSD)
     history.ratio = bar.ratio
@@ -280,11 +280,11 @@ export function transfer(event: TransferEvent): void {
     const fromUserDays = event.block.timestamp.minus(fromUser.updatedAt).divDecimal(BigDecimal.fromString('86400'))
 
     // Recalc xJoe age first
-    fromUser.xJoeAged = fromUser.xJoeAged.plus(fromUserDays.times(fromUser.xJoe))
-    // Calculate xJoeAged being transfered
-    const xJoeAgedTranfered = fromUser.xJoeAged.div(fromUser.xJoe).times(value)
-    // Subtract from xJoeAged
-    fromUser.xJoeAged = fromUser.xJoeAged.minus(xJoeAgedTranfered)
+    fromUser.xJoeAge = fromUser.xJoeAge.plus(fromUserDays.times(fromUser.xJoe))
+    // Calculate xJoeAge being transfered
+    const xJoeAgeTranfered = fromUser.xJoeAge.div(fromUser.xJoe).times(value)
+    // Subtract from xJoeAge
+    fromUser.xJoeAge = fromUser.xJoeAge.minus(xJoeAgeTranfered)
     fromUser.updatedAt = event.block.timestamp
 
     fromUser.xJoe = fromUser.xJoe.minus(value)
@@ -306,10 +306,10 @@ export function transfer(event: TransferEvent): void {
       toUser.bar = bar.id
     }
 
-    // Recalculate xJoe age and add incoming xJoeAgedTransfered
+    // Recalculate xJoe age and add incoming xJoeAgeTransfered
     const toUserDays = event.block.timestamp.minus(toUser.updatedAt).divDecimal(BigDecimal.fromString('86400'))
 
-    toUser.xJoeAged = toUser.xJoeAged.plus(toUserDays.times(toUser.xJoe)).plus(xJoeAgedTranfered)
+    toUser.xJoeAge = toUser.xJoeAge.plus(toUserDays.times(toUser.xJoe)).plus(xJoeAgeTranfered)
     toUser.updatedAt = event.block.timestamp
 
     toUser.xJoe = toUser.xJoe.plus(value)
