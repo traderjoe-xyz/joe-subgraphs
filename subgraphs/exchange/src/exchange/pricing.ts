@@ -5,13 +5,14 @@ import {
   BIG_DECIMAL_ZERO,
   // DAI_WETH_PAIR,
   FACTORY_ADDRESS,
-  MINIMUM_LIQUIDITY_THRESHOLD_ETH,
+  // MINIMUM_LIQUIDITY_THRESHOLD_ETH,
   // WHITELIST,
-  JOE_TOKEN_ADDRESS,
+  // JOE_TOKEN_ADDRESS,
   JOE_USDT_PAIR_ADDRESS,
-  TRADERJOE_START_BLOCK, 
-  TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
-  USDT_ADDRESS,
+  // TRADERJOE_START_BLOCK, 
+  // TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
+  // USDT_ADDRESS,
+  WAVAX_STABLE_PAIRS, 
   WAVAX_ADDRESS,
 } from 'const'
 import { Address, BigDecimal, BigInt, ethereum, log } from '@graphprotocol/graph-ts'
@@ -35,23 +36,55 @@ export function getJoePrice(): BigDecimal {
   return BIG_DECIMAL_ZERO
 }
 
+
+/* 
+ * Bundle tracks the price of AVAX, it is used to convert from AVAX price to USD price.
+ * Exchange subgraph only keeps 1 bundle; it is updated during factory sync() event. 
+ * 
+ * This is different from getAvaxRate which calculates AVAX price for token, as it only
+ * calculates price in USD for AVAX. 
+ * 
+ * AVAX price is calculated by getting average of 3 stablecoin pairs. 
+ * On mainnet, we will refer to e.g. PGL pairs to build price oracle. 
+ * On testnet, we will just use our own stable pairs. 
+ * 
+ */
 export function getAvaxPrice(block: ethereum.Block = null): BigDecimal {
 
-  // TODO: fallback to e.g. pangolin
-  if (block !== null && block.number.le(TRADERJOE_START_BLOCK)) {
-    return BIG_DECIMAL_ZERO
+  let total_weight = BIG_DECIMAL_ZERO
+  let sum_price = BIG_DECIMAL_ZERO
+
+  // for (const pair_address of WAVAX_STABLE_PAIRS) {
+
+  for (let i = 0; i < WAVAX_STABLE_PAIRS.length; ++i) {
+    const pair_address = WAVAX_STABLE_PAIRS[i]
+    const pair = Pair.load(pair_address)
+    const price = _getAvaxPrice(pair)
+    const weight = _getAvaxReserve(pair)
+
+    total_weight = total_weight.plus(weight)
+    sum_price = sum_price.plus(price.times(weight))
   }
 
-  // TODO: get weighted average prices across many avax/stable pairs
-  const avaxUsdtPair = Pair.load(TRADERJOE_WAVAX_USDT_PAIR_ADDRESS.toString()) 
-  
-  if (avaxUsdtPair == null) {
-    log.warning('No eth pair...', [])
-    return BIG_DECIMAL_ZERO
-  }
-
-  return avaxUsdtPair.token0Price
+  // div by 0
+  const avax_price = total_weight.equals(BIG_DECIMAL_ZERO) ? BIG_DECIMAL_ZERO : sum_price.div(total_weight)
+  return avax_price
 }
+
+// returns avax price given e.g. avax-usdt or avax-dai pair
+function _getAvaxPrice(pair: Pair | null): BigDecimal {
+  if (pair == null) { return BIG_DECIMAL_ZERO}
+  const avax = pair.token0 == WAVAX_ADDRESS.toString() ? pair.token1Price : pair.token0Price
+  return avax
+}
+
+// returns avax reserves given e.g. avax-usdt or avax-dai pair
+function _getAvaxReserve(pair: Pair | null): BigDecimal {
+  if (pair == null) { return BIG_DECIMAL_ZERO}
+  const avax = pair.token0 == WAVAX_ADDRESS.toString() ? pair.reserve1 : pair.reserve0
+  return avax
+}
+
 
 export function findAvaxPerToken(token: Token): BigDecimal {
   if (Address.fromString(token.id) == WAVAX_ADDRESS) {

@@ -9,13 +9,17 @@
     "joe_router_address": "0x62387711313CC10F433B32E010A05Bf768c2F037",
     "joe_maker_address": "0x07DFE570AaBeD486F5577472F7F7952DE425a922",
 
+    "joe_token_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4", 
+    "joe_usdt_pair_address": "0x3f593aa97c94520a272d5d6763fa946a6b6356b1",
+    "avax_usdt_pair_address": "0x5e912466046d3e156ed6237d21052fddff5b2554",
+
+
     "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
     "wbtc_address": "0x5af59f281b3cfd0c12770e4633e6c16dd08ea543",
     "usdt_address": "0xd92e713d051c37ebb2561803a3b5fbabc4962431",
-    "dai_address": "0x1521e5c11bdd02ca6cd1b35a34e176d87d9bdcd2", 
-    "joe_token_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4", 
-    "joe_usdt_pair_address": "0x0000000000000000000000000000000000000000",
-    "avax_usdt_pair_address": "0x0000000000000000000000000000000000000000",
-
+    "dai_address": "0x1521e5c11bdd02ca6cd1b35a34e176d87d9bdcd2",     
+    "wavax_usdt_pair_address": "0x5e912466046d3e156ed6237d21052fddff5b2554",
+    "wavax_dai_pair_address": "0x5e912466046d3e156ed6237d21052fddff5b2554",
+    
     "zero_address": "0x0000000000000000000000000000000000000000"
 }

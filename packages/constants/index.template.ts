@@ -43,6 +43,11 @@ export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_addres
 export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 
+export const WAVAX_STABLE_PAIRS: string[] = [
+    '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
+    '{{ wavax_dai_pair_address }}',  // WAVAX-DAI
+]
+
 export const WHITELIST: string[] = [
     '{{ wavax_address }}', // WAVAX
     '{{ wbtc_address }}', // WBTC
