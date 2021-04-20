@@ -9,7 +9,7 @@ Forked from `sushiswap-subgraph`.
 ### Subgraph Status
 
 | subgraph   | rinkeby | avalanche | 
-------------------------------------
+|------------| :---:   | :---:     |
 | exchange   |   [x]   |           |
 | masterchef |   [x]   |           |
 | bar        |   [x]   |           |
