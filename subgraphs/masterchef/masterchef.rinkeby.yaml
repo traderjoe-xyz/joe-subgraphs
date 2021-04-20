@@ -8,9 +8,9 @@ dataSources:
     name: MasterChef
     network: rinkeby
     source:
-      address: '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd'
+      address: '0x1Af353148F2316487b5311Fcd522c037842D232c'
       abi: MasterChef
-      startBlock: 8438455
+      startBlock: 8443458
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

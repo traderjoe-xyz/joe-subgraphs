@@ -6,6 +6,15 @@ URL: https://thegraph.com/explorer/subgraph/0xmurloc/joeDefiAvax
 
 Forked from `sushiswap-subgraph`. 
 
+### Subgraph Status
+
+| subgraph   | rinkeby | avalanche | 
+------------------------------------
+| exchange   |   [x]   |           |
+| masterchef |   [x]   |           |
+| bar        |   [x]   |           |
+
+
 ### Deploy
 
 ```` 
@@ -13,21 +22,11 @@ $ graph auth https://api.thegraph.com/deploy/ <API_KEY>
 
 $ cd subgraphs/exchange
 $ yarn prepare:avax
-$ yarn codegen
-$ yarn build
-$ yarn deploy
+$ yarn codegen:avax
+$ yarn build:avax
+$ yarn deploy:avax
 ````
 
-### Test
-
-(Doesn't work)
-
-```
-graph init \
-  --from-contract 0x7eeccb3028870540EEc3D88C2259506f2d34fEE0 \
-  --network fuji \
-  0xmurloc/joeFactoryFuji joe-factory-graph-test
-```
 
 ### (SUSHISWAP-SUBGRAPH README)
 Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!

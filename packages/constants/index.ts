@@ -36,7 +36,7 @@ export const JOE_DAI_PAIR_ADDRESS = Address.fromString('')
 // export const AVAX_USDT_PAIR_ADDRESS = Address.fromString('')
 export const WAVAX_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
 
-export const MASTER_CHEF_ADDRESS = Address.fromString('0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd')
+export const MASTER_CHEF_ADDRESS = Address.fromString('0x1Af353148F2316487b5311Fcd522c037842D232c')
 
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
@@ -88,6 +88,6 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('')
 export const USDT_ADDRESS = Address.fromString('0x1a37dd375096820a5fde14342720102c07100f26')
 
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(8438455)
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(8443458)
 
 export const JOE_BAR_ADDRESS = Address.fromString('0x1C4b41bA54492F551e98eD0A9A59B952a962C452')
