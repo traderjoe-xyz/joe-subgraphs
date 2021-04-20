@@ -18,12 +18,20 @@ Forked from `sushiswap-subgraph`.
 ### Deploy
 
 ```` 
+# authenticate api key
 $ graph auth https://api.thegraph.com/deploy/ <API_KEY>
 
+# build constants
+$ cd packages/constants
+$ yarn prepare:avax
+
+# build subgraph
 $ cd subgraphs/exchange
 $ yarn prepare:avax
 $ yarn codegen:avax
 $ yarn build:avax
+
+# deploy subgraph
 $ yarn deploy:avax
 ````
 

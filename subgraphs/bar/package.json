@@ -13,11 +13,11 @@
         "build:avax": "graph build bar.avax.yaml",
         "build:rinkeby": "graph build bar.rinkeby.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-bar-avax bar.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ 0xmurloc/joe-defi-bar-rinkeby bar.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar bar.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar-rinkeby bar.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ 0xmurloc/joe-defi-bar --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
-        "remove-local": "graph remove --node http://localhost:8020/ 0xmurloc/joe-defi-bar",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token 6830146c4e7348f1bcf765cfb8c1fb10 0xmurloc/joe-defi-exchange bar.avalanche.yaml"
+        "create-local": "graph create --node http://localhost:8020/ joe-defi/bar --access-token ",
+        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/bar",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token  joe-defi/bar bar.avax.yaml"
     }
 }
