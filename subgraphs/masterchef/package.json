@@ -2,7 +2,7 @@
     "name": "masterchef",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "SushiSwap",
+    "author": "JoeDefi",
     "scripts": {
         "prepare:avax": "mustache config/avax.json masterchef.template.yaml > masterchef.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json masterchef.template.yaml > masterchef.rinkeby.yaml",

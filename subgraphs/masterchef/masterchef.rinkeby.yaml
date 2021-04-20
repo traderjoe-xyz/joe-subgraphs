@@ -23,7 +23,7 @@ dataSources:
         - User
       abis:
         - name: MasterChef
-          file: ../../node_modules/@joe-defi/core/abi/MasterJoe.json
+          file: ../../node_modules/@joe-defi/core/abi/MasterChef.json
         - name: Factory
           file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
         - name: Pair
