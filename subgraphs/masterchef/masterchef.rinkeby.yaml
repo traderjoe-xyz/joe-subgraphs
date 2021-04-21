@@ -39,19 +39,4 @@ dataSources:
           handler: ownershipTransferred
         - event: Withdraw(indexed address,indexed uint256,uint256)
           handler: withdraw
-      callHandlers:
-        - function: add(uint256,address,bool)
-          handler: add
-        - function: set(uint256,uint256,bool)
-          handler: set
-        - function: massUpdatePools()
-          handler: massUpdatePools
-        - function: updatePool(uint256)
-          handler: updatePool
-        - function: setMigrator(address)
-          handler: setMigrator
-        - function: migrate(uint256)
-          handler: migrate
-        - function: dev(address)
-          handler: dev
       file: ./src/masterchef.ts
