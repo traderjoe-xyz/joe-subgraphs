@@ -6,18 +6,21 @@
     "scripts": {
         "prepare:avax": "mustache config/avax.json masterchef.template.yaml > masterchef.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json masterchef.template.yaml > masterchef.rinkeby.yaml",
+        "prepare:fuji": "mustache config/fuji.json masterchef.template.yaml > masterchef.fuji.yaml",
 
         "codegen:avax": "graph codegen masterchef.avax.yaml",
         "codegen:rinkeby": "graph codegen masterchef.rinkeby.yaml",
+        "codegen:fuji": "graph codegen masterchef.fuji.yaml",
 
         "build:avax": "graph build masterchef.avax.yaml",
         "build:rinkeby": "graph build masterchef.rinkeby.yaml",
+        "build:fuji": "graph build masterchef.fuji.yaml",
 
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/masterchef masterchef.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/masterchef-rinkeby masterchef.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/masterchef",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/masterchef",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token joe-defi/masterchef masterchef.avax.yaml"
+        "create-local": "graph create --node http://localhost:8020/ joe-defi/masterchef --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
+        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/masterchef --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token 6830146c4e7348f1bcf765cfb8c1fb10 joe-defi/masterchef masterchef.fuji.yaml"
     }
 }
