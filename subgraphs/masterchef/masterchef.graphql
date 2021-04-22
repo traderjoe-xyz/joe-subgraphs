@@ -33,20 +33,20 @@ type MasterChef @entity {
   # Pool count
   poolCount: BigInt!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
+  # JLP Balance
+  jlpBalance: BigDecimal!
 
-  # SLP Age
-  slpAge: BigDecimal!
+  # JLP Age
+  jlpAge: BigDecimal!
 
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
 
-  # SLP Deposited
-  slpDeposited: BigDecimal!
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
 
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
 
   # History
   history: [History!]! @derivedFrom(field: "owner")
@@ -62,20 +62,20 @@ type History @entity {
   # Owner (MasterChef, Pool, or User).
   owner: MasterChef!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
+  # JLP Balance
+  jlpBalance: BigDecimal!
 
-  # SLP Age
-  slpAge: BigDecimal!
+  # JLP Age
+  jlpAge: BigDecimal!
 
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
 
-  # SLP Deposited
-  slpDeposited: BigDecimal!
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
 
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
 
   # Timestamp
   timestamp: BigInt!
@@ -104,7 +104,7 @@ type Pool @entity {
   # Accumulated joe per share
   accJoePerShare: BigInt!
 
-  # SLP token balance
+  # JLP token balance
   balance: BigInt!
 
   # Pool users
@@ -113,20 +113,20 @@ type Pool @entity {
   # User count
   userCount: BigInt!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
+  # JLP Balance
+  jlpBalance: BigDecimal!
 
-  # SLP Age
-  slpAge: BigDecimal!
+  # JLP Age
+  jlpAge: BigDecimal!
 
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
 
-  # SLP Deposited
-  slpDeposited: BigDecimal!
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
 
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
 
   # Timestamp
   timestamp: BigInt!
@@ -157,20 +157,20 @@ type PoolHistory @entity {
   # Pool
   pool: Pool!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
+  # JLP Balance
+  jlpBalance: BigDecimal!
 
-  # SLP Age
-  slpAge: BigDecimal!
+  # JLP Age
+  jlpAge: BigDecimal!
 
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
 
-  # SLP Deposited
-  slpDeposited: BigDecimal!
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
 
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
 
   # User Count
   userCount: BigInt!
