@@ -70,18 +70,25 @@ export function deposit(event: Deposit): void {
   //     event.transaction.hash.toHex(),
   //   ])
   // }
-
+  const userAddress = event.params.user
+  const pid = event.params.pid
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
 
-  // log.info('{} has deposited {} slp tokens to pool #{}', [
+  // log.info('{} has deposited {} slp tokens to pool #{} (masterchef address: #{})', [
   //   event.params.user.toHex(),
   //   event.params.amount.toString(),
   //   event.params.pid.toString(),
+  //   MASTER_CHEF_ADDRESS.toHexString(),
   // ])
 
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
 
-  const poolInfo = masterChefContract.poolInfo(event.params.pid)
+  let poolInfoResult = masterChefContract.try_poolInfo(event.params.pid)
+  if (poolInfoResult.reverted) {
+    log.info("[masterchef deposit] poolInfo reverted", [])
+    return 
+  } 
+  const poolInfo = poolInfoResult.value
 
   const pool = getPool(event.params.pid, event.block)
 
@@ -238,7 +245,12 @@ export function withdraw(event: Withdraw): void {
 
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
 
-  const poolInfo = masterChefContract.poolInfo(event.params.pid)
+  let poolInfoResult = masterChefContract.try_poolInfo(event.params.pid)
+  if (poolInfoResult.reverted) {
+    log.info("[masterchef withdraw] poolInfo reverted", [])
+    return 
+  } 
+  const poolInfo = poolInfoResult.value
 
   const pool = getPool(event.params.pid, event.block)
 
@@ -456,8 +468,13 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
     // Set relation
     pool.owner = masterChef.id
 
-    const poolInfo = masterChefContract.poolInfo(masterChef.poolCount)
-
+    let poolInfoResult = masterChefContract.try_poolInfo(masterChef.poolCount)
+    if (poolInfoResult.reverted) {
+      log.info("[masterchef getPool] poolInfo reverted", [])
+      return null
+    } 
+    const poolInfo = poolInfoResult.value
+  
     pool.pair = poolInfo.value0
     pool.allocPoint = poolInfo.value1
     pool.lastRewardBlock = poolInfo.value2

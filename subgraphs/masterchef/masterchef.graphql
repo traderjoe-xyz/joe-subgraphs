@@ -6,9 +6,6 @@ type MasterChef @entity {
   # Bonus multiplier
   bonusMultiplier: BigInt!
 
-  # Bonus end block
-  bonusEndBlock: BigInt!
-
   # Dev fund address
   devaddr: Bytes!
 

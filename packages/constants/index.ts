@@ -38,7 +38,7 @@ export const JOE_BAR_ADDRESS = Address.fromString('0x1528Bde49A4a693DDcD3dF9cBa5
 
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0x5e912466046d3e156ed6237d21052fddff5b2554')
-export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x0000000000000000000000000000000000000000')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x9daC0e053134Ced75269189F25C746BAE548afc4')
 
 export const WAVAX_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
 export const USDT_ADDRESS = Address.fromString('0xd92e713d051c37ebb2561803a3b5fbabc4962431')
