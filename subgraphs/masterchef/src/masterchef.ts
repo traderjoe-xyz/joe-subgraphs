@@ -32,8 +32,7 @@ export function add(event: Add): void {
   const allocPoint = event.params.allocPoint
 
   log.info('Add pool #{}', [allocPoint.toString()])
-
-  // const pool = getPool(masterChef.poolCount, event.block)
+  const pool = getPool(masterChef.poolCount, event.block)
 
   // Update MasterChef.
   masterChef.totalAllocPoint = masterChef.totalAllocPoint.plus(allocPoint)
