@@ -12,20 +12,20 @@ type MasterChef @entity {
   # Dev fund address
   devaddr: Bytes!
 
-  # Migrator
-  migrator: Bytes!
+  # Treasury
+  treasuryaddr: Bytes!
 
   # Owner
   owner: Bytes!
 
-  # Start block
-  startBlock: BigInt!
+  # Start timestamp
+  startTimestamp: BigInt!
 
   # Joe
   joe: Bytes!
 
-  # Joe per block
-  joePerBlock: BigInt!
+  # Joe per sec
+  joePerSec: BigInt!
 
   # Total allocation point
   totalAllocPoint: BigInt!

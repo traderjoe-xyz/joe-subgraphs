@@ -2,15 +2,15 @@
     "factory_address": "0xE2eCc226Fd2D5CEad96F3f9f00eFaE9fAfe75eB8",
     "trader_joe_start_block": "8438448", 
 
-    "masterchef_address": "0x1Af353148F2316487b5311Fcd522c037842D232c",
-    "master_chef_start_block": "8443458", 
+    "masterchef_address": "0x861726BFE27931A4E22a7277bDe6cb8432b65856",
+    "master_chef_start_block": "8455513", 
 
-    "joe_bar_address": "0x1C4b41bA54492F551e98eD0A9A59B952a962C452",
+    "joe_bar_address": "0x1528Bde49A4a693DDcD3dF9cBa56803C2f54629c",
     "joe_router_address": "0x62387711313CC10F433B32E010A05Bf768c2F037",
-    "joe_maker_address": "0x07DFE570AaBeD486F5577472F7F7952DE425a922",
+    "joe_maker_address": "0x4fBccB4B0b69FDd7863dF0372E20C3Cc3244729E",
 
-    "joe_token_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4", 
-    "joe_usdt_pair_address": "0x3f593aa97c94520a272d5d6763fa946a6b6356b1",
+    "joe_token_address": "0xB0c71B8d4928EdDB4be4Dee9FaA81d9aaFF40117", 
+    "joe_usdt_pair_address": "0x0000000000000000000000000000000000000000",
     "avax_usdt_pair_address": "0x5e912466046d3e156ed6237d21052fddff5b2554",
 
 

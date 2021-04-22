@@ -39,4 +39,8 @@ dataSources:
           handler: ownershipTransferred
         - event: Withdraw(indexed address,indexed uint256,uint256)
           handler: withdraw
+        - event: Add(indexed address, uint256)
+          handler: add
+        - event: Set(indexed uint256, uint256)
+          handler: set
       file: ./src/masterchef.ts
