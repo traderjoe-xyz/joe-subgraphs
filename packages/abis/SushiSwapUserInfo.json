@@ -10,7 +10,7 @@
   },
   {
     "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
-    "name": "getETHRate",
+    "name": "getAVAXRate",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -23,8 +23,8 @@
         "components": [
           { "internalType": "uint256", "name": "block", "type": "uint256" },
           { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-          { "internalType": "uint256", "name": "eth_rate", "type": "uint256" },
-          { "internalType": "uint256", "name": "sushiBalance", "type": "uint256" },
+          { "internalType": "uint256", "name": "avax_rate", "type": "uint256" },
+          { "internalType": "uint256", "name": "joeBalance", "type": "uint256" },
           { "internalType": "address", "name": "delegates", "type": "address" },
           { "internalType": "uint256", "name": "currentVotes", "type": "uint256" },
           { "internalType": "uint256", "name": "nonces", "type": "uint256" }
@@ -35,8 +35,8 @@
       },
       {
         "components": [
-          { "internalType": "uint256", "name": "lastRewardBlock", "type": "uint256" },
-          { "internalType": "uint256", "name": "accSushiPerShare", "type": "uint256" },
+          { "internalType": "uint256", "name": "lastRewardTimestamp", "type": "uint256" },
+          { "internalType": "uint256", "name": "accJoePerShare", "type": "uint256" },
           { "internalType": "uint256", "name": "balance", "type": "uint256" },
           { "internalType": "uint256", "name": "totalSupply", "type": "uint256" },
           { "internalType": "uint256", "name": "uniBalance", "type": "uint256" },
@@ -68,8 +68,8 @@
         "components": [
           { "internalType": "uint256", "name": "block", "type": "uint256" },
           { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-          { "internalType": "uint256", "name": "eth_rate", "type": "uint256" },
-          { "internalType": "uint256", "name": "sushiBalance", "type": "uint256" },
+          { "internalType": "uint256", "name": "avax_rate", "type": "uint256" },
+          { "internalType": "uint256", "name": "joeBalance", "type": "uint256" },
           { "internalType": "address", "name": "delegates", "type": "address" },
           { "internalType": "uint256", "name": "currentVotes", "type": "uint256" },
           { "internalType": "uint256", "name": "nonces", "type": "uint256" }
@@ -80,8 +80,8 @@
       },
       {
         "components": [
-          { "internalType": "uint256", "name": "lastRewardBlock", "type": "uint256" },
-          { "internalType": "uint256", "name": "accSushiPerShare", "type": "uint256" },
+          { "internalType": "uint256", "name": "lastRewardTimestamp", "type": "uint256" },
+          { "internalType": "uint256", "name": "accJoePerShare", "type": "uint256" },
           { "internalType": "uint256", "name": "balance", "type": "uint256" },
           { "internalType": "uint256", "name": "totalSupply", "type": "uint256" },
           { "internalType": "uint256", "name": "uniBalance", "type": "uint256" },
@@ -114,8 +114,8 @@
     "inputs": [
       { "internalType": "address", "name": "uniFactory_", "type": "address" },
       { "internalType": "address", "name": "masterChef_", "type": "address" },
-      { "internalType": "address", "name": "sushi_", "type": "address" },
-      { "internalType": "address", "name": "WETH_", "type": "address" }
+      { "internalType": "address", "name": "joe_", "type": "address" },
+      { "internalType": "address", "name": "WAVAX_", "type": "address" }
     ],
     "name": "setContracts",
     "outputs": [],

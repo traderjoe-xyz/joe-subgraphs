@@ -94,7 +94,7 @@ export function deposit(event: Deposit): void {
   const pairContract = PairContract.bind(poolInfo.value0)
   pool.balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
 
-  pool.lastRewardBlock = poolInfo.value2
+  pool.lastRewardTimestamp = poolInfo.value2
   pool.accJoePerShare = poolInfo.value3
 
   const poolDays = event.block.timestamp.minus(pool.updatedAt).divDecimal(BigDecimal.fromString('86400'))
@@ -255,7 +255,7 @@ export function withdraw(event: Withdraw): void {
 
   const pairContract = PairContract.bind(poolInfo.value0)
   pool.balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
-  pool.lastRewardBlock = poolInfo.value2
+  pool.lastRewardTimestamp = poolInfo.value2
   pool.accJoePerShare = poolInfo.value3
 
   const poolDays = event.block.timestamp.minus(pool.updatedAt).divDecimal(BigDecimal.fromString('86400'))
@@ -472,7 +472,7 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
 
     pool.pair = poolInfo.value0
     pool.allocPoint = poolInfo.value1
-    pool.lastRewardBlock = poolInfo.value2
+    pool.lastRewardTimestamp = poolInfo.value2
     pool.accJoePerShare = poolInfo.value3
 
     // Total supply of LP tokens
@@ -611,7 +611,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
 //   const masterChef = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
 //   const poolInfo = masterChef.poolInfo(call.inputs._pid)
 //   const pool = getPool(call.inputs._pid, call.block)
-//   pool.lastRewardBlock = poolInfo.value2
+//   pool.lastRewardTimestamp = poolInfo.value2
 //   pool.accJoePerShare = poolInfo.value3
 //   pool.save()
 // }

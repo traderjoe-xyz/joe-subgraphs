@@ -99,7 +99,7 @@ type Pool @entity {
   allocPoint: BigInt!
 
   # Last reward block
-  lastRewardBlock: BigInt!
+  lastRewardTimestamp: BigInt!
 
   # Accumulated joe per share
   accJoePerShare: BigInt!
@@ -208,7 +208,7 @@ type User @entity {
   # entitled to a user but is pending to be distributed is:
   # pending reward = (user.amount * pool.accJoePerShare) - user.rewardDebt
   # Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
-  # 1. The pool's `accJoePerShare` (and `lastRewardBlock`) gets updated.
+  # 1. The pool's `accJoePerShare` (and `lastRewardTimestamp`) gets updated.
   # 2. User receives the pending reward sent to his/her address.
   # 3. User's `amount` gets updated.
   # 4. User's `rewardDebt` gets updated.
