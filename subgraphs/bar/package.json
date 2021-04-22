@@ -6,18 +6,21 @@
     "scripts": {
 	    "prepare:avax": "mustache config/avax.json bar.template.yaml > bar.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json bar.template.yaml > bar.rinkeby.yaml",
+        "prepare:fuji": "mustache config/fuji.json bar.template.yaml > bar.fuji.yaml",
 
         "codegen:avax": "graph codegen bar.avax.yaml",
         "codegen:rinkeby": "graph codegen bar.rinkeby.yaml",
+        "codegen:fuji": "graph codegen bar.fuji.yaml",
 
         "build:avax": "graph build bar.avax.yaml",
         "build:rinkeby": "graph build bar.rinkeby.yaml",
+        "build:fuji": "graph build bar.fuji.yaml",
 
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar bar.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar-rinkeby bar.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/bar --access-token ",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/bar",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token  joe-defi/bar bar.avax.yaml"
+        "create-local": "graph create --node http://localhost:8020/ joe-defi/bar --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
+        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/bar --access-token 6830146c4e7348f1bcf765cfb8c1fb10",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token 6830146c4e7348f1bcf765cfb8c1fb10 joe-defi/bar bar.fuji.yaml"
     }
 }
