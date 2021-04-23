@@ -167,7 +167,7 @@ export function onTransfer(event: TransferEvent): void {
   const mints = transaction.mints
   const burns = transaction.burns
 
-  // 3 cases, mints, send first on ETH withdrawls, and burns
+  // 3 cases, mints, send first on AVAX withdrawls, and burns
 
   if (event.params.from == ADDRESS_ZERO) {
     // mints
@@ -194,7 +194,7 @@ export function onTransfer(event: TransferEvent): void {
       factory.save()
     }
   } else if (event.params.to.toHex() == pair.id) {
-    // case where direct send first on ETH withdrawls
+    // case where direct send first on AVAX withdrawls
     const burn = new Burn(
       event.transaction.hash.toHex().concat('-').concat(BigInt.fromI32(transaction.burns.length).toString())
     )
@@ -317,7 +317,7 @@ export function onSync(event: SyncEvent): void {
 
   pair.save()
 
-  // update ETH price now that reserves could have changed
+  // update AVAX price now that reserves could have changed
   const bundle = getBundle()
   // Pass the block so we can get accurate price data before migration
   const avaxPrice = getAvaxPrice(event.block)
@@ -385,7 +385,7 @@ export function onMint(event: MintEvent): void {
   token0.txCount = token0.txCount.plus(BigInt.fromI32(1))
   token1.txCount = token1.txCount.plus(BigInt.fromI32(1))
 
-  // get new amounts of USD and ETH for tracking
+  // get new amounts of USD and AVAX for tracking
   const bundle = getBundle()
   const amountTotalUSD = token1.derivedAVAX
     .times(token1Amount)
@@ -451,7 +451,7 @@ export function onBurn(event: BurnEvent): void {
   token0.txCount = token0.txCount.plus(BigInt.fromI32(1))
   token1.txCount = token1.txCount.plus(BigInt.fromI32(1))
 
-  // get new amounts of USD and ETH for tracking
+  // get new amounts of USD and AVAX for tracking
   const bundle = getBundle()
   const amountTotalUSD = token1.derivedAVAX
     .times(token1Amount)
@@ -512,15 +512,15 @@ export function onSwap(event: SwapEvent): void {
   const amount0Total = amount0Out.plus(amount0In)
   const amount1Total = amount1Out.plus(amount1In)
 
-  // ETH/USD prices
+  // AVAX/USD prices
   const bundle = getBundle()
 
-  // get total amounts of derived USD and ETH for tracking
-  const derivedAmountETH = token1.derivedAVAX
+  // get total amounts of derived USD and AVAX for tracking
+  const derivedAmountAVAX = token1.derivedAVAX
     .times(amount1Total)
     .plus(token0.derivedAVAX.times(amount0Total))
     .div(BigDecimal.fromString('2'))
-  const derivedAmountUSD = derivedAmountETH.times(bundle.avaxPrice)
+  const derivedAmountUSD = derivedAmountAVAX.times(bundle.avaxPrice)
 
   // only accounts for volume through white listed tokens
   const trackedAmountUSD = getTrackedVolumeUSD(
@@ -531,12 +531,12 @@ export function onSwap(event: SwapEvent): void {
     pair as Pair
   )
 
-  let trackedAmountETH: BigDecimal
+  let trackedAmountAVAX: BigDecimal
 
   if (bundle.avaxPrice.equals(BIG_DECIMAL_ZERO)) {
-    trackedAmountETH = BIG_DECIMAL_ZERO
+    trackedAmountAVAX = BIG_DECIMAL_ZERO
   } else {
-    trackedAmountETH = trackedAmountUSD.div(bundle.avaxPrice)
+    trackedAmountAVAX = trackedAmountUSD.div(bundle.avaxPrice)
   }
 
   // update token0 global volume and token liquidity stats
@@ -564,7 +564,7 @@ export function onSwap(event: SwapEvent): void {
   // update global values, only used tracked amounts for volume
   const factory = getFactory()
   factory.volumeUSD = factory.volumeUSD.plus(trackedAmountUSD)
-  factory.volumeAVAX = factory.volumeAVAX.plus(trackedAmountETH)
+  factory.volumeAVAX = factory.volumeAVAX.plus(trackedAmountAVAX)
   factory.untrackedVolumeUSD = factory.untrackedVolumeUSD.plus(derivedAmountUSD)
   factory.txCount = factory.txCount.plus(BigInt.fromI32(1))
 
@@ -619,7 +619,7 @@ export function onSwap(event: SwapEvent): void {
 
   // swap specific updating
   dayData.volumeUSD = dayData.volumeUSD.plus(trackedAmountUSD)
-  dayData.volumeAVAX = dayData.volumeAVAX.plus(trackedAmountETH)
+  dayData.volumeAVAX = dayData.volumeAVAX.plus(trackedAmountAVAX)
   dayData.untrackedVolume = dayData.untrackedVolume.plus(derivedAmountUSD)
   dayData.save()
 

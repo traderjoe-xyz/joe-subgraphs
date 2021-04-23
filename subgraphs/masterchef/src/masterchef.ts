@@ -3,10 +3,8 @@ import {
   Set,
   Deposit,
   EmergencyWithdraw,
-  // MassUpdatePoolsCall,
   MasterChef as MasterChefContract,
   OwnershipTransferred,
-  // UpdatePoolCall,
   Withdraw,
 } from '../generated/MasterChef/MasterChef'
 import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
@@ -26,12 +24,18 @@ import { getJoePrice, getUSDRate } from 'pricing'
 import { ERC20 as ERC20Contract } from '../generated/MasterChef/ERC20'
 import { Pair as PairContract } from '../generated/MasterChef/Pair'
 
+
+
+/*
+ * Event handler, called after masterchef adds new LP pool
+ * We get the pool and add this to graph
+ */ 
 export function add(event: Add): void {
   const masterChef = getMasterChef(event.block)
   const allocPoint = event.params.allocPoint
-
-  log.info('Add pool #{}', [allocPoint.toString()])
-  const pool = getPool(masterChef.poolCount, event.block)
+  
+  // get getPool to create pool
+  getPool(masterChef.poolCount, event.block)
 
   // Update MasterChef.
   masterChef.totalAllocPoint = masterChef.totalAllocPoint.plus(allocPoint)
@@ -39,17 +43,14 @@ export function add(event: Add): void {
   masterChef.save()
 }
 
+/*
+ * Event handler, called after masterchef sets liquidity to LP pool
+ * We get the pool and update to graph
+ */ 
 export function set(event: Set): void {
-  // log.info('Set pool id: {} allocPoint: {} withUpdate: {}', [
-  //   call.inputs._pid.toString(),
-  //   call.inputs._allocPoint.toString(),
-  //   call.inputs._withUpdate ? 'true' : 'false',
-  // ])
   const masterChef = getMasterChef(event.block)
   const pool = getPool(event.params.pid, event.block)
   const allocPoint = event.params.allocPoint
-
-  log.info('Set pool #{}, prev: #{}', [allocPoint.toString(), pool.allocPoint.toString()])
 
   // Update masterchef
   masterChef.totalAllocPoint = masterChef.totalAllocPoint.plus(allocPoint.minus(pool.allocPoint))
@@ -60,53 +61,38 @@ export function set(event: Set): void {
   pool.save()
 }
 
+
+/*
+ * Event handler, called after user deposits liquidity
+ * We update pool, histories and user jlp balances
+ * 
+ * event params: {user, pid, amount}
+ */ 
 export function deposit(event: Deposit): void {
-  // if (event.params.amount == BIG_INT_ZERO) {
-  //   log.info('Deposit zero transaction, input {} hash {}', [
-  //     event.transaction.input.toHex(),
-  //     event.transaction.hash.toHex(),
-  //   ])
-  // }
-  const userAddress = event.params.user
-  const pid = event.params.pid
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
-
-  // log.info('{} has deposited {} jlp tokens to pool #{} (masterchef address: #{})', [
-  //   event.params.user.toHex(),
-  //   event.params.amount.toString(),
-  //   event.params.pid.toString(),
-  //   MASTER_CHEF_ADDRESS.toHexString(),
-  // ])
-
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
 
+  // update pool
   const poolInfoResult = masterChefContract.try_poolInfo(event.params.pid)
   if (poolInfoResult.reverted) {
     log.info('[masterchef deposit] poolInfo reverted', [])
     return
   }
   const poolInfo = poolInfoResult.value
-
   const pool = getPool(event.params.pid, event.block)
-
   const poolHistory = getPoolHistory(pool, event.block)
-
   const pairContract = PairContract.bind(poolInfo.value0)
   pool.balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
-
   pool.lastRewardTimestamp = poolInfo.value2
   pool.accJoePerShare = poolInfo.value3
-
   const poolDays = event.block.timestamp.minus(pool.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   pool.jlpAge = pool.jlpAge.plus(poolDays.times(pool.jlpBalance))
-
   pool.jlpDeposited = pool.jlpDeposited.plus(amount)
   pool.jlpBalance = pool.jlpBalance.plus(amount)
-
   pool.updatedAt = event.block.timestamp
 
+  // get user
   const userInfo = masterChefContract.userInfo(event.params.pid, event.params.user)
-
   const user = getUser(event.params.pid, event.params.user, event.block)
 
   // If not currently in pool and depositing JLP
@@ -123,9 +109,7 @@ export function deposit(event: Deposit): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
-    // log.info('Deposit: User amount is more than zero, we should harvest {} joe', [pending.toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
-      // log.info('Harvesting {} JOE', [pending.toString()])
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
       user.joeHarvested = user.joeHarvested.plus(pending)
       user.joeHarvestedUSD = user.joeHarvestedUSD.plus(joeHarvestedUSD)
@@ -136,6 +120,7 @@ export function deposit(event: Deposit): void {
     }
   }
 
+  // update user
   user.amount = userInfo.value0
   user.rewardDebt = userInfo.value1
 
@@ -160,35 +145,6 @@ export function deposit(event: Deposit): void {
 
       const entryUSD = token0USD.plus(token1USD)
 
-      // log.info(
-      //   'Token {} priceUSD: {} reserve: {} amount: {} / Token {} priceUSD: {} reserve: {} amount: {} - jlp amount: {} total supply: {} share: {}',
-      //   [
-      //     token0.symbol(),
-      //     token0PriceUSD.toString(),
-      //     reservesResult.value.value0.toString(),
-      //     token0Amount.toString(),
-      //     token1.symbol(),
-      //     token1PriceUSD.toString(),
-      //     reservesResult.value.value1.toString(),
-      //     token1Amount.toString(),
-      //     amount.toString(),
-      //     totalSupply.toString(),
-      //     share.toString(),
-      //   ]
-      // )
-
-      // log.info('User {} has deposited {} JLP tokens {} {} (${}) and {} {} (${}) at a combined value of ${}', [
-      //   user.address.toHex(),
-      //   amount.toString(),
-      //   token0Amount.toString(),
-      //   token0.symbol(),
-      //   token0USD.toString(),
-      //   token1Amount.toString(),
-      //   token1.symbol(),
-      //   token1USD.toString(),
-      //   entryUSD.toString(),
-      // ])
-
       user.entryUSD = user.entryUSD.plus(entryUSD)
 
       pool.entryUSD = pool.entryUSD.plus(entryUSD)
@@ -200,23 +156,23 @@ export function deposit(event: Deposit): void {
   user.save()
   pool.save()
 
+  // update masterchef
   const masterChef = getMasterChef(event.block)
-
   const masterChefDays = event.block.timestamp.minus(masterChef.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   masterChef.jlpAge = masterChef.jlpAge.plus(masterChefDays.times(masterChef.jlpBalance))
-
   masterChef.jlpDeposited = masterChef.jlpDeposited.plus(amount)
   masterChef.jlpBalance = masterChef.jlpBalance.plus(amount)
-
   masterChef.updatedAt = event.block.timestamp
   masterChef.save()
 
+  // update masterchef history
   const history = getHistory(MASTER_CHEF_ADDRESS.toHex(), event.block)
   history.jlpAge = masterChef.jlpAge
   history.jlpBalance = masterChef.jlpBalance
   history.jlpDeposited = history.jlpDeposited.plus(amount)
   history.save()
 
+  // update pool history
   poolHistory.jlpAge = pool.jlpAge
   poolHistory.jlpBalance = pool.balance.divDecimal(BIG_DECIMAL_1E18)
   poolHistory.jlpDeposited = poolHistory.jlpDeposited.plus(amount)
@@ -224,40 +180,29 @@ export function deposit(event: Deposit): void {
   poolHistory.save()
 }
 
+/*
+ * Event handler, called after user withdraws liquidity
+ * We update pool, histories and user jlp balances
+ * 
+ * event params: {user, pid, amount}
+ */ 
 export function withdraw(event: Withdraw): void {
-  // if (event.params.amount == BIG_INT_ZERO && User.load(event.params.user.toHex()) !== null) {
-  //   log.info('Withdrawal zero transaction, input {} hash {}', [
-  //     event.transaction.input.toHex(),
-  //     event.transaction.hash.toHex(),
-  //   ])
-  // }
-
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
-
-  // log.info('{} has withdrawn {} jlp tokens from pool #{}', [
-  //   event.params.user.toHex(),
-  //   amount.toString(),
-  //   event.params.pid.toString(),
-  // ])
-
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
 
+  // update pool
   const poolInfoResult = masterChefContract.try_poolInfo(event.params.pid)
   if (poolInfoResult.reverted) {
     log.info('[masterchef withdraw] poolInfo reverted', [])
     return
   }
   const poolInfo = poolInfoResult.value
-
   const pool = getPool(event.params.pid, event.block)
-
   const poolHistory = getPoolHistory(pool, event.block)
-
   const pairContract = PairContract.bind(poolInfo.value0)
   pool.balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
   pool.lastRewardTimestamp = poolInfo.value2
   pool.accJoePerShare = poolInfo.value3
-
   const poolDays = event.block.timestamp.minus(pool.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   const poolAge = pool.jlpAge.plus(poolDays.times(pool.jlpBalance))
   const poolAgeRemoved = poolAge.div(pool.jlpBalance).times(amount)
@@ -267,8 +212,11 @@ export function withdraw(event: Withdraw): void {
   pool.jlpBalance = pool.jlpBalance.minus(amount)
   pool.updatedAt = event.block.timestamp
 
+  // get user
   const user = getUser(event.params.pid, event.params.user, event.block)
+  const userInfo = masterChefContract.userInfo(event.params.pid, event.params.user)
 
+  // calculate JOE owed
   if (event.block.number.gt(MASTER_CHEF_START_BLOCK) && user.amount.gt(BIG_INT_ZERO)) {
     const pending = user.amount
       .toBigDecimal()
@@ -276,16 +224,7 @@ export function withdraw(event: Withdraw): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
-    // log.info('Withdraw: User amount is more than zero, we should harvest {} JOE - block: {}', [
-    //   pending.toString(),
-    //   event.block.number.toString(),
-    // ])
-    // log.info('JOE PRICE {}', [getJoePrice(event.block).toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
-      // log.info('Harvesting {} JOE (CURRENT JOE PRICE {})', [
-      //   pending.toString(),
-      //   getJoePrice(event.block).toString(),
-      // ])
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
       user.joeHarvested = user.joeHarvested.plus(pending)
       user.joeHarvestedUSD = user.joeHarvestedUSD.plus(joeHarvestedUSD)
@@ -296,8 +235,7 @@ export function withdraw(event: Withdraw): void {
     }
   }
 
-  const userInfo = masterChefContract.userInfo(event.params.pid, event.params.user)
-
+  // update user
   user.amount = userInfo.value0
   user.rewardDebt = userInfo.value1
 
@@ -327,18 +265,6 @@ export function withdraw(event: Withdraw): void {
 
       poolHistory.exitUSD = pool.exitUSD
 
-      // log.info('User {} has withdrwn {} JLP tokens {} {} (${}) and {} {} (${}) at a combined value of ${}', [
-      //   user.address.toHex(),
-      //   amount.toString(),
-      //   token0Amount.toString(),
-      //   token0USD.toString(),
-      //   pairContract.token0().toHex(),
-      //   token1Amount.toString(),
-      //   token1USD.toString(),
-      //   pairContract.token1().toHex(),
-      //   exitUSD.toString(),
-      // ])
-
       user.exitUSD = user.exitUSD.plus(exitUSD)
     } else {
       log.info("Withdraw couldn't get reserves for pair {}", [poolInfo.value0.toHex()])
@@ -354,19 +280,19 @@ export function withdraw(event: Withdraw): void {
   user.save()
   pool.save()
 
+  // update masterchef
   const masterChef = getMasterChef(event.block)
-
   const days = event.block.timestamp.minus(masterChef.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   const jlpAge = masterChef.jlpAge.plus(days.times(masterChef.jlpBalance))
   const jlpAgeRemoved = jlpAge.div(masterChef.jlpBalance).times(amount)
   masterChef.jlpAge = jlpAge.minus(jlpAgeRemoved)
   masterChef.jlpAgeRemoved = masterChef.jlpAgeRemoved.plus(jlpAgeRemoved)
-
   masterChef.jlpWithdrawn = masterChef.jlpWithdrawn.plus(amount)
   masterChef.jlpBalance = masterChef.jlpBalance.minus(amount)
   masterChef.updatedAt = event.block.timestamp
   masterChef.save()
 
+  // update masterchef history
   const history = getHistory(MASTER_CHEF_ADDRESS.toHex(), event.block)
   history.jlpAge = masterChef.jlpAge
   history.jlpAgeRemoved = history.jlpAgeRemoved.plus(jlpAgeRemoved)
@@ -374,6 +300,7 @@ export function withdraw(event: Withdraw): void {
   history.jlpWithdrawn = history.jlpWithdrawn.plus(amount)
   history.save()
 
+  // update pool history
   poolHistory.jlpAge = pool.jlpAge
   poolHistory.jlpAgeRemoved = poolHistory.jlpAgeRemoved.plus(jlpAgeRemoved)
   poolHistory.jlpBalance = pool.balance.divDecimal(BIG_DECIMAL_1E18)
@@ -382,6 +309,10 @@ export function withdraw(event: Withdraw): void {
   poolHistory.save()
 }
 
+/*
+ * Event handler for emergencyWithdraw
+ * 
+ */ 
 export function emergencyWithdraw(event: EmergencyWithdraw): void {
   log.info('User {} emergancy withdrawal of {} from pool #{}', [
     event.params.user.toHex(),
@@ -403,6 +334,10 @@ export function emergencyWithdraw(event: EmergencyWithdraw): void {
   user.save()
 }
 
+/*
+ * Event handler for ownershipTransferred
+ * 
+ */ 
 export function ownershipTransferred(event: OwnershipTransferred): void {
   log.info('Ownership transfered from previous owner: {} to new owner: {}', [
     event.params.previousOwner.toHex(),
@@ -410,11 +345,12 @@ export function ownershipTransferred(event: OwnershipTransferred): void {
   ])
 }
 
-/*
- * Utility functions
- *
- */
 
+// UTILITY FUNCTIONS
+
+/*
+ * get or create masterchef
+ */
 function getMasterChef(block: ethereum.Block): MasterChef {
   let masterChef = MasterChef.load(MASTER_CHEF_ADDRESS.toHex())
 
@@ -449,6 +385,9 @@ function getMasterChef(block: ethereum.Block): MasterChef {
   return masterChef as MasterChef
 }
 
+/*
+ * get or create pool
+ */
 export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
 
@@ -499,6 +438,9 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
   return pool as Pool
 }
 
+/*
+ * get or create history
+ */
 function getHistory(owner: string, block: ethereum.Block): History {
   const day = block.timestamp.div(BIG_INT_ONE_DAY_SECONDS)
 
@@ -521,6 +463,9 @@ function getHistory(owner: string, block: ethereum.Block): History {
   return history as History
 }
 
+/*
+ * get or create poolHistory
+ */
 function getPoolHistory(pool: Pool, block: ethereum.Block): PoolHistory {
   const day = block.timestamp.div(BIG_INT_ONE_DAY_SECONDS)
 
@@ -547,6 +492,9 @@ function getPoolHistory(pool: Pool, block: ethereum.Block): PoolHistory {
   return history as PoolHistory
 }
 
+/*
+ * get or create user
+ */
 export function getUser(pid: BigInt, address: Address, block: ethereum.Block): User {
   const uid = address.toHex()
   const id = pid.toString().concat('-').concat(uid)
@@ -570,57 +518,3 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
 
   return user as User
 }
-
-// // Calls
-
-// export function setMigrator(call: SetMigratorCall): void {
-//   log.info('Set migrator to {}', [call.inputs._migrator.toHex()])
-
-//   const masterChef = getMasterChef(call.block)
-//   masterChef.migrator = call.inputs._migrator
-//   masterChef.save()
-// }
-
-// export function migrate(call: MigrateCall): void {
-//   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
-
-//   const pool = getPool(call.inputs._pid, call.block)
-
-//   const poolInfo = masterChefContract.poolInfo(call.inputs._pid)
-
-//   const pair = poolInfo.value0
-
-//   const pairContract = PairContract.bind(pair as Address)
-
-//   pool.pair = pair
-
-//   const balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
-
-//   pool.balance = balance
-
-//   pool.save()
-// }
-
-// export function massUpdatePools(call: MassUpdatePoolsCall): void {
-//   log.info('Mass update pools', [])
-// }
-
-// export function updatePool(call: UpdatePoolCall): void {
-//   log.info('Update pool id {}', [call.inputs._pid.toString()])
-
-//   const masterChef = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
-//   const poolInfo = masterChef.poolInfo(call.inputs._pid)
-//   const pool = getPool(call.inputs._pid, call.block)
-//   pool.lastRewardTimestamp = poolInfo.value2
-//   pool.accJoePerShare = poolInfo.value3
-//   pool.save()
-// }
-// export function dev(call: DevCall): void {
-//   log.info('Dev changed to {}', [call.inputs._devaddr.toHex()])
-
-//   const masterChef = getMasterChef(call.block)
-
-//   masterChef.devaddr = call.inputs._devaddr
-
-//   masterChef.save()
-// }
