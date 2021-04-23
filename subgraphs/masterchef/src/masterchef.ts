@@ -83,7 +83,7 @@ export function deposit(event: Deposit): void {
   const poolHistory = getPoolHistory(pool, event.block)
   const pairContract = PairContract.bind(poolInfo.value0)
   pool.balance = pairContract.balanceOf(MASTER_CHEF_ADDRESS)
-  pool.lastRewardBlock = poolInfo.value2
+  pool.lastRewardTimestamp = poolInfo.value2
   pool.accJoePerShare = poolInfo.value3
   const poolDays = event.block.timestamp.minus(pool.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   pool.jlpAge = pool.jlpAge.plus(poolDays.times(pool.jlpBalance))
