@@ -80,7 +80,7 @@
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#36040d5b5312f19a025782b5e36663823494c2f3"
 
-"@joe-defi/core@^0.0.4":
+"@joe-defi/core@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@joe-defi/core/-/core-0.1.0.tgz#f740500a4baa2ce273eedb92375799f722487db0"
   integrity sha512-3gfabKTTIEUGgxqh/XzDjzOgJ6UlO9+Pc9vm6xtybzIkREnsBn+iySfrWffjfHPjv31ywGC5C75FCiird4TTLg==
