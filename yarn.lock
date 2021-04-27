@@ -80,10 +80,10 @@
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#36040d5b5312f19a025782b5e36663823494c2f3"
 
-"@joe-defi/core@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@joe-defi/core/-/core-0.1.0.tgz#f740500a4baa2ce273eedb92375799f722487db0"
-  integrity sha512-3gfabKTTIEUGgxqh/XzDjzOgJ6UlO9+Pc9vm6xtybzIkREnsBn+iySfrWffjfHPjv31ywGC5C75FCiird4TTLg==
+"@joe-defi/core@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@joe-defi/core/-/core-0.2.0.tgz#5574a548ee8d884f92d12b4bb42379610b5f3d57"
+  integrity sha512-nPzb1p3Ift6qmwOhYN22ji1Bc2EXBCkRHTjToSyGvikW2obaQ5NmbQERutqmN9WXhvFv5sbYE1eiK7z5RfpLPA==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"

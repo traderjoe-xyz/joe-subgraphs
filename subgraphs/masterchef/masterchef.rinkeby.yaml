@@ -8,7 +8,7 @@ dataSources:
     name: MasterChef
     network: rinkeby
     source:
-      address: '0x861726BFE27931A4E22a7277bDe6cb8432b65856'
+      address: '0xDa78543E5202216684734fBC003E578fd32c3869'
       abi: MasterChef
       startBlock: 8455513
     mapping:
@@ -23,7 +23,7 @@ dataSources:
         - User
       abis:
         - name: MasterChef
-          file: ../../node_modules/@joe-defi/core/abi/MasterChef.json
+          file: ../../node_modules/@joe-defi/core/abi/MasterChefJoe.json
         - name: Factory
           file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
         - name: Pair
