@@ -2,23 +2,25 @@
     "name": "maker",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "SushiSwap",
+    "author": "Joe Defi",
     "scripts": {
-        "codegen": "graph codegen maker.yaml",
-        "build": "graph build maker.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sushiswap/maker maker.yaml",
-        "create-local": "graph create --node http://localhost:8020/ /sushiswap/sushiswap",
-        "remove-local": "graph remove --node http://localhost:8020/ /sushiswap/sushiswap",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /sushiswap/sushiswap",
+	    "prepare:avax": "mustache config/avax.json maker.template.yaml > maker.avax.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json maker.template.yaml > maker.rinkeby.yaml",
+        "prepare:fuji": "mustache config/fuji.json maker.template.yaml > maker.fuji.yaml",
 
-        "prepare:bsc": "mustache config/bsc.json maker.template.yaml > maker.yaml",
-        "prepare:fantom": "mustache config/fantom.json maker.template.yaml > maker.yaml",
-        "prepare:goerli": "mustache config/goerli.json maker.template.yaml > maker.yaml",
-        "prepare:kovan": "mustache config/kovan.json maker.template.yaml > maker.yaml",
-        "prepare:mainnet": "mustache config/mainnet.json maker.template.yaml > maker.yaml",
-        "prepare:matic": "mustache config/matic.json maker.template.yaml > maker.yaml",
-        "prepare:rinkeby": "mustache config/rinkeby.json maker.template.yaml > maker.yaml",
-        "prepare:ropsten": "mustache config/ropsten.json maker.template.yaml > maker.yaml",
-        "prepare:xdai": "mustache config/xdai.json maker.template.yaml > maker.yaml"
+        "codegen:avax": "graph codegen maker.avax.yaml",
+        "codegen:rinkeby": "graph codegen maker.rinkeby.yaml",
+        "codegen:fuji": "graph codegen maker.fuji.yaml",
+
+        "build:avax": "graph build maker.avax.yaml",
+        "build:rinkeby": "graph build maker.rinkeby.yaml",
+        "build:fuji": "graph build maker.fuji.yaml",
+
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/maker maker.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/maker-rinkeby maker.rinkeby.yaml",
+
+        "create-local": "graph create --node http://localhost:8020/ joe-defi/maker --access-token ",
+        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/maker --access-token ",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token joe-defi/maker maker.fuji.yaml"
     }
 }

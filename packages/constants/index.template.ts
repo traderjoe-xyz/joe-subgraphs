@@ -36,6 +36,9 @@ export const MASTER_CHEF_START_BLOCK = BigInt.fromI32({{ master_chef_start_block
 // BAR
 export const JOE_BAR_ADDRESS = Address.fromString('{{ joe_bar_address }}')
 
+// BAR
+export const JOE_MAKER_ADDRESS = Address.fromString('{{ joe_maker_address }}')
+
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ avax_usdt_pair_address }}')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')
