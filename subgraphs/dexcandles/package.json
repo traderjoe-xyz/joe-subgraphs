@@ -4,21 +4,24 @@
     "version": "1.0.0",
     "author": "SushiSwap",
     "scripts": {
-        "codegen": "graph codegen dexcandles.yaml",
-        "build": "graph build dexcandles.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sushiswap/dexcandles dexcandles.yaml",
+        "prepare:avax": "mustache config/avax.json dexcandles.template.yaml > dexcandles.avax.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json dexcandles.template.yaml > dexcandles.rinkeby.yaml",
+        "prepare:fuji": "mustache config/fuji.json dexcandles.template.yaml > dexcandles.fuji.yaml",
+
+        "codegen:avax": "graph codegen dexcandles.avax.yaml",
+        "codegen:rinkeby": "graph codegen dexcandles.rinkeby.yaml",
+        "codegen:fuji": "graph codegen dexcandles.fuji.yaml",
+
+        "build:avax": "graph build dexcandles.avax.yaml",
+        "build:rinkeby": "graph build dexcandles.rinkeby.yaml",
+        "build:fuji": "graph build dexcandles.fuji.yaml",
+
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles dexcandles.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles-rinkeby dexcandles.rinkeby.yaml",
+        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles-fuji dexcandles.fuji.yaml",
+
         "create-local": "graph create --node http://localhost:8020/ /sushiswap/sushiswap",
         "remove-local": "graph remove --node http://localhost:8020/ /sushiswap/sushiswap",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /sushiswap/sushiswap",
-        
-        "prepare:bsc": "mustache config/bsc.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:fantom": "mustache config/fantom.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:goerli": "mustache config/goerli.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:kovan": "mustache config/kovan.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:mainnet": "mustache config/mainnet.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:matic": "mustache config/matic.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:rinkeby": "mustache config/rinkeby.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:ropsten": "mustache config/ropsten.json dexcandles.template.yaml > dexcandles.yaml",
-        "prepare:xdai": "mustache config/xdai.json dexcandles.template.yaml > dexcandles.yaml"
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /sushiswap/sushiswap"
     }
 }
