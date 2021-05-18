@@ -1,8 +1,6 @@
-# Joe Defi (AVAX) Subgraph
+# Trader Joe Subgraphs
 
-Subgraph for Joe Defi on AVAX chain. Currently only `exchange` subgraph available. 
-
-URL: https://thegraph.com/explorer/subgraph/0xmurloc/joeDefiAvax
+Subgraph for Trader Joe on AVAX chain. 
 
 Forked from `sushiswap-subgraph`. 
 

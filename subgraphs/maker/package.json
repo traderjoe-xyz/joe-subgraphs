@@ -2,7 +2,7 @@
     "name": "maker",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "Joe Defi",
+    "author": "Trader Joe",
     "scripts": {
 	    "prepare:avax": "mustache config/avax.json maker.template.yaml > maker.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json maker.template.yaml > maker.rinkeby.yaml",
@@ -16,11 +16,11 @@
         "build:rinkeby": "graph build maker.rinkeby.yaml",
         "build:fuji": "graph build maker.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/maker maker.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/maker-rinkeby maker.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/maker maker.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/maker-rinkeby-ii maker.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/maker --access-token ",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/maker --access-token ",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token joe-defi/maker maker.fuji.yaml"
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/maker --access-token ",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/maker --access-token ",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/maker maker.fuji.yaml"
     }
 }

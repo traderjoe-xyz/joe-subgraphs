@@ -1,6 +1,6 @@
 specVersion: 0.0.3
 description: Exchange
-repository: https://github.com/joe-defi/joe-subgraph
+repository: https://github.com/traderjoe-xyz/joe-subgraph
 schema:
   file: ./exchange.graphql
 dataSources:
@@ -20,13 +20,13 @@ dataSources:
         - Factory
       abis:
         - name: Factory
-          file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: JoeToken
-          file: ../../node_modules/@joe-defi/core/abi/JoeToken.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeToken.json
         - name: ERC20
-          file: ../../node_modules/@joe-defi/core/abi/ERC20.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: ERC20SymbolBytes
           file: ../../packages/abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
@@ -59,9 +59,9 @@ templates:
         - User
       abis:
         - name: Pair
-          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: Factory
-          file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: onMint

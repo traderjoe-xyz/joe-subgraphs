@@ -16,9 +16,9 @@
         "build:rinkeby": "graph build dexcandles.rinkeby.yaml",
         "build:fuji": "graph build dexcandles.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles dexcandles.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles-rinkeby dexcandles.rinkeby.yaml",
-        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/dexcandles-fuji dexcandles.fuji.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/dexcandles dexcandles.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/dexcandles-rinkeby-ii dexcandles.rinkeby.yaml",
+        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/dexcandles-fuji dexcandles.fuji.yaml",
 
         "create-local": "graph create --node http://localhost:8020/ /sushiswap/sushiswap",
         "remove-local": "graph remove --node http://localhost:8020/ /sushiswap/sushiswap",

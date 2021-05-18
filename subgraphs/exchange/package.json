@@ -20,11 +20,11 @@
         "build:rinkeby": "graph build exchange.rinkeby.yaml",
         "build:fuji": "graph build exchange.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/exchange exchange.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/exchange-rinkeby exchange.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange exchange.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-rinkeby-ii exchange.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/exchange",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/exchange",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 joe-defi/exchange exchange.fuji.yaml"
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/exchange",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/exchange",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/exchange exchange.fuji.yaml"
     }
 }

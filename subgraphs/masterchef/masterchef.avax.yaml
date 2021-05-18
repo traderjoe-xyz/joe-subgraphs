@@ -1,6 +1,6 @@
 specVersion: 0.0.3
 description: Masterchef
-repository: https://github.com/joe-defi/joe-subgraph
+repository: https://github.com/traderjoe-xyz/joe-subgraph
 schema:
   file: ./masterchef.graphql
 dataSources:
@@ -23,13 +23,13 @@ dataSources:
         - User
       abis:
         - name: MasterChef
-          file: ../../node_modules/@joe-defi/core/abi/MasterJoe.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterJoe.json
         - name: Factory
-          file: ../../node_modules/@joe-defi/core/abi/JoeFactory.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: ERC20
-          file: ../../node_modules/@joe-defi/core/abi/ERC20.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
       eventHandlers:
         - event: Deposit(indexed address,indexed uint256,uint256)
           handler: deposit

@@ -1,6 +1,6 @@
 specVersion: 0.0.3
 description: Bar
-repository: https://github.com/joe-defi/joe-subgraph
+repository: https://github.com/traderjoe-xyz/joe-subgraph
 schema:
   file: ./bar.graphql
 dataSources:
@@ -20,11 +20,11 @@ dataSources:
         - User
       abis:
         - name: Bar
-          file: ../../node_modules/@joe-defi/core/abi/JoeBar.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeBar.json
         - name: JoeToken
-          file: ../../node_modules/@joe-defi/core/abi/JoeToken.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeToken.json
         - name: Pair
-          file: ../../node_modules/@joe-defi/core/abi/JoePair.json
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: transfer

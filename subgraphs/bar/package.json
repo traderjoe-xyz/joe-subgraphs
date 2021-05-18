@@ -2,7 +2,7 @@
     "name": "bar",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "JoeDefi",
+    "author": "Trader Joe",
     "scripts": {
 	    "prepare:avax": "mustache config/avax.json bar.template.yaml > bar.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json bar.template.yaml > bar.rinkeby.yaml",
@@ -16,11 +16,11 @@
         "build:rinkeby": "graph build bar.rinkeby.yaml",
         "build:fuji": "graph build bar.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar bar.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/bar-rinkeby bar.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/bar bar.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/bar-rinkeby-ii bar.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/bar",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/bar",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 joe-defi/bar bar.fuji.yaml"
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/bar",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/bar",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/bar bar.fuji.yaml"
     }
 }

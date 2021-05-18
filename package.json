@@ -1,5 +1,5 @@
 {
-  "name": "@joedefi/subgraphs",
+  "name": "@traderjoe-xyz/subgraphs",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.19.0",
     "@graphprotocol/graph-ts": "^0.19.0",
-    "@joe-defi/core": "^0.2.0",
+    "@traderjoe-xyz/core": "^0.2.2",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "eslint": "^7.0.0",

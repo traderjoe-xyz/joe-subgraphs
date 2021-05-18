@@ -2,7 +2,7 @@
     "name": "masterchef",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "JoeDefi",
+    "author": "Trader Joe",
     "scripts": {
         "prepare:avax": "mustache config/avax.json masterchef.template.yaml > masterchef.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json masterchef.template.yaml > masterchef.rinkeby.yaml",
@@ -16,11 +16,11 @@
         "build:rinkeby": "graph build masterchef.rinkeby.yaml",
         "build:fuji": "graph build masterchef.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/masterchef masterchef.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ joe-defi/masterchef-rinkeby masterchef.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchef masterchef.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchef-rinkeby-ii masterchef.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ joe-defi/masterchef",
-        "remove-local": "graph remove --node http://localhost:8020/ joe-defi/masterchef",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 joe-defi/masterchef masterchef.fuji.yaml"
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/masterchef",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/masterchef",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/masterchef masterchef.fuji.yaml"
     }
 }
