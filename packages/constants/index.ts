@@ -40,15 +40,15 @@ export const JOE_BAR_ADDRESS = Address.fromString('0x9B8536B0710196865b7bbc2BF2b
 export const JOE_MAKER_ADDRESS = Address.fromString('0xA1688d70F98a5802b50aAc71D8c03ac385cc9fA5')
 
 // PRICING
-export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0x5e912466046d3e156ed6237d21052fddff5b2554')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xbf21027fbf3e6fff156e9f2464881898e4672713')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0xdb5109f6006bcefee2458a010dce3796bff79489')
 
 export const WAVAX_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
 export const USDT_ADDRESS = Address.fromString('0xd92e713d051c37ebb2561803a3b5fbabc4962431')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
-    '0x5e912466046d3e156ed6237d21052fddff5b2554', // WAVAX-USDT
-    '0x5e912466046d3e156ed6237d21052fddff5b2554',  // WAVAX-DAI
+    '0xbf21027fbf3e6fff156e9f2464881898e4672713', // WAVAX-USDT
+    '0xbf21027fbf3e6fff156e9f2464881898e4672713',  // WAVAX-DAI
 ]
 
 export const WHITELIST: string[] = [
