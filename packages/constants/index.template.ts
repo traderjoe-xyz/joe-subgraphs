@@ -31,12 +31,13 @@ export const JOE_TOKEN_ADDRESS = Address.fromString('{{ joe_token_address }}')
 
 // MASTER CHEF
 export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32({{ master_chef_start_block }})
+export const MASTER_CHEF_V2_ADDRESS = Address.fromString('{{ masterchefV2_address }}')
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32({{master_chef_start_block}})
 
 // BAR
 export const JOE_BAR_ADDRESS = Address.fromString('{{ joe_bar_address }}')
 
-// BAR
+// MAKER
 export const JOE_MAKER_ADDRESS = Address.fromString('{{ joe_maker_address }}')
 
 // PRICING
@@ -67,5 +68,5 @@ export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 // minimum liquidity for price to get tracked
 export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
-
-
+// MasterChefV2 precision
+export const ACC_JOE_PRECISION = BigInt.fromString('1000000000000')

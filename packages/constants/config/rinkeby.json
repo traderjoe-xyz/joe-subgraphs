@@ -3,13 +3,14 @@
     "trader_joe_start_block": "8438448", 
 
     "masterchef_address": "0xDa78543E5202216684734fBC003E578fd32c3869",
+    "masterchefV2_address": "0x30D906965307B6deE13737c3FD550e95D9f3b8b3",
     "master_chef_start_block": "8455513", 
 
     "joe_bar_address": "0x9B8536B0710196865b7bbc2BF2b448eC014C637b",
     "joe_router_address": "0xF8bCDda9f6545a1A1A6AcDad6f9Abd1e863423dA",
     "joe_maker_address": "0xA1688d70F98a5802b50aAc71D8c03ac385cc9fA5",
 
-    "joe_token_address": "0x32A83BF2BD519e505f4e39182F214176162F7429", 
+    "joe_token_address": "0x8b405c4464e75Da7b1f91B1f7695b6b72059D6C7", 
     "joe_usdt_pair_address": "0xdb5109f6006bcefee2458a010dce3796bff79489",
     "avax_usdt_pair_address": "0xbf21027fbf3e6fff156e9f2464881898e4672713",
 

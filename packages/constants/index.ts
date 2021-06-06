@@ -27,16 +27,17 @@ export const NULL_CALL_RESULT_VALUE = '0x000000000000000000000000000000000000000
 export const FACTORY_ADDRESS = Address.fromString('0xE2eCc226Fd2D5CEad96F3f9f00eFaE9fAfe75eB8')
 export const TRADERJOE_START_BLOCK = BigInt.fromI32(8438448)
 
-export const JOE_TOKEN_ADDRESS = Address.fromString('0x32A83BF2BD519e505f4e39182F214176162F7429')
+export const JOE_TOKEN_ADDRESS = Address.fromString('0x8b405c4464e75Da7b1f91B1f7695b6b72059D6C7')
 
 // MASTER CHEF
 export const MASTER_CHEF_ADDRESS = Address.fromString('0xDa78543E5202216684734fBC003E578fd32c3869')
+export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0x30D906965307B6deE13737c3FD550e95D9f3b8b3')
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(8455513)
 
 // BAR
 export const JOE_BAR_ADDRESS = Address.fromString('0x9B8536B0710196865b7bbc2BF2b448eC014C637b')
 
-// BAR
+// MAKER
 export const JOE_MAKER_ADDRESS = Address.fromString('0xA1688d70F98a5802b50aAc71D8c03ac385cc9fA5')
 
 // PRICING
@@ -67,5 +68,5 @@ export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 // minimum liquidity for price to get tracked
 export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
 
-
-
+// MasterChefV2 precision
+export const ACC_JOE_PRECISION = BigInt.fromString('1000000000000')
