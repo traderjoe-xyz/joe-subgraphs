@@ -4,9 +4,9 @@
     "version": "1.0.0",
     "author": "Trader Joe",
     "scripts": {
-        "prepare:avax": "mustache config/avax.json masterchefV2.template.yaml > masterChefV2.avax.yaml",
-        "prepare:rinkeby": "mustache config/rinkeby.json masterchefV2.template.yaml > masterChefV2.rinkeby.yaml",
-        "prepare:fuji": "mustache config/fuji.json masterchefV2.template.yaml > masterChefV2.fuji.yaml",
+        "prepare:avax": "mustache config/avax.json masterchefV2.template.yaml > masterchefV2.avax.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json masterchefV2.template.yaml > masterchefV2.rinkeby.yaml",
+        "prepare:fuji": "mustache config/fuji.json masterchefV2.template.yaml > masterchefV2.fuji.yaml",
 
         "codegen:avax": "graph codegen masterchefV2.avax.yaml",
         "codegen:rinkeby": "graph codegen masterchefV2.rinkeby.yaml",
@@ -16,11 +16,11 @@
         "build:rinkeby": "graph build masterchefV2.rinkeby.yaml",
         "build:fuji": "graph build masterchefV2.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefv2-avax masterchefV2.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefv2-rinkeby masterchefV2.rinkeby.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-avax masterchefV2.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-rinkeby masterchefV2.rinkeby.yaml",
 
-        "create-local": "graph create --node http://localhost:8020/ /sushiswap/sushiswap",
-        "remove-local": "graph remove --node http://localhost:8020/ /sushiswap/sushiswap",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /sushiswap/sushiswap"
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/masterchefV2",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/masterchefV2",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/masterchefV2 masterchefV2.fuji.yaml"
     }
 }

@@ -1,54 +1,239 @@
-type MasterChef @entity {
+# MasterChefV2
+type MasterChefV2 @entity {
   # Contract address
   id: ID!
 
-  #owner: Bytes!
-  #migrator: Bytes!
+  # Dev fund address
+  devaddr: Bytes!
 
-  #sushiPerBlock: BgInt! not needed till fully migrated over
+  # Treasury
+  treasuryaddr: Bytes!
+
+  # Owner
+  owner: Bytes!
+
+  # Start timestamp
+  startTimestamp: BigInt!
+
+  # Joe
+  joe: Bytes!
+
+  # Joe per sec
+  joePerSec: BigInt!
+
+  # Total allocation point
   totalAllocPoint: BigInt!
 
-  pools: [Pool!] @derivedFrom(field: "masterChef")
+  # Pools
+  pools: [Pool!]! @derivedFrom(field: "owner")
+
+  # Pool count
   poolCount: BigInt!
 
-  #history: [History!]! @derivedFrom(field: "masterChef")
+  # JLP Balance
+  jlpBalance: BigDecimal!
 
+  # JLP Age
+  jlpAge: BigDecimal!
+
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
+
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
+
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
+
+  # History
+  history: [History!]! @derivedFrom(field: "owner")
+
+  # Upated at
+  updatedAt: BigInt!
+}
+
+type History @entity {
+  # Master chef id concatenated with timestamp
+  id: ID!
+
+  # Owner (MasterChefV2, Pool, or User).
+  owner: MasterChefV2!
+
+  # JLP Balance
+  jlpBalance: BigDecimal!
+
+  # JLP Age
+  jlpAge: BigDecimal!
+
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
+
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
+
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
+
+  # Timestamp
   timestamp: BigInt!
+
+  # Block
   block: BigInt!
 }
 
+# Pool
 type Pool @entity {
-  # Index of pool in poolInfo on MasterChef contract
+  # Index of pool in poolInfo on MasterChefV2 contract
   id: ID!
-  masterChef: MasterChef!
+
+  # Owner
+  owner: MasterChefV2!
+
+  # Pair Liquidity Token Address
   pair: Bytes!
 
+  # Rewarder contract address
   rewarder: Bytes!
 
+  # Allocation point
   allocPoint: BigInt!
+
+  # Last reward block
   lastRewardTimestamp: BigInt!
+
+  # Accumulated joe per share
   accJoePerShare: BigInt!
 
-  jlpBalance: BigInt!
+  # JLP token balance
+  balance: BigInt!
 
+  # Pool users
   users: [User!]! @derivedFrom(field: "pool")
+
+  # User count
   userCount: BigInt!
 
+  # JLP Balance
+  jlpBalance: BigDecimal!
+
+  # JLP Age
+  jlpAge: BigDecimal!
+
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
+
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
+
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
+
+  # Timestamp
   timestamp: BigInt!
+
+  # Block
   block: BigInt!
+
+  # Upated at
+  updatedAt: BigInt!
+
+  # Entry USD
+  entryUSD: BigDecimal!
+
+  # Exit USD
+  exitUSD: BigDecimal!
+
+  # Joe harvested
+  joeHarvested: BigDecimal!
+
+  # Joe harvested
+  joeHarvestedUSD: BigDecimal!
+}
+
+type PoolHistory @entity {
+  # Pool id concatenated with timestamp
+  id: ID!
+
+  # Pool
+  pool: Pool!
+
+  # JLP Balance
+  jlpBalance: BigDecimal!
+
+  # JLP Age
+  jlpAge: BigDecimal!
+
+  # JLP Removed
+  jlpAgeRemoved: BigDecimal!
+
+  # JLP Deposited
+  jlpDeposited: BigDecimal!
+
+  # JLP Withdrawn
+  jlpWithdrawn: BigDecimal!
+
+  # User Count
+  userCount: BigInt!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  # Block
+  block: BigInt!
+
+  # Entry USD
+  entryUSD: BigDecimal!
+
+  # Exit USD
+  exitUSD: BigDecimal!
+
+  # Joe harvested
+  joeHarvested: BigDecimal!
+
+  # Joe harvested
+  joeHarvestedUSD: BigDecimal!
 }
 
 type User @entity {
   # Pool id concatenated with user address
   id: ID!
 
+  # User address
   address: Bytes!
+
+  # Related pool
   pool: Pool
 
-  amount: BigInt!
-  rewardDebt: BigInt!
-  joeHarvested: BigInt!
+  # We do some fancy math here. Basically, any point in time, the amount of JOEs
+  # entitled to a user but is pending to be distributed is:
+  # pending reward = (user.amount * pool.accJoePerShare) - user.rewardDebt
+  # Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
+  # 1. The pool's `accJoePerShare` (and `lastRewardTimestamp`) gets updated.
+  # 2. User receives the pending reward sent to his/her address.
+  # 3. User's `amount` gets updated.
+  # 4. User's `rewardDebt` gets updated.
 
+  # Amount
+  amount: BigInt!
+
+  # Reward debt
+  rewardDebt: BigInt!
+
+  # Entry USD
+  entryUSD: BigDecimal!
+
+  # Exit USD
+  exitUSD: BigDecimal!
+
+  # Joe harvested
+  joeHarvested: BigDecimal!
+
+  # Joe harvested
+  joeHarvestedUSD: BigDecimal!
+
+  # Timestamp
   timestamp: BigInt!
+
+  # Block
   block: BigInt!
 }

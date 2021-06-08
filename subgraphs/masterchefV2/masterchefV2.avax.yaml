@@ -1,29 +1,29 @@
 specVersion: 0.0.3
 description: Masterchef
-repository: https://github.com/traderjoe-xyz/joe-subgraphs
+repository: https://github.com/traderjoe-xyz/joe-subgraph
 schema:
-  file: ./masterchefV2.graphql
+  file: ./masterchef.graphql
 dataSources:
   - kind: ethereum/contract
-    name: MasterChefV2
-    network: rinkeby
+    name: MasterChef
+    network: avalanche
     source:
-      address: '0xDa78543E5202216684734fBC003E578fd32c3869'
-      abi: MasterChefV2
-      startBlock: 8455513
+      address: '0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae'
+      abi: MasterChef
+      startBlock: 800000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - MasterChefV2
+        - MasterChef
         - History
         - Pool
         - PoolHistory
         - User
       abis:
-        - name: MasterChefV2
-          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV2.json
+        - name: MasterChef
+          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterJoe.json
         - name: Factory
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
@@ -39,12 +39,19 @@ dataSources:
           handler: ownershipTransferred
         - event: Withdraw(indexed address,indexed uint256,uint256)
           handler: withdraw
-        - event: Add(indexed uint256,uint256,indexed address,indexed address)
+      callHandlers:
+        - function: add(uint256,address,bool)
           handler: add
-        - event: Set(indexed uint256,uint256,indexed address,bool)
+        - function: set(uint256,uint256,bool)
           handler: set
-        - event: UpdatePool(indexed uint256,uint256,uint256,uint256)
+        - function: massUpdatePools()
+          handler: massUpdatePools
+        - function: updatePool(uint256)
           handler: updatePool
-        - event: Harvest(indexed address,indexed uint256,uint256)
-          handler: harvest
-      file: ./src/masterchefV2.ts
+        - function: setMigrator(address)
+          handler: setMigrator
+        - function: migrate(uint256)
+          handler: migrate
+        - function: dev(address)
+          handler: dev
+      file: ./src/masterchef.ts

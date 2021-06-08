@@ -1,5 +1,5 @@
 specVersion: 0.0.3
-description: MasterChefJoeV2
+description: Masterchef
 repository: https://github.com/traderjoe-xyz/joe-subgraphs
 schema:
   file: ./masterchefV2.graphql
@@ -15,10 +15,11 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/mappings/masterchefV2.ts
       entities:
         - MasterChefV2
+        - History
         - Pool
+        - PoolHistory
         - User
       abis:
         - name: MasterChefV2
@@ -32,15 +33,18 @@ dataSources:
       eventHandlers:
         - event: Deposit(indexed address,indexed uint256,uint256)
           handler: deposit
-        - event: Withdraw(indexed address,indexed uint256,uint256)
-          handler: withdraw
         - event: EmergencyWithdraw(indexed address,indexed uint256,uint256)
           handler: emergencyWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: ownershipTransferred
+        - event: Withdraw(indexed address,indexed uint256,uint256)
+          handler: withdraw
+        - event: Add(indexed uint256,uint256,indexed address,indexed address)
+          handler: add
+        - event: Set(indexed uint256,uint256,indexed address,bool)
+          handler: set
+        - event: UpdatePool(indexed uint256,uint256,uint256,uint256)
+          handler: updatePool
         - event: Harvest(indexed address,indexed uint256,uint256)
           handler: harvest
-        - event: Add(indexed uint256,uint256,indexed address,indexed address)
-          handler: add 
-        - event: Set(indexed uint256,uint256,indexed address,bool)
-          handler: set 
-        - event: UpdatePool(indexed uint256,uint256,uint256,uint256)
-          handler: updatePool 
+      file: ./src/masterchefV2.ts
