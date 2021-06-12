@@ -8,7 +8,7 @@ dataSources:
     name: JoeBar
     network: rinkeby
     source:
-      address: '0x9B8536B0710196865b7bbc2BF2b448eC014C637b'
+      address: '0x0CC47Aa1252f25FD95b65F19C2fd6dB33366A557'
       abi: Bar
       startBlock: 8455514
     mapping:

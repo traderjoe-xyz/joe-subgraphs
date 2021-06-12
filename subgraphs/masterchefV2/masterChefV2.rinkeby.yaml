@@ -8,7 +8,7 @@ dataSources:
     name: MasterChefV2
     network: rinkeby
     source:
-      address: '0xDa78543E5202216684734fBC003E578fd32c3869'
+      address: '0x927bE1425F2C3599Ced2146459f6491eE450848b'
       abi: MasterChefV2
       startBlock: 8455513
     mapping:

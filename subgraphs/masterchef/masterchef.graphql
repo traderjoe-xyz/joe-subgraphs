@@ -3,9 +3,6 @@ type MasterChef @entity {
   # Contract address
   id: ID!
 
-  # Bonus multiplier
-  bonusMultiplier: BigInt!
-
   # Dev fund address
   devaddr: Bytes!
 

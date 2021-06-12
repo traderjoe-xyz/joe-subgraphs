@@ -24,16 +24,14 @@ import { getJoePrice, getUSDRate } from 'pricing'
 import { ERC20 as ERC20Contract } from '../generated/MasterChef/ERC20'
 import { Pair as PairContract } from '../generated/MasterChef/Pair'
 
-
-
 /*
  * Event handler, called after masterchef adds new LP pool
  * We get the pool and add this to graph
- */ 
+ */
 export function add(event: Add): void {
   const masterChef = getMasterChef(event.block)
   const allocPoint = event.params.allocPoint
-  
+
   // get getPool to create pool
   getPool(masterChef.poolCount, event.block)
 
@@ -46,7 +44,7 @@ export function add(event: Add): void {
 /*
  * Event handler, called after masterchef sets liquidity to LP pool
  * We get the pool and update to graph
- */ 
+ */
 export function set(event: Set): void {
   const masterChef = getMasterChef(event.block)
   const pool = getPool(event.params.pid, event.block)
@@ -61,13 +59,12 @@ export function set(event: Set): void {
   pool.save()
 }
 
-
 /*
  * Event handler, called after user deposits liquidity
  * We update pool, histories and user jlp balances
- * 
+ *
  * event params: {user, pid, amount}
- */ 
+ */
 export function deposit(event: Deposit): void {
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
@@ -183,9 +180,9 @@ export function deposit(event: Deposit): void {
 /*
  * Event handler, called after user withdraws liquidity
  * We update pool, histories and user jlp balances
- * 
+ *
  * event params: {user, pid, amount}
- */ 
+ */
 export function withdraw(event: Withdraw): void {
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
   const masterChefContract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
@@ -311,8 +308,8 @@ export function withdraw(event: Withdraw): void {
 
 /*
  * Event handler for emergencyWithdraw
- * 
- */ 
+ *
+ */
 export function emergencyWithdraw(event: EmergencyWithdraw): void {
   log.info('User {} emergancy withdrawal of {} from pool #{}', [
     event.params.user.toHex(),
@@ -336,15 +333,14 @@ export function emergencyWithdraw(event: EmergencyWithdraw): void {
 
 /*
  * Event handler for ownershipTransferred
- * 
- */ 
+ *
+ */
 export function ownershipTransferred(event: OwnershipTransferred): void {
   log.info('Ownership transfered from previous owner: {} to new owner: {}', [
     event.params.previousOwner.toHex(),
     event.params.newOwner.toHex(),
   ])
 }
-
 
 // UTILITY FUNCTIONS
 
@@ -357,7 +353,6 @@ function getMasterChef(block: ethereum.Block): MasterChef {
   if (masterChef === null) {
     const contract = MasterChefContract.bind(MASTER_CHEF_ADDRESS)
     masterChef = new MasterChef(MASTER_CHEF_ADDRESS.toHex())
-    masterChef.bonusMultiplier = contract.BONUS_MULTIPLIER()
     // masterChef.bonusEndBlock = contract.bonusEndBlock()
     masterChef.devaddr = contract.devaddr()
     masterChef.treasuryaddr = contract.treasuryaddr()
