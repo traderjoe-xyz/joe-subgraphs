@@ -1,16 +1,16 @@
 {
-    "factory_address": "0xBB95aa2089A3494e466D3CBE6d6c21eEEFD7b337",
+    "factory_address": "0x86f83be9770894d8e46301b12E88e14AdC6cdb5F",
     "trader_joe_start_block": "8438448", 
 
-    "masterchef_address": "0x4D0b7302D7aD0B0f9eFDF16CAed64868eD377313",
-    "masterchefV2_address": "0x927bE1425F2C3599Ced2146459f6491eE450848b",
+    "masterchef_address": "0x770B6E8a1b39F1a3ea06069cbd6d1e0b5dB264f3",
+    "masterchefV2_address": "0x30e112880b60Cc8046653B246b147EB681BC2D79",
     "master_chef_start_block": "8455513", 
 
-    "joe_bar_address": "0x0CC47Aa1252f25FD95b65F19C2fd6dB33366A557",
-    "joe_router_address": "0x4A586DAA5D5EDCD8182339C24291FB510fA4d271",
-    "joe_maker_address": "0x1FCFDEe3aB694032255Cd5ffe24d66b6c85501ad",
+    "joe_bar_address": "0xd7FeB56CAc77d610b0ab006eF2a0511b7EbF4a3E",
+    "joe_router_address": "0x45bEa0e9aD9d44184cd0B8725fcB04E548303D4e",
+    "joe_maker_address": "0x5B29eb224f30Cf3d9a91149167cd761F1975CF9a",
 
-    "joe_token_address": "0xDDF06D89C908bC38e03067d65408D632fDA4fd9d", 
+    "joe_token_address": "0x4bCa851F272B1a3DAdb077e86AFa94910160d03E", 
     "joe_usdt_pair_address": "0x4C69f41eee459C98F7CbC82573F5E1055010F8CC",
     "avax_usdt_pair_address": "0xbf21027fbf3e6fff156e9f2464881898e4672713",
 
