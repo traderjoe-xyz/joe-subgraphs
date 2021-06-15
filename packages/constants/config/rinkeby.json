@@ -7,20 +7,20 @@
     "master_chef_start_block": "8455513", 
 
     "joe_bar_address": "0xd7FeB56CAc77d610b0ab006eF2a0511b7EbF4a3E",
-    "joe_router_address": "0x45bEa0e9aD9d44184cd0B8725fcB04E548303D4e",
+    "joe_router_address": "0x7E2528476b14507f003aE9D123334977F5Ad7B14",
     "joe_maker_address": "0x5B29eb224f30Cf3d9a91149167cd761F1975CF9a",
 
     "joe_token_address": "0x4bCa851F272B1a3DAdb077e86AFa94910160d03E", 
-    "joe_usdt_pair_address": "0x4C69f41eee459C98F7CbC82573F5E1055010F8CC",
-    "avax_usdt_pair_address": "0xbf21027fbf3e6fff156e9f2464881898e4672713",
+    "joe_usdt_pair_address": "0x7246a837cf85135bc2759f870431cbf9eca408d2",
+    "avax_usdt_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
 
 
     "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
     "wbtc_address": "0x5af59f281b3cfd0c12770e4633e6c16dd08ea543",
     "usdt_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10 ",
     "dai_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10 ",     
-    "wavax_usdt_pair_address": "0xbf21027fbf3e6fff156e9f2464881898e4672713",
-    "wavax_dai_pair_address": "0xbf21027fbf3e6fff156e9f2464881898e4672713",
+    "wavax_usdt_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
+    "wavax_dai_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
     
     "zero_address": "0x0000000000000000000000000000000000000000"
 }
