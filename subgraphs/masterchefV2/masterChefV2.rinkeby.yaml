@@ -43,8 +43,4 @@ dataSources:
           handler: add
         - event: Set(indexed uint256,uint256,indexed address,bool)
           handler: set
-        - event: UpdatePool(indexed uint256,uint256,uint256,uint256)
-          handler: updatePool
-        - event: Harvest(indexed address,indexed uint256,uint256)
-          handler: harvest
       file: ./src/masterchefV2.ts
