@@ -1,5 +1,5 @@
-# MasterChefV2
-type MasterChefV2 @entity {
+# MasterChef
+type MasterChef @entity {
   # Contract address
   id: ID!
 
@@ -56,8 +56,8 @@ type History @entity {
   # Master chef id concatenated with timestamp
   id: ID!
 
-  # Owner (MasterChefV2, Pool, or User).
-  owner: MasterChefV2!
+  # Owner (MasterChef, Pool, or User).
+  owner: MasterChef!
 
   # JLP Balance
   jlpBalance: BigDecimal!
@@ -83,11 +83,11 @@ type History @entity {
 
 # Pool
 type Pool @entity {
-  # Index of pool in poolInfo on MasterChefV2 contract
+  # Index of pool in poolInfo on MasterChef contract
   id: ID!
 
   # Owner
-  owner: MasterChefV2!
+  owner: MasterChef!
 
   # Pair Liquidity Token Address
   pair: Bytes!

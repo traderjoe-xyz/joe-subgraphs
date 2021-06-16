@@ -18,7 +18,7 @@ import {
   MASTER_CHEF_V2_ADDRESS,
   MASTER_CHEF_START_BLOCK,
 } from 'const'
-import { History, MasterChefV2, Pool, PoolHistory, User } from '../generated/schema'
+import { History, MasterChef, Pool, PoolHistory, User } from '../generated/schema'
 import { getJoePrice, getUSDRate } from 'pricing'
 
 import { ERC20 as ERC20Contract } from '../generated/MasterChefV2/ERC20'
@@ -29,13 +29,13 @@ import { Pair as PairContract } from '../generated/MasterChefV2/Pair'
  * We get the pool and add this to graph
  */
 export function add(event: Add): void {
-  const masterChefV2 = getMasterChefV2(event.block)
+  const masterChefV2 = getMasterChef(event.block)
   const allocPoint = event.params.allocPoint
 
   // get getPool to create pool
   getPool(masterChefV2.poolCount, event.block)
 
-  // Update MasterChefV2.
+  // Update MasterChef.
   masterChefV2.totalAllocPoint = masterChefV2.totalAllocPoint.plus(allocPoint)
   masterChefV2.poolCount = masterChefV2.poolCount.plus(BIG_INT_ONE)
   masterChefV2.save()
@@ -46,7 +46,7 @@ export function add(event: Add): void {
  * We get the pool and update to graph
  */
 export function set(event: Set): void {
-  const masterChefV2 = getMasterChefV2(event.block)
+  const masterChefV2 = getMasterChef(event.block)
   const pool = getPool(event.params.pid, event.block)
   const allocPoint = event.params.allocPoint
 
@@ -157,7 +157,7 @@ export function deposit(event: Deposit): void {
   pool.save()
 
   // update masterchef
-  const masterChefV2 = getMasterChefV2(event.block)
+  const masterChefV2 = getMasterChef(event.block)
   const masterChefV2Days = event.block.timestamp
     .minus(masterChefV2.updatedAt)
     .divDecimal(BigDecimal.fromString('86400'))
@@ -283,7 +283,7 @@ export function withdraw(event: Withdraw): void {
   pool.save()
 
   // update masterchef
-  const masterChefV2 = getMasterChefV2(event.block)
+  const masterChefV2 = getMasterChef(event.block)
   const days = event.block.timestamp.minus(masterChefV2.updatedAt).divDecimal(BigDecimal.fromString('86400'))
   const jlpAge = masterChefV2.jlpAge.plus(days.times(masterChefV2.jlpBalance))
   const jlpAgeRemoved = jlpAge.div(masterChefV2.jlpBalance).times(amount)
@@ -352,12 +352,12 @@ export function ownershipTransferred(event: OwnershipTransferred): void {
 /*
  * get or create masterchef
  */
-function getMasterChefV2(block: ethereum.Block): MasterChefV2 {
-  let masterChefV2 = MasterChefV2.load(MASTER_CHEF_V2_ADDRESS.toHex())
+function getMasterChef(block: ethereum.Block): MasterChef {
+  let masterChefV2 = MasterChef.load(MASTER_CHEF_V2_ADDRESS.toHex())
 
   if (masterChefV2 === null) {
     const contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
-    masterChefV2 = new MasterChefV2(MASTER_CHEF_V2_ADDRESS.toHex())
+    masterChefV2 = new MasterChef(MASTER_CHEF_V2_ADDRESS.toHex())
     masterChefV2.devaddr = contract.devaddr()
     masterChefV2.treasuryaddr = contract.treasuryaddr()
     masterChefV2.owner = contract.owner()
@@ -380,7 +380,7 @@ function getMasterChefV2(block: ethereum.Block): MasterChefV2 {
     masterChefV2.save()
   }
 
-  return masterChefV2 as MasterChefV2
+  return masterChefV2 as MasterChef
 }
 
 /*
@@ -390,7 +390,7 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
 
   if (pool === null) {
-    const masterChefV2 = getMasterChefV2(block)
+    const masterChefV2 = getMasterChef(block)
 
     const masterChefV2Contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
 
