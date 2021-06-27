@@ -1,0 +1,32 @@
+specVersion: 0.0.3
+description: Maker
+repository: https://github.com/traderjoe-xyz/joe-subgraphs
+schema:
+  file: ./maker.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Maker
+    network: rinkeby
+    source:
+      address: '0xE8A191026e71C303b0f40F15be93403f7D529707'
+      abi: Pair
+      startBlock: 8438447
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Maker
+        - Server
+        - Serving
+      abis:
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: served
+      file: ./src/maker.ts

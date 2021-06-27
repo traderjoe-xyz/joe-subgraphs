@@ -1,20 +1,20 @@
 {
-    "factory_address": "0x7eeccb3028870540EEc3D88C2259506f2d34fEE0",
+    "factory_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
     "trader_joe_start_block": "100000", 
 
-    "masterchef_address": "0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae",
-    "masterchefV2_address": "0xDD91030c74b70b5A006AEc16ffF8F330476981c6",
+    "masterchef_address": "0x0000000000000000000000000000000000000000",
+    "masterchefV2_address": "0xd6a4F121CA35509aF06A0Be99093d08462f53052",
     "master_chef_start_block": "100000", 
 
-    "joe_bar_address": "0x171B28d39De22EF001029117F3d241fF78c7DC5C",
-    "joe_router_address": "0x5db0735cf88F85E78ed742215090c465979B5006",
-    "joe_maker_address": "0x4EC505F60C041dF9A8351aF6d4532Fd96cFa641f",
+    "joe_bar_address": "0x931B5dFfeBF156B3c295f0C50bbAd494d35989BA",
+    "joe_router_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
+    "joe_maker_address": "0xE8A191026e71C303b0f40F15be93403f7D529707",
 
-    "wavax_address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "wavax_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
     "wbtc_address": "0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab",
     "usdt_address": "0xde3A24028580884448a5397872046a019649b084",
     "dai_address": "0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a", 
-    "joe_token_address": "0x0000000000000000000000000000000000000000", 
+    "joe_token_address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd", 
     "joe_usdt_pair_address": "0x0000000000000000000000000000000000000000",
     "avax_usdt_pair_address": "0x0000000000000000000000000000000000000000",
 

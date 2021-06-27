@@ -16,7 +16,7 @@
         "build:rinkeby": "graph build masterchefV2.rinkeby.yaml",
         "build:fuji": "graph build masterchefV2.fuji.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-avax masterchefV2.avax.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefv2 masterchefV2.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-rinkeby masterchefV2.rinkeby.yaml",
 
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/masterchefV2",

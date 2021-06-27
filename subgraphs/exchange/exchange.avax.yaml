@@ -8,9 +8,9 @@ dataSources:
     name: Factory
     network: avalanche
     source:
-      address: '0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699'
+      address: '0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10'
       abi: Factory
-      startBlock: 800000
+      startBlock: 123846
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
