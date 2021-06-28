@@ -106,10 +106,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@traderjoe-xyz/core@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@traderjoe-xyz/core/-/core-0.5.3.tgz#e94cf6367c6de720893ab6831566c0a324e13d3c"
-  integrity sha512-E2hhepvDaoIe2zlhi2QPkzU5OWQex622HCQdpv2UUWgUAf6QYHQnMalndcbXnaBFQV/sdiLqUztO/JMjy0Kn8g==
+"@traderjoe-xyz/core@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@traderjoe-xyz/core/-/core-0.7.0.tgz#4a8e86e24459c540a446220e3db939ea4e051049"
+  integrity sha512-FD3Rr81lWrrYLB/RiaFEO1yJYVKmeaEfFvh3oXoXNwrBNLaESXECsjZymYsCUxWd4pfRSC98Xf5yIwj209u9OQ==
 
 "@types/connect@^3.4.33":
   version "3.4.34"
