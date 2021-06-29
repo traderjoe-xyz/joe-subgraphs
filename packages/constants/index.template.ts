@@ -54,6 +54,7 @@ export const WAVAX_STABLE_PAIRS: string[] = [
 
 export const WHITELIST: string[] = [
     '{{ wavax_address }}', // WAVAX
+    '{{ weth_address }}', // WETH
     '{{ wbtc_address }}', // WBTC
     '{{ usdt_address }}', // USDT
     '{{ dai_address }}', // DAI
@@ -66,7 +67,7 @@ export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 
 // minimum liquidity for price to get tracked
-export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
+export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('5')
 
 // MasterChefV2 precision
 export const ACC_JOE_PRECISION = BigInt.fromString('1000000000000')

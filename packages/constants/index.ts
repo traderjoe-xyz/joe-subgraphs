@@ -24,41 +24,40 @@ export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
 
 // EXCHANGE
-export const FACTORY_ADDRESS = Address.fromString('0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10')
-export const TRADERJOE_START_BLOCK = BigInt.fromI32(2486000)
+export const FACTORY_ADDRESS = Address.fromString('0x86f83be9770894d8e46301b12e88e14adc6cdb5f')
+export const TRADERJOE_START_BLOCK = BigInt.fromI32(8438448)
 
-export const JOE_TOKEN_ADDRESS = Address.fromString('0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd')
+export const JOE_TOKEN_ADDRESS = Address.fromString('0x23fc76b53882d8dcab1900f0d3c1c0c504ffb8e3')
 
 // MASTER CHEF
-export const MASTER_CHEF_ADDRESS = Address.fromString('0x0000000000000000000000000000000000000000')
-export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0xd6a4F121CA35509aF06A0Be99093d08462f53052')
-export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(2486000)
+export const MASTER_CHEF_ADDRESS = Address.fromString('0x770b6e8a1b39f1a3ea06069cbd6d1e0b5db264f3')
+export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0xff6ea1c23107e0d835930612ee2f4cd975331d0d')
+export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(8455513)
 
 // BAR
-export const JOE_BAR_ADDRESS = Address.fromString('0x931B5dFfeBF156B3c295f0C50bbAd494d35989BA')
+export const JOE_BAR_ADDRESS = Address.fromString('0x33a86afc0f728882f48e5105bc98758b3eae2081')
 
 // MAKER
-export const JOE_MAKER_ADDRESS = Address.fromString('0xE8A191026e71C303b0f40F15be93403f7D529707')
+export const JOE_MAKER_ADDRESS = Address.fromString('0xbefe1d0756da706b3f0ebaea7b4ae10d0adf2f3f')
 
 // PRICING
-export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xe4b9865c0866346ba3613ec122040a365637fb46')
-export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x0000000000000000000000000000000000000000')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0xc23f448c7d255b4787b7e97df11f2b637f716809')
 
-export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7')
-export const USDT_ADDRESS = Address.fromString('0xde3a24028580884448a5397872046a019649b084')
+export const WAVAX_ADDRESS = Address.fromString('0xc778417e063141139fce010982780140aa0cd5ab')
+export const USDT_ADDRESS = Address.fromString('0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
-    '0xe4b9865c0866346ba3613ec122040a365637fb46', // WAVAX-USDT
-    '0x43b9c8dec26c2d21146466caacabf94fdbeac473',  // WAVAX-DAI
-    '0x9ee0a4e21bd333a6bb2ab298194320b8daa26516',  // PNG WAVAX-DAI
-    '0x17a2e8275792b4616befb02eb9ae699aa0dcb94b',  // PNG WAVAX-DAI
+    '0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2', // WAVAX-USDT
+    '0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2',  // WAVAX-DAI
 ]
 
 export const WHITELIST: string[] = [
-    '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', // WAVAX
-    '0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab', // WBTC
-    '0xde3a24028580884448a5397872046a019649b084', // USDT
-    '0xba7deebbfc5fa1100fb055a87773e1e99cd3507a', // DAI
+    '0xc778417e063141139fce010982780140aa0cd5ab', // WAVAX
+    '0xc778417e063141139fce010982780140aa0cd5ab', // WETH
+    '0x5af59f281b3cfd0c12770e4633e6c16dd08ea543', // WBTC
+    '0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ', // USDT
+    '0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ', // DAI
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
@@ -68,7 +67,7 @@ export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
 
 // minimum liquidity for price to get tracked
-export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0')
+export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('5')
 
 // MasterChefV2 precision
 export const ACC_JOE_PRECISION = BigInt.fromString('1000000000000')
