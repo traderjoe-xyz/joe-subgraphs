@@ -2,7 +2,7 @@
     "name": "dexcandles",
     "license": "MIT",
     "version": "1.0.0",
-    "author": "SushiSwap",
+    "author": "TraderJoe",
     "scripts": {
         "prepare:avax": "mustache config/avax.json dexcandles.template.yaml > dexcandles.avax.yaml",
         "prepare:rinkeby": "mustache config/rinkeby.json dexcandles.template.yaml > dexcandles.rinkeby.yaml",

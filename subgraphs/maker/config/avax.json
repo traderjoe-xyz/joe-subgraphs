@@ -1,5 +1,5 @@
 {
-    "network": "rinkeby",
+    "network": "avalanche",
     "address": "0xE8A191026e71C303b0f40F15be93403f7D529707",
-    "startBlock": "8438447"
+    "startBlock": "2486000"
 }

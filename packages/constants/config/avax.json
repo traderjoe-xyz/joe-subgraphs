@@ -1,10 +1,10 @@
 {
     "factory_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
-    "trader_joe_start_block": "100000", 
+    "trader_joe_start_block": "2486000", 
 
     "masterchef_address": "0x0000000000000000000000000000000000000000",
     "masterchefV2_address": "0xd6a4F121CA35509aF06A0Be99093d08462f53052",
-    "master_chef_start_block": "100000", 
+    "master_chef_start_block": "2486000", 
 
     "joe_bar_address": "0x931B5dFfeBF156B3c295f0C50bbAd494d35989BA",
     "joe_router_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
