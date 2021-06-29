@@ -1,19 +1,20 @@
 {
-    "factory_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
+    "factory_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10",
     "trader_joe_start_block": "2486000", 
 
     "masterchef_address": "0x0000000000000000000000000000000000000000",
-    "masterchefV2_address": "0xd6a4F121CA35509aF06A0Be99093d08462f53052",
+    "masterchefV2_address": "0xd6a4f121ca35509af06a0be99093d08462f53052",
     "master_chef_start_block": "2486000", 
 
-    "joe_bar_address": "0x931B5dFfeBF156B3c295f0C50bbAd494d35989BA",
-    "joe_router_address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
-    "joe_maker_address": "0xE8A191026e71C303b0f40F15be93403f7D529707",
+    "joe_bar_address": "0x931b5dffebf156b3c295f0c50bbad494d35989ba",
+    "joe_router_address": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
+    "joe_maker_address": "0xe8a191026e71c303b0f40f15be93403f7d529707",
 
     "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd", 
     "joe_usdt_pair_address": "0x0000000000000000000000000000000000000000",
 
     "wavax_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+    "weth_address": "0xf20d962a6c8f70c731bd838a3a388d7d48fa6e15", 
     "wbtc_address": "0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab",
     "usdt_address": "0xde3a24028580884448a5397872046a019649b084",
     "dai_address": "0xba7deebbfc5fa1100fb055a87773e1e99cd3507a", 

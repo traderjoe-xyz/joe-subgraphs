@@ -8,7 +8,7 @@ dataSources:
     name: Maker
     network: rinkeby
     source:
-      address: '0x5B29eb224f30Cf3d9a91149167cd761F1975CF9a'
+      address: '0xbEFE1d0756Da706B3F0EbaEa7b4ae10D0AdF2f3F'
       abi: Pair
       startBlock: 8438447
     mapping:
