@@ -119,9 +119,12 @@ export function findAvaxPerToken(token: Token): BigDecimal {
   const reserve0 = reserves.value0.toBigDecimal()
   const reserve1 = reserves.value1.toBigDecimal()
 
-  const avax = pair.token0() == WAVAX_ADDRESS 
-    ? reserve1.div(reserve0).times(BigInt.fromString("10").pow(decimals0.minus(decimals1)).toBigDecimal())
-    : reserve0.div(reserve1).times(BigInt.fromString("10").pow(decimals1.minus(decimals0)).toBigDecimal())
+  const decimalRatio0 = BigDecimal.fromString("1e" + decimals0.minus(decimals1).toString())
+  const decimalRatio1 = BigDecimal.fromString("1e" + decimals1.minus(decimals0).toString())
+  
+  let avax = pair.token0() == WAVAX_ADDRESS 
+    ? reserve1.div(reserve0).times(decimalRatio0)
+    : reserve0.div(reserve1).times(decimalRatio1)
 
   return avax
 
