@@ -19,6 +19,7 @@ import { Pair, Token } from '../../generated/schema'
 
 import { Factory as FactoryContract } from '../../generated/Factory/Factory'
 import { Pair as PairContract } from '../../generated/Factory/Pair'
+import { getDecimals } from './enitites'
 
 // export const uniswapFactoryContract = FactoryContract.bind(Address.fromString("<>"))
 
@@ -61,6 +62,8 @@ export function getAvaxPrice(block: ethereum.Block = null): BigDecimal {
 
     total_weight = total_weight.plus(weight)
     sum_price = sum_price.plus(price.times(weight))
+
+    log.info("getAvaxPrice, address: {}, price: {}, weight: {}", [pair_address, price.toString(), weight.toString()])
   }
 
   // div by 0
@@ -100,10 +103,19 @@ export function findAvaxPerToken(token: Token): BigDecimal {
 
   const reserves = pair.getReserves()
 
+  // handle decimals, cos USDT
+  const token0 = pair.token0()
+  const token1 = pair.token1()
+  const decimals0 = getDecimals(token0)
+  const decimals1 = getDecimals(token1)
+  
+  const decimalRatio01 = decimals1.toBigDecimal().div(decimals0.toBigDecimal())
+  const decimalRatio10 = decimals0.toBigDecimal().div(decimals1.toBigDecimal())
+
   let avax =
     pair.token0() == WAVAX_ADDRESS
-      ? reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value1.toBigDecimal())
-      : reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal())
+      ? reserves.value0.toBigDecimal().times(decimalRatio01).div(reserves.value1.toBigDecimal())
+      : reserves.value1.toBigDecimal().times(decimalRatio10).div(reserves.value0.toBigDecimal())
 
   return avax.div(BIG_DECIMAL_1E18)
 

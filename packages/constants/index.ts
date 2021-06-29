@@ -50,8 +50,6 @@ export const USDT_ADDRESS = Address.fromString('0xde3a24028580884448a5397872046a
 export const WAVAX_STABLE_PAIRS: string[] = [
     '0xe4b9865c0866346ba3613ec122040a365637fb46', // WAVAX-USDT
     '0x43b9c8dec26c2d21146466caacabf94fdbeac473',  // WAVAX-DAI
-    '0x9ee0a4e21bd333a6bb2ab298194320b8daa26516',  // PNG WAVAX-DAI
-    '0x17a2e8275792b4616befb02eb9ae699aa0dcb94b',  // PNG WAVAX-DAI
 ]
 
 export const WHITELIST: string[] = [
