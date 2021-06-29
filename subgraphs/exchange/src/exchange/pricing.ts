@@ -110,23 +110,4 @@ export function findAvaxPerToken(token: Token): BigDecimal {
   }
 
   return BIG_DECIMAL_ZERO // nothing was found return 0
-
-  // if (address == ADDRESS_ZERO) {
-  //   log.info('Address ZERO...', [])
-  //   return BIG_DECIMAL_ZERO
-  // }
-
-  // const pair = PairContract.bind(address)
-
-  // const reserves = pair.getReserves()
-
-  // log.debug('[findAvaxPerToken] token: {}, reserve0: {}, reserve1: {}',
-  //   [token.id.toString(), reserves.value0.toBigDecimal().toString(), reserves.value1.toBigDecimal().toString()])
-
-  // let avax =
-  //   pair.token0() == WAVAX_ADDRESS
-  //     ? reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value1.toBigDecimal())
-  //     : reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal())
-
-  // return avax.div(BIG_DECIMAL_1E18)
 }
