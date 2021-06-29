@@ -85,13 +85,14 @@ function _getAvaxReserve(pair: Pair | null): BigDecimal {
   return avax
 }
 
-
+// returns derived AVAX for token
 export function findAvaxPerToken(token: Token): BigDecimal {
   if (Address.fromString(token.id) == WAVAX_ADDRESS) {
     return BIG_DECIMAL_ONE
   }
 
-  // TODO: explore why sushi loops through a whitelist
+  // TODO: loop through a list of whitelisted base pairs
+  // for now we assume that token has a WAVAX pair
   const address = factoryContract.getPair(Address.fromString(token.id), WAVAX_ADDRESS)
   
   if (address == ADDRESS_ZERO) {
@@ -100,24 +101,29 @@ export function findAvaxPerToken(token: Token): BigDecimal {
   }
 
   const pair = PairContract.bind(address)
-
   const reserves = pair.getReserves()
 
-  // handle decimals, cos USDT
+  /*
+   * HOW THIS WORKS
+   * Assume that token1 is AVAX: 
+   * DerivedAvax of token0 = reserve1 / reserve0 
+   * 
+   * But we have to account for tokens with different decimals, so: 
+   * DerivedAvax = reserve1 / reserve0 * 10^(decimals0 - decimals1)
+   * 
+   */
   const token0 = pair.token0()
   const token1 = pair.token1()
   const decimals0 = getDecimals(token0)
   const decimals1 = getDecimals(token1)
-  
-  const decimalRatio01 = decimals1.toBigDecimal().div(decimals0.toBigDecimal())
-  const decimalRatio10 = decimals0.toBigDecimal().div(decimals1.toBigDecimal())
+  const reserve0 = reserves.value0.toBigDecimal()
+  const reserve1 = reserves.value1.toBigDecimal()
 
-  let avax =
-    pair.token0() == WAVAX_ADDRESS
-      ? reserves.value0.toBigDecimal().times(decimalRatio01).div(reserves.value1.toBigDecimal())
-      : reserves.value1.toBigDecimal().times(decimalRatio10).div(reserves.value0.toBigDecimal())
+  const avax = pair.token0() == WAVAX_ADDRESS 
+    ? reserve1.div(reserve0).times(BigInt.fromString("10").pow(decimals0.minus(decimals1)).toBigDecimal())
+    : reserve0.div(reserve1).times(BigInt.fromString("10").pow(decimals1.minus(decimals0)).toBigDecimal())
 
-  return avax.div(BIG_DECIMAL_1E18)
+  return avax
 
   // // loop through whitelist and check if paired with any
 
