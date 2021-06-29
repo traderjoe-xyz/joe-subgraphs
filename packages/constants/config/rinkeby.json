@@ -12,8 +12,6 @@
 
     "joe_token_address": "0x23fc76B53882d8dcaB1900f0D3C1C0c504Ffb8E3", 
     "joe_usdt_pair_address": "0xC23f448C7d255b4787b7e97DF11f2b637F716809",
-    "avax_usdt_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
-
 
     "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
     "wbtc_address": "0x5af59f281b3cfd0c12770e4633e6c16dd08ea543",
@@ -21,6 +19,6 @@
     "dai_address": "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10 ",     
     "wavax_usdt_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
     "wavax_dai_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
-    
+
     "zero_address": "0x0000000000000000000000000000000000000000"
 }

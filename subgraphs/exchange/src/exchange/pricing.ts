@@ -10,7 +10,6 @@ import {
   // JOE_TOKEN_ADDRESS,
   JOE_USDT_PAIR_ADDRESS,
   // TRADERJOE_START_BLOCK, 
-  // TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
   // USDT_ADDRESS,
   WAVAX_STABLE_PAIRS, 
   WAVAX_ADDRESS,
@@ -53,8 +52,6 @@ export function getAvaxPrice(block: ethereum.Block = null): BigDecimal {
 
   let total_weight = BIG_DECIMAL_ZERO
   let sum_price = BIG_DECIMAL_ZERO
-
-  // for (const pair_address of WAVAX_STABLE_PAIRS) {
 
   for (let i = 0; i < WAVAX_STABLE_PAIRS.length; ++i) {
     const pair_address = WAVAX_STABLE_PAIRS[i]
