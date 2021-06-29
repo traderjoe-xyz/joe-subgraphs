@@ -60,7 +60,7 @@ export function getAvaxPrice(block: ethereum.Block = null): BigDecimal {
     total_weight = total_weight.plus(weight)
     sum_price = sum_price.plus(price.times(weight))
 
-    log.info("getAvaxPrice, address: {}, price: {}, weight: {}", [pair_address, price.toString(), weight.toString()])
+    log.debug("getAvaxPrice, address: {}, price: {}, weight: {}", [pair_address, price.toString(), weight.toString()])
   }
 
   // div by 0
@@ -73,8 +73,11 @@ function _getAvaxPrice(pair: Pair | null): BigDecimal {
   if (pair == null) {
     return BIG_DECIMAL_ZERO
   }
-  const avax = pair.token0 == WAVAX_ADDRESS.toString() ? pair.token1Price : pair.token0Price
+  const avax = pair.token0 == WAVAX_ADDRESS.toHexString() ? pair.token1Price : pair.token0Price
+  log.debug("_getAvaxPrice, token0: {}, wavax: {}", [pair.token0, WAVAX_ADDRESS.toHexString()])
+
   return avax
+  // return pair.token1Price
 }
 
 // returns avax reserves given e.g. avax-usdt or avax-dai pair
@@ -82,8 +85,9 @@ function _getAvaxReserve(pair: Pair | null): BigDecimal {
   if (pair == null) {
     return BIG_DECIMAL_ZERO
   }
-  const avax = pair.token0 == WAVAX_ADDRESS.toString() ? pair.reserve1 : pair.reserve0
+  const avax = pair.token0 == WAVAX_ADDRESS.toHexString() ? pair.reserve0 : pair.reserve1
   return avax
+  // return pair.reserve0
 }
 
 export function findAvaxPerToken(token: Token): BigDecimal {
