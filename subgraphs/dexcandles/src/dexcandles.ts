@@ -1,4 +1,4 @@
-import { BigInt, Bytes } from '@graphprotocol/graph-ts'
+import { Address, BigInt, Bytes, ByteArray } from '@graphprotocol/graph-ts'
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
@@ -15,13 +15,26 @@ export function handleNewPair(event: PairCreated): void {
 }
 
 export function handleSwap(event: Swap): void {
-  const token0Amount: BigInt = event.params.amount0In.minus(event.params.amount0Out).abs()
-  const token1Amount: BigInt = event.params.amount1Out.minus(event.params.amount1In).abs()
+  const pair = Pair.load(event.address.toHex())
+  const usdtAddress = Address.fromString(
+    ByteArray.fromHexString('0xde3A24028580884448a5397872046a019649b084').toHexString()
+  )
+
+  // Because USDT is 6 decimals, we shift right 12 decimals
+  const token0Amount: BigInt =
+    pair.token0 === usdtAddress
+      ? event.params.amount0In.minus(event.params.amount0Out).abs().rightShift(12)
+      : event.params.amount0In.minus(event.params.amount0Out).abs()
+
+  const token1Amount: BigInt =
+    pair.token1 === usdtAddress
+      ? event.params.amount1Out.minus(event.params.amount1In).abs().rightShift(12)
+      : event.params.amount1Out.minus(event.params.amount1In).abs()
+
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
   }
 
-  const pair = Pair.load(event.address.toHex())
   const price = token0Amount.divDecimal(token1Amount.toBigDecimal())
   const tokens = concat(pair.token0, pair.token1)
   const timestamp = event.block.timestamp.toI32()
