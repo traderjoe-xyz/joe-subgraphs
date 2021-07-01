@@ -37,7 +37,7 @@ export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0xd6a4f121ca35509af06a
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(2486000)
 
 // BAR
-export const JOE_BAR_ADDRESS = Address.fromString('0x931b5dffebf156b3c295f0c50bbad494d35989ba')
+export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33')
 
 // MAKER
 export const JOE_MAKER_ADDRESS = Address.fromString('0xe8a191026e71c303b0f40f15be93403f7d529707')
