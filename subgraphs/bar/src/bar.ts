@@ -27,7 +27,7 @@ function createBar(block: ethereum.Block): Bar {
   const bar = new Bar(dataSource.address().toHex())
   bar.decimals = contract.decimals()
   bar.name = contract.name()
-  bar.joe = contract.sushi()
+  bar.joe = contract.joe()
   bar.symbol = contract.symbol()
   bar.totalSupply = BIG_DECIMAL_ZERO
   bar.joeStaked = BIG_DECIMAL_ZERO
@@ -147,9 +147,7 @@ export function transfer(event: TransferEvent): void {
   const joePrice = getJoePrice()
 
   bar.totalSupply = barContract.totalSupply().divDecimal(BIG_DECIMAL_1E18)
-  bar.joeStaked = JoeTokenContract.bind(JOE_TOKEN_ADDRESS)
-    .balanceOf(JOE_BAR_ADDRESS)
-    .divDecimal(BIG_DECIMAL_1E18)
+  bar.joeStaked = JoeTokenContract.bind(JOE_TOKEN_ADDRESS).balanceOf(JOE_BAR_ADDRESS).divDecimal(BIG_DECIMAL_1E18)
   bar.ratio = bar.joeStaked.div(bar.totalSupply)
 
   const what = value.times(bar.ratio)
@@ -269,11 +267,7 @@ export function transfer(event: TransferEvent): void {
 
   // If transfer from address to address and not known xJoe pools.
   if (event.params.from != ADDRESS_ZERO && event.params.to != ADDRESS_ZERO) {
-    log.info('transfered {} xJoe from {} to {}', [
-      value.toString(),
-      event.params.from.toHex(),
-      event.params.to.toHex(),
-    ])
+    log.info('transfered {} xJoe from {} to {}', [value.toString(), event.params.from.toHex(), event.params.to.toHex()])
 
     const fromUser = getUser(event.params.from, event.block)
 
