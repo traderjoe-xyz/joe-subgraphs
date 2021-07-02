@@ -8,7 +8,7 @@ dataSources:
     name: Maker
     network: avalanche
     source:
-      address: '0xE8A191026e71C303b0f40F15be93403f7D529707'
+      address: '0x861726BFE27931A4E22a7277bDe6cb8432b65856'
       abi: Pair
       startBlock: 2486000
     mapping:
