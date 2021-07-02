@@ -4,10 +4,13 @@ type MasterChef @entity {
   id: ID!
 
   # Dev fund address
-  devaddr: Bytes!
+  devAddr: Bytes!
 
   # Treasury
-  treasuryaddr: Bytes!
+  treasuryAddr: Bytes!
+
+  # Investor
+  investorAddr: Bytes!
 
   # Owner
   owner: Bytes!

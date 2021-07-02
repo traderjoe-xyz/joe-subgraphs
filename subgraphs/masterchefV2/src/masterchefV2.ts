@@ -358,8 +358,9 @@ function getMasterChef(block: ethereum.Block): MasterChef {
   if (masterChefV2 === null) {
     const contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
     masterChefV2 = new MasterChef(MASTER_CHEF_V2_ADDRESS.toHex())
-    masterChefV2.devaddr = contract.devaddr()
-    masterChefV2.treasuryaddr = contract.treasuryaddr()
+    masterChefV2.devAddr = contract.devAddr()
+    masterChefV2.treasuryAddr = contract.treasuryAddr()
+    masterChefV2.investorAddr = contract.investorAddr()
     masterChefV2.owner = contract.owner()
     // poolInfo ...
     masterChefV2.startTimestamp = contract.startTimestamp()
