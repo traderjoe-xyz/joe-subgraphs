@@ -18,7 +18,12 @@ import { JoeToken as JoeTokenContract } from '../generated/JoeBar/JoeToken'
 // TODO: Get averages of multiple joe stablecoin pairs
 function getJoePrice(): BigDecimal {
   const pair = PairContract.bind(JOE_USDT_PAIR_ADDRESS)
-  const reserves = pair.getReserves()
+  const reservesResult = pair.try_getReserves()
+  if (reservesResult.reverted) {
+    log.info('[getAvaxRate] getReserves reverted', [])
+    return BIG_DECIMAL_ZERO
+  }
+  const reserves = reservesResult.value
   return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
 }
 

@@ -109,10 +109,5 @@ export function getJoePrice(block: ethereum.Block): BigDecimal {
     return BIG_DECIMAL_ZERO
   }
   const reserves = reservesResult.value
-  log.warning('Reserves: {} {} {}', [
-    reserves.value0.toBigDecimal().toString(),
-    reserves.value1.toBigDecimal().toString(),
-    reserves.value2.toBigDecimal().toString(),
-  ])
   return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
 }
