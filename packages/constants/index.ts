@@ -37,14 +37,14 @@ export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0xd6a4f121ca35509af06a
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(2486000)
 
 // BAR
-export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33')
+export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41f71E81f3c65f2a47cA4e001ebafd4F33')
 
 // MAKER
-export const JOE_MAKER_ADDRESS = Address.fromString('0x861726BFE27931A4E22a7277bDe6cb8432b65856')
+export const JOE_MAKER_ADDRESS = Address.fromString('0x861726bfe27931a4e22a7277bde6cb8432b65856')
 
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xe4b9865c0866346ba3613ec122040a365637fb46')
-export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x0000000000000000000000000000000000000000')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x29e0120de4406e9b2e28b15937b67eae5e50c510')
 
 export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7')
 export const USDT_ADDRESS = Address.fromString('0xde3a24028580884448a5397872046a019649b084')

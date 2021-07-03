@@ -7,7 +7,7 @@ import {
   FACTORY_ADDRESS,
   JOE_TOKEN_ADDRESS,
   JOE_USDT_PAIR_ADDRESS,
-  TRADERJOE_START_BLOCK, 
+  TRADERJOE_START_BLOCK,
   TRADERJOE_WAVAX_USDT_PAIR_ADDRESS,
   USDT_ADDRESS,
   WAVAX_ADDRESS,
@@ -36,7 +36,12 @@ export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
 
   const pair = PairContract.bind(address)
 
-  const reserves = pair.getReserves()
+  const reservesResult = pair.try_getReserves()
+  if (reservesResult.reverted) {
+    log.info('[getUSDRate] getReserves reverted', [])
+    return BIG_DECIMAL_ZERO
+  }
+  const reserves = reservesResult.value
 
   const reserve0 = reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18)
 
@@ -68,7 +73,12 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
 
   const pair = PairContract.bind(address)
 
-  const reserves = pair.getReserves()
+  const reservesResult = pair.try_getReserves()
+  if (reservesResult.reverted) {
+    log.info('[getAvaxRate] getReserves reverted', [])
+    return BIG_DECIMAL_ZERO
+  }
+  const reserves = reservesResult.value
 
   let avax =
     pair.token0() == WAVAX_ADDRESS
@@ -79,25 +89,30 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
 }
 
 export function getJoePrice(block: ethereum.Block): BigDecimal {
-
   if (block.number.lt(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
   }
   // TODO: fallback on token price
   //    if (block.number.lt(SOME_BLOCK)) {
   //        return getUSDRate(JOE_TOKEN_ADDRESS, block)
-  //    } 
+  //    }
 
   // TODO: fallback on e.g. pangolin
   //    if (block.number.le(SOME_BLOCK)) {
-  //        pair = PairContract.bind(SOME_ADDRESS) 
+  //        pair = PairContract.bind(SOME_ADDRESS)
   //    }
   const pair = PairContract.bind(JOE_USDT_PAIR_ADDRESS)
 
-  const reserves = pair.getReserves()
-  return reserves.value1
-    .toBigDecimal()
-    .times(BIG_DECIMAL_1E18)
-    .div(reserves.value0.toBigDecimal())
-    .div(BIG_DECIMAL_1E6)
+  const reservesResult = pair.try_getReserves()
+  if (reservesResult.reverted) {
+    log.info('[getJoePrice] getReserves reverted', [])
+    return BIG_DECIMAL_ZERO
+  }
+  const reserves = reservesResult.value
+  log.warning('Reserves: {} {} {}', [
+    reserves.value0.toBigDecimal().toString(),
+    reserves.value1.toBigDecimal().toString(),
+    reserves.value2.toBigDecimal().toString(),
+  ])
+  return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
 }

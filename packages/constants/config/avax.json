@@ -6,12 +6,12 @@
     "masterchefV2_address": "0xd6a4f121ca35509af06a0be99093d08462f53052",
     "master_chef_start_block": "2486000", 
 
-    "joe_bar_address": "0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33",
+    "joe_bar_address": "0x57319d41f71E81f3c65f2a47cA4e001ebafd4F33",
     "joe_router_address": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
-    "joe_maker_address": "0x861726BFE27931A4E22a7277bDe6cb8432b65856",
+    "joe_maker_address": "0x861726bfe27931a4e22a7277bde6cb8432b65856",
 
     "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd", 
-    "joe_usdt_pair_address": "0x0000000000000000000000000000000000000000",
+    "joe_usdt_pair_address": "0x29e0120de4406e9b2e28b15937b67eae5e50c510",
 
     "wavax_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
     "weth_address": "0xf20d962a6c8f70c731bd838a3a388d7d48fa6e15", 
