@@ -3,10 +3,10 @@ import {
   Set,
   Deposit,
   EmergencyWithdraw,
-  MasterChefV2 as MasterChefV2Contract,
+  MasterChefJoeV2 as MasterChefV2Contract,
   OwnershipTransferred,
   Withdraw,
-} from '../generated/MasterChefV2/MasterChefV2'
+} from '../generated/MasterChefJoeV2/MasterChefJoeV2'
 import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
 import {
   BIG_DECIMAL_1E12,
@@ -21,8 +21,8 @@ import {
 import { History, MasterChef, Pool, PoolHistory, User } from '../generated/schema'
 import { getJoePrice, getUSDRate } from 'pricing'
 
-import { ERC20 as ERC20Contract } from '../generated/MasterChefV2/ERC20'
-import { Pair as PairContract } from '../generated/MasterChefV2/Pair'
+import { ERC20 as ERC20Contract } from '../generated/MasterChefJoeV2/ERC20'
+import { Pair as PairContract } from '../generated/MasterChefJoeV2/Pair'
 
 /*
  * Event handler, called after masterchef adds new LP pool
@@ -366,7 +366,7 @@ function getMasterChef(block: ethereum.Block): MasterChef {
     masterChefV2.startTimestamp = contract.startTimestamp()
     masterChefV2.joe = contract.joe()
     masterChefV2.joePerSec = contract.joePerSec()
-    masterChefV2.totalAllocPoint = contract.totalAllocPoint()
+    masterChefV2.totalAllocPoint = BIG_INT_ZERO
     // userInfo ...
     masterChefV2.poolCount = BIG_INT_ZERO
 
