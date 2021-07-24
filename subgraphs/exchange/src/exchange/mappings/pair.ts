@@ -22,7 +22,7 @@ import {
   updatePairHourData,
   updateTokenDayData,
 } from '../enitites'
-import { findAvaxPerToken, getAvaxPrice } from '../pricing'
+import { getAvaxRate, getAvaxPrice } from '../pricing'
 
 /**
  * Accepts tokens and amounts, return tracked amount based on token whitelist
@@ -326,8 +326,11 @@ export function onSync(event: SyncEvent): void {
 
   bundle.save()
 
-  token0.derivedAVAX = findAvaxPerToken(token0 as Token)
-  token1.derivedAVAX = findAvaxPerToken(token1 as Token)
+  const token0Address = Address.fromString(token0.id)
+  const token1Address = Address.fromString(token1.id)
+
+  token0.derivedAVAX = getAvaxRate(token0Address)
+  token1.derivedAVAX = getAvaxRate(token1Address)
   token0.save()
   token1.save()
 
