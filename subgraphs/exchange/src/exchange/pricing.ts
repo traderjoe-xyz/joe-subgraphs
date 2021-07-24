@@ -19,10 +19,21 @@ import { Factory as FactoryContract } from '../../generated/Factory/Factory'
 export const factoryContract = FactoryContract.bind(FACTORY_ADDRESS)
 
 /*
+ * Base JOE price using JOE/AVAX * AVAX. 
+ * WAvg price would be better, but JOE/AVAX is bulk of liquidity. 
+ */
+export function getJoePrice(block: ethereum.Block = null): BigDecimal {
+  const avax_rate = getAvaxRate(JOE_TOKEN_ADDRESS)
+  const avax_price = getAvaxPrice()
+  const price = avax_rate.times(avax_price)
+  return price
+}
+
+/*
  * JOE price is the weighted average of JOE/AVAX * AVAX and JOE/USDT.
  *
  */
-export function getJoePrice(block: ethereum.Block = null): BigDecimal {
+export function getWavgJoePrice(block: ethereum.Block = null): BigDecimal {
   // get JOE/USDT
   const usdt_pair = Pair.load(JOE_USDT_PAIR_ADDRESS.toString())
   const usdt_price = usdt_pair
