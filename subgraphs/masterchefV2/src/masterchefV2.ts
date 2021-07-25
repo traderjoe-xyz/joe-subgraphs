@@ -102,6 +102,9 @@ export function deposit(event: Deposit): void {
   }
 
   // Calculate JOE being paid out
+  // NOTE: currently using pricing via JOE/USDT while exchange subgraph is based on JOE/AVAX
+  // this results in some small discrepancy in JOE price, and therefore joeHarvestedUSD
+  // we live with this data point has no impact to front end experience, only analytics
   if (event.block.number.gt(MASTER_CHEF_START_BLOCK) && user.amount.gt(BIG_INT_ZERO)) {
     const pending = user.amount
       .toBigDecimal()
