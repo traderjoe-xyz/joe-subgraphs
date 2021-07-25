@@ -19,7 +19,7 @@ import {
   MASTER_CHEF_START_BLOCK,
 } from 'const'
 import { History, MasterChef, Pool, PoolHistory, User } from '../generated/schema'
-import { getJoePrice, getUSDRate } from '../../exchange/pricing'
+import { getJoePrice, getUSDRate } from 'pricing'
 
 import { ERC20 as ERC20Contract } from '../generated/MasterChefJoeV2/ERC20'
 import { Pair as PairContract } from '../generated/MasterChefJoeV2/Pair'
