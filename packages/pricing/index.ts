@@ -88,6 +88,9 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   return avax.div(BIG_DECIMAL_1E18)
 }
 
+  // NOTE: currently using pricing via JOE/USDT while exchange subgraph is based on JOE/AVAX
+  // this results in some small discrepancy in JOE price, and therefore joeHarvestedUSD
+  // we live with this data point has no impact to front end experience, only analytics
 export function getJoePrice(block: ethereum.Block): BigDecimal {
   if (block.number.lt(TRADERJOE_START_BLOCK)) {
     return BIG_DECIMAL_ZERO
