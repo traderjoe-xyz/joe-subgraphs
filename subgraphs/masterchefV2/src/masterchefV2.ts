@@ -51,6 +51,8 @@ export function set(event: Set): void {
   const allocPoint = event.params.allocPoint
 
   // Update masterchef
+  const contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
+  masterChefV2.joePerSec = contract.joePerSec()
   masterChefV2.totalAllocPoint = masterChefV2.totalAllocPoint.plus(allocPoint.minus(pool.allocPoint))
   masterChefV2.save()
 
