@@ -5,6 +5,7 @@ import {
   EmergencyWithdraw,
   MasterChefJoeV2 as MasterChefV2Contract,
   OwnershipTransferred,
+  UpdateEmissionRate,
   Withdraw,
 } from '../generated/MasterChefJoeV2/MasterChefJoeV2'
 import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
@@ -51,8 +52,6 @@ export function set(event: Set): void {
   const allocPoint = event.params.allocPoint
 
   // Update masterchef
-  const contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
-  masterChefV2.joePerSec = contract.joePerSec()
   masterChefV2.totalAllocPoint = masterChefV2.totalAllocPoint.plus(allocPoint.minus(pool.allocPoint))
   masterChefV2.save()
 
@@ -352,6 +351,17 @@ export function ownershipTransferred(event: OwnershipTransferred): void {
   ])
 }
 
+/*
+ * Event handler for updateEmissionRate
+ */
+export function updateEmissionRate(event: UpdateEmissionRate): void {
+  const newJoePerSec = event.params._joePerSec.toBigDecimal()
+
+  const masterChefV2 = getMasterChef(event.block)
+  masterChefV2.joePerSec = newJoePerSec
+  masterChefV2.save()
+}
+
 // UTILITY FUNCTIONS
 
 /*
@@ -370,7 +380,7 @@ function getMasterChef(block: ethereum.Block): MasterChef {
     // poolInfo ...
     masterChefV2.startTimestamp = contract.startTimestamp()
     masterChefV2.joe = contract.joe()
-    masterChefV2.joePerSec = contract.joePerSec()
+    masterChefV2.joePerSec = contract.joePerSec().toBigDecimal()
     masterChefV2.totalAllocPoint = BIG_INT_ZERO
     // userInfo ...
     masterChefV2.poolCount = BIG_INT_ZERO

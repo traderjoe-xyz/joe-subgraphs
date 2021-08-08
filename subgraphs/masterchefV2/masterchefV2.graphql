@@ -22,7 +22,7 @@ type MasterChef @entity {
   joe: Bytes!
 
   # Joe per sec
-  joePerSec: BigInt!
+  joePerSec: BigDecimal!
 
   # Total allocation point
   totalAllocPoint: BigInt!
