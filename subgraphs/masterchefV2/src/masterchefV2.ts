@@ -355,7 +355,7 @@ export function ownershipTransferred(event: OwnershipTransferred): void {
  * Event handler for updateEmissionRate
  */
 export function updateEmissionRate(event: UpdateEmissionRate): void {
-  const newJoePerSec = event.params._joePerSec.toBigDecimal()
+  const newJoePerSec = event.params._joePerSec
 
   const masterChefV2 = getMasterChef(event.block)
   masterChefV2.joePerSec = newJoePerSec
@@ -380,7 +380,7 @@ function getMasterChef(block: ethereum.Block): MasterChef {
     // poolInfo ...
     masterChefV2.startTimestamp = contract.startTimestamp()
     masterChefV2.joe = contract.joe()
-    masterChefV2.joePerSec = contract.joePerSec().toBigDecimal()
+    masterChefV2.joePerSec = contract.joePerSec()
     masterChefV2.totalAllocPoint = BIG_INT_ZERO
     // userInfo ...
     masterChefV2.poolCount = BIG_INT_ZERO
