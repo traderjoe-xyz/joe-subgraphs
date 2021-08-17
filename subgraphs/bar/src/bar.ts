@@ -156,6 +156,7 @@ export function transfer(event: TransferEvent): void {
   bar.ratio = bar.joeStaked.div(bar.totalSupply)
 
   const what = value.times(bar.ratio)
+  log.debug('joePrice: {}, bar.ratio: {}, what: {}', [joePrice.toString(), bar.ratio.toString(), what.toString()])
 
   // Minted xJoe
   if (event.params.from == ADDRESS_ZERO) {
