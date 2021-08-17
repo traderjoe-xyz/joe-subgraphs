@@ -11,15 +11,15 @@
     "joe_maker_address": "0x861726bfe27931a4e22a7277bde6cb8432b65856",
 
     "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd", 
-    "joe_usdt_pair_address": "0x29e0120de4406e9b2e28b15937b67eae5e50c510",
+    "joe_usdt_pair_address": "0x1643de2efb8e35374d796297a9f95f64c082a8ce",
 
     "wavax_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
-    "weth_address": "0xf20d962a6c8f70c731bd838a3a388d7d48fa6e15", 
-    "wbtc_address": "0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab",
-    "usdt_address": "0xde3a24028580884448a5397872046a019649b084",
-    "dai_address": "0xba7deebbfc5fa1100fb055a87773e1e99cd3507a", 
-    "wavax_usdt_pair_address": "0xe4b9865c0866346ba3613ec122040a365637fb46",
-    "wavax_dai_pair_address": "0x43b9c8dec26c2d21146466caacabf94fdbeac473",
+    "weth_address": "0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab", 
+    "wbtc_address": "0x50b7545627a5162f82a992c33b87adc75187b218",
+    "usdt_address": "0xc7198437980c041c805a1edcba50c1ce5db95118",
+    "dai_address": "0xd586e7f844cea2f87f50152665bcbc2c279d8d70", 
+    "wavax_usdt_pair_address": "0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256",
+    "wavax_dai_pair_address": "0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256",
 
     "zero_address": "0x0000000000000000000000000000000000000000"
 }

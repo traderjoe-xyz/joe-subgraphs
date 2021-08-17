@@ -43,23 +43,23 @@ export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41f71E81f3c65f2a47cA4
 export const JOE_MAKER_ADDRESS = Address.fromString('0x861726bfe27931a4e22a7277bde6cb8432b65856')
 
 // PRICING
-export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xe4b9865c0866346ba3613ec122040a365637fb46')
-export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x29e0120de4406e9b2e28b15937b67eae5e50c510')
+export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256')
+export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x1643de2efb8e35374d796297a9f95f64c082a8ce')
 
 export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7')
-export const USDT_ADDRESS = Address.fromString('0xde3a24028580884448a5397872046a019649b084')
+export const USDT_ADDRESS = Address.fromString('0xc7198437980c041c805a1edcba50c1ce5db95118')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
-    '0xe4b9865c0866346ba3613ec122040a365637fb46', // WAVAX-USDT
-    '0x43b9c8dec26c2d21146466caacabf94fdbeac473',  // WAVAX-DAI
+    '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
+    '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256',  // WAVAX-DAI
 ]
 
 export const WHITELIST: string[] = [
     '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', // WAVAX
-    '0xf20d962a6c8f70c731bd838a3a388d7d48fa6e15', // WETH
-    '0x408d4cd0adb7cebd1f1a1c33a0ba2098e1295bab', // WBTC
-    '0xde3a24028580884448a5397872046a019649b084', // USDT
-    '0xba7deebbfc5fa1100fb055a87773e1e99cd3507a', // DAI
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
+    '0x50b7545627a5162f82a992c33b87adc75187b218', // WBTC
+    '0xc7198437980c041c805a1edcba50c1ce5db95118', // USDT
+    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', // DAI
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
