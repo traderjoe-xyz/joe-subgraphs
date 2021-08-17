@@ -20,10 +20,14 @@ function getJoePrice(): BigDecimal {
   const pair = PairContract.bind(JOE_USDT_PAIR_ADDRESS)
   const reservesResult = pair.try_getReserves()
   if (reservesResult.reverted) {
-    log.info('[getAvaxRate] getReserves reverted', [])
+    log.info('[getJoePrice] getReserves reverted', [])
     return BIG_DECIMAL_ZERO
   }
   const reserves = reservesResult.value
+  if (reserves.value0.toBigDecimal().equals(BigDecimal.fromString("0"))) {
+    log.error('[getJoePrice] USDT reserve 0', [])
+    return BIG_DECIMAL_ZERO
+  }
   return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
 }
 
