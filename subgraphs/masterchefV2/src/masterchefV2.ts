@@ -36,6 +36,8 @@ export function add(event: Add): void {
   // get getPool to create pool
   getPool(masterChefV2.poolCount, event.block)
 
+  log.info("[add] poolcount: {}, allocPoint: {}", [masterChefV2.poolCount.toString(), allocPoint.toString()])
+
   // Update MasterChef.
   masterChefV2.totalAllocPoint = masterChefV2.totalAllocPoint.plus(allocPoint)
   masterChefV2.poolCount = masterChefV2.poolCount.plus(BIG_INT_ONE)
@@ -60,6 +62,7 @@ export function set(event: Set): void {
   if (event.params.overwrite) {
     pool.rewarder = event.params.rewarder
   }
+  log.info("[set] pool: {}, alloc: {}, rewarder: {}", [pool.id, allocPoint.toString(), event.params.rewarder.toString()])
   pool.save()
 }
 
@@ -76,7 +79,7 @@ export function deposit(event: Deposit): void {
   // update pool
   const poolInfoResult = masterChefV2Contract.try_poolInfo(event.params.pid)
   if (poolInfoResult.reverted) {
-    log.info('[masterchef deposit] poolInfo reverted', [])
+    log.info('[deposit] poolInfo reverted', [])
     return
   }
   const poolInfo = poolInfoResult.value
@@ -100,6 +103,7 @@ export function deposit(event: Deposit): void {
   if (!user.pool && event.params.amount.gt(BIG_INT_ZERO)) {
     user.pool = pool.id
     pool.userCount = pool.userCount.plus(BIG_INT_ONE)
+    log.info('[deposit] user {} entered pool {}', [user.id, pool.id])
   }
 
   // Calculate JOE being paid out
@@ -113,8 +117,10 @@ export function deposit(event: Deposit): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
+      log.info('[deposit] pending: {}', [pending.toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
+      log.info('[deposit] joeHarvestedUSD: {}', [joeHarvestedUSD.toString()])
       user.joeHarvested = user.joeHarvested.plus(pending)
       user.joeHarvestedUSD = user.joeHarvestedUSD.plus(joeHarvestedUSD)
       pool.joeHarvested = pool.joeHarvested.plus(pending)
@@ -154,6 +160,8 @@ export function deposit(event: Deposit): void {
       pool.entryUSD = pool.entryUSD.plus(entryUSD)
 
       poolHistory.entryUSD = pool.entryUSD
+    } else {
+      log.info("Deposit couldn't get reserves for pair {}", [poolInfo.value0.toHex()])
     }
   }
 
@@ -199,7 +207,7 @@ export function withdraw(event: Withdraw): void {
   // update pool
   const poolInfoResult = masterChefV2Contract.try_poolInfo(event.params.pid)
   if (poolInfoResult.reverted) {
-    log.info('[masterchef withdraw] poolInfo reverted', [])
+    log.info('[withdraw] poolInfo reverted', [])
     return
   }
   const poolInfo = poolInfoResult.value
@@ -230,8 +238,10 @@ export function withdraw(event: Withdraw): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
+      log.info('[withdraw] pending: {}', [pending.toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
+      log.info('[withdraw] harvested: {}', [joeHarvestedUSD.toString()])
       user.joeHarvested = user.joeHarvested.plus(pending)
       user.joeHarvestedUSD = user.joeHarvestedUSD.plus(joeHarvestedUSD)
       pool.joeHarvested = pool.joeHarvested.plus(pending)
@@ -371,6 +381,8 @@ function getMasterChef(block: ethereum.Block): MasterChef {
   let masterChefV2 = MasterChef.load(MASTER_CHEF_V2_ADDRESS.toHex())
 
   if (masterChefV2 === null) {
+    log.info('[getMasterChef] creating new master chef', [])
+
     const contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
     masterChefV2 = new MasterChef(MASTER_CHEF_V2_ADDRESS.toHex())
     masterChefV2.devAddr = contract.devAddr()
@@ -412,6 +424,7 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
 
     // Create new pool.
     pool = new Pool(id.toString())
+    log.info('[getPool] creating new pool, {}', [id.toString()])
 
     // Set relation
     pool.owner = masterChefV2.id
@@ -464,6 +477,7 @@ function getHistory(owner: string, block: ethereum.Block): History {
   let history = History.load(id)
 
   if (history === null) {
+    log.info('[getHistory] creating new history, owner: {}, day: {}', [owner, day.toString()])
     history = new History(id)
     history.owner = owner
     history.jlpBalance = BIG_DECIMAL_ZERO
@@ -489,6 +503,7 @@ function getPoolHistory(pool: Pool, block: ethereum.Block): PoolHistory {
   let history = PoolHistory.load(id)
 
   if (history === null) {
+    log.info('[getPoolHistory] creating new pool history, pool: {}, day: {}', [pool.id, day.toString()])
     history = new PoolHistory(id)
     history.pool = pool.id
     history.jlpBalance = BIG_DECIMAL_ZERO
@@ -517,6 +532,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
   let user = User.load(id)
 
   if (user === null) {
+    log.info('[getUser] creating new user : {}, pid: {}', [address.toString(), pid.toString()])
     user = new User(id)
     user.pool = null
     user.address = address
