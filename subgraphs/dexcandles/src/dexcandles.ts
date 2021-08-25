@@ -4,7 +4,7 @@ import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { BIG_INT_1E10, BIG_INT_1E12, USDT_ADDRESS, USDC_ADDRESS, WETH_ADDRESS } from 'const'
+import { BIG_INT_1E10, BIG_INT_1E12, USDT_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS } from 'const'
 
 export function handleNewPair(event: PairCreated): void {
   const pair = new Pair(event.params.pair.toHex())
@@ -21,7 +21,7 @@ export function getTokenAmount(address, event:Swap){
       return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
     case USDC_ADDRESS:
       return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
-    case WETH_ADDRESS:
+    case WBTC_ADDRESS:
         return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
     default:
       return event.params.amount0In.minus(event.params.amount0Out).abs()
