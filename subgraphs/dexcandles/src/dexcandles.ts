@@ -4,7 +4,7 @@ import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { BIG_DECIMAL_1E12, BIG_INT_1E12, USDT_ADDRESS } from 'const'
+import { BIG_INT_1E10, BIG_INT_1E12, USDT_ADDRESS, USDC_ADDRESS, WETH_ADDRESS } from 'const'
 
 export function handleNewPair(event: PairCreated): void {
   const pair = new Pair(event.params.pair.toHex())
@@ -13,6 +13,19 @@ export function handleNewPair(event: PairCreated): void {
   pair.save()
 
   PairTemplate.create(event.params.pair)
+}
+
+export function getTokenAmount(address, event:Swap){
+  switch(address){
+    case USDT_ADDRESS:
+      return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+    case USDC_ADDRESS:
+      return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+    case WETH_ADDRESS:
+        return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
+    default:
+      return event.params.amount0In.minus(event.params.amount0Out).abs()
+  }
 }
 
 export function handleSwap(event: Swap): void {
@@ -27,16 +40,10 @@ export function handleSwap(event: Swap): void {
     log.warning('USDT ADDRESS FOUND 0', [])
   }
 
-  // Because USDT is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
-  const token0Amount: BigInt =
-    pair.token0 == USDT_ADDRESS
-      ? event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
-      : event.params.amount0In.minus(event.params.amount0Out).abs()
+  // Because USDT & USDC is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
+  const token0Amount: BigInt = getTokenAmount(pair.token0, event)
 
-  const token1Amount: BigInt =
-    pair.token1 == USDT_ADDRESS
-      ? event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
-      : event.params.amount1Out.minus(event.params.amount1In).abs()
+  const token1Amount: BigInt = getTokenAmount(pair.token1, event)
 
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
