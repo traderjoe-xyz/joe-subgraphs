@@ -4,7 +4,7 @@ import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { BIG_DECIMAL_1E12, BIG_INT_1E12, USDT_ADDRESS } from 'const'
+import { BIG_INT_1E12, BIG_INT_1E10, USDT_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS } from 'const'
 
 export function handleNewPair(event: PairCreated): void {
   const pair = new Pair(event.params.pair.toHex())
@@ -15,28 +15,62 @@ export function handleNewPair(event: PairCreated): void {
   PairTemplate.create(event.params.pair)
 }
 
+export function getTokenAmount0(event:Swap): BigInt {
+  const pair = Pair.load(event.address.toHex())
+  const token0 = pair.token0.toHexString()
+
+  // Because USDT & USDC is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
+  if (token0 == USDT_ADDRESS.toHexString()) {
+    log.warning('USDT ADDRESS FOUND 0', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+  }
+  if (token0 == USDC_ADDRESS.toHexString()) {
+    log.warning('USDC ADDRESS FOUND 0', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+  }
+
+  // Because WBTC is 8 decimals, we multiply by 1e10 so it's comparable with other ERC20s
+  if (token0 == WBTC_ADDRESS.toHexString()) {
+    log.warning('WBTC ADDRESS FOUND 0', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
+  }
+  // fallback
+  return event.params.amount0In.minus(event.params.amount0Out).abs()
+}
+
+export function getTokenAmount1(event:Swap): BigInt {
+  const pair = Pair.load(event.address.toHex())
+  const token1 = pair.token1.toHexString()
+
+  // Because USDT & USDC is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
+  if (token1 == USDT_ADDRESS.toHexString()) {
+    log.warning('USDT ADDRESS FOUND 1', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
+  }
+  if (token1 == USDC_ADDRESS.toHexString()) {
+    log.warning('USDC ADDRESS FOUND 1', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
+  }
+
+  // Because WBTC is 8 decimals, we multiply by 1e10 so it's comparable with other ERC20s
+  if (token1 == WBTC_ADDRESS.toHexString()) {
+    log.warning('WBTC ADDRESS FOUND 1', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E10)
+  }
+  // fallback
+  return event.params.amount1Out.minus(event.params.amount1In).abs()
+}
+
 export function handleSwap(event: Swap): void {
   const pair = Pair.load(event.address.toHex())
   log.error('Swap! {} {} {}', [pair.token0.toHex(), pair.token1.toHex(), USDT_ADDRESS.toHex()])
 
-  if (pair.token1 == USDT_ADDRESS) {
-    log.warning('USDT ADDRESS FOUND 1', [])
+  const token0Amount: BigInt = getTokenAmount0(event)
+  const token1Amount: BigInt = getTokenAmount1(event)
+
+  if (token0Amount.isZero() || token1Amount.isZero()) {
+    return
   }
-
-  if (pair.token0 == USDT_ADDRESS) {
-    log.warning('USDT ADDRESS FOUND 0', [])
-  }
-
-  // Because USDT is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
-  const token0Amount: BigInt =
-    pair.token0 == USDT_ADDRESS
-      ? event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
-      : event.params.amount0In.minus(event.params.amount0Out).abs()
-
-  const token1Amount: BigInt =
-    pair.token1 == USDT_ADDRESS
-      ? event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
-      : event.params.amount1Out.minus(event.params.amount1In).abs()
 
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return

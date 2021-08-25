@@ -21,6 +21,8 @@ export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const BIG_INT_1E12 = BigInt.fromString('1000000000000')
 
+export const BIG_INT_1E10 = BigInt.fromString('10000000000')
+
 export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
@@ -48,6 +50,8 @@ export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_addres
 
 export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
+export const USDC_ADDRESS = Address.fromString('{{ usdc_address }}')
+export const WBTC_ADDRESS = Address.fromString('{{ wbtc_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
