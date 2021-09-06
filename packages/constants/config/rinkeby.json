@@ -15,6 +15,7 @@
 
     "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
     "weth_address": "0xc778417e063141139fce010982780140aa0cd5ab",
+    "usdc_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10",
     "wbtc_address": "0x5af59f281b3cfd0c12770e4633e6c16dd08ea543",
     "usdt_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ",
     "dai_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ",     
