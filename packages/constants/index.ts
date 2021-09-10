@@ -54,16 +54,17 @@ export const USDC_ADDRESS = Address.fromString('0xA7D7079b0FEaD91F3e65f86E8915Cb
 export const WBTC_ADDRESS = Address.fromString('0x50b7545627a5162f82a992c33b87adc75187b218')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
-    '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
-    '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256',  // WAVAX-DAI
+  '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
+  '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-DAI
 ]
 
 export const WHITELIST: string[] = [
-    '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', // WAVAX
-    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
-    '0x50b7545627a5162f82a992c33b87adc75187b218', // WBTC
-    '0xc7198437980c041c805a1edcba50c1ce5db95118', // USDT
-    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', // DAI
+  '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7', // WAVAX
+  '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
+  '0x50b7545627a5162f82a992c33b87adc75187b218', // WBTC
+  '0xc7198437980c041c805a1edcba50c1ce5db95118', // USDT
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', // DAI
+  '0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664', // USDC
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
