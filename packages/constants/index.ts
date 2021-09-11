@@ -56,6 +56,7 @@ export const USDC_ADDRESS = Address.fromString('0xA7D7079b0FEaD91F3e65f86E8915Cb
 export const WBTC_ADDRESS = Address.fromString('0x50b7545627a5162f82a992c33b87adc75187b218')
 export const APEX_ADDRESS = Address.fromString('0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5')
 export const TIME_ADDRESS = Address.fromString('0xb54f16fb19478766a268f172c9480f8da1a7c9c3')
+export const GB_ADDRESS = Address.fromString('0x90842eb834cfd2a1db0b1512b254a18e4d396215')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
   '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT

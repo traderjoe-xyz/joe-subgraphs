@@ -13,6 +13,7 @@ import {
   WBTC_ADDRESS,
   APEX_ADDRESS,
   TIME_ADDRESS,
+  GB_ADDRESS,
 } from 'const'
 
 export function handleNewPair(event: PairCreated): void {
@@ -28,27 +29,31 @@ export function getTokenAmount0(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token0 = pair.token0.toHexString()
 
-  // Because USDT & USDC is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
+  // These tokens are 6 decimals so we multiply by 1e12
   if (token0 == USDT_ADDRESS.toHexString()) {
-    log.warning('USDT ADDRESS FOUND 0', [])
+    log.warning('USDT ADDRESS FOUND', [])
     return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
   } else if (token0 == USDC_ADDRESS.toHexString()) {
-    log.warning('USDC ADDRESS FOUND 0', [])
+    log.warning('USDC ADDRESS FOUND', [])
     return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
   }
-  // Because WBTC is 8 decimals, we multiply by 1e10 so it's comparable with other ERC20s
+  // These tokens are 8 decimals so we multiply by 1e10
   else if (token0 == WBTC_ADDRESS.toHexString()) {
-    log.warning('WBTC ADDRESS FOUND 0', [])
+    log.warning('WBTC ADDRESS FOUND', [])
     return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
   }
-  // Because APE-X & TIME are 9 decimals, we multiply by 1e9 so it's comparable with other ERC20s
+  // These tokens are 9 decimals so we multiply by 1e9
   else if (token0 == APEX_ADDRESS.toHexString()) {
-    log.warning('APE-X ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.parms.amount0Out).abs().times(BIG_INT_1E9)
+    log.warning('APE-X ADDRESS FOUND', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
   } else if (token0 == TIME_ADDRESS.toHexString()) {
-    log.warning('TIME ADDRESS FOUND 0', [])
+    log.warning('TIME ADDRESS FOUND', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
+  } else if (token0 == GB_ADDRESS.toHexString()) {
+    log.warning('GB ADDRESS FOUND', [])
     return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
   }
+
   // fallback
   return event.params.amount0In.minus(event.params.amount0Out).abs()
 }
@@ -57,26 +62,29 @@ export function getTokenAmount1(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token1 = pair.token1.toHexString()
 
-  // Because USDT & USDC is 6 decimals, we multiply by 1e12 so it's comparable with other ERC20s
+  // These tokens are 6 decimals so we multiply by 1e12
   if (token1 == USDT_ADDRESS.toHexString()) {
-    log.warning('USDT ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+    log.warning('USDT ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
   } else if (token1 == USDC_ADDRESS.toHexString()) {
-    log.warning('USDC ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
+    log.warning('USDC ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
   }
-  // Because WBTC is 8 decimals, we multiply by 1e10 so it's comparable with other ERC20s
+  // These tokens are 8 decimals so we multiply by 1e10
   else if (token1 == WBTC_ADDRESS.toHexString()) {
-    log.warning('WBTC ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
+    log.warning('WBTC ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E10)
   }
-  // Because APE-X & TIME are 9 decimals, we multiply by 1e9 so it's comparable with other ERC20s
+  // These tokens are 9 decimals so we multiply by 1e9
   else if (token1 == APEX_ADDRESS.toHexString()) {
-    log.warning('APE-X ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.parms.amount0Out).abs().times(BIG_INT_1E9)
+    log.warning('APE-X ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
   } else if (token1 == TIME_ADDRESS.toHexString()) {
-    log.warning('TIME ADDRESS FOUND 0', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
+    log.warning('TIME ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
+  } else if (token1 == GB_ADDRESS.toHexString()) {
+    log.warning('GB ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
   }
 
   // fallback
