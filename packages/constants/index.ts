@@ -23,6 +23,8 @@ export const BIG_INT_1E12 = BigInt.fromString('1000000000000')
 
 export const BIG_INT_1E10 = BigInt.fromString('10000000000')
 
+export const BIG_INT_1E9 = BigInt.fromString('1000000000')
+
 export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
@@ -52,6 +54,8 @@ export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e
 export const USDT_ADDRESS = Address.fromString('0xc7198437980c041c805a1edcba50c1ce5db95118')
 export const USDC_ADDRESS = Address.fromString('0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664')
 export const WBTC_ADDRESS = Address.fromString('0x50b7545627a5162f82a992c33b87adc75187b218')
+export const APEX_ADDRESS = Address.fromString('0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5')
+export const TIME_ADDRESS = Address.fromString('0xb54f16fb19478766a268f172c9480f8da1a7c9c3')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
   '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
