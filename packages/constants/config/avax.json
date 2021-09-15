@@ -19,6 +19,9 @@
     "usdt_address": "0xc7198437980c041c805a1edcba50c1ce5db95118",
     "usdc_address": "0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664",
     "dai_address": "0xd586e7f844cea2f87f50152665bcbc2c279d8d70", 
+    "time_address": "0xb54f16fb19478766a268f172c9480f8da1a7c9c3",
+    "apex_address": "0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5",
+    "gb_address": "0x90842eb834cfd2a1db0b1512b254a18e4d396215",
     "wavax_usdt_pair_address": "0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256",
     "wavax_dai_pair_address": "0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256",
 

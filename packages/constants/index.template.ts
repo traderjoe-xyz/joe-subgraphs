@@ -23,6 +23,8 @@ export const BIG_INT_1E12 = BigInt.fromString('1000000000000')
 
 export const BIG_INT_1E10 = BigInt.fromString('10000000000')
 
+export const BIG_INT_1E9 = BigInt.fromString('1000000000')
+
 export const LOCKUP_POOL_NUMBER = BigInt.fromI32(29)
 
 export const NULL_CALL_RESULT_VALUE = '0x0000000000000000000000000000000000000000000000000000000000000001'
@@ -52,6 +54,9 @@ export const WAVAX_ADDRESS = Address.fromString('{{ wavax_address }}')
 export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 export const USDC_ADDRESS = Address.fromString('{{ usdc_address }}')
 export const WBTC_ADDRESS = Address.fromString('{{ wbtc_address }}')
+export const TIME_ADDRESS = Address.fromString('{{ time_address }}')
+export const APEX_ADDRESS = Address.fromString('{{ apex_address }}')
+export const GB_ADDRESS = Address.fromString('{{ gb_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
@@ -64,6 +69,7 @@ export const WHITELIST: string[] = [
     '{{ wbtc_address }}', // WBTC
     '{{ usdt_address }}', // USDT
     '{{ dai_address }}', // DAI
+    '{{ usdc_address }}', // USDC
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
