@@ -423,32 +423,27 @@ function getMasterChef(block: ethereum.Block): MasterChef {
  */
 export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
+  const masterChefV2 = getMasterChef(block)
+  const masterChefV2Contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
+  const poolInfoResult = masterChefV2Contract.try_poolInfo(id)
+  if (poolInfoResult.reverted) {
+    log.info('[masterchef getPool] poolInfo reverted', [])
+    return null
+  }
+  const poolInfo = poolInfoResult.value
 
   if (pool === null) {
-    const masterChefV2 = getMasterChef(block)
-
-    const masterChefV2Contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
-
     // Create new pool.
     pool = new Pool(id.toString())
     log.info('[getPool] creating new pool, {}', [id.toString()])
 
     // Set relation
     pool.owner = masterChefV2.id
-
-    const poolInfoResult = masterChefV2Contract.try_poolInfo(masterChefV2.poolCount)
-    if (poolInfoResult.reverted) {
-      log.info('[masterchef getPool] poolInfo reverted', [])
-      return null
-    }
-    const poolInfo = poolInfoResult.value
-
     pool.pair = poolInfo.value0
     pool.allocPoint = poolInfo.value1
     pool.lastRewardTimestamp = poolInfo.value2
     pool.accJoePerShare = poolInfo.value3
-    const rewarder = getRewarder(poolInfo.value4, block)
-    pool.rewarder = rewarder ? rewarder.id : null
+    pool.rewarder = null
     // Total supply of LP tokens
     pool.balance = BIG_INT_ZERO
     pool.userCount = BIG_INT_ZERO
@@ -469,6 +464,11 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
     pool.joeHarvestedUSD = BIG_DECIMAL_ZERO
     pool.save()
   }
+  // Update rewarder again outside of scope as it may be updated anytime during lifecycle
+  // of a pool.
+  const rewarder = getRewarder(poolInfo.value4, block)
+  pool.rewarder = rewarder ? rewarder.id : null
+  pool.save()
 
   return pool as Pool
 }
