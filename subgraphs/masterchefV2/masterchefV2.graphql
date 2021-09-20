@@ -96,7 +96,7 @@ type Pool @entity {
   pair: Bytes!
 
   # Rewarder contract address
-  rewarder: Rewarder!
+  rewarder: Rewarder
 
   # Allocation point
   allocPoint: BigInt!
