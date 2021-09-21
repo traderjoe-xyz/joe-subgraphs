@@ -38,7 +38,7 @@ export * from './pair'
 export * from './token-day-data'
 
 // Token Hour Data
-// export * from './token-hour-data'
+export * from './token-hour-data'
 
 // Token
 export * from './token'
