@@ -63,7 +63,7 @@ export function set(event: Set): void {
   pool.allocPoint = allocPoint
   if (event.params.overwrite) {
     const rewarder = getRewarder(event.params.rewarder, event.block)
-    pool.rewarder = rewarder ? rewarder.id : pool.rewarder
+    pool.rewarder = rewarder ? rewarder.id : null
   }
   log.info('[set] pool: {}, alloc: {}, rewarder: {}', [
     pool.id,
