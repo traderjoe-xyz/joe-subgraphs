@@ -4,6 +4,7 @@ import {
   BIG_DECIMAL_1E6,
   BIG_DECIMAL_ONE,
   BIG_DECIMAL_ZERO,
+  BIG_INT_ZERO,
   FACTORY_ADDRESS,
   JOE_TOKEN_ADDRESS,
   JOE_USDT_PAIR_ADDRESS,
@@ -80,7 +81,8 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   }
   const reserves = reservesResult.value
 
-  if (reserves.value0.toBigDecimal() == BIG_DECIMAL_ZERO || reserves.value1.toBigDecimal() == BIG_DECIMAL_ZERO) {
+  // avoid div by 0
+  if (reserves.value0.equals(BIG_INT_ZERO) || reserves.value1.equals(BIG_INT_ZERO)) {
     return BIG_DECIMAL_ZERO
   }
 
