@@ -63,7 +63,8 @@ export const MYAK_ADDRESS = Address.fromString('0xddaaad7366b455aff8e7c82940c43c
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
-    '0x87dee1cc9ffd464b79e058ba20387c1984aed86a',  // WAVAX-DAI
+    '0x87dee1cc9ffd464b79e058ba20387c1984aed86a', // WAVAX-DAI
+    '0xa389f9430876455c36478deea9769b7ca4e3ddb1', // WAVAX-USDC
 ]
 
 export const WHITELIST: string[] = [

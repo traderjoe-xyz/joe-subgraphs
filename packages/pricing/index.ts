@@ -80,6 +80,10 @@ export function getAvaxRate(token: Address, block: ethereum.Block): BigDecimal {
   }
   const reserves = reservesResult.value
 
+  if (reserves.value0.toBigDecimal() == BIG_DECIMAL_ZERO || reserves.value1.toBigDecimal() == BIG_DECIMAL_ZERO) {
+    return BIG_DECIMAL_ZERO
+  }
+
   let avax =
     pair.token0() == WAVAX_ADDRESS
       ? reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value1.toBigDecimal())

@@ -63,7 +63,8 @@ export const MYAK_ADDRESS = Address.fromString('{{ myak_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
-    '{{ wavax_dai_pair_address }}',  // WAVAX-DAI
+    '{{ wavax_dai_pair_address }}', // WAVAX-DAI
+    '{{ wavax_usdc_pair_address }}', // WAVAX-USDC
 ]
 
 export const WHITELIST: string[] = [

@@ -25,6 +25,7 @@
     "gb_address": "0x90842eb834cfd2a1db0b1512b254a18e4d396215",
     "wavax_usdt_pair_address": "0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256",
     "wavax_dai_pair_address": "0x87dee1cc9ffd464b79e058ba20387c1984aed86a",
+    "wavax_usdc_pair_address": "0xa389f9430876455c36478deea9769b7ca4e3ddb1",
 
     "zero_address": "0x0000000000000000000000000000000000000000"
 }
