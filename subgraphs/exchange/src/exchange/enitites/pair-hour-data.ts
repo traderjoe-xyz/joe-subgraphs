@@ -23,6 +23,7 @@ export function updatePairHourData(event: ethereum.Event): PairHourData {
     pairHourData.volumeToken0 = BIG_DECIMAL_ZERO
     pairHourData.volumeToken1 = BIG_DECIMAL_ZERO
     pairHourData.volumeUSD = BIG_DECIMAL_ZERO
+    pairHourData.untrackedVolumeUSD = BIG_DECIMAL_ZERO
     pairHourData.txCount = BigInt.fromI32(0)
   }
 

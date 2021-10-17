@@ -319,6 +319,7 @@ type PairHourData @entity {
 
   # volume usd
   volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
 
   # tx count
   txCount: BigInt!
@@ -357,6 +358,7 @@ type PairDayData @entity {
 
   # volume usd
   volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
 
   # tx count
   txCount: BigInt!
