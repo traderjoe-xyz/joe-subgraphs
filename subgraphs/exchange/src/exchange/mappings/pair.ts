@@ -322,7 +322,7 @@ export function onSync(event: SyncEvent): void {
   // Pass the block so we can get accurate price data before migration
   const avaxPrice = getAvaxPrice(event.block)
   bundle.avaxPrice = avaxPrice
-  log.info("on sync block: {}, avaxPrice: {}", [event.block.number.toString(), avaxPrice.toString()])
+  log.info('on sync block: {}, avaxPrice: {}', [event.block.number.toString(), avaxPrice.toString()])
 
   bundle.save()
 
@@ -630,12 +630,14 @@ export function onSwap(event: SwapEvent): void {
   pairDayData.volumeToken0 = pairDayData.volumeToken0.plus(amount0Total)
   pairDayData.volumeToken1 = pairDayData.volumeToken1.plus(amount1Total)
   pairDayData.volumeUSD = pairDayData.volumeUSD.plus(trackedAmountUSD)
+  pairDayData.untrackedVolumeUSD = pairDayData.untrackedVolumeUSD.plus(derivedAmountUSD)
   pairDayData.save()
 
   // update hourly pair data
   pairHourData.volumeToken0 = pairHourData.volumeToken0.plus(amount0Total)
   pairHourData.volumeToken1 = pairHourData.volumeToken1.plus(amount1Total)
   pairHourData.volumeUSD = pairHourData.volumeUSD.plus(trackedAmountUSD)
+  pairHourData.untrackedVolumeUSD = pairHourData.untrackedVolumeUSD.plus(derivedAmountUSD)
   pairHourData.save()
 
   // swap specific updating for token0

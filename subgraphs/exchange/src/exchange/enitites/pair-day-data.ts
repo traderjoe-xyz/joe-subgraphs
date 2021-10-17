@@ -25,6 +25,7 @@ export function updatePairDayData(event: ethereum.Event): PairDayData {
     pairDayData.volumeToken0 = BIG_DECIMAL_ZERO
     pairDayData.volumeToken1 = BIG_DECIMAL_ZERO
     pairDayData.volumeUSD = BIG_DECIMAL_ZERO
+    pairDayData.untrackedVolumeUSD = BIG_DECIMAL_ZERO
     pairDayData.txCount = BigInt.fromI32(0)
   }
 
