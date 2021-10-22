@@ -7,6 +7,9 @@ import { Pair, Candle } from '../generated/schema'
 import { ERC20 } from '../generated/Factory/ERC20'
 
 import {
+  BIG_INT_1E6,
+  BIG_INT_1E9,
+  BIG_INT_1E10,
   BIG_INT_1E12,
   USDT_ADDRESS,
 } from 'const'
@@ -26,6 +29,22 @@ function getDecimals(address: Address): BigInt {
   return BigInt.fromI32(decimalValue as i32)
 }
 
+function getMultiplier(decimals: i32): BigInt {
+  let multiplier: BigInt
+
+  if (decimals === 6) {
+    multiplier = BIG_INT_1E12
+  } else if (decimals === 8) {
+    multiplier = BIG_INT_1E10
+  } else if (decimals === 9) {
+    multiplier = BIG_INT_1E9
+  } else if (decimals === 12) {
+    multiplier = BIG_INT_1E6
+  }
+
+  return multiplier
+}
+
 export function handleNewPair(event: PairCreated): void {
   const pair = new Pair(event.params.pair.toHex())
   pair.token0 = event.params.token0
@@ -39,8 +58,7 @@ export function getTokenAmount0(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token0 = pair.token0.toHexString()
   const decimals = getDecimals(Address.fromString(token0))
-  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
-  const multiplier = BigInt.fromString("1e" + (exponent as string))
+  const multiplier = getMultiplier(decimals as i32)
   
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
@@ -49,8 +67,7 @@ export function getTokenAmount1(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token1 = pair.token1.toHexString()
   const decimals = getDecimals(Address.fromString(token1))
-  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
-  const multiplier = BigInt.fromString("1e" + (exponent as string))
+  const multiplier = getMultiplier(decimals as i32)
 
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
