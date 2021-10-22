@@ -1,9 +1,10 @@
-import { BigDecimal, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
+import { BigInt, Bytes, log } from '@graphprotocol/graph-ts'
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
+import { getDecimals } from '../../exchange/src/exchange/enitites/token'
 import {
   BIG_INT_1E12,
   BIG_INT_1E10,
@@ -18,6 +19,23 @@ import {
   MYAK_ADDRESS,
 } from 'const'
 
+const decimalToMultiplierHash = {
+  6: BIG_INT_1E12, 
+  8: BIG_INT_1E10,
+  9: BIG_INT_1E9, 
+  12: BIG_INT_1E6
+};
+
+const supportedTokensList = [
+  USDT_ADDRESS.toHexString(), 
+  USDC_ADDRESS.toHexString(), 
+  WBTC_ADDRESS.toHexString(), 
+  APEX_ADDRESS.toHexString(),
+  TIME_ADDRESS.toHexString(),
+  GB_ADDRESS.toHexString(),
+  MYAK_ADDRESS.toHexString()
+]
+
 export function handleNewPair(event: PairCreated): void {
   const pair = new Pair(event.params.pair.toHex())
   pair.token0 = event.params.token0
@@ -30,38 +48,13 @@ export function handleNewPair(event: PairCreated): void {
 export function getTokenAmount0(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token0 = pair.token0.toHexString()
+  const decimalValue = getDecimals(token0)
 
-  // These tokens are 6 decimals so we multiply by 1e12
-  if (token0 == USDT_ADDRESS.toHexString()) {
-    log.warning('USDT ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
-  } else if (token0 == USDC_ADDRESS.toHexString()) {
-    log.warning('USDC ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12)
-  }
-  // These tokens are 8 decimals so we multiply by 1e10
-  else if (token0 == WBTC_ADDRESS.toHexString()) {
-    log.warning('WBTC ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E10)
-  }
-  // These tokens are 9 decimals so we multiply by 1e9
-  else if (token0 == APEX_ADDRESS.toHexString()) {
-    log.warning('APE-X ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
-  } else if (token0 == TIME_ADDRESS.toHexString()) {
-    log.warning('TIME ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
-  } else if (token0 == GB_ADDRESS.toHexString()) {
-    log.warning('GB ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
-  }
-  // These tokens are 12 decimals, so we multiply by 1e6
-  else if (token0 == MYAK_ADDRESS.toHexString()) {
-    log.warning('mYAK ADDRESS FOUND', [])
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E6)
+  if (token0 in supportedTokensList) {
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(decimalToMultiplierHash[decimalValue.toString()])
   }
 
-  // fallback
+  //fallback
   return event.params.amount0In.minus(event.params.amount0Out).abs()
 }
 
@@ -69,38 +62,14 @@ export function getTokenAmount1(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token1 = pair.token1.toHexString()
 
-  // These tokens are 6 decimals so we multiply by 1e12
-  if (token1 == USDT_ADDRESS.toHexString()) {
-    log.warning('USDT ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
-  } else if (token1 == USDC_ADDRESS.toHexString()) {
-    log.warning('USDC ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12)
-  }
-  // These tokens are 8 decimals so we multiply by 1e10
-  else if (token1 == WBTC_ADDRESS.toHexString()) {
-    log.warning('WBTC ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E10)
-  }
-  // These tokens are 9 decimals so we multiply by 1e9
-  else if (token1 == APEX_ADDRESS.toHexString()) {
-    log.warning('APE-X ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
-  } else if (token1 == TIME_ADDRESS.toHexString()) {
-    log.warning('TIME ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
-  } else if (token1 == GB_ADDRESS.toHexString()) {
-    log.warning('GB ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
-  }
-  // These tokens are 12 decimals, so we multiply by 1e6
-  else if (token1 == MYAK_ADDRESS.toHexString()) {
-    log.warning('mYAK ADDRESS FOUND', [])
-    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E6)
+  const decimalValue = getDecimals(token1)
+  
+  if (token1 in supportedTokensList) {
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(decimalToMultiplierHash[decimalValue.toString()])
   }
 
-  // fallback
-  return event.params.amount1Out.minus(event.params.amount1In).abs()
+  //fallback
+  return event.params.amount0In.minus(event.params.amount0Out).abs()
 }
 
 export function handleSwap(event: Swap): void {

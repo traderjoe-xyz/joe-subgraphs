@@ -21,7 +21,6 @@ import {
   updatePairDayData,
   updatePairHourData,
   updateTokenDayData,
-  updateTokenHourData
 } from '../enitites'
 import { getAvaxRate, getAvaxPrice } from '../pricing'
 
@@ -434,10 +433,6 @@ export function onMint(event: MintEvent): void {
 
   // update token1 day data
   updateTokenDayData(token1 as Token, event)
-
-  updateTokenHourData(token0 as Token, event)
-
-  updateTokenHourData(token1 as Token, event)
 }
 
 export function onBurn(event: BurnEvent): void {
@@ -660,10 +655,4 @@ export function onSwap(event: SwapEvent): void {
     amount1Total.times(token1.derivedAVAX as BigDecimal).times(bundle.avaxPrice)
   )
   token1DayData.save()
-
-    // update hourly pair data
-  tokenHourData.volumeToken0 = pairHourData.volumeToken0.plus(amount0Total)
-  tokenHourData.volumeToken1 = pairHourData.volumeToken1.plus(amount1Total)
-  tokenHourData.volumeUSD = pairHourData.volumeUSD.plus(trackedAmountUSD)
-  tokenHourData.save()
 }
