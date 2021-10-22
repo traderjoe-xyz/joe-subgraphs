@@ -8,12 +8,14 @@ import {
   BIG_INT_1E12,
   BIG_INT_1E10,
   BIG_INT_1E9,
+  BIG_INT_1E6,
   USDT_ADDRESS,
   USDC_ADDRESS,
   WBTC_ADDRESS,
   APEX_ADDRESS,
   TIME_ADDRESS,
   GB_ADDRESS,
+  MYAK_ADDRESS,
 } from 'const'
 
 export function handleNewPair(event: PairCreated): void {
@@ -53,6 +55,11 @@ export function getTokenAmount0(event: Swap): BigInt {
     log.warning('GB ADDRESS FOUND', [])
     return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E9)
   }
+  // These tokens are 12 decimals, so we multiply by 1e6
+  else if (token0 == MYAK_ADDRESS.toHexString()) {
+    log.warning('mYAK ADDRESS FOUND', [])
+    return event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E6)
+  }
 
   // fallback
   return event.params.amount0In.minus(event.params.amount0Out).abs()
@@ -85,6 +92,11 @@ export function getTokenAmount1(event: Swap): BigInt {
   } else if (token1 == GB_ADDRESS.toHexString()) {
     log.warning('GB ADDRESS FOUND', [])
     return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E9)
+  }
+  // These tokens are 12 decimals, so we multiply by 1e6
+  else if (token1 == MYAK_ADDRESS.toHexString()) {
+    log.warning('mYAK ADDRESS FOUND', [])
+    return event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E6)
   }
 
   // fallback

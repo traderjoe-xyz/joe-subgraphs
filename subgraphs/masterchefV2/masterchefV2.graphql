@@ -96,7 +96,7 @@ type Pool @entity {
   pair: Bytes!
 
   # Rewarder contract address
-  rewarder: Bytes!
+  rewarder: Rewarder
 
   # Allocation point
   allocPoint: BigInt!
@@ -151,6 +151,21 @@ type Pool @entity {
 
   # Joe harvested
   joeHarvestedUSD: BigDecimal!
+}
+
+type Rewarder @entity {
+  # Contract address
+  id: ID!
+
+  # Reward token address
+  rewardToken: Bytes!
+  name: String!
+  symbol: String!
+  decimals: Int!
+
+  tokenPerSec: BigInt!
+
+  endTimestamp: BigInt!
 }
 
 type PoolHistory @entity {

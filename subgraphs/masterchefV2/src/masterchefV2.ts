@@ -18,12 +18,14 @@ import {
   BIG_INT_ZERO,
   MASTER_CHEF_V2_ADDRESS,
   MASTER_CHEF_START_BLOCK,
+  ADDRESS_ZERO,
 } from 'const'
-import { History, MasterChef, Pool, PoolHistory, User } from '../generated/schema'
+import { History, MasterChef, Pool, PoolHistory, Rewarder, User } from '../generated/schema'
 import { getJoePrice, getUSDRate } from 'pricing'
 
 import { ERC20 as ERC20Contract } from '../generated/MasterChefJoeV2/ERC20'
 import { Pair as PairContract } from '../generated/MasterChefJoeV2/Pair'
+import { Rewarder as RewarderContract } from '../generated/MasterChefJoeV2/Rewarder'
 
 /*
  * Event handler, called after masterchef adds new LP pool
@@ -36,7 +38,7 @@ export function add(event: Add): void {
   // get getPool to create pool
   getPool(masterChefV2.poolCount, event.block)
 
-  log.info("[add] poolcount: {}, allocPoint: {}", [masterChefV2.poolCount.toString(), allocPoint.toString()])
+  log.info('[add] poolcount: {}, allocPoint: {}', [masterChefV2.poolCount.toString(), allocPoint.toString()])
 
   // Update MasterChef.
   masterChefV2.totalAllocPoint = masterChefV2.totalAllocPoint.plus(allocPoint)
@@ -60,9 +62,14 @@ export function set(event: Set): void {
   // Update pool
   pool.allocPoint = allocPoint
   if (event.params.overwrite) {
-    pool.rewarder = event.params.rewarder
+    const rewarder = getRewarder(event.params.rewarder, event.block)
+    pool.rewarder = rewarder ? rewarder.id : null
   }
-  log.info("[set] pool: {}, alloc: {}, rewarder: {}", [pool.id, allocPoint.toString(), event.params.rewarder.toString()])
+  log.info('[set] pool: {}, alloc: {}, rewarder: {}', [
+    pool.id,
+    allocPoint.toString(),
+    event.params.rewarder.toString(),
+  ])
   pool.save()
 }
 
@@ -117,7 +124,7 @@ export function deposit(event: Deposit): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
-      log.info('[deposit] pending: {}', [pending.toString()])
+    log.info('[deposit] pending: {}', [pending.toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
       log.info('[deposit] joeHarvestedUSD: {}', [joeHarvestedUSD.toString()])
@@ -238,7 +245,7 @@ export function withdraw(event: Withdraw): void {
       .div(BIG_DECIMAL_1E12)
       .minus(user.rewardDebt.toBigDecimal())
       .div(BIG_DECIMAL_1E18)
-      log.info('[withdraw] pending: {}', [pending.toString()])
+    log.info('[withdraw] pending: {}', [pending.toString()])
     if (pending.gt(BIG_DECIMAL_ZERO)) {
       const joeHarvestedUSD = pending.times(getJoePrice(event.block))
       log.info('[withdraw] harvested: {}', [joeHarvestedUSD.toString()])
@@ -416,32 +423,27 @@ function getMasterChef(block: ethereum.Block): MasterChef {
  */
 export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
+  const masterChefV2 = getMasterChef(block)
+  const masterChefV2Contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
+  const poolInfoResult = masterChefV2Contract.try_poolInfo(id)
+  if (poolInfoResult.reverted) {
+    log.info('[masterchef getPool] poolInfo reverted', [])
+    return null
+  }
+  const poolInfo = poolInfoResult.value
 
   if (pool === null) {
-    const masterChefV2 = getMasterChef(block)
-
-    const masterChefV2Contract = MasterChefV2Contract.bind(MASTER_CHEF_V2_ADDRESS)
-
     // Create new pool.
     pool = new Pool(id.toString())
     log.info('[getPool] creating new pool, {}', [id.toString()])
 
     // Set relation
     pool.owner = masterChefV2.id
-
-    const poolInfoResult = masterChefV2Contract.try_poolInfo(masterChefV2.poolCount)
-    if (poolInfoResult.reverted) {
-      log.info('[masterchef getPool] poolInfo reverted', [])
-      return null
-    }
-    const poolInfo = poolInfoResult.value
-
     pool.pair = poolInfo.value0
     pool.allocPoint = poolInfo.value1
     pool.lastRewardTimestamp = poolInfo.value2
     pool.accJoePerShare = poolInfo.value3
-    pool.rewarder = poolInfo.value4
-
+    pool.rewarder = null
     // Total supply of LP tokens
     pool.balance = BIG_INT_ZERO
     pool.userCount = BIG_INT_ZERO
@@ -462,8 +464,50 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
     pool.joeHarvestedUSD = BIG_DECIMAL_ZERO
     pool.save()
   }
+  // Update rewarder again outside of scope as it may be updated anytime during lifecycle
+  // of a pool.
+  const rewarder = getRewarder(poolInfo.value4, block)
+  pool.rewarder = rewarder ? rewarder.id : null
+  pool.save()
 
   return pool as Pool
+}
+
+function getRewarder(rewarderAddress: Address, block: ethereum.Block): Rewarder {
+  if (rewarderAddress == ADDRESS_ZERO || rewarderAddress == null) {
+    return null
+  }
+
+  let rewarder = Rewarder.load(rewarderAddress.toHex())
+  if (rewarder == null) {
+    log.info('[getRewarder] Creating new rewarder {}', [rewarderAddress.toHexString()])
+    rewarder = new Rewarder(rewarderAddress.toHex())
+  }
+  const rewarderContract = RewarderContract.bind(rewarderAddress)
+  const tokenAddressCall = rewarderContract.try_rewardToken()
+  const tokenAddress = tokenAddressCall.reverted ? ADDRESS_ZERO : tokenAddressCall.value
+  rewarder.rewardToken = tokenAddress
+
+  const tokenPerSecCall = rewarderContract.try_tokenPerSec()
+  rewarder.tokenPerSec = tokenPerSecCall.reverted ? BIG_INT_ZERO : tokenPerSecCall.value
+
+  const tokenContract = ERC20Contract.bind(tokenAddress)
+  const tokenNameCall = tokenContract.try_name()
+  rewarder.name = tokenNameCall.reverted ? '' : tokenNameCall.value
+
+  const tokenSymbolCall = tokenContract.try_symbol()
+  rewarder.symbol = tokenSymbolCall.reverted ? '' : tokenSymbolCall.value
+
+  const tokenDecimalsCall = tokenContract.try_decimals()
+  rewarder.decimals = tokenDecimalsCall.reverted ? 0 : tokenDecimalsCall.value
+
+  const currentBalanceCall = tokenContract.try_balanceOf(rewarderAddress)
+  const currentBalance = currentBalanceCall.reverted ? BIG_INT_ZERO : currentBalanceCall.value
+  const secondsLeft = rewarder.tokenPerSec == BIG_INT_ZERO ? BIG_INT_ZERO : currentBalance.div(rewarder.tokenPerSec)
+  rewarder.endTimestamp = block.timestamp.plus(secondsLeft)
+  rewarder.save()
+
+  return rewarder as Rewarder
 }
 
 /*
