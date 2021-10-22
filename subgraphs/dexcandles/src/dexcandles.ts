@@ -1,10 +1,11 @@
-import { Address, BigDecimal, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
+import { Address, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { getDecimals } from '../../exchange/src/exchange/enitites/token'
+import { ERC20 } from '../generated/Factory/ERC20'
+
 import {
   BIG_INT_1E12,
   BIG_INT_1E10,
@@ -28,6 +29,26 @@ let supportedTokensList: String[] = [
   GB_ADDRESS.toHexString(),
   MYAK_ADDRESS.toHexString()
 ]
+
+function getDecimals(address: Address): BigInt {
+  // hardcode overrides NOTE: AAVE
+  if (address.toHex() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
+    return BigInt.fromI32(18)
+  }
+
+  const contract = ERC20.bind(address)
+
+  // try types uint8 for decimals
+  let decimalValue = null
+
+  const decimalResult = contract.try_decimals()
+
+  if (!decimalResult.reverted) {
+    decimalValue = decimalResult.value
+  }
+
+  return BigInt.fromI32(decimalValue as i32)
+}
 
 function getMultiplier(decimals: i32): BigInt {
   let multiplier: BigInt
