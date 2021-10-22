@@ -4,20 +4,11 @@ import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { ERC20 } from '../generated/templates/Pair/ERC20'
+import { ERC20 } from '../generated/Factory/ERC20'
 
 import {
   BIG_INT_1E12,
-  BIG_INT_1E10,
-  BIG_INT_1E9,
-  BIG_INT_1E6,
   USDT_ADDRESS,
-  USDC_ADDRESS,
-  WBTC_ADDRESS,
-  APEX_ADDRESS,
-  TIME_ADDRESS,
-  GB_ADDRESS,
-  MYAK_ADDRESS,
 } from 'const'
 
 function getDecimals(address: Address): BigInt {
