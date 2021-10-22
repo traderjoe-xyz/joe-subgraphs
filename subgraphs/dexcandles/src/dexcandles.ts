@@ -1,10 +1,10 @@
-import { Address, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
+import { Address, BigDecimal, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { ERC20 } from '../generated/Factory/ERC20'
+import { ERC20 } from '../generated/templates/Pair/ERC20'
 
 import {
   BIG_INT_1E12,
@@ -20,22 +20,7 @@ import {
   MYAK_ADDRESS,
 } from 'const'
 
-let supportedTokensList: String[] = [
-  USDT_ADDRESS.toHexString(), 
-  USDC_ADDRESS.toHexString(), 
-  WBTC_ADDRESS.toHexString(), 
-  APEX_ADDRESS.toHexString(),
-  TIME_ADDRESS.toHexString(),
-  GB_ADDRESS.toHexString(),
-  MYAK_ADDRESS.toHexString()
-]
-
 function getDecimals(address: Address): BigInt {
-  // hardcode overrides NOTE: AAVE
-  if (address.toHex() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
-    return BigInt.fromI32(18)
-  }
-
   const contract = ERC20.bind(address)
 
   // try types uint8 for decimals
@@ -48,22 +33,6 @@ function getDecimals(address: Address): BigInt {
   }
 
   return BigInt.fromI32(decimalValue as i32)
-}
-
-function getMultiplier(decimals: i32): BigInt {
-  let multiplier: BigInt
-
-  if (decimals === 6) {
-    multiplier = BIG_INT_1E12
-  } else if (decimals === 8) {
-    multiplier = BIG_INT_1E10
-  } else if (decimals === 9) {
-    multiplier = BIG_INT_1E9
-  } else if (decimals === 12) {
-    multiplier = BIG_INT_1E6
-  }
-
-  return multiplier
 }
 
 export function handleNewPair(event: PairCreated): void {
@@ -79,26 +48,20 @@ export function getTokenAmount0(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token0 = pair.token0.toHexString()
   const decimals = getDecimals(Address.fromString(token0))
-
-  if (supportedTokensList.indexOf(token0) > -1) {
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(getMultiplier(decimals as i32))
-  }
-
-  //fallback
-  return event.params.amount0In.minus(event.params.amount0Out).abs()
+  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
+  const multiplier = BigInt.fromString("1e" + (exponent as string))
+  
+  return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
 export function getTokenAmount1(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token1 = pair.token1.toHexString()
   const decimals = getDecimals(Address.fromString(token1))
+  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
+  const multiplier = BigInt.fromString("1e" + (exponent as string))
 
-  if (supportedTokensList.indexOf(token1) > -1) {
-    return event.params.amount0In.minus(event.params.amount0Out).abs().times(getMultiplier(decimals as i32))
-  }
-
-  //fallback
-  return event.params.amount0In.minus(event.params.amount0Out).abs()
+  return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
 export function handleSwap(event: Swap): void {
