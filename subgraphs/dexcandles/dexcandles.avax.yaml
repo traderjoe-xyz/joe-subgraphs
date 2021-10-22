@@ -13,7 +13,7 @@ dataSources:
       startBlock: 2486000
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/dexcandles.ts
       entities:
@@ -21,6 +21,8 @@ dataSources:
       abis:
         - name: Factory
           file: ../../node_modules/@traderjoe-xyz/core//abi/JoeFactory.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handleNewPair
@@ -32,7 +34,7 @@ templates:
       abi: Pair
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/dexcandles.ts
       entities:
