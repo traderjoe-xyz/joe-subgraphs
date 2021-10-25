@@ -2,14 +2,14 @@ specVersion: 0.0.3
 description: Masterchef
 repository: https://github.com/traderjoe-xyz/joe-subgraphs
 schema:
-  file: ./masterchefV2.graphql
+  file: ./masterchefV3.graphql
 dataSources:
   - kind: ethereum/contract
-    name: MasterChefJoeV2
+    name: MasterChefJoeV3
     network: rinkeby
     source:
-      address: '0x1f51b7697a1919cf301845c93d4843fd620ad7cc'
-      abi: MasterChefJoeV2
+      address: '0xeedf119022f1bb5f63676bbe855c82151b7198af'
+      abi: MasterChefJoeV3
       startBlock: 9400000
     mapping:
       kind: ethereum/events
@@ -23,8 +23,8 @@ dataSources:
         - User
         - Rewarder
       abis:
-        - name: MasterChefJoeV2
-          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV2.json
+        - name: MasterChefJoeV3
+          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV3.json
         - name: Factory
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
@@ -46,6 +46,4 @@ dataSources:
           handler: add
         - event: Set(indexed uint256,uint256,indexed address,bool)
           handler: set
-        - event: UpdateEmissionRate(indexed address,uint256)
-          handler: updateEmissionRate
-      file: ./src/masterchefV2.ts
+      file: ./src/masterchefV3.ts

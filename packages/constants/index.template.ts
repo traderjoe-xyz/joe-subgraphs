@@ -40,6 +40,7 @@ export const JOE_TOKEN_ADDRESS = Address.fromString('{{ joe_token_address }}')
 // MASTER CHEF
 export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
 export const MASTER_CHEF_V2_ADDRESS = Address.fromString('{{ masterchefV2_address }}')
+export const MASTER_CHEF_V3_ADDRESS = Address.fromString('{{ masterchefV3_address }}')
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32({{ master_chef_start_block }})
 
 // BAR

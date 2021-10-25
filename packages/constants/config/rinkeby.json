@@ -1,26 +1,32 @@
 {
-    "factory_address": "0x86f83be9770894d8e46301b12e88e14adc6cdb5f",
-    "trader_joe_start_block": "8438448", 
+  "factory_address": "0x86f83be9770894d8e46301b12e88e14adc6cdb5f",
+  "trader_joe_start_block": "8438448",
 
-    "masterchef_address": "0x770b6e8a1b39f1a3ea06069cbd6d1e0b5db264f3",
-    "masterchefV2_address": "0xff6ea1c23107e0d835930612ee2f4cd975331d0d",
-    "master_chef_start_block": "8455513", 
+  "masterchef_address": "0x770b6e8a1b39f1a3ea06069cbd6d1e0b5db264f3",
+  "masterchefV2_address": "0x1f51b7697a1919cf301845c93d4843fd620ad7cc",
+  "masterchefV3_address": "0xeedf119022f1bb5f63676bbe855c82151b7198af",
+  "master_chef_start_block": "9400000",
 
-    "joe_bar_address": "0x33a86afc0f728882f48e5105bc98758b3eae2081",
-    "joe_router_address": "0x7e2528476b14507f003ae9d123334977f5ad7b14",
-    "joe_maker_address": "0xbefe1d0756da706b3f0ebaea7b4ae10d0adf2f3f",
+  "joe_bar_address": "0x33a86afc0f728882f48e5105bc98758b3eae2081",
+  "joe_router_address": "0x7e2528476b14507f003ae9d123334977f5ad7b14",
+  "joe_maker_address": "0xbefe1d0756da706b3f0ebaea7b4ae10d0adf2f3f",
 
-    "joe_token_address": "0x23fc76b53882d8dcab1900f0d3c1c0c504ffb8e3", 
-    "joe_usdt_pair_address": "0xc23f448c7d255b4787b7e97df11f2b637f716809",
+  "joe_token_address": "0xce347e069b68c53a9ed5e7da5952529caf8accd4",
+  "joe_usdt_pair_address": "0x961ef01283b7f90b2346f3dcec9d8291bdacae92",
 
-    "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
-    "weth_address": "0xc778417e063141139fce010982780140aa0cd5ab",
-    "usdc_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10",
-    "wbtc_address": "0x5af59f281b3cfd0c12770e4633e6c16dd08ea543",
-    "usdt_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ",
-    "dai_address": "0x9ad6c38be94206ca50bb0d90783181662f0cfa10 ",     
-    "wavax_usdt_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
-    "wavax_dai_pair_address": "0x6d551ad3570888d49da4d6c8b8a626c8cbfd5ac2",
+  "wavax_address": "0xc778417e063141139fce010982780140aa0cd5ab",
+  "weth_address": "0xc778417e063141139fce010982780140aa0cd5ab",
+  "wbtc_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
+  "usdt_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
+  "usdc_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
+  "dai_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
+  "time_address": "0xb54f16fb19478766a268f172c9480f8da1a7c9c3",
+  "apex_address": "0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5",
+  "myak_address": "0xddaaad7366b455aff8e7c82940c43ceb5829b604",
+  "gb_address": "0x90842eb834cfd2a1db0b1512b254a18e4d396215",
+  "wavax_usdt_pair_address": "0x63fce17ba68c82a322fdd5a4d03aedbedbd730fd",
+  "wavax_dai_pair_address": "0x63fce17ba68c82a322fdd5a4d03aedbedbd730fd",
+  "wavax_usdc_pair_address": "0x63fce17ba68c82a322fdd5a4d03aedbedbd730fd",
 
-    "zero_address": "0x0000000000000000000000000000000000000000"
+  "zero_address": "0x0000000000000000000000000000000000000000"
 }
