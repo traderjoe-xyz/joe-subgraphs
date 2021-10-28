@@ -34,8 +34,10 @@ export function add(event: Add): void {
   const masterChefV3 = getMasterChef(event.block)
   const allocPoint = event.params.allocPoint
   // get getPool to create pool
-  getPool(masterChefV3.poolCount, event.block)
-  log.info('[add] poolcount: {}, allocPoint: {}', [masterChefV3.poolCount.toString(), allocPoint.toString()])
+  const pool = getPool(masterChefV3.poolCount, event.block)
+  pool.allocPoint = allocPoint
+  pool.save()
+  log.debug('[add] poolcount: {}, allocPoint: {}', [masterChefV3.poolCount.toString(), allocPoint.toString()])
   // Update MasterChef.
   masterChefV3.totalAllocPoint = masterChefV3.totalAllocPoint.plus(allocPoint)
   masterChefV3.poolCount = masterChefV3.poolCount.plus(BIG_INT_ONE)
@@ -59,7 +61,7 @@ export function set(event: Set): void {
     const rewarder = getRewarder(event.params.rewarder, event.block)
     pool.rewarder = rewarder ? rewarder.id : null
   }
-  log.info('[set] pool: {}, alloc: {}, rewarder: {}', [
+  log.debug('[set] pool: {}, alloc: {}, rewarder: {}', [
     pool.id,
     allocPoint.toString(),
     event.params.rewarder.toString(),
