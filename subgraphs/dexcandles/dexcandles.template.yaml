@@ -13,7 +13,7 @@ dataSources:
       startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/dexcandles.ts
       entities:
@@ -32,7 +32,7 @@ templates:
       abi: Pair
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/dexcandles.ts
       entities:
@@ -40,6 +40,8 @@ templates:
       abis:
         - name: Pair
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+        file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
       eventHandlers:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleSwap
