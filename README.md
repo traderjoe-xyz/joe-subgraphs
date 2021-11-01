@@ -51,6 +51,8 @@ Current subgraph locations:
 
 5. **Joe Bar**: Indexes the SushiBar, includes data related to the bar: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/bar
 
+6. **Dexcandles**: 
+
 
 ## To setup and deploy
 
