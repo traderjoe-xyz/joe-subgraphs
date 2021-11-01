@@ -8,9 +8,9 @@ Forked from `sushiswap-subgraph`.
 
 | subgraph   | rinkeby | avalanche | 
 |------------| :---:   | :---:     |
-| exchange   |   [x]   |           |
-| masterchef |   [x]   |           |
-| bar        |   [x]   |           |
+| exchange   |   [x]   |    [x]    |
+| masterchef |   [x]   |    [x]    |
+| bar        |   [x]   |    [x]    |
 
 
 ### Deploy
@@ -34,80 +34,32 @@ $ yarn deploy:avax
 ````
 
 
-### (SUSHISWAP-SUBGRAPH README)
-Aims to deliver analytics & historical data for SushiSwap. Still a work in progress. Feel free to contribute!
+### (TRADERJOE-SUBGRAPH README)
+Aims to deliver analytics & historical data for Trader Joe. Still a work in progress. Feel free to contribute!
 
 The Graph exposes a GraphQL endpoint to query the events and entities within the SushiSwap ecosytem.
 
 Current subgraph locations:
 
-1. **Exchange**: Includes all SushiSwap Exchange data with Price Data, Volume, Users, etc: https://thegraph.com/explorer/subgraph/sushiswap/exchange
+1. **Exchange**: Includes all SushiSwap Exchange data with Price Data, Volume, Users, etc: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/exchange
 
-2. **Master Chef**: Indexes all MasterChef staking data: https://thegraph.com/explorer/subgraph/sushiswap/master-chef
+2. **Master Chef Joe V2**: Indexes all MasterChef v2 staking data: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/masterchefv2
 
-3. **Sushi Maker**: Indexes the SushiMaker contract, that handles the serving of exchange fees to the SushiBar: https://thegraph.com/explorer/subgraph/sushiswap/sushi-maker
+3. **Master Chef Joe V3**: Indexes all MasterChef v3 staking data: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/masterchefv3
 
-4. **Sushi Timelock**: Includes all of the timelock transactions queued, executed, and cancelled: https://thegraph.com/explorer/subgraph/sushiswap/sushi-timelock
+4. **Joe Maker**: Indexes the JoeMaker contract, that handles the serving of exchange fees to the JoeBar: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/maker
 
-5. **Sushi Bar**: Indexes the SushiBar, includes data related to the bar: https://thegraph.com/explorer/subgraph/sushiswap/sushi-bar
+5. **Joe Bar**: Indexes the SushiBar, includes data related to the bar: https://thegraph.com/hosted-service/subgraph/traderjoe-xyz/bar
 
-6. **SushiSwap-SubGraph-Fork** (on uniswap-fork branch): Indexes the SushiSwap Factory, includes Price Data, Pricing, etc: https://thegraph.com/explorer/subgraph/jiro-ono/sushiswap-v1-exchange
 
 ## To setup and deploy
 
-For any of the subgraphs: `sushiswap` or `bar` as `[subgraph]`
+For any of the subgraphs:
 
 1. Run the `yarn run codegen:[subgraph]` command to prepare the TypeScript sources for the GraphQL (generated/schema) and the ABIs (generated/[ABI]/\*)
 2. [Optional] run the `yarn run build:[subgraph]` command to build the subgraph. Can be used to check compile errors before deploying.
 3. Run `graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>`
 4. Deploy via `yarn run deploy:[subgraph]`.
 
-## To query these subgraphs
 
-Please use our node utility: [sushi-data](https://github.com/sushiswap/sushi-data).
-
-Note: This is in on going development as well.
-
-## Example Queries
-
-We will add to this as development progresses.
-
-### Maker
-
-```graphql
-{
-  maker(id: "0x6684977bbed67e101bb80fc07fccfba655c0a64f") {
-    id
-    servings(orderBy: timestamp) {
-      id
-      server {
-        id
-      }
-      tx
-      pair
-      token0
-      token1
-      sushiServed
-      block
-      timestamp
-    }
-  }
-  servers {
-    id
-    sushiServed
-    servings(orderBy: timestamp) {
-      id
-      server {
-        id
-      }
-      tx
-      pair
-      token0
-      token1
-      sushi
-      block
-      timestamp
-    }
-  }
-}
 
