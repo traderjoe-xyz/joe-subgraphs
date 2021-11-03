@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Address, BigDecimal, BigInt, Bytes } from '@graphprotocol/graph-ts'
+=======
+import { Address, BigDecimal, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
+>>>>>>> afc808557ac9fc606ca7ccd631c64fff4bdb5bec
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
@@ -6,7 +10,29 @@ import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
 import { ERC20 } from '../generated/Factory/ERC20'
 
+<<<<<<< HEAD
 import { BIG_INT_1E12, USDT_ADDRESS } from 'const'
+
+function getDecimals(address: Address): BigInt {
+  const contract = ERC20.bind(address)
+
+  // try types uint8 for decimals
+  let decimalValue = null
+
+  const decimalResult = contract.try_decimals()
+
+  if (!decimalResult.reverted) {
+    decimalValue = decimalResult.value
+  }
+
+  return BigInt.fromI32(decimalValue as i32)
+}
+=======
+import {
+  BIG_INT_1E12,
+  USDT_ADDRESS,
+} from 'const'
+>>>>>>> afc808557ac9fc606ca7ccd631c64fff4bdb5bec
 
 function getDecimals(address: Address): BigInt {
   const contract = ERC20.bind(address)
@@ -38,7 +64,6 @@ export function getTokenAmount0(event: Swap): BigInt {
   const decimals = getDecimals(Address.fromString(token0))
   const exponent = BigInt.fromI32(18).minus(decimals).toString()
   const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent).toString())
-
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
