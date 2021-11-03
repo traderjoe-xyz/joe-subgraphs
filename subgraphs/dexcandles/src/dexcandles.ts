@@ -1,4 +1,4 @@
-import { Address, BigDecimal, BigInt, Bytes, log } from '@graphprotocol/graph-ts'
+import { Address, BigDecimal, BigInt, Bytes } from '@graphprotocol/graph-ts'
 import { concat } from '@graphprotocol/graph-ts/helper-functions'
 import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
@@ -6,10 +6,7 @@ import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
 import { ERC20 } from '../generated/Factory/ERC20'
 
-import {
-  BIG_INT_1E12,
-  USDT_ADDRESS,
-} from 'const'
+import { BIG_INT_1E12, USDT_ADDRESS } from 'const'
 
 function getDecimals(address: Address): BigInt {
   const contract = ERC20.bind(address)
@@ -39,9 +36,9 @@ export function getTokenAmount0(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token0 = pair.token0.toHexString()
   const decimals = getDecimals(Address.fromString(token0))
-  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
-  const multiplier = BigInt.fromI32(BigDecimal.fromString('1e' + (exponent)) as i32)
-  
+  const exponent = BigInt.fromI32(18).minus(decimals).toString()
+  const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent).toString())
+
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
@@ -49,15 +46,13 @@ export function getTokenAmount1(event: Swap): BigInt {
   const pair = Pair.load(event.address.toHex())
   const token1 = pair.token1.toHexString()
   const decimals = getDecimals(Address.fromString(token1))
-  const exponent = (BigInt.fromI32(18).minus(decimals)).toString()
-  const multiplier = BigInt.fromI32(BigDecimal.fromString('1e' + (exponent)) as i32)
-
-  return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
+  const exponent = BigInt.fromI32(18).minus(decimals).toString()
+  const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent).toString())
+  return event.params.amount1In.minus(event.params.amount1Out).abs().times(multiplier)
 }
 
 export function handleSwap(event: Swap): void {
   const pair = Pair.load(event.address.toHex())
-  log.error('Swap! {} {} {}', [pair.token0.toHex(), pair.token1.toHex(), USDT_ADDRESS.toHex()])
 
   const token0Amount: BigInt = getTokenAmount0(event)
   const token1Amount: BigInt = getTokenAmount1(event)
@@ -69,15 +64,6 @@ export function handleSwap(event: Swap): void {
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
   }
-
-  log.error('token0: {} {}', [
-    event.params.amount0In.minus(event.params.amount0Out).abs().times(BIG_INT_1E12).toString(),
-    event.params.amount0In.minus(event.params.amount0Out).abs().toString(),
-  ])
-  log.error('token1: {} {}', [
-    event.params.amount1Out.minus(event.params.amount1In).abs().times(BIG_INT_1E12).toString(),
-    event.params.amount1Out.minus(event.params.amount1In).abs().toString(),
-  ])
 
   // const price = token0AmountBigDecimal.div(token1AmountBigDecimal)
   const price = token0Amount.divDecimal(token1Amount.toBigDecimal())
