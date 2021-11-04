@@ -1,0 +1,93 @@
+# The Global Maker (Smart Contract)
+type Maker @entity {
+  # Maker address
+  id: ID!
+
+  # Joe served
+  joeServed: BigDecimal!
+  joeServedUSD: BigDecimal!
+  totalServings: BigInt!
+
+  # Servers
+  servers: [Server!]! @derivedFrom(field: "maker")
+
+  # Servings
+  servings: [Serving!]! @derivedFrom(field: "maker")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Server @entity {
+  # Server address
+  id: ID!
+
+  # Relation to maker
+  maker: Maker!
+
+  # Joe served
+  joeServed: BigDecimal!
+  joeServedUSD: BigDecimal!
+  totalServings: BigInt!
+
+  # Servings related to the server
+  servings: [Serving!]! @derivedFrom(field: "server")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Serving @entity {
+  # Pair address concatinated with block number
+  id: ID!
+
+  # Maker
+  maker: Maker!
+
+  # Server
+  server: Server!
+
+  # Transaction
+  tx: Bytes!
+
+  # Token 0
+  token0: Bytes!
+  token0Symbol: String!
+
+  # Token 1
+  token1: Bytes!
+  token1Symbol: String!
+
+  # Amount 0
+  amount0: BigDecimal!
+
+  # Amount 1
+  amount1: BigDecimal!
+
+  # Joe served
+  joeServed: BigDecimal!
+  joeServedUSD: BigDecimal!
+
+  # Block
+  block: BigInt!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  dayData: ServingDayData
+}
+
+type ServingDayData @entity {
+  # Timestmap / 86400
+  id: ID!
+
+  # Start of day timestamp
+  date: Int!
+
+  # Joe served
+  joeServed: BigDecimal!
+  joeServedUSD: BigDecimal!
+  totalServings: BigInt!
+
+  servings: [Serving!] @derivedFrom(field: "dayData")
+}

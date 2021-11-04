@@ -10,6 +10,7 @@
   "joe_bar_address": "0x57319d41f71e81f3c65f2a47ca4e001ebafd4f33",
   "joe_router_address": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
   "joe_maker_address": "0x861726bfe27931a4e22a7277bde6cb8432b65856",
+  "joe_makerV2_address": "0xC98C3C547DDbcc0029F38E0383C645C202aD663d",
 
   "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd",
   "joe_usdt_pair_address": "0x1643de2efb8e35374d796297a9f95f64c082a8ce",
