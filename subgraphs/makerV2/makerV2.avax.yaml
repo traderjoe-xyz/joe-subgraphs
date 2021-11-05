@@ -1,0 +1,33 @@
+specVersion: 0.0.2
+description: JoeMakerV2
+schema:
+  file: ./makerV2.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: JoeMakerV2
+    network: avalanche
+    source:
+      address: '0xC98C3C547DDbcc0029F38E0383C645C202aD663d'
+      abi: JoeMakerV2
+      startBlock: 2486000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/maker.ts
+      entities:
+        - Maker
+        - Server
+        - Serving
+      abis:
+        - name: JoeMakerV2
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLogConvert

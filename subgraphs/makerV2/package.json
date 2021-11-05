@@ -1,0 +1,23 @@
+{
+    "name": "makerV2",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "Trader Joe",
+    "scripts": {
+	    "prepare:avax": "mustache config/avax.json makerV2.template.yaml > makerV2.avax.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json makerV2.template.yaml > makerV2.rinkeby.yaml",
+
+        "codegen:avax": "graph codegen makerV2.avax.yaml",
+        "codegen:rinkeby": "graph codegen makerV2.rinkeby.yaml",
+
+        "build:avax": "graph build makerV2.avax.yaml",
+        "build:rinkeby": "graph build makerV2.rinkeby.yaml",
+
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/makerv2 makerV2.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/makerV2-rinkeby-ii makerV2.rinkeby.yaml",
+
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/maker-v2 --access-token ",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/maker-v2 --access-token ",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/makerV2 makerV2.fuji.yaml"
+    }
+}
