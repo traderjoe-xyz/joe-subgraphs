@@ -13,7 +13,7 @@
         "build:avax": "graph build makerV2.avax.yaml",
         "build:rinkeby": "graph build makerV2.rinkeby.yaml",
 
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/makerV2 makerV2.avax.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/makerv2 makerV2.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/makerV2-rinkeby-ii makerV2.rinkeby.yaml",
 
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/maker-v2 --access-token ",

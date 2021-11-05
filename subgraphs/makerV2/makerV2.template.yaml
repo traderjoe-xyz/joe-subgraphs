@@ -1,14 +1,14 @@
 specVersion: 0.0.2
-description: JoeMaker
+description: JoeMakerV2
 schema:
-  file: ./maker.graphql
+  file: ./makerV2.graphql
 dataSources:
   - kind: ethereum/contract
-    name: JoeMaker
+    name: JoeMakerV2
     network: {{ network }}
     source:
       address: '{{ address }}'
-      abi: JoeMaker
+      abi: JoeMakerV2
       startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
@@ -20,8 +20,8 @@ dataSources:
         - Server
         - Serving
       abis:
-        - name: JoeMaker 
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMaker.json
+        - name: JoeMakerV2
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
         - name: Pair
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: ERC20
