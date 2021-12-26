@@ -62,11 +62,13 @@ export const TIME_ADDRESS = Address.fromString('{{ time_address }}')
 export const APEX_ADDRESS = Address.fromString('{{ apex_address }}')
 export const GB_ADDRESS = Address.fromString('{{ gb_address }}')
 export const MYAK_ADDRESS = Address.fromString('{{ myak_address }}')
+export const MIM_ADDRESS = Address.fromString('{{ mim_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
     '{{ wavax_dai_pair_address }}', // WAVAX-DAI
     '{{ wavax_usdc_pair_address }}', // WAVAX-USDC
+    '{{ wavax_mim_pair_address }}', // WAVAX-USDC
 ]
 
 export const WHITELIST: string[] = [
@@ -76,6 +78,7 @@ export const WHITELIST: string[] = [
     '{{ usdt_address }}', // USDT
     '{{ dai_address }}', // DAI
     '{{ usdc_address }}', // USDC
+    '{{ mim_address }}', // MIM
 ]
 
 // LOCKUP -- TO BE DEPRECATED?

@@ -62,11 +62,13 @@ export const TIME_ADDRESS = Address.fromString('0xb54f16fb19478766a268f172c9480f
 export const APEX_ADDRESS = Address.fromString('0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5')
 export const GB_ADDRESS = Address.fromString('0x90842eb834cfd2a1db0b1512b254a18e4d396215')
 export const MYAK_ADDRESS = Address.fromString('0xddaaad7366b455aff8e7c82940c43ceb5829b604')
+export const MIM_ADDRESS = Address.fromString('0x130966628846bfd36ff31a822705796e8cb8c18d')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
     '0x87dee1cc9ffd464b79e058ba20387c1984aed86a', // WAVAX-DAI
     '0xa389f9430876455c36478deea9769b7ca4e3ddb1', // WAVAX-USDC
+    '0x781655d802670bba3c89aebaaea59d3182fd755d', // WAVAX-MIM
 ]
 
 export const WHITELIST: string[] = [
@@ -76,6 +78,7 @@ export const WHITELIST: string[] = [
     '0xc7198437980c041c805a1edcba50c1ce5db95118', // USDT
     '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', // DAI
     '0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664', // USDC
+    '0x130966628846bfd36ff31a822705796e8cb8c18d', // MIM
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
