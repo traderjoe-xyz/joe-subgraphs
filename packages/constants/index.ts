@@ -68,7 +68,7 @@ export const WAVAX_STABLE_PAIRS: string[] = [
     '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
     '0x87dee1cc9ffd464b79e058ba20387c1984aed86a', // WAVAX-DAI
     '0xa389f9430876455c36478deea9769b7ca4e3ddb1', // WAVAX-USDC
-    '0x781655d802670bbA3c89aeBaaEa59D3182fD755D', // WAVAX-MIM
+    '0x781655d802670bba3c89aebaaea59d3182fd755d', // WAVAX-MIM
 ]
 
 export const WHITELIST: string[] = [
