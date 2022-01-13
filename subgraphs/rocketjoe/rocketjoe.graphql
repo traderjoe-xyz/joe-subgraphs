@@ -1,0 +1,138 @@
+# Factory
+type RocketJoeFactory @entity {
+  # Contract address
+  id: ID!
+}
+
+# LaunchEvent
+type LaunchEvent @entity {
+  # issuer - token
+  id: ID!
+
+  # Phase starts 
+  phaseOneStart: BigInt! 
+  phaseTwoStart: BigInt!
+  phaseThreeStart: BigInt!
+
+  # Withdrawal penalty 
+  withdrawalPenalty: BigDecimal!
+
+  # issuer 
+  issuer: ID! 
+
+  # Price in terms of the asset pair
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+
+  # lifetime volume stats
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  txCount: BigInt!
+  liquidityProviderCount: BigInt!
+
+  # reserves
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+
+  # derived liquidity
+  reserveUSD: BigDecimal!
+
+  # used to detect new exchanges
+  liquidityProviderCount: BigInt!
+
+  # Launch event day data
+  dayData: [LaunchEventDayData!]! @derivedFrom(field: "launchEvent")
+
+  # Launch event hour data
+  hourData: [LaunchEventHourData!]! @derivedFrom(field: "launchEvent")
+
+  # Transactions ? 
+  deposits: [Deposits!]! @derivedFrom(field: "launchEvent")
+  withdraws: [Withdraws!]! @derivedFrom(field: "launchEvent")
+
+  # Created at
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+# Launch event hour data
+type LaunchEventHourData @entity {
+  # launchEvent.id - hour start timestamp
+  id: ID!
+
+  # date - hour start timestamp
+  date: Int!
+
+  # launch event
+  launchEvent: LaunchEvent!
+
+  # reserves
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+
+  # derived liquidity
+  reserveUSD: BigDecimal!
+
+  # volume
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+
+  # volume usd
+  volumeUSD: BigDecimal!
+
+  # tx count
+  txCount: BigInt!
+}
+
+# Launch event day data
+type LaunchEventDayData @entity {
+  # launch event id - day start timestamp
+  id: ID!
+
+  # date - day start timestamp
+  date: Int!
+
+  # launch event
+  launchEvent: LaunchEvent!
+
+  # reserves
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+
+  # derived liquidity
+  reserveUSD: BigDecimal!
+
+  # volume
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+
+  # volume usd
+  volumeUSD: BigDecimal!
+
+  # tx count
+  txCount: BigInt!
+}
+
+# Deposit
+type Deposit @entity { 
+  userAddress: ID! 
+  launchEvent: LaunchEvent!
+  timestamp: BigInt!
+
+  # amount in AVAX
+  amount: BigDecimal!
+}
+
+# Withdraw
+type Withdraw @entity { 
+  userAddress: ID! 
+  launchEvent: LaunchEvent!
+  timestamp: BigInt!
+
+  # amount in AVAX
+  amount: BigDecimal!
+
+  # amount of AVAX as penalty fee
+  penalty: BigDecimal! 
+}

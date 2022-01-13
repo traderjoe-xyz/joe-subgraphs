@@ -1,0 +1,72 @@
+specVersion: 0.0.2
+description: RocketJoe
+schema:
+  file: ./rocketjoe.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: RocketJoeFactory
+    network: avalanche
+    source:
+      address: '0xC98C3C547DDbcc0029F38E0383C645C202aD663d'
+      abi: RocketJoeFactory
+      startBlock: 2486000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/rocketJoeFactory.ts
+      entities:
+        - RocketJoeFactory
+      abis:
+        - name: LaunchEventContract
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: RJLaunchEventCreated(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleRJLaunchEventCreated
+templates:
+  - kind: ethereum/contract
+    name: LaunchEvent
+    network: avalanche
+    source:
+      address: '0xC98C3C547DDbcc0029F38E0383C645C202aD663d'
+      abi: LaunchEvent
+      startBlock: 2486000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/launchEvent.ts
+      entities:
+        - LaunchEvent
+        - LaunchEventHourData
+        - LaunchEventDayData
+        - Deposits
+        - Withdrawals
+      abis:
+        - name: LaunchEventContract
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: IssuingTokenDeposited(address token, uint amount)
+          handler: handleIssuingTokenDeposited
+        - event: UserWithdrawn(address user, uint AVAXamount)
+          handler: handleUserWithdrawn
+        - event: UserParticipated(address user, uint AVAXamount, uint RJOEAmount)
+          handler: handleUserParticipated
+        - event: LiquidityPoolCreated(address pair, address token0, address token1, uint amount0, uint amount1);
+          handler: handleLiquidityPoolCreated
+        - event: UserLiquidityWithdrawn(address user, address pair, uint amount)
+          handler: onUserLiquidityWithdrawn
+        - event: IssuerLiquidityWithdrawn(address issuer, address pair, uint amount)
+          handler: onIssuerLiquidityWithdrawn

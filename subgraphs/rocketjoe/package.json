@@ -1,0 +1,23 @@
+{
+    "name": "rocketjoe",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "Trader Joe",
+    "scripts": {
+	    "prepare:avax": "mustache config/avax.json rocketjoe.template.yaml > rocketjoe.avax.yaml",
+        "prepare:rinkeby": "mustache config/rinkeby.json rocketjoe.template.yaml > rocketjoe.rinkeby.yaml",
+
+        "codegen:avax": "graph codegen rocketjoe.avax.yaml",
+        "codegen:rinkeby": "graph codegen rocketjoe.rinkeby.yaml",
+
+        "build:avax": "graph build rocketjoe.avax.yaml",
+        "build:rinkeby": "graph build rocketjoe.rinkeby.yaml",
+
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/rocketjoe rocketjoe.avax.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/rocketjoe-rinkeby- rocketjoe.rinkeby.yaml",
+
+        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/rocketjoe --access-token ",
+        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/rocketjoe --access-token ",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/rocketjoe rocketjoe.fuji.yaml"
+    }
+}

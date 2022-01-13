@@ -12,6 +12,9 @@
   "joe_maker_address": "0x861726bfe27931a4e22a7277bde6cb8432b65856",
   "joe_makerV2_address": "0xC98C3C547DDbcc0029F38E0383C645C202aD663d",
 
+  "rocket_joe_factory_address": "",
+  "launch_event_address": "",
+  
   "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd",
   "joe_usdt_pair_address": "0x1643de2efb8e35374d796297a9f95f64c082a8ce",
 

@@ -50,6 +50,10 @@ export const JOE_BAR_ADDRESS = Address.fromString('{{ joe_bar_address }}')
 export const JOE_MAKER_ADDRESS = Address.fromString('{{ joe_maker_address }}')
 export const JOE_MAKER_V2_ADDRESS = Address.fromString('{{ joe_makerV2_address }}')
 
+// ROCKETJOE 
+export const ROCKET_JOE_FACTORY_ADDRESS = Address.fromString('{{ rocket_joe_factory_address }}')
+export const LAUNCH_EVENT_ADDRESS = Address.fromString('{{ launch_event_address }}')
+
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ wavax_usdt_pair_address }}')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')

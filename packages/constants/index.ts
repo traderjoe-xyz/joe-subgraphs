@@ -50,6 +50,10 @@ export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41f71e81f3c65f2a47ca4
 export const JOE_MAKER_ADDRESS = Address.fromString('0x861726bfe27931a4e22a7277bde6cb8432b65856')
 export const JOE_MAKER_V2_ADDRESS = Address.fromString('0xC98C3C547DDbcc0029F38E0383C645C202aD663d')
 
+// ROCKETJOE 
+export const ROCKET_JOE_FACTORY_ADDRESS = Address.fromString('{{ rocket_joe_factory_address }}')
+export const LAUNCH_EVENT_ADDRESS = Address.fromString('{{ launch_event_address }}')
+
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x1643de2efb8e35374d796297a9f95f64c082a8ce')
@@ -68,7 +72,7 @@ export const WAVAX_STABLE_PAIRS: string[] = [
     '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
     '0x87dee1cc9ffd464b79e058ba20387c1984aed86a', // WAVAX-DAI
     '0xa389f9430876455c36478deea9769b7ca4e3ddb1', // WAVAX-USDC
-    '0x781655d802670bba3c89aebaaea59d3182fd755d', // WAVAX-MIM
+    '0x781655d802670bba3c89aebaaea59d3182fd755d', // WAVAX-USDC
 ]
 
 export const WHITELIST: string[] = [
