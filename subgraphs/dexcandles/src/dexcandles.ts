@@ -4,7 +4,7 @@ import { Swap } from '../generated/templates/Pair/Pair'
 import { PairCreated } from '../generated/Factory/Factory'
 import { Pair as PairTemplate } from '../generated/templates'
 import { Pair, Candle } from '../generated/schema'
-import { ERC20 } from '../generated/Factory/ERC20'
+import { ERC20 } from '../generated/templates/Pair/ERC20'
 
 function getDecimals(address: Address): BigInt {
   const contract = ERC20.bind(address)
@@ -54,10 +54,9 @@ export function handleSwap(event: Swap): void {
   const token0Amount: BigInt = getTokenAmount0(event)
   const token1Amount: BigInt = getTokenAmount1(event)
 
-  if (token0Amount.isZero() || token1Amount.isZero()) {
+  if (!(token0Amount instanceof BigInt) || !(token1Amount instanceof BigInt)) {
     return
   }
-
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
   }
