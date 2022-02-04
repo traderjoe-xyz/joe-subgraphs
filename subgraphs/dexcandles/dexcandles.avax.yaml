@@ -1,6 +1,9 @@
 specVersion: 0.0.2
 description: DEX trades candles (5m/15m/1h/4h/1d/1w)
 repository: https://github.com/traderjoe-xyz/joe-subgraphs
+graft:
+  base: Qme4NHMPn5FUYhbRQ6EwbtWMHfNxAuaSwLDRkSZ57z5qJ9
+  block: 10227000
 schema:
   file: ./dexcandles.graphql
 dataSources:
