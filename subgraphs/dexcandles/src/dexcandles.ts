@@ -30,7 +30,7 @@ export function handleNewPair(event: PairCreated): void {
   PairTemplate.create(event.params.pair)
 }
 
-export function getTokenAmount0(event: Swap, pair: Pair): BigInt {
+export function getTokenAmount0(event: Swap, pair: Pair | null): BigInt {
   const token0 = pair.token0.toHexString()
   const decimals = getDecimals(Address.fromString(token0))
   const exponent = BigInt.fromI32(18).minus(decimals).toString()
@@ -38,7 +38,7 @@ export function getTokenAmount0(event: Swap, pair: Pair): BigInt {
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
-export function getTokenAmount1(event: Swap, pair: Pair): BigInt {
+export function getTokenAmount1(event: Swap, pair: Pair | null): BigInt {
   const token1 = pair.token1.toHexString()
   const decimals = getDecimals(Address.fromString(token1))
   const exponent = BigInt.fromI32(18).minus(decimals).toString()
