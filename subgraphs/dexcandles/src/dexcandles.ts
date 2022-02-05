@@ -30,8 +30,7 @@ export function handleNewPair(event: PairCreated): void {
   PairTemplate.create(event.params.pair)
 }
 
-export function getTokenAmount0(event: Swap): BigInt {
-  const pair = Pair.load(event.address.toHex())
+export function getTokenAmount0(event: Swap, pair: Pair): BigInt {
   const token0 = pair.token0.toHexString()
   const decimals = getDecimals(Address.fromString(token0))
   const exponent = BigInt.fromI32(18).minus(decimals).toString()
@@ -39,8 +38,7 @@ export function getTokenAmount0(event: Swap): BigInt {
   return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
 }
 
-export function getTokenAmount1(event: Swap): BigInt {
-  const pair = Pair.load(event.address.toHex())
+export function getTokenAmount1(event: Swap, pair: Pair): BigInt {
   const token1 = pair.token1.toHexString()
   const decimals = getDecimals(Address.fromString(token1))
   const exponent = BigInt.fromI32(18).minus(decimals).toString()
@@ -51,8 +49,8 @@ export function getTokenAmount1(event: Swap): BigInt {
 export function handleSwap(event: Swap): void {
   const pair = Pair.load(event.address.toHex())
 
-  const token0Amount: BigInt = getTokenAmount0(event)
-  const token1Amount: BigInt = getTokenAmount1(event)
+  const token0Amount: BigInt = getTokenAmount0(event, pair)
+  const token1Amount: BigInt = getTokenAmount1(event, pair)
 
   if (!(token0Amount instanceof BigInt) || !(token1Amount instanceof BigInt)) {
     return
