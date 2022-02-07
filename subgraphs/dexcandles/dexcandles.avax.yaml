@@ -6,7 +6,7 @@ features:
 repository: https://github.com/traderjoe-xyz/joe-subgraphs
 graft:
   base: Qme4NHMPn5FUYhbRQ6EwbtWMHfNxAuaSwLDRkSZ57z5qJ9
-  block: 10227060
+  block: 10227000
 schema:
   file: ./dexcandles.graphql
 dataSources:
