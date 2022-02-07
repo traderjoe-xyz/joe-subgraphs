@@ -30,31 +30,24 @@ export function handleNewPair(event: PairCreated): void {
   PairTemplate.create(event.params.pair)
 }
 
-export function getTokenAmount0(event: Swap, pair: Pair | null): BigInt {
-  const token0 = pair.token0.toHexString()
-  const decimals = getDecimals(Address.fromString(token0))
-  const exponent = BigInt.fromI32(18).minus(decimals).toString()
-  const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent).toString())
-  return event.params.amount0In.minus(event.params.amount0Out).abs().times(multiplier)
-}
-
-export function getTokenAmount1(event: Swap, pair: Pair | null): BigInt {
-  const token1 = pair.token1.toHexString()
-  const decimals = getDecimals(Address.fromString(token1))
-  const exponent = BigInt.fromI32(18).minus(decimals).toString()
-  const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent).toString())
-  return event.params.amount1In.minus(event.params.amount1Out).abs().times(multiplier)
+function getTokenAmount(event: Swap, token: string): BigInt {
+  const decimals = getDecimals(Address.fromString(token))
+  const exponent = BigInt.fromI32(18).minus(decimals)
+  if (exponent >= BigInt.fromI32(0)) {
+    const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent.toString()).toString())
+    return event.params.amount1In.minus(event.params.amount1Out).abs().times(multiplier)
+  } else {
+    const divider = BigInt.fromString(BigDecimal.fromString('1e' + (exponent.times(BigInt.fromI32(-1))).toString()).toString())
+    return event.params.amount1In.minus(event.params.amount1Out).abs().div(divider)
+  }
 }
 
 export function handleSwap(event: Swap): void {
   const pair = Pair.load(event.address.toHex())
 
-  const token0Amount: BigInt = getTokenAmount0(event, pair)
-  const token1Amount: BigInt = getTokenAmount1(event, pair)
+  const token0Amount: BigInt = getTokenAmount(event, pair.token0.toHexString())
+  const token1Amount: BigInt = getTokenAmount(event, pair.token1.toHexString())
 
-  if (!(token0Amount instanceof BigInt) || !(token1Amount instanceof BigInt)) {
-    return
-  }
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
   }
