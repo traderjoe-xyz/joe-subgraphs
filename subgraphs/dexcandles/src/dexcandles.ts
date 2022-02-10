@@ -30,23 +30,23 @@ export function handleNewPair(event: PairCreated): void {
   PairTemplate.create(event.params.pair)
 }
 
-function getTokenAmount(event: Swap, token: string): BigInt {
+function getTokenAmount(token: string, amountIn: BigInt, amountOut: BigInt): BigInt {
   const decimals = getDecimals(Address.fromString(token))
   const exponent = BigInt.fromI32(18).minus(decimals)
   if (exponent >= BigInt.fromI32(0)) {
     const multiplier = BigInt.fromString(BigDecimal.fromString('1e' + exponent.toString()).toString())
-    return event.params.amount1In.minus(event.params.amount1Out).abs().times(multiplier)
+    return amountIn.minus(amountOut).abs().times(multiplier)
   } else {
     const divider = BigInt.fromString(BigDecimal.fromString('1e' + (exponent.times(BigInt.fromI32(-1))).toString()).toString())
-    return event.params.amount1In.minus(event.params.amount1Out).abs().div(divider)
+    return amountIn.minus(amountOut).abs().div(divider)
   }
 }
 
 export function handleSwap(event: Swap): void {
   const pair = Pair.load(event.address.toHex())
 
-  const token0Amount: BigInt = getTokenAmount(event, pair.token0.toHexString())
-  const token1Amount: BigInt = getTokenAmount(event, pair.token1.toHexString())
+  const token0Amount: BigInt = getTokenAmount(pair.token0.toHexString(), event.params.amount0In, event.params.amount0Out)
+  const token1Amount: BigInt = getTokenAmount(pair.token1.toHexString(), event.params.amount1In, event.params.amount1Out)
 
   if (token0Amount.isZero() || token1Amount.isZero()) {
     return
