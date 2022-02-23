@@ -9,17 +9,20 @@ type StableJoe @entity {
   # Joe staked USD
   joeStakedUSD: BigDecimal!
 
-  # Joe harvested
-  joeHarvested: BigDecimal!
-
-  # Joe harvested USD
-  joeHarvestedUSD: BigDecimal!
+  # USD harvested
+  usdHarvested: BigDecimal!
 
   # Users in the bar
   users: [User!]! @derivedFrom(field: "stableJoe")
 
   # Deposit fee 
   depositFee: BigDecimal!
+
+  # Deposit fees collected in JOE
+  depositFeeJOE: BigDecimal!
+
+  # Deposit fees collected in USD
+  depositFeeUSD: BigDecimal!
 
   # Last Updated At 
   updatedAt: BigInt!
@@ -39,11 +42,8 @@ type User @entity {
   # Sum of $ at time of staking
   joeStakedUSD: BigDecimal!
 
-  # Harvested
-  joeHarvested: BigDecimal!
-
-  # Sum of $ at time of harvesting
-  joeHarvestedUSD: BigDecimal!
+  # USD harvested
+  usdHarvested: BigDecimal!
 
   # Updated at
   updatedAt: BigInt!
@@ -54,8 +54,7 @@ type StableJoeDayData @entity {
   date: Int!
   joeStaked: BigDecimal!
   joeStakedUSD: BigDecimal!
-  joeUnstaked: BigDecimal!
-  joeUnstakedUSD: BigDecimal!
-  joeHarvested: BigDecimal!
-  joeHarvestedUSD: BigDecimal!
+  usdHarvested: BigDecimal!
+  depositFeeJOE: BigDecimal!
+  depositFeeUSD: BigDecimal!
 }
