@@ -23,8 +23,6 @@ dataSources:
       abis:
         - name: MoneyMaker
           file: ../../node_modules/@traderjoe-xyz/core/abi/MoneyMaker.json
-        - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: ERC20
           file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Factory

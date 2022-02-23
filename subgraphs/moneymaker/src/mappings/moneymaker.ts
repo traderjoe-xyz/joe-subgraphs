@@ -1,10 +1,10 @@
-import { log, Address, BigInt } from '@graphprotocol/graph-ts'
+import { log, Address, BigInt, BigDecimal } from '@graphprotocol/graph-ts'
 import { LogConvert, MoneyMaker } from '../../generated/MoneyMaker/MoneyMaker'
 import { Remit } from '../../generated/schema'
 import { ERC20 } from '../../generated/MoneyMaker/ERC20'
 import { Factory } from '../../generated/MoneyMaker/Factory'
 import { getMoneyMaker, getRemitter, getDayData } from '../entities'
-import { FACTORY_ADDRESS, BIG_INT_ONE } from 'const'
+import { FACTORY_ADDRESS, BIG_INT_ONE, ADDRESS_ZERO } from 'const'
 import { getUSDRate } from '../../../../packages/pricing'
 
 export function handleLogConvert(event: LogConvert): void {
@@ -22,10 +22,11 @@ export function handleLogConvert(event: LogConvert): void {
   const remitter = getRemitter(moneyMakerAddress, event.params.server, event.block)
 
   const moneyMakerContract = MoneyMaker.bind(moneyMakerAddress)
-  const tokenTo =  moneyMakerContract.tokenTo.call()
+  
+  const tokenToResult =  moneyMakerContract.try_tokenTo()
+  const tokenTo = tokenToResult.reverted ? ADDRESS_ZERO : tokenToResult.value
   const tokenToDecimals = getDecimals(tokenTo)
-  const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(tokenToDecimals)
-
+  const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(BigDecimal.fromString(tokenToDecimals.toString()))
   const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenTo, event.block))
 
   const token0Contract = ERC20.bind(event.params.token0)
@@ -46,8 +47,8 @@ export function handleLogConvert(event: LogConvert): void {
   const id = pair.toHex().concat('-').concat(event.block.number.toString())
   let remit = new Remit(id)
 
-  remit.maker = moneyMaker.id
-  remit.server = remitter.id
+  remit.moneyMaker = moneyMaker.id
+  remit.remitter = remitter.id
   remit.tx = event.transaction.hash
   remit.token0 = event.params.token0
   remit.token1 = event.params.token1
