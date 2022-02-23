@@ -157,8 +157,8 @@ export function handleDeposit(event: DepositEvent): void {
     stableJoeDayData.joeStaked = stableJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
     stableJoeDayData.joeStakedUSD = stableJoeDayData.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
     if (stableJoe.depositFee) {
-      stableJoe.depositFeeJOE = stableJoe.depositFeeJOE.plus(stableJoe.depositFee)
-      stableJoe.depositFeeUSD = stableJoe.depositFeeUSD.plus(stableJoe.depositFee).times(getJoePrice())
+      stableJoeDayData.depositFeeJOE = stableJoeDayData.depositFeeJOE.plus(stableJoe.depositFee)
+      stableJoeDayData.depositFeeUSD = stableJoeDayData.depositFeeUSD.plus(stableJoe.depositFee).times(getJoePrice())
     }
   }
 
@@ -191,20 +191,20 @@ export function handleWithdraw(event: WithdrawEvent): void {
   stableJoe.save()
 
   // update day data
-  // const timestamp = event.block.timestamp.toI32()
-  // const day = timestamp / 86400
-  // const date = day * 86400
-  // const id = event.address.toHex().concat('-').concat(BigInt.fromI32(day).toString())
-  // let stableJoeDayData = StableJoeDayData.load(id);
-  // if (stableJoeDayData === null) {
-  //   stableJoeDayData = new StableJoeDayData(id)
-  //   stableJoeDayData.date = date
-  //   stableJoeDayData.joeStaked = convertAmountToDecimal(event.params.amount)
-  //   stableJoeDayData.joeStakedUSD = convertAmountToDecimal(event.params.amount).times(joePrice)
-  // } else {
-  //   stableJoeDayData.joeStaked = stableJoeDayData.joeStaked.minus(convertAmountToDecimal(event.params.amount))
-  //   stableJoeDayData.joeStakedUSD = stableJoeDayData.joeStakedUSD.minus(convertAmountToDecimal(event.params.amount).times(joePrice))
-  // } 
+  const timestamp = event.block.timestamp.toI32()
+  const day = timestamp / 86400
+  const date = day * 86400
+  const id = event.address.toHex().concat('-').concat(BigInt.fromI32(day).toString())
+  let stableJoeDayData = StableJoeDayData.load(id);
+  if (stableJoeDayData === null) {
+    stableJoeDayData = new StableJoeDayData(id)
+    stableJoeDayData.date = date
+    stableJoeDayData.joeUnstaked = convertAmountToDecimal(event.params.amount)
+    stableJoeDayData.joeUnstakedUSD = convertAmountToDecimal(event.params.amount).times(joePrice)
+  } else {
+    stableJoeDayData.joeUnstaked = stableJoeDayData.joeUnstaked.plus(convertAmountToDecimal(event.params.amount))
+    stableJoeDayData.joeUnstakedUSD = stableJoeDayData.joeUnstakedUSD.plus(convertAmountToDecimal(event.params.amount).times(joePrice))
+  } 
 
-  // stableJoeDayData.save()
+  stableJoeDayData.save()
 }

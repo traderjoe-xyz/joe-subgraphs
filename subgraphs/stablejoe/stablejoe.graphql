@@ -54,6 +54,8 @@ type StableJoeDayData @entity {
   date: Int!
   joeStaked: BigDecimal!
   joeStakedUSD: BigDecimal!
+  joeUnstaked: BigDecimal!
+  joeUnstakedUSD: BigDecimal!
   usdHarvested: BigDecimal!
   depositFeeJOE: BigDecimal!
   depositFeeUSD: BigDecimal!
