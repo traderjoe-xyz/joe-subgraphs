@@ -3,6 +3,7 @@ type MoneyMaker @entity {
   id: ID!
 
   # USD remitted
+  tokenRemitted: BigDecimal!
   usdRemitted: BigDecimal!
   totalRemits: BigInt!
 
@@ -24,6 +25,7 @@ type Remitter @entity {
   moneyMaker: MoneyMaker!
 
   # USD remitted
+  tokenRemitted: BigDecimal!
   usdRemitted: BigDecimal!
   totalRemits: BigInt!
 
@@ -62,6 +64,7 @@ type Remit @entity {
   amount1: BigDecimal!
 
   # USD remitted
+  tokenRemitted: BigDecimal!
   usdRemitted: BigDecimal!
 
   # Day data
@@ -79,6 +82,7 @@ type DayData @entity {
   date: Int!
 
   # USD remitted
+  tokenRemitted: BigDecimal!
   usdRemitted: BigDecimal!
   totalRemits: BigInt!
 
