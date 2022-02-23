@@ -1,4 +1,4 @@
-import { BigDecimal, BigInt, log } from '@graphprotocol/graph-ts';
+import { BigDecimal, BigInt, ethereum, log } from '@graphprotocol/graph-ts';
 import {
   BIG_DECIMAL_1E18,
   BIG_DECIMAL_1E6,
@@ -53,18 +53,42 @@ export function exponentToBigDecimal(decimals: BigInt): BigDecimal {
   return bd;
 }
 
+function createStableJoe(event: ethereum.Event): StableJoe {
+  const stableJoe = new StableJoe(event.address.toHex())
+  stableJoe.joeStaked = BIG_DECIMAL_ZERO
+  stableJoe.joeStakedUSD = BIG_DECIMAL_ZERO
+  stableJoe.usdHarvested = BIG_DECIMAL_ZERO
+  stableJoe.depositFee = BIG_DECIMAL_ZERO
+  stableJoe.depositFeeJOE = BIG_DECIMAL_ZERO
+  stableJoe.depositFeeUSD = BIG_DECIMAL_ZERO
+  stableJoe.updatedAt = event.block.timestamp
+  stableJoe.save()
+
+  return stableJoe as StableJoe
+}
+
+function getStableJoe(event: ethereum.Event): StableJoe {
+  let stableJoe = StableJoe.load(event.address.toHex())
+
+  if (stableJoe === null) {
+    stableJoe = createStableJoe(event)
+  }
+
+  return stableJoe as StableJoe
+}
+
 export function handleClaimReward(event: ClaimRewardEvent): void {
-  const stableJoe = StableJoe.load(event.address.toHex())
+  const stableJoe = getStableJoe(event)
   let user = User.load(event.params.user.toHex())
 
   if (!user) return
 
   user.usdHarvested = user.usdHarvested.plus(convertAmountToDecimal(event.params.amount))
   user.updatedAt = event.block.timestamp
-  
+  user.save() 
+
   stableJoe.usdHarvested = stableJoe.usdHarvested.plus(convertAmountToDecimal(event.params.amount))
   stableJoe.updatedAt = event.block.timestamp
-
   stableJoe.save()
 
   // update day data
@@ -87,7 +111,7 @@ export function handleClaimReward(event: ClaimRewardEvent): void {
 }
 
 export function handleDeposit(event: DepositEvent): void {
-  const stableJoe = StableJoe.load(event.address.toHex())
+  const stableJoe = getStableJoe(event)
   let user = User.load(event.params.user.toHex())
 
   if (user) {
@@ -100,11 +124,11 @@ export function handleDeposit(event: DepositEvent): void {
     user.joeStakedUSD = convertAmountToDecimal(event.params.amount).times(getJoePrice())
   }
   user.updatedAt = event.block.timestamp
-  
+  user.save() 
+
   stableJoe.joeStaked = stableJoe.joeStaked.plus(convertAmountToDecimal(event.params.amount))
   stableJoe.joeStakedUSD = stableJoe.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
   stableJoe.updatedAt = event.block.timestamp
-
   stableJoe.save()
 
   // update deposit fees 
@@ -142,7 +166,7 @@ export function handleDeposit(event: DepositEvent): void {
 }
 
 export function handleDepositFeeChanged(event: DepositFeeChangedEvent): void {
-  const stableJoe = StableJoe.load(event.address.toHex())
+  const stableJoe = getStableJoe(event)
 
   stableJoe.depositFee = convertAmountToDecimal(event.params.newFee)
   stableJoe.updatedAt = event.block.timestamp
@@ -150,7 +174,7 @@ export function handleDepositFeeChanged(event: DepositFeeChangedEvent): void {
 }
 
 export function handleWithdraw(event: WithdrawEvent): void {
-  const stableJoe = StableJoe.load(event.address.toHex())
+  const stableJoe = getStableJoe(event)
   let user = User.load(event.params.user.toHex())
 
   if (!user) return
@@ -158,12 +182,12 @@ export function handleWithdraw(event: WithdrawEvent): void {
   user.joeStaked = user.joeStaked.minus(convertAmountToDecimal(event.params.amount))
   user.joeStakedUSD = user.joeStakedUSD.minus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
   user.updatedAt = event.block.timestamp
+  user.save()
 
   const joePrice = getJoePrice()
   stableJoe.joeStaked = stableJoe.joeStaked.minus(convertAmountToDecimal(event.params.amount))
   stableJoe.joeStakedUSD = stableJoe.joeStakedUSD.minus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
   stableJoe.updatedAt = event.block.timestamp
-
   stableJoe.save()
 
   // update day data
