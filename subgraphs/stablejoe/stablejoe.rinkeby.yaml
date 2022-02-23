@@ -6,7 +6,7 @@ dataSources:
     name: StableJoeStaking
     network: rinkeby
     source:
-      address: "0x79b872319cdC2C2959F342F2abbAa6dE4bb27727"
+      address: "0x12ba94D04a7a7F0882155b2c55b88e269428227B"
       abi: StableJoeStaking
     mapping:
       kind: ethereum/events
