@@ -56,7 +56,8 @@ export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x1643de2efb8e35374d796
 
 export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7')
 export const USDT_ADDRESS = Address.fromString('0xc7198437980c041c805a1edcba50c1ce5db95118')
-export const USDC_ADDRESS = Address.fromString('0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664')
+export const USDC_E_ADDRESS = Address.fromString('0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664')
+export const USDC_ADDRESS = Address.fromString('0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e')
 export const WBTC_ADDRESS = Address.fromString('0x50b7545627a5162f82a992c33b87adc75187b218')
 export const TIME_ADDRESS = Address.fromString('0xb54f16fb19478766a268f172c9480f8da1a7c9c3')
 export const APEX_ADDRESS = Address.fromString('0xd039c9079ca7f2a87d632a9c0d7cea0137bacfb5')

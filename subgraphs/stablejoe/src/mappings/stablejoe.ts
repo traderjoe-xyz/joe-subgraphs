@@ -5,7 +5,7 @@ import {
   BIG_DECIMAL_ZERO,
   JOE_USDT_PAIR_ADDRESS,
   USDC_ADDRESS,
-  USDT_ADDRESS
+  USDC_E_ADDRESS
 } from 'const'
 import {
   ClaimReward as ClaimRewardEvent,
@@ -98,7 +98,7 @@ export function handleClaimReward(event: ClaimRewardEvent): void {
   const id = event.address.toHex().concat('-').concat(BigInt.fromI32(day).toString())
   let stableJoeDayData = StableJoeDayData.load(id);
 
-  if (USDT_ADDRESS === event.params.rewardToken || USDC_ADDRESS === event.params.rewardToken) {
+  if (USDC_ADDRESS === event.params.rewardToken || USDC_E_ADDRESS === event.params.rewardToken) {
     if (stableJoeDayData === null) {
       stableJoeDayData = new StableJoeDayData(id)
       stableJoeDayData.date = date
