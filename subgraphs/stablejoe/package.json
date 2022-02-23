@@ -1,0 +1,21 @@
+{
+  "name": "StableJoeStaking",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prepare:avax": "mustache config/avax.json stablejoe.avax.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json stablejoe.rinkeby.yaml",
+    "codegen:avax": "graph codegen stablejoe.avax.yaml",
+    "codegen:rinkeby": "graph codegen stablejoe.rinkeby.yaml",
+    "build:avax": "graph build stablejoe.avax.yaml",
+    "build:rinkeby": "graph build stablejoe.rinkeby.yaml",
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/stablejoe stablejoe.avax.yaml",
+    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/sjoe-rinkeby stablejoe.rinkeby.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/stablejoe --access-token ",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/stablejoe --access-token ",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/stablejoe stablejoe.fuji.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.26.0",
+    "@graphprotocol/graph-ts": "0.24.1"
+  }
+}

@@ -1,0 +1,61 @@
+# StableJoe
+type StableJoe @entity {
+  # Contract address
+  id: ID!
+
+  # Joe staked
+  joeStaked: BigDecimal!
+
+  # Joe staked USD
+  joeStakedUSD: BigDecimal!
+
+  # Joe harvested
+  joeHarvested: BigDecimal!
+
+  # Joe harvested USD
+  joeHarvestedUSD: BigDecimal!
+
+  # Users in the bar
+  users: [User!]! @derivedFrom(field: "stableJoe")
+
+  # Deposit fee 
+  depositFee: BigDecimal!
+
+  # Last Updated At 
+  updatedAt: BigInt!
+}
+
+# User
+type User @entity {
+  # ID
+  id: ID!
+
+  # Stable Joe
+  stableJoe: StableJoe
+
+  # Staked
+  joeStaked: BigDecimal!
+
+  # Sum of $ at time of staking
+  joeStakedUSD: BigDecimal!
+
+  # Harvested
+  joeHarvested: BigDecimal!
+
+  # Sum of $ at time of harvesting
+  joeHarvestedUSD: BigDecimal!
+
+  # Updated at
+  updatedAt: BigInt!
+}
+
+type StableJoeDayData @entity {
+  id: ID!
+  date: Int!
+  joeStaked: BigDecimal!
+  joeStakedUSD: BigDecimal!
+  joeUnstaked: BigDecimal!
+  joeUnstakedUSD: BigDecimal!
+  joeHarvested: BigDecimal!
+  joeHarvestedUSD: BigDecimal!
+}
