@@ -1,0 +1,35 @@
+specVersion: 0.0.2
+description: StableJoeStaking
+schema:
+  file: ./stablejoe.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: StableJoeStaking
+    network: {{ network }}
+    source:
+      address: '{{ address }}'
+      abi: StableJoeStaking
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/stablejoe.ts
+      entities:
+        - StableJoe
+        - User
+        - StableJoeDayData
+      abis:
+        - name: StableJoeStaking
+          file: ../../node_modules/@traderjoe-xyz/core/abi/StableJoeStaking.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+      eventHandlers:
+        - event: ClaimReward(indexed address,indexed address,uint256)
+          handler: handleClaimReward
+        - event: Deposit(indexed address,uint256,uint256)
+          handler: handleDeposit
+        - event: DepositFeeChanged(uint256,uint256)
+          handler: handleDepositFeeChanged
+        - event: Withdraw(indexed address,uint256)
+          handler: handleWithdraw

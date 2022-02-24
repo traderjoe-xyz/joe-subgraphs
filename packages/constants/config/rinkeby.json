@@ -19,6 +19,7 @@
   "weth_address": "0xc778417e063141139fce010982780140aa0cd5ab",
   "wbtc_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
   "usdt_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
+  "usdc_e_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
   "usdc_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
   "dai_address": "0x5b8470fbc6b31038aa07abd3010acffca6e36611",
   "time_address": "0xb54f16fb19478766a268f172c9480f8da1a7c9c3",
