@@ -30,3 +30,5 @@ dataSources:
       eventHandlers:
         - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
           handler: handleLogConvert
+        - event: SetTokenTo(address)
+          handler: handleSetTokenTo

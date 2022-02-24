@@ -1,10 +1,10 @@
 import { log, Address, BigInt, BigDecimal } from '@graphprotocol/graph-ts'
-import { LogConvert, MoneyMaker } from '../../generated/MoneyMaker/MoneyMaker'
+import { LogConvert, SetTokenTo } from '../../generated/MoneyMaker/MoneyMaker'
 import { Remit } from '../../generated/schema'
 import { ERC20 } from '../../generated/MoneyMaker/ERC20'
 import { Factory } from '../../generated/MoneyMaker/Factory'
-import { getMoneyMaker, getRemitter, getDayData } from '../entities'
-import { FACTORY_ADDRESS, BIG_INT_ONE, ADDRESS_ZERO } from 'const'
+import { getMoneyMaker, getRemitter, getDayData, getToken } from '../entities'
+import { FACTORY_ADDRESS, BIG_INT_ONE } from 'const'
 import { getUSDRate } from '../../../../packages/pricing'
 
 export function handleLogConvert(event: LogConvert): void {
@@ -21,13 +21,11 @@ export function handleLogConvert(event: LogConvert): void {
   const moneyMaker = getMoneyMaker(moneyMakerAddress, event.block)
   const remitter = getRemitter(moneyMakerAddress, event.params.server, event.block)
 
-  const moneyMakerContract = MoneyMaker.bind(moneyMakerAddress)
-  
-  const tokenToResult =  moneyMakerContract.try_tokenTo()
-  const tokenTo = tokenToResult.reverted ? ADDRESS_ZERO : tokenToResult.value
-  const tokenToDecimals = getDecimals(tokenTo)
+  const tokenToAddress = Address.fromString(moneyMaker.tokenTo)
+  const tokenTo = getToken(tokenToAddress)
+  const tokenToDecimals = tokenTo.decimals
   const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(BigDecimal.fromString(tokenToDecimals.toString()))
-  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenTo, event.block))
+  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block))
 
   const token0Contract = ERC20.bind(event.params.token0)
   const token0SymbolResult = token0Contract.try_symbol()
@@ -82,17 +80,9 @@ export function handleLogConvert(event: LogConvert): void {
   remitter.save()
 }
 
-function getDecimals(address: Address): BigInt {
-  const contract = ERC20.bind(address)
-
-  // try types uint8 for decimals
-  let decimalValue = null
-
-  const decimalResult = contract.try_decimals()
-
-  if (!decimalResult.reverted) {
-    decimalValue = decimalResult.value
-  }
-
-  return BigInt.fromI32(decimalValue as i32)
+export function handleSetTokenTo(event: SetTokenTo): void {
+  const moneyMaker = getMoneyMaker(event.address, event.block)
+  const tokenTo = getToken(event.params._tokenTo)
+  moneyMaker.tokenTo = tokenTo.id
+  moneyMaker.save()
 }
