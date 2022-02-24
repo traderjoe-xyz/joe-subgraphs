@@ -2,8 +2,8 @@
   "name": "StableJoeStaking",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare:avax": "mustache config/avax.json stablejoe.avax.yaml",
-    "prepare:rinkeby": "mustache config/rinkeby.json stablejoe.rinkeby.yaml",
+    "prepare:avax": "mustache config/avax.json stablejoe.template.yaml > stablejoe.avax.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json stablejoe.template.yaml > stablejoe.rinkeby.yaml",
     "codegen:avax": "graph codegen stablejoe.avax.yaml",
     "codegen:rinkeby": "graph codegen stablejoe.rinkeby.yaml",
     "build:avax": "graph build stablejoe.avax.yaml",

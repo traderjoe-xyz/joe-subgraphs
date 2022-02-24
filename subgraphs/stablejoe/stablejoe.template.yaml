@@ -5,11 +5,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: StableJoeStaking
-    network: rinkeby
+    network: {{ network }}
     source:
-      address: '0x12ba94D04a7a7F0882155b2c55b88e269428227B'
+      address: '{{ address }}'
       abi: StableJoeStaking
-      startBlock: 10219081
+      startBlock: {{ startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
