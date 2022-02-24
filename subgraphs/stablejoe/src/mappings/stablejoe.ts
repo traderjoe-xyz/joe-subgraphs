@@ -125,20 +125,20 @@ export function handleDeposit(event: DepositEvent): void {
   user.updatedAt = event.block.timestamp
   user.save()
 
-  log.warning('[handleDeposit] updating stableJoe and saving {}', [event.address.toHexString()])
+  log.debug('[handleDeposit] updating stableJoe and saving {}', [event.address.toHexString()])
   stableJoe.joeStaked = stableJoe.joeStaked.plus(convertAmountToDecimal(event.params.amount))
   stableJoe.joeStakedUSD = stableJoe.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
   stableJoe.updatedAt = event.block.timestamp
   stableJoe.save()
 
-  log.warning('[handleDeposit] update deposit fees {}', [event.address.toHexString()])
+  log.debug('[handleDeposit] update deposit fees {}', [event.address.toHexString()])
   // update deposit fees
   if (stableJoe.depositFee) {
     stableJoe.depositFeeJOE = stableJoe.depositFeeJOE.plus(stableJoe.depositFee)
     stableJoe.depositFeeUSD = stableJoe.depositFeeUSD.plus(stableJoe.depositFee).times(getJoePrice())
   }
 
-  log.warning('[handleDeposit] update day data {}', [event.address.toHexString()])
+  log.debug('[handleDeposit] update day data {}', [event.address.toHexString()])
   // update day data
   let stableJoeDayData = getStableJoeDayData(event.block)
   stableJoeDayData.joeStaked = stableJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
