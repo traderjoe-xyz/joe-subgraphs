@@ -15,7 +15,7 @@ type StableJoe @entity {
   # Users in the bar
   users: [User!]! @derivedFrom(field: "stableJoe")
 
-  # Deposit fee 
+  # Deposit fee
   depositFee: BigDecimal!
 
   # Deposit fees collected in JOE
@@ -24,7 +24,7 @@ type StableJoe @entity {
   # Deposit fees collected in USD
   depositFeeUSD: BigDecimal!
 
-  # Last Updated At 
+  # Last Updated At
   updatedAt: BigInt!
 }
 
