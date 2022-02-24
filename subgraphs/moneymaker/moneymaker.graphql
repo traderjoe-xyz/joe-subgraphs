@@ -1,0 +1,101 @@
+type MoneyMaker @entity {
+  # MoneyMaker address
+  id: ID!
+
+  # Remitted token
+  tokenTo: Token!
+
+  # USD remitted
+  tokenRemitted: BigDecimal!
+  usdRemitted: BigDecimal!
+  totalRemits: BigInt!
+
+  # Remitters
+  remitters: [Remitter!]! @derivedFrom(field: "moneyMaker")
+
+  # Remits
+  remits: [Remit!]! @derivedFrom(field: "moneyMaker")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Remitter @entity {
+  # Remitter address
+  id: ID!
+
+  # MoneyMaker
+  moneyMaker: MoneyMaker!
+
+  # USD remitted
+  tokenRemitted: BigDecimal!
+  usdRemitted: BigDecimal!
+  totalRemits: BigInt!
+
+  # Remits
+  remits: [Remit!]! @derivedFrom(field: "remitter")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Remit @entity {
+  # Pair address concatinated with block number
+  id: ID!
+
+  # MoneyMaker
+  moneyMaker: MoneyMaker!
+
+  # Remitter
+  remitter: Remitter!
+
+  # Transaction
+  tx: Bytes!
+
+  # Token 0
+  token0: Bytes!
+  token0Symbol: String!
+
+  # Token 1
+  token1: Bytes!
+  token1Symbol: String!
+
+  # Amount 0
+  amount0: BigDecimal!
+
+  # Amount 1
+  amount1: BigDecimal!
+
+  # USD remitted
+  tokenRemitted: BigDecimal!
+  usdRemitted: BigDecimal!
+
+  # Day data
+  dayData: DayData
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type DayData @entity {
+  # Timestmap / 86400
+  id: ID!
+
+  # Start of day timestamp
+  date: Int!
+
+  # USD remitted
+  tokenRemitted: BigDecimal!
+  usdRemitted: BigDecimal!
+  totalRemits: BigInt!
+
+  # Remits
+  remits: [Remit!] @derivedFrom(field: "dayData")
+}
+
+type Token @entity {
+  # Token address
+  id: ID!
+  symbol: String!
+  decimals: BigInt!
+}

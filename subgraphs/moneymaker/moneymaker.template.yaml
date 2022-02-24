@@ -1,0 +1,34 @@
+specVersion: 0.0.1
+description: MoneyMaker
+schema:
+  file: ./moneymaker.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: MoneyMaker
+    network: {{ network }}
+    source:
+      address: '{{ address }}'
+      abi: MoneyMaker
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/moneymaker.ts
+      entities:
+        - MoneyMaker
+        - Remitter
+        - Remit
+        - DayData
+      abis:
+        - name: MoneyMaker
+          file: ../../node_modules/@traderjoe-xyz/core/abi/MoneyMaker.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+      eventHandlers:
+        - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleLogConvert
+        - event: SetTokenTo(address)
+          handler: handleSetTokenTo
