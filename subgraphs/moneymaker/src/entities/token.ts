@@ -21,14 +21,14 @@ export function getToken(address: Address): Token {
 }
 
 function getDecimals(contract: ERC20): BigInt {
-    // try types uint8 for decimals
-    let decimalValue = null
-  
-    const decimalResult = contract.try_decimals()
-  
-    if (!decimalResult.reverted) {
-      decimalValue = decimalResult.value
-    }
-  
-    return BigInt.fromI32(decimalValue as i32)
+  // try types uint8 for decimals
+  let decimalValue = null
+
+  const decimalResult = contract.try_decimals()
+
+  if (!decimalResult.reverted) {
+    decimalValue = decimalResult.value
   }
+
+  return BigInt.fromI32(decimalValue as i32)
+}

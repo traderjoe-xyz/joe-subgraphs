@@ -1,5 +1,5 @@
 {
-    "network": "rinkeby",
-    "address": "0xCB1A7684374A281253adAA246d17a3fA6Bba7E3a",
-    "startBlock": "10220592"
+  "network": "rinkeby",
+  "address": "0xCB1A7684374A281253adAA246d17a3fA6Bba7E3a",
+  "startBlock": "10220592"
 }

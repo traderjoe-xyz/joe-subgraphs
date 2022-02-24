@@ -12,7 +12,7 @@ export function getMoneyMaker(address: Address, block: ethereum.Block): MoneyMak
     maker = new MoneyMaker(id)
 
     const moneyMakerContract = MoneyMakerContract.bind(address)
-    const tokenToResult =  moneyMakerContract.try_tokenTo()
+    const tokenToResult = moneyMakerContract.try_tokenTo()
     const tokenToAddress = tokenToResult.reverted ? ADDRESS_ZERO : tokenToResult.value
     const tokenTo = getToken(tokenToAddress)
 

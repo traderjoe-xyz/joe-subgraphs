@@ -1,5 +1,5 @@
 {
-    "network": "avalanche",
-    "address": "0xC98C3C547DDbcc0029F38E0383C645C202aD663d",
-    "startBlock": "2486000"
+  "network": "avalanche",
+  "address": "0xC98C3C547DDbcc0029F38E0383C645C202aD663d",
+  "startBlock": "2486000"
 }
