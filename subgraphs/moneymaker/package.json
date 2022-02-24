@@ -14,7 +14,7 @@
         "build:rinkeby": "graph build moneymaker.rinkeby.yaml",
 
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/moneymaker moneymaker.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/money-maker-rinkeby moneymaker.rinkeby.yaml",
+        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/moneymaker-rinkeby moneymaker.rinkeby.yaml",
 
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/moneymaker --access-token ",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/moneymaker --access-token ",
