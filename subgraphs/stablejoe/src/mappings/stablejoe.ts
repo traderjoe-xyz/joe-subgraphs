@@ -13,7 +13,7 @@ import {
   DepositFeeChanged as DepositFeeChangedEvent,
   Withdraw as WithdrawEvent,
 } from '../../generated/StableJoeStaking/StableJoeStaking'
-import { StableJoe, User, StableJoeDayData } from '../../generated/schema'
+import { StableJoe, User } from '../../generated/schema'
 import { Pair as PairContract } from '../../generated/StableJoeStaking/Pair'
 import { getStableJoeDayData } from '../entities'
 
@@ -108,7 +108,7 @@ export function handleClaimReward(event: ClaimRewardEvent): void {
 
   // update day data
   if (USDC_ADDRESS === event.params.rewardToken || USDC_E_ADDRESS === event.params.rewardToken) {
-    let stableJoeDayData = getStableJoeDayData(event.block)
+    let stableJoeDayData = getStableJoeDayData(event.address, event.block)
     stableJoeDayData.usdHarvested = stableJoeDayData.usdHarvested.plus(convertAmountToDecimal(event.params.amount))
     stableJoeDayData.save()
   }
@@ -140,7 +140,7 @@ export function handleDeposit(event: DepositEvent): void {
 
   log.debug('[handleDeposit] update day data {}', [event.address.toHexString()])
   // update day data
-  let stableJoeDayData = getStableJoeDayData(event.block)
+  let stableJoeDayData = getStableJoeDayData(event.address, event.block)
   stableJoeDayData.joeStaked = stableJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
   stableJoeDayData.joeStakedUSD = stableJoeDayData.joeStakedUSD.plus(
     convertAmountToDecimal(event.params.amount).times(getJoePrice())
@@ -179,7 +179,7 @@ export function handleWithdraw(event: WithdrawEvent): void {
   stableJoe.save()
 
   // update day data
-  let stableJoeDayData = getStableJoeDayData(event.block)
+  let stableJoeDayData = getStableJoeDayData(event.address, event.block)
   stableJoeDayData.joeUnstaked = stableJoeDayData.joeUnstaked.plus(convertAmountToDecimal(event.params.amount))
   stableJoeDayData.joeUnstakedUSD = stableJoeDayData.joeUnstakedUSD.plus(
     convertAmountToDecimal(event.params.amount).times(joePrice)

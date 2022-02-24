@@ -1,11 +1,11 @@
 import { StableJoeDayData } from '../../generated/schema'
 import { BIG_DECIMAL_ZERO } from 'const'
-import { ethereum, BigInt } from '@graphprotocol/graph-ts'
+import { ethereum, BigInt, Address } from '@graphprotocol/graph-ts'
 
-export function getStableJoeDayData(block: ethereum.Block): StableJoeDayData {
+export function getStableJoeDayData(eventAddress: Address, block: ethereum.Block): StableJoeDayData {
   const SECONDS_PER_DAY = 86400
   const day = block.timestamp.toI32() / SECONDS_PER_DAY
-  const id = BigInt.fromI32(day).toString()
+  const id = eventAddress.toHex().concat('-').concat(BigInt.fromI32(day).toString())
 
   let dayData = StableJoeDayData.load(id)
 
