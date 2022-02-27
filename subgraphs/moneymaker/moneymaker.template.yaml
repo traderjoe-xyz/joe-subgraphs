@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 description: MoneyMaker
 schema:
   file: ./moneymaker.graphql
@@ -27,6 +27,8 @@ dataSources:
           file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Factory
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
       eventHandlers:
         - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
           handler: handleLogConvert

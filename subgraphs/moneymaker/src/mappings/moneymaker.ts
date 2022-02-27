@@ -3,8 +3,8 @@ import { LogConvert, SetTokenTo } from '../../generated/MoneyMaker/MoneyMaker'
 import { Remit } from '../../generated/schema'
 import { ERC20 } from '../../generated/MoneyMaker/ERC20'
 import { Factory } from '../../generated/MoneyMaker/Factory'
-import { getMoneyMaker, getRemitter, getDayData, getToken } from '../entities'
-import { FACTORY_ADDRESS, BIG_INT_ONE } from 'const'
+import { getMoneyMaker, getRemitter, getDayData, getDecimals } from '../entities'
+import { FACTORY_ADDRESS, BIG_INT_ONE, BIG_INT_ZERO, BIG_DECIMAL_ZERO } from 'const'
 import { getUSDRate } from '../../../../packages/pricing'
 
 export function handleLogConvert(event: LogConvert): void {
@@ -21,9 +21,8 @@ export function handleLogConvert(event: LogConvert): void {
   const moneyMaker = getMoneyMaker(moneyMakerAddress, event.block)
   const remitter = getRemitter(moneyMakerAddress, event.params.server, event.block)
 
-  const tokenToAddress = Address.fromString(moneyMaker.tokenTo)
-  const tokenTo = getToken(tokenToAddress)
-  const tokenToDecimals = tokenTo.decimals
+  const tokenToAddress = Address.fromString(moneyMaker.tokenRemittedAddress)
+  const tokenToDecimals = moneyMaker.tokenRemittedDecimals
   const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(BigDecimal.fromString(tokenToDecimals.toString()))
   const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block))
 
@@ -81,8 +80,14 @@ export function handleLogConvert(event: LogConvert): void {
 }
 
 export function handleSetTokenTo(event: SetTokenTo): void {
+  const tokenToAddress = event.params._tokenTo
+  log.info('handleSetTokenTo {}', [tokenToAddress.toHex()])
+  const tokenToContract = ERC20.bind(tokenToAddress)
   const moneyMaker = getMoneyMaker(event.address, event.block)
-  const tokenTo = getToken(event.params._tokenTo)
-  moneyMaker.tokenTo = tokenTo.id
+  moneyMaker.tokenRemittedAddress = tokenToAddress.toHex()
+  moneyMaker.tokenRemittedDecimals = getDecimals(tokenToContract)
+  moneyMaker.usdRemitted = BIG_DECIMAL_ZERO
+  moneyMaker.tokenRemitted = BIG_DECIMAL_ZERO
+  moneyMaker.totalRemits = BIG_INT_ZERO
   moneyMaker.save()
 }
