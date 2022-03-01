@@ -53,8 +53,8 @@ export function handleLogConvert(event: LogConvert): void {
   remit.token1 = event.params.token1
   remit.token0Symbol = token0Symbol
   remit.token1Symbol = token1Symbol
-  remit.amount0 = event.params.amount0.toBigDecimal().div(BigInt.fromI32(token0Decimals).toBigDecimal())
-  remit.amount1 = event.params.amount1.toBigDecimal().div(BigInt.fromI32(token1Decimals).toBigDecimal())
+  remit.amount0 = event.params.amount0.toBigDecimal().div(BigDecimal.fromString('1e' + token0Decimals.toString()))
+  remit.amount1 = event.params.amount1.toBigDecimal().div(BigDecimal.fromString('1e' + token1Decimals.toString()))
   remit.tokenRemitted = tokenAmount
   remit.usdRemitted = tokenAmountUSD
   remit.block = event.block.number
