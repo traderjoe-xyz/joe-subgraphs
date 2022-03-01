@@ -4,7 +4,7 @@ import { Remit } from '../../generated/schema'
 import { ERC20 } from '../../generated/MoneyMaker/ERC20'
 import { Factory } from '../../generated/MoneyMaker/Factory'
 import { getMoneyMaker, getRemitter, getDayData, getDecimals } from '../entities'
-import { FACTORY_ADDRESS, BIG_INT_ONE, BIG_INT_ZERO, BIG_DECIMAL_ZERO } from 'const'
+import { FACTORY_ADDRESS, BIG_INT_ONE, BIG_INT_ZERO, BIG_DECIMAL_ZERO, BIG_DECIMAL_1E12 } from 'const'
 import { getUSDRate } from '../../../../packages/pricing'
 
 export function handleLogConvert(event: LogConvert): void {
@@ -23,8 +23,10 @@ export function handleLogConvert(event: LogConvert): void {
 
   const tokenToAddress = Address.fromString(moneyMaker.tokenRemittedAddress)
   const tokenToDecimals = moneyMaker.tokenRemittedDecimals
-  const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(BigDecimal.fromString(tokenToDecimals.toString()))
-  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block))
+  const tokenAmount = event.params.amountTOKEN
+    .toBigDecimal()
+    .div(BigDecimal.fromString('1e' + tokenToDecimals.toString()))
+  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block)).div(BIG_DECIMAL_1E12)
 
   const token0Contract = ERC20.bind(event.params.token0)
   const token0SymbolResult = token0Contract.try_symbol()
