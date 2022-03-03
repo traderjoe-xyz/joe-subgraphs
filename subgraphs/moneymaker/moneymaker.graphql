@@ -3,7 +3,8 @@ type MoneyMaker @entity {
   id: ID!
 
   # Remitted token
-  tokenTo: Token!
+  tokenRemittedAddress: String!
+  tokenRemittedDecimals: BigInt!
 
   # USD remitted
   tokenRemitted: BigDecimal!
@@ -91,11 +92,4 @@ type DayData @entity {
 
   # Remits
   remits: [Remit!] @derivedFrom(field: "dayData")
-}
-
-type Token @entity {
-  # Token address
-  id: ID!
-  symbol: String!
-  decimals: BigInt!
 }

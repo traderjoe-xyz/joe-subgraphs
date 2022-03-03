@@ -3,8 +3,8 @@ import { LogConvert, SetTokenTo } from '../../generated/MoneyMaker/MoneyMaker'
 import { Remit } from '../../generated/schema'
 import { ERC20 } from '../../generated/MoneyMaker/ERC20'
 import { Factory } from '../../generated/MoneyMaker/Factory'
-import { getMoneyMaker, getRemitter, getDayData, getToken } from '../entities'
-import { FACTORY_ADDRESS, BIG_INT_ONE } from 'const'
+import { getMoneyMaker, getRemitter, getDayData, getDecimals } from '../entities'
+import { FACTORY_ADDRESS, BIG_INT_ONE, BIG_INT_ZERO, BIG_DECIMAL_ZERO, BIG_DECIMAL_1E12 } from 'const'
 import { getUSDRate } from '../../../../packages/pricing'
 
 export function handleLogConvert(event: LogConvert): void {
@@ -21,11 +21,12 @@ export function handleLogConvert(event: LogConvert): void {
   const moneyMaker = getMoneyMaker(moneyMakerAddress, event.block)
   const remitter = getRemitter(moneyMakerAddress, event.params.server, event.block)
 
-  const tokenToAddress = Address.fromString(moneyMaker.tokenTo)
-  const tokenTo = getToken(tokenToAddress)
-  const tokenToDecimals = tokenTo.decimals
-  const tokenAmount = event.params.amountTOKEN.toBigDecimal().div(BigDecimal.fromString(tokenToDecimals.toString()))
-  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block))
+  const tokenToAddress = Address.fromString(moneyMaker.tokenRemittedAddress)
+  const tokenToDecimals = moneyMaker.tokenRemittedDecimals
+  const tokenAmount = event.params.amountTOKEN
+    .toBigDecimal()
+    .div(BigDecimal.fromString('1e' + tokenToDecimals.toString()))
+  const tokenAmountUSD = tokenAmount.times(getUSDRate(tokenToAddress, event.block)).div(BIG_DECIMAL_1E12)
 
   const token0Contract = ERC20.bind(event.params.token0)
   const token0SymbolResult = token0Contract.try_symbol()
@@ -52,8 +53,8 @@ export function handleLogConvert(event: LogConvert): void {
   remit.token1 = event.params.token1
   remit.token0Symbol = token0Symbol
   remit.token1Symbol = token1Symbol
-  remit.amount0 = event.params.amount0.toBigDecimal().div(BigInt.fromI32(token0Decimals).toBigDecimal())
-  remit.amount1 = event.params.amount1.toBigDecimal().div(BigInt.fromI32(token1Decimals).toBigDecimal())
+  remit.amount0 = event.params.amount0.toBigDecimal().div(BigDecimal.fromString('1e' + token0Decimals.toString()))
+  remit.amount1 = event.params.amount1.toBigDecimal().div(BigDecimal.fromString('1e' + token1Decimals.toString()))
   remit.tokenRemitted = tokenAmount
   remit.usdRemitted = tokenAmountUSD
   remit.block = event.block.number
@@ -81,8 +82,14 @@ export function handleLogConvert(event: LogConvert): void {
 }
 
 export function handleSetTokenTo(event: SetTokenTo): void {
+  const tokenToAddress = event.params._tokenTo
+  log.info('handleSetTokenTo {}', [tokenToAddress.toHex()])
+  const tokenToContract = ERC20.bind(tokenToAddress)
   const moneyMaker = getMoneyMaker(event.address, event.block)
-  const tokenTo = getToken(event.params._tokenTo)
-  moneyMaker.tokenTo = tokenTo.id
+  moneyMaker.tokenRemittedAddress = tokenToAddress.toHex()
+  moneyMaker.tokenRemittedDecimals = getDecimals(tokenToContract)
+  moneyMaker.usdRemitted = BIG_DECIMAL_ZERO
+  moneyMaker.tokenRemitted = BIG_DECIMAL_ZERO
+  moneyMaker.totalRemits = BIG_INT_ZERO
   moneyMaker.save()
 }
