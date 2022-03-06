@@ -11,7 +11,8 @@ export function getStableJoeDayData(eventAddress: Address, block: ethereum.Block
 
   if (dayData === null) {
     dayData = new StableJoeDayData(id)
-    dayData.date = day
+    dayData.date = day * SECONDS_PER_DAY
+    dayData.totalJoeStaked = BIG_DECIMAL_ZERO
     dayData.joeStaked = BIG_DECIMAL_ZERO
     dayData.joeStakedUSD = BIG_DECIMAL_ZERO
     dayData.joeUnstaked = BIG_DECIMAL_ZERO
