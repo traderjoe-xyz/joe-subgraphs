@@ -9,7 +9,7 @@
     "build:avax": "graph build vejoe.avax.yaml",
     "build:rinkeby": "graph build vejoe.rinkeby.yaml",
     "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/vejoe vejoe.avax.yaml",
-    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/sjoe-rinkeby vejoe.rinkeby.yaml --access-token 8948fe26a7f94daca75fd7c62b6319fb",
+    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/sjoe-rinkeby vejoe.rinkeby.yaml",
     "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/vejoe --access-token ",
     "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/vejoe --access-token ",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/vejoe vejoe.fuji.yaml"
