@@ -3,23 +3,15 @@ import {
   BIG_DECIMAL_1E18,
   BIG_DECIMAL_1E6,
   BIG_DECIMAL_ZERO,
-  JOE_USDT_PAIR_ADDRESS,
-  USDC_ADDRESS,
-  USDC_E_ADDRESS,
+  JOE_USDT_PAIR_ADDRESS
 } from 'const'
 import {
   Claim as ClaimEvent,
   Deposit as DepositEvent,
-  OwnershipTransferred as OwnershipTransferredEvent,
-  UpdateMaxCapPct as UpdateMaxCapPctEvent,
-  UpdateRewardVars as UpdateRewardVarsEvent,
-  UpdateSpeedUpThreshold as UpdateSpeedUpThresholdEvent,
-  UpdateVeJoePerSharePerSec as UpdateVeJoePerSharePerSecEvent,
   Withdraw as WithdrawEvent
 } from "../../generated/VeJoeStaking/VeJoeStaking"
 import {
   VeJoe,
-  VeJoeDayData,
   User
 } from "../../generated/schema"
 import { Pair as PairContract } from '../../generated/VeJoeStaking/Pair'
@@ -69,7 +61,7 @@ function createVeJoe(block: ethereum.Block): VeJoe {
 function createUser(address: Address, block: ethereum.Block): User {
   const user = new User(address.toHex())
 
-  user.vejoe = dataSource.address().toHex()
+  user.veJoe = dataSource.address().toHex()
   user.joeStaked = BIG_DECIMAL_ZERO
   user.joeStakedUSD = BIG_DECIMAL_ZERO
   user.totalVeJoeMinted = BIG_DECIMAL_ZERO
@@ -90,7 +82,7 @@ function getUser(address: Address, block: ethereum.Block): User {
 }
 
 function getVeJoe(block: ethereum.Block): VeJoe {
-  log.debug('[getStableJoe] from {}', [dataSource.address().toHex()])
+  log.debug('[getVeJoe] from {}', [dataSource.address().toHex()])
 
   let veJoe = VeJoe.load(dataSource.address().toHex())
 
