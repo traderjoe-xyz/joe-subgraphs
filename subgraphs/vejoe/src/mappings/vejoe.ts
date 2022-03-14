@@ -123,6 +123,8 @@ export function handleDeposit(event: DepositEvent): void {
   user.save()
 
   log.debug('[handleDeposit] updating veJoe and saving {}', [event.address.toHexString()])
+  log.warning('joe price was {}', [getJoePrice().toString()])
+
   veJoe.joeStaked = veJoe.joeStaked.plus(convertAmountToDecimal(event.params.amount))
   veJoe.joeStakedUSD = veJoe.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
   veJoe.updatedAt = event.block.timestamp
@@ -130,13 +132,13 @@ export function handleDeposit(event: DepositEvent): void {
 
   log.debug('[handleDeposit] update day data {}', [event.address.toHexString()])
   // update day data
-  let stableJoeDayData = getVeJoeDayData(event.address, event.block)
-  stableJoeDayData.joeStaked = stableJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
-  stableJoeDayData.joeStakedUSD = stableJoeDayData.joeStakedUSD.plus(
+  let veJoeDayData = getVeJoeDayData(event.address, event.block)
+  veJoeDayData.joeStaked = veJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
+  veJoeDayData.joeStakedUSD = veJoeDayData.joeStakedUSD.plus(
     convertAmountToDecimal(event.params.amount).times(getJoePrice())
   )
 
-  stableJoeDayData.save()
+  veJoeDayData.save()
 }
 
 export function handleWithdraw(event: WithdrawEvent): void {
@@ -151,7 +153,7 @@ export function handleWithdraw(event: WithdrawEvent): void {
   const joePrice = getJoePrice()
   veJoe.joeStaked = veJoe.joeStaked.minus(convertAmountToDecimal(event.params.withdrawAmount))
   veJoe.joeStakedUSD = veJoe.joeStakedUSD.minus(
-    convertAmountToDecimal(event.params.amount).times(getJoePrice())
+    convertAmountToDecimal(event.params.withdrawAmount).times(getJoePrice())
   )
   veJoe.totalVeJoeBurned = veJoe.totalVeJoeBurned.plus(convertAmountToDecimal(event.params.burnAmount))
   veJoe.updatedAt = event.block.timestamp
@@ -161,7 +163,7 @@ export function handleWithdraw(event: WithdrawEvent): void {
   let veJoeDayData = getVeJoeDayData(event.address, event.block)
   veJoeDayData.joeUnstaked = veJoeDayData.joeUnstaked.plus(convertAmountToDecimal(event.params.withdrawAmount))
   veJoeDayData.joeUnstakedUSD = veJoeDayData.joeUnstakedUSD.plus(
-    convertAmountToDecimal(event.params.amount).times(joePrice)
+    convertAmountToDecimal(event.params.withdrawAmount).times(joePrice)
   )
   veJoeDayData.veJoeBurned = veJoeDayData.veJoeBurned.plus(convertAmountToDecimal(event.params.burnAmount))
 
