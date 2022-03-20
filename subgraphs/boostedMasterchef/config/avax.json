@@ -1,6 +1,5 @@
 {
-    "network": "avalanche",
-    "address": "0x4483f0b6e2F5486D06958C20f8C39A7aBe87bf8F",
-    "startBlock": "12217756"
-  }
-  
+  "network": "avalanche",
+  "address": "0x4483f0b6e2F5486D06958C20f8C39A7aBe87bf8F",
+  "startBlock": "12217756"
+}

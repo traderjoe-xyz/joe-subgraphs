@@ -253,7 +253,6 @@ export function withdraw(event: WithdrawEvent): void {
       pool.exitUSD = pool.exitUSD.plus(exitUSD)
       poolHistory.exitUSD = pool.exitUSD
       user.exitUSD = user.exitUSD.plus(exitUSD)
-      user.veJoeStaked = BIG_DECIMAL_ZERO
     } else {
       log.info("Withdraw couldn't get reserves for pair {}", [poolInfo.value0.toHex()])
     }

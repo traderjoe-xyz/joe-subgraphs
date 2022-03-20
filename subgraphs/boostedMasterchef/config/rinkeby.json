@@ -1,6 +1,5 @@
 {
-    "network": "rinkeby",
-    "address": "0xDf185554C4619fBd2BAFC6287ebd6e77F06A1272",
-    "startBlock": "10330136"
-  }
-  
+  "network": "rinkeby",
+  "address": "0xDf185554C4619fBd2BAFC6287ebd6e77F06A1272",
+  "startBlock": "10330136"
+}
