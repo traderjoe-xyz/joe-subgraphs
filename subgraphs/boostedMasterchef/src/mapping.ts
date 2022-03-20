@@ -389,6 +389,7 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
     pool.exitUSD = BIG_DECIMAL_ZERO
     pool.joeHarvested = BIG_DECIMAL_ZERO
     pool.joeHarvestedUSD = BIG_DECIMAL_ZERO
+    pool.veJoeStaked = BIG_DECIMAL_ZERO
     pool.save()
   }
   // Update rewarder again outside of scope as it may be updated anytime during lifecycle
@@ -489,6 +490,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
     user.joeHarvestedUSD = BIG_DECIMAL_ZERO
     user.entryUSD = BIG_DECIMAL_ZERO
     user.exitUSD = BIG_DECIMAL_ZERO
+    user.veJoeStaked = BIG_DECIMAL_ZERO
     user.timestamp = block.timestamp
     user.block = block.number
     user.save()

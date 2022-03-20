@@ -22,6 +22,8 @@ dataSources:
       abis:
         - name: BoostedMasterChef
           file: ./abis/BoostedMasterChef.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
           file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: VeJoeToken
