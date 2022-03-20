@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: BoostedMasterChef
-    network: rinkeby
+    network: avalanche
     source:
-      address: '0xDf185554C4619fBd2BAFC6287ebd6e77F06A1272'
+      address: '0x4483f0b6e2F5486D06958C20f8C39A7aBe87bf8F'
       abi: BoostedMasterChef
-      startBlock: 10330136
+      startBlock: 12217756
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

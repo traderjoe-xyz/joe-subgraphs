@@ -37,12 +37,8 @@ dataSources:
           handler: handleDeposit
         - event: EmergencyWithdraw(indexed address,indexed uint256,uint256)
           handler: handleEmergencyWithdraw
-        - event: Harvest(indexed address,indexed uint256,uint256)
-          handler: handleHarvest
         - event: Set(indexed uint256,uint256,uint256,indexed address,bool)
           handler: handleSet
-        - event: UpdatePool(indexed uint256,uint256,uint256,uint256,uint256)
-          handler: handleUpdatePool
         - event: Withdraw(indexed address,indexed uint256,uint256)
           handler: handleWithdraw
       file: ./src/mapping.ts

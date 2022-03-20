@@ -16,11 +16,7 @@ import {
   BoostedMasterChef,
   Deposit as DepositEvent,
   EmergencyWithdraw as EmergencyWithdrawEvent,
-  Harvest as HarvestEvent,
-  Init as InitEvent,
-  OwnershipTransferred as OwnershipTransferredEvent,
   Set as SetEvent,
-  UpdatePool as UpdatePoolEvent,
   Withdraw as WithdrawEvent
 } from "../generated/BoostedMasterChef/BoostedMasterChef"
 import { MasterChef, Pool, PoolHistory, Rewarder, User } from '../generated/schema'
@@ -36,7 +32,7 @@ import { VeJoeToken as VeJoeTokenContract } from '../generated/BoostedMasterChef
  * Event handler, called after masterchef adds new LP pool
  * We get the pool and add this to graph
  */
-export function add(event: AddEvent): void {
+export function handleAdd(event: AddEvent): void {
   const boostedMasterChef = getMasterChef(event.block)
   const allocPoint = event.params.allocPoint
   // get getPool to create pool
@@ -54,7 +50,7 @@ export function add(event: AddEvent): void {
  * Event handler, called after masterchef sets liquidity to LP pool
  * We get the pool and update to graph
  */
-export function set(event: SetEvent): void {
+export function handleSet(event: SetEvent): void {
   const boostedMasterChef = getMasterChef(event.block)
   const pool = getPool(event.params.pid, event.block)
   const allocPoint = event.params.allocPoint
@@ -81,7 +77,7 @@ export function set(event: SetEvent): void {
  *
  * event params: {user, pid, amount}
  */
-export function deposit(event: DepositEvent): void {
+export function handleDeposit(event: DepositEvent): void {
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
   const boostedMasterChefContract = BoostedMasterChef.bind(BOOSTED_MASTER_CHEF_ADDRESS)
   // update pool
@@ -187,7 +183,7 @@ export function deposit(event: DepositEvent): void {
  *
  * event params: {user, pid, amount}
  */
-export function withdraw(event: WithdrawEvent): void {
+export function handleWithdraw(event: WithdrawEvent): void {
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
   const boostedMasterChefContract = BoostedMasterChef.bind(BOOSTED_MASTER_CHEF_ADDRESS)
   // update pool
@@ -294,7 +290,7 @@ export function withdraw(event: WithdrawEvent): void {
  * Event handler for emergencyWithdraw
  *
  */
-export function emergencyWithdraw(event: EmergencyWithdrawEvent): void {
+export function handleEmergencyWithdraw(event: EmergencyWithdrawEvent): void {
   log.info('User {} emergancy withdrawal of {} from pool #{}', [
     event.params.user.toHex(),
     event.params.amount.toString(),
@@ -308,6 +304,7 @@ export function emergencyWithdraw(event: EmergencyWithdrawEvent): void {
   const user = getUser(event.params.pid, event.params.user, event.block)
   user.amount = BIG_INT_ZERO
   user.rewardDebt = BIG_INT_ZERO
+  user.veJoeStaked = BIG_DECIMAL_ZERO
   user.save()
 }
 
