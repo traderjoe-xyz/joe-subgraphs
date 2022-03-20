@@ -41,6 +41,8 @@ export const JOE_TOKEN_ADDRESS = Address.fromString('0x6e84a6216ea6dacc71ee8e6b0
 export const MASTER_CHEF_ADDRESS = Address.fromString('0x0000000000000000000000000000000000000000')
 export const MASTER_CHEF_V2_ADDRESS = Address.fromString('0xd6a4f121ca35509af06a0be99093d08462f53052')
 export const MASTER_CHEF_V3_ADDRESS = Address.fromString('0x188bed1968b795d5c9022f6a0bb5931ac4c18f00')
+export const BOOSTED_MASTER_CHEF_ADDRESS = Address.fromString('0x4483f0b6e2F5486D06958C20f8C39A7aBe87bf8F')
+
 export const MASTER_CHEF_START_BLOCK = BigInt.fromI32(2486000)
 
 // BAR
@@ -53,6 +55,9 @@ export const JOE_MAKER_V2_ADDRESS = Address.fromString('0xC98C3C547DDbcc0029F38E
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x1643de2efb8e35374d796297a9f95f64c082a8ce')
+
+// VEJOE 
+export const VEJOE_TOKEN_ADDRESS = Address.fromString('0x3cabf341943Bc8466245e4d6F1ae0f8D071a1456')
 
 export const WAVAX_ADDRESS = Address.fromString('0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7')
 export const USDT_ADDRESS = Address.fromString('0xc7198437980c041c805a1edcba50c1ce5db95118')
