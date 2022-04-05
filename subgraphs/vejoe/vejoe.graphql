@@ -18,6 +18,9 @@ type VeJoe @entity {
   # Users in the bar
   users: [User!]! @derivedFrom(field: "veJoe")
 
+  # Count of users with veJoe balance
+  activeUserCount: BigInt!
+
   # Last Updated At
   updatedAt: BigInt!
 }
@@ -41,6 +44,9 @@ type User @entity {
 
   # veJoe burned
   totalVeJoeBurned: BigDecimal!
+
+  # veJoe balance 
+  veJoeBalance: BigDecimal!
 
   # Updated at
   updatedAt: BigInt!

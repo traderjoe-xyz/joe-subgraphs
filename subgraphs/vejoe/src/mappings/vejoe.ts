@@ -1,5 +1,7 @@
 import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
 import {
+  BIG_INT_ZERO,
+  BIG_INT_ONE,
   BIG_DECIMAL_1E18,
   BIG_DECIMAL_1E6,
   BIG_DECIMAL_ZERO,
@@ -52,6 +54,7 @@ function createVeJoe(block: ethereum.Block): VeJoe {
   veJoe.joeStakedUSD = BIG_DECIMAL_ZERO
   veJoe.totalVeJoeMinted = BIG_DECIMAL_ZERO
   veJoe.totalVeJoeBurned = BIG_DECIMAL_ZERO
+  veJoe.activeUserCount = BIG_INT_ZERO
   veJoe.updatedAt = block.timestamp
   veJoe.save()
 
@@ -66,8 +69,9 @@ function createUser(address: Address, block: ethereum.Block): User {
   user.joeStakedUSD = BIG_DECIMAL_ZERO
   user.totalVeJoeMinted = BIG_DECIMAL_ZERO
   user.totalVeJoeBurned = BIG_DECIMAL_ZERO
+  user.veJoeBalance = BIG_DECIMAL_ZERO
   user.updatedAt = block.timestamp
-  
+
   return user as User
 }
 
@@ -96,13 +100,19 @@ function getVeJoe(block: ethereum.Block): VeJoe {
 export function handleClaim(event: ClaimEvent): void {
   const veJoe = getVeJoe(event.block)
   const user = getUser(event.params.user, event.block)
+  const amountClaimed = convertAmountToDecimal(event.params.amount)
+  const userBalancePreviouslyZero = user.veJoeBalance.equals(BIG_DECIMAL_ZERO)
 
-  user.totalVeJoeMinted = user.totalVeJoeMinted.plus(convertAmountToDecimal(event.params.amount))
+  user.totalVeJoeMinted = user.totalVeJoeMinted.plus(amountClaimed)
+  user.veJoeBalance = user.veJoeBalance.plus(amountClaimed)
   user.updatedAt = event.block.timestamp
   user.save()
 
-  veJoe.totalVeJoeMinted = veJoe.totalVeJoeMinted.plus(convertAmountToDecimal(event.params.amount))
+  veJoe.totalVeJoeMinted = veJoe.totalVeJoeMinted.plus(amountClaimed)
   veJoe.updatedAt = event.block.timestamp
+  if (userBalancePreviouslyZero && amountClaimed.notEqual(BIG_DECIMAL_ZERO)) {
+    veJoe.activeUserCount = veJoe.activeUserCount.plus(BIG_INT_ONE)
+  }
   veJoe.save()
 
   // update day data
@@ -116,17 +126,17 @@ export function handleDeposit(event: DepositEvent): void {
 
   const veJoe = getVeJoe(event.block)
   let user = getUser(event.params.user, event.block)
+  const joePrice = getJoePrice()
 
   user.joeStaked = user.joeStaked.plus(convertAmountToDecimal(event.params.amount))
-  user.joeStakedUSD = user.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
+  user.joeStakedUSD = user.joeStaked.times(joePrice)
   user.updatedAt = event.block.timestamp
   user.save()
 
   log.debug('[handleDeposit] updating veJoe and saving {}', [event.address.toHexString()])
-  log.warning('joe price was {}', [getJoePrice().toString()])
 
   veJoe.joeStaked = veJoe.joeStaked.plus(convertAmountToDecimal(event.params.amount))
-  veJoe.joeStakedUSD = veJoe.joeStakedUSD.plus(convertAmountToDecimal(event.params.amount).times(getJoePrice()))
+  veJoe.joeStakedUSD = veJoe.joeStaked.times(joePrice)
   veJoe.updatedAt = event.block.timestamp
   veJoe.save()
 
@@ -134,9 +144,7 @@ export function handleDeposit(event: DepositEvent): void {
   // update day data
   let veJoeDayData = getVeJoeDayData(event.address, event.block)
   veJoeDayData.joeStaked = veJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
-  veJoeDayData.joeStakedUSD = veJoeDayData.joeStakedUSD.plus(
-    convertAmountToDecimal(event.params.amount).times(getJoePrice())
-  )
+  veJoeDayData.joeStakedUSD = veJoeDayData.joeStaked.times(joePrice)
 
   veJoeDayData.save()
 }
@@ -144,28 +152,26 @@ export function handleDeposit(event: DepositEvent): void {
 export function handleWithdraw(event: WithdrawEvent): void {
   const veJoe = getVeJoe(event.block)
   const user = getUser(event.params.user, event.block)
+  const joePrice = getJoePrice()
 
   user.joeStaked = user.joeStaked.minus(convertAmountToDecimal(event.params.withdrawAmount))
-  user.joeStakedUSD = user.joeStakedUSD.minus(convertAmountToDecimal(event.params.withdrawAmount).times(getJoePrice()))
+  user.joeStakedUSD = user.joeStaked.times(joePrice)
+  user.veJoeBalance = BIG_DECIMAL_ZERO
   user.updatedAt = event.block.timestamp
   user.save()
 
-  const joePrice = getJoePrice()
   veJoe.joeStaked = veJoe.joeStaked.minus(convertAmountToDecimal(event.params.withdrawAmount))
-  veJoe.joeStakedUSD = veJoe.joeStakedUSD.minus(
-    convertAmountToDecimal(event.params.withdrawAmount).times(getJoePrice())
-  )
+  veJoe.joeStakedUSD = veJoe.joeStaked.times(joePrice)
   veJoe.totalVeJoeBurned = veJoe.totalVeJoeBurned.plus(convertAmountToDecimal(event.params.burnAmount))
+  veJoe.activeUserCount = veJoe.activeUserCount.minus(BIG_INT_ONE)
   veJoe.updatedAt = event.block.timestamp
   veJoe.save()
 
   // update day data
   let veJoeDayData = getVeJoeDayData(event.address, event.block)
   veJoeDayData.joeUnstaked = veJoeDayData.joeUnstaked.plus(convertAmountToDecimal(event.params.withdrawAmount))
-  veJoeDayData.joeUnstakedUSD = veJoeDayData.joeUnstakedUSD.plus(
-    convertAmountToDecimal(event.params.withdrawAmount).times(joePrice)
-  )
+  veJoeDayData.joeUnstakedUSD = veJoeDayData.joeUnstaked.times(joePrice)
   veJoeDayData.veJoeBurned = veJoeDayData.veJoeBurned.plus(convertAmountToDecimal(event.params.burnAmount))
 
-  veJoeDayData.save()   
+  veJoeDayData.save()
 }
