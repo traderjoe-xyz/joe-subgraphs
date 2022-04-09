@@ -1,0 +1,64 @@
+# VeJoe
+type VeJoe @entity {
+  # Contract address
+  id: ID!
+
+  # Joe staked
+  joeStaked: BigDecimal!
+
+  # Joe staked USD
+  joeStakedUSD: BigDecimal!
+
+  # veJoe minted
+  totalVeJoeMinted: BigDecimal!
+
+  # veJoe burned
+  totalVeJoeBurned: BigDecimal!
+
+  # Users in the bar
+  users: [User!]! @derivedFrom(field: "veJoe")
+
+  # Count of users with veJoe balance
+  activeUserCount: BigInt!
+
+  # Last Updated At
+  updatedAt: BigInt!
+}
+
+# User
+type User @entity {
+  # ID
+  id: ID!
+
+  # veJoe
+  veJoe: VeJoe
+
+  # Staked
+  joeStaked: BigDecimal!
+
+  # Sum of $ at time of staking
+  joeStakedUSD: BigDecimal!
+
+  # veJoe minted
+  totalVeJoeMinted: BigDecimal!
+
+  # veJoe burned
+  totalVeJoeBurned: BigDecimal!
+
+  # veJoe balance 
+  veJoeBalance: BigDecimal!
+
+  # Updated at
+  updatedAt: BigInt!
+}
+
+type VeJoeDayData @entity {
+  id: ID!
+  date: Int!
+  joeStaked: BigDecimal!
+  joeStakedUSD: BigDecimal!
+  joeUnstaked: BigDecimal!
+  joeUnstakedUSD: BigDecimal!
+  veJoeMinted: BigDecimal!
+  veJoeBurned: BigDecimal!
+}
