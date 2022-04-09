@@ -1,0 +1,33 @@
+specVersion: 0.0.2
+description: VeJoeStaking
+schema:
+  file: ./vejoe.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: VeJoeStaking
+    network: rinkeby
+    source:
+      address: '0x1c3C3424439e4A97802d29861cf8DA8A70d51A0e'
+      abi: VeJoeStaking
+      startBlock: 10361375
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/vejoe.ts
+      entities:
+        - VeJoe
+        - User
+        - VeJoeDayData
+      abis:
+        - name: VeJoeStaking
+          file: ./abis/VeJoeStaking.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+      eventHandlers:
+        - event: Claim(indexed address,uint256)
+          handler: handleClaim
+        - event: Deposit(indexed address,uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed address,uint256,uint256)
+          handler: handleWithdraw
