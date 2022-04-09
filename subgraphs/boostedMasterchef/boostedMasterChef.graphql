@@ -190,6 +190,8 @@ type User @entity {
   # Related pool
   pool: Pool
 
+  poolId: ID!
+
   # We do some fancy math here. Basically, any point in time, the amount of JOEs
   # entitled to a user but is pending to be distributed is:
   # pending reward = (user.amount * pool.accJoePerShare) - user.rewardDebt
@@ -219,6 +221,9 @@ type User @entity {
 
   # veJoe staked
   veJoeStaked: BigDecimal! 
+
+  # user factor 
+  factor: BigInt!
 
   # Timestamp
   timestamp: BigInt!

@@ -133,6 +133,8 @@ export function handleDeposit(event: DepositEvent): void {
   // update user
   user.amount = userInfo.value0
   user.rewardDebt = userInfo.value1
+  user.factor = userInfo.value2
+
   if (event.params.amount.gt(BIG_INT_ZERO)) {
     const reservesResult = pairContract.try_getReserves()
     if (!reservesResult.reverted) {
@@ -483,6 +485,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
     log.info('[getUser] creating new user : {}, pid: {}', [address.toString(), pid.toString()])
     user = new User(id)
     user.pool = null
+    user.poolId = pid.toString()
     user.address = address
     user.amount = BIG_INT_ZERO
     user.rewardDebt = BIG_INT_ZERO
@@ -491,6 +494,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
     user.entryUSD = BIG_DECIMAL_ZERO
     user.exitUSD = BIG_DECIMAL_ZERO
     user.veJoeStaked = BIG_DECIMAL_ZERO
+    user.factor = BIG_INT_ZERO
     user.timestamp = block.timestamp
     user.block = block.number
     user.save()
