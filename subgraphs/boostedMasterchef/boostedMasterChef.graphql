@@ -78,6 +78,9 @@ type Pool @entity {
   # User count
   userCount: BigInt!
 
+  # Number of users in pool getting boosted rewards from veJoe 
+  boostedUserCount: BigInt!
+
   # JLP Balance
   jlpBalance: BigDecimal!
 

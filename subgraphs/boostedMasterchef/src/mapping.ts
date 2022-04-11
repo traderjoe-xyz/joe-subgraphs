@@ -101,6 +101,7 @@ export function handleDeposit(event: DepositEvent): void {
   // get user
   const userInfo = boostedMasterChefContract.userInfo(event.params.pid, event.params.user)
   const user = getUser(event.params.pid, event.params.user, event.block)
+  const userFactorWasZero = user.factor.equals(BIG_INT_ZERO)
   // If not currently in pool and depositing JLP
   if (!user.pool && event.params.amount.gt(BIG_INT_ZERO)) {
     user.pool = pool.id
@@ -134,6 +135,12 @@ export function handleDeposit(event: DepositEvent): void {
   user.amount = userInfo.value0
   user.rewardDebt = userInfo.value1
   user.factor = userInfo.value2
+
+  if (userFactorWasZero && user.factor.gt(BIG_INT_ZERO)) {
+    pool.boostedUserCount = pool.boostedUserCount.plus(BIG_INT_ONE) 
+  } else if (!userFactorWasZero && user.factor.equals(BIG_INT_ZERO)) {
+    pool.boostedUserCount = pool.boostedUserCount.minus(BIG_INT_ONE) 
+  }
 
   if (event.params.amount.gt(BIG_INT_ZERO)) {
     const reservesResult = pairContract.try_getReserves()
@@ -212,6 +219,7 @@ export function handleWithdraw(event: WithdrawEvent): void {
   // get user
   const user = getUser(event.params.pid, event.params.user, event.block)
   const userInfo = boostedMasterChefContract.userInfo(event.params.pid, event.params.user)
+  const userFactorWasZero = user.factor.equals(BIG_INT_ZERO)
 
   // calculate JOE owed
   if (event.block.number.gt(MASTER_CHEF_START_BLOCK) && user.amount.gt(BIG_INT_ZERO)) {
@@ -236,6 +244,8 @@ export function handleWithdraw(event: WithdrawEvent): void {
   // update user
   user.amount = userInfo.value0
   user.rewardDebt = userInfo.value1
+  user.factor = userInfo.value2
+
   if (event.params.amount.gt(BIG_INT_ZERO)) {
     const reservesResult = pairContract.try_getReserves()
     if (!reservesResult.reverted) {
@@ -265,6 +275,13 @@ export function handleWithdraw(event: WithdrawEvent): void {
     pool.veJoeStaked = pool.veJoeStaked.minus(userVeJoeBalance)
     poolHistory.veJoeStaked = poolHistory.veJoeStaked.minus(userVeJoeBalance)
   }
+
+  if (userFactorWasZero && user.factor.gt(BIG_INT_ZERO)) {
+    pool.boostedUserCount = pool.boostedUserCount.plus(BIG_INT_ONE) 
+  } else if (!userFactorWasZero && user.factor.equals(BIG_INT_ZERO)) {
+    pool.boostedUserCount = pool.boostedUserCount.minus(BIG_INT_ONE) 
+  }
+
   user.save()
   pool.save()
   // update masterchef
@@ -376,6 +393,7 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
     // Total supply of LP tokens
     pool.balance = BIG_INT_ZERO
     pool.userCount = BIG_INT_ZERO
+    pool.boostedUserCount = BIG_INT_ZERO
 
     pool.jlpBalance = BIG_DECIMAL_ZERO
     pool.jlpAge = BIG_DECIMAL_ZERO
