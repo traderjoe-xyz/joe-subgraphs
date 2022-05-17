@@ -22,6 +22,7 @@
 
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange exchange.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-rinkeby-ii exchange.rinkeby.yaml",
+        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-fuji exchange.fuji.yaml",
 
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/exchange",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/exchange",

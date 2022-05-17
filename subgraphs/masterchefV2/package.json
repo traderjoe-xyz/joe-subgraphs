@@ -16,6 +16,7 @@
         "deploy:stage": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefv2-stage masterchefV2.avax.yaml",
         "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefv2 masterchefV2.avax.yaml",
         "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-rinkeby masterchefV2.rinkeby.yaml",
+        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/masterchefV2-fuji masterchefV2.fuji.yaml",
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/masterchefV2",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/masterchefV2",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/masterchefV2 masterchefV2.fuji.yaml"
