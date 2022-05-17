@@ -1,0 +1,26 @@
+{
+  "name": "BoostedMasterchef",
+  "license": "MIT",
+  "version": "1.0.0",
+  "author": "Trader Joe",
+  "scripts": {
+    "prepare:avax": "mustache config/avax.json boostedMasterchef.template.yaml > boostedMasterchef.avax.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json boostedMasterchef.template.yaml > boostedMasterchef.rinkeby.yaml",
+    "prepare:fuji": "mustache config/fuji.json boostedMasterchef.template.yaml > boostedMasterchef.fuji.yaml",
+    "codegen:avax": "graph codegen boostedMasterchef.avax.yaml",
+    "codegen:rinkeby": "graph codegen boostedMasterchef.rinkeby.yaml",
+    "codegen:fuji": "graph codegen boostedMasterchef.fuji.yaml",
+    "build:avax": "graph build boostedMasterchef.avax.yaml",
+    "build:rinkeby": "graph build boostedMasterchef.rinkeby.yaml",
+    "build:fuji": "graph build boostedMasterchef.fuji.yaml",
+    "deploy:stage": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/boostedMasterchef-stage boostedMasterchef.avax.yaml",
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/boosted-master-chef boostedMasterchef.avax.yaml",
+    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/boosted-master-chef-rinkeby boostedMasterchef.rinkeby.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/boostedMasterchef",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/boostedMasterchef",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/boostedMasterchef boostedMasterchef.fuji.yaml"
+  },
+  "dependencies": {
+    "@traderjoe-xyz/core": "^2.2.2"
+  }
+}
