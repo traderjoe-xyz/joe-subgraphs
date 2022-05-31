@@ -1,26 +1,25 @@
 {
-    "factory_address": "0x7eeccb3028870540EEc3D88C2259506f2d34fEE0",
-    "trader_joe_start_block": "122614", 
+  "factory_address": "0xF5c7d9733e5f53abCC1695820c4818C59B457C2C",
+  "trader_joe_start_block": "10220115",
 
-    "masterchef_address": "0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae",
-    "masterchefV2_address": "0xDD91030c74b70b5A006AEc16ffF8F330476981c6",
-    "master_chef_start_block": "123846", 
+  "masterchef_address": "0x2d388F47c3Ae5CC0C7F8ad73296B208cfaCd35ae",
+  "masterchefV2_address": "0xDD91030c74b70b5A006AEc16ffF8F330476981c6",
+  "master_chef_start_block": "123846",
 
-    "joe_bar_address": "0x171B28d39De22EF001029117F3d241fF78c7DC5C",
-    "joe_router_address": "0x5db0735cf88F85E78ed742215090c465979B5006",
-    "joe_maker_address": "0x0529719e33AA2f15c13b12be01D7E876454Caf02",
+  "joe_bar_address": "0x171B28d39De22EF001029117F3d241fF78c7DC5C",
+  "joe_router_address": "0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901",
+  "joe_maker_address": "0x0529719e33AA2f15c13b12be01D7E876454Caf02",
 
-    "joe_token_address": "0xcee9d937E3627E55F08240072D63f32c3a60fF2D", 
-    "joe_usdt_pair_address": "0x345f9581522ecd41c3b9ee5fbccacf98d17967eb",
-    "avax_usdt_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
+  "joe_token_address": "0xcee9d937E3627E55F08240072D63f32c3a60fF2D",
+  "joe_usdt_pair_address": "0x345f9581522ecd41c3b9ee5fbccacf98d17967eb",
+  "avax_usdt_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
 
+  "wavax_address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
+  "wbtc_address": "0xD6e29Beeb3C37542dCC5C115e44b232ACF487073",
+  "usdt_address": "0xAd1c1a22A0eC39b81034b6c4dC01D5AeC406A4Ad",
+  "dai_address": "0xAd1c1a22A0eC39b81034b6c4dC01D5AeC406A4Ad",
+  "wavax_usdt_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
+  "wavax_dai_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
 
-    "wavax_address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
-    "wbtc_address": "0xD6e29Beeb3C37542dCC5C115e44b232ACF487073",
-    "usdt_address": "0xAd1c1a22A0eC39b81034b6c4dC01D5AeC406A4Ad",
-    "dai_address": "0xAd1c1a22A0eC39b81034b6c4dC01D5AeC406A4Ad",     
-    "wavax_usdt_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
-    "wavax_dai_pair_address": "0xba4188622c7a92341c8451f7bec80bc9904a2ec0",
-    
-    "zero_address": "0x0000000000000000000000000000000000000000"
+  "zero_address": "0x0000000000000000000000000000000000000000"
 }
