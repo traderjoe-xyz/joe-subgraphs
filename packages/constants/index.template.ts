@@ -64,10 +64,6 @@ export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 export const USDC_E_ADDRESS = Address.fromString('{{ usdc_e_address }}')
 export const USDC_ADDRESS = Address.fromString('{{ usdc_address }}')
 export const WBTC_ADDRESS = Address.fromString('{{ wbtc_address }}')
-export const TIME_ADDRESS = Address.fromString('{{ time_address }}')
-export const APEX_ADDRESS = Address.fromString('{{ apex_address }}')
-export const GB_ADDRESS = Address.fromString('{{ gb_address }}')
-export const MYAK_ADDRESS = Address.fromString('{{ myak_address }}')
 export const MIM_ADDRESS = Address.fromString('{{ mim_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [

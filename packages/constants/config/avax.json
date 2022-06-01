@@ -6,12 +6,14 @@
   "masterchefV2_address": "0xd6a4f121ca35509af06a0be99093d08462f53052",
   "masterchefV3_address": "0x188bed1968b795d5c9022f6a0bb5931ac4c18f00",
   "master_chef_start_block": "2486000",
+  "boostedMasterChef_address": "0x4483f0b6e2F5486D06958C20f8C39A7aBe87bf8F",
 
   "joe_bar_address": "0x57319d41f71e81f3c65f2a47ca4e001ebafd4f33",
   "joe_router_address": "0x60ae616a2155ee3d9a68541ba4544862310933d4",
   "joe_maker_address": "0x861726bfe27931a4e22a7277bde6cb8432b65856",
   "joe_makerV2_address": "0xC98C3C547DDbcc0029F38E0383C645C202aD663d",
 
+  "vejoeToken_address": "0x3cabf341943Bc8466245e4d6F1ae0f8D071a1456",
   "joe_token_address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd",
   "joe_usdt_pair_address": "0x1643de2efb8e35374d796297a9f95f64c082a8ce",
 
@@ -31,6 +33,6 @@
   "wavax_dai_pair_address": "0x87dee1cc9ffd464b79e058ba20387c1984aed86a",
   "wavax_usdc_pair_address": "0xa389f9430876455c36478deea9769b7ca4e3ddb1",
   "wavax_mim_pair_address": "0x781655d802670bba3c89aebaaea59d3182fd755d",
-  
+
   "zero_address": "0x0000000000000000000000000000000000000000"
 }
