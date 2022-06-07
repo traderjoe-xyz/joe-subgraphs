@@ -1,0 +1,51 @@
+specVersion: 0.0.3
+description: Masterchef
+repository: https://github.com/traderjoe-xyz/joe-subgraphs
+schema:
+  file: ./masterchefV2.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: MasterChefJoeV2
+    network: fuji
+    source:
+      address: '0xEAA9637E54D4Da88d7A56E797C2EAa4950111033'
+      abi: MasterChefJoeV2
+      startBlock: 9539146
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - MasterChef
+        - History
+        - Pool
+        - PoolHistory
+        - User
+        - Rewarder
+      abis:
+        - name: MasterChefJoeV2
+          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV2.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Rewarder
+          file: ../../node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,uint256)
+          handler: deposit
+        - event: EmergencyWithdraw(indexed address,indexed uint256,uint256)
+          handler: emergencyWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: ownershipTransferred
+        - event: Withdraw(indexed address,indexed uint256,uint256)
+          handler: withdraw
+        - event: Add(indexed uint256,uint256,indexed address,indexed address)
+          handler: add
+        - event: Set(indexed uint256,uint256,indexed address,bool)
+          handler: set
+        - event: UpdateEmissionRate(indexed address,uint256)
+          handler: updateEmissionRate
+      file: ./src/masterchefV2.ts

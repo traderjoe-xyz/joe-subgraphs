@@ -1,0 +1,50 @@
+specVersion: 0.0.2
+description: DEX trades candles (5m/15m/1h/4h/1d/1w)
+features:
+  - nonFatalErrors
+  - grafting
+repository: https://github.com/traderjoe-xyz/joe-subgraphs
+schema:
+  file: ./dexcandles.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: fuji
+    source:
+      address: '0xF5c7d9733e5f53abCC1695820c4818C59B457C2C'
+      abi: Factory
+      startBlock: 10220115
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/dexcandles.ts
+      entities:
+        - Pair
+      abis:
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core//abi/JoeFactory.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handleNewPair
+templates:
+  - kind: ethereum/contract
+    name: Pair
+    network: fuji
+    source:
+      abi: Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/dexcandles.ts
+      entities:
+        - Pair
+      abis:
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleSwap
