@@ -6,15 +6,18 @@
   "scripts": {
     "prepare:avax": "mustache config/avax.json moneymaker.template.yaml > moneymaker.avax.yaml",
     "prepare:rinkeby": "mustache config/rinkeby.json moneymaker.template.yaml > moneymaker.rinkeby.yaml",
+    "prepare:fuji": "mustache config/fuji.json moneymaker.template.yaml > moneymaker.fuji.yaml",
     "codegen:avax": "graph codegen moneymaker.avax.yaml",
     "codegen:rinkeby": "graph codegen moneymaker.rinkeby.yaml",
+    "codegen:fuji": "graph codegen moneymaker.fuji.yaml",
     "build:avax": "graph build moneymaker.avax.yaml",
     "build:rinkeby": "graph build moneymaker.rinkeby.yaml",
+    "build:fuji": "graph build moneymaker.fuji.yaml",
     "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/money-maker moneymaker.avax.yaml",
     "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/moneymaker-rinkeby moneymaker.rinkeby.yaml",
     "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/moneymaker-fuji moneymaker.fuji.yaml",
-    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/moneymaker --access-token ",
-    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/moneymaker --access-token ",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/moneymaker moneymaker.fuji.yaml"
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/moneymaker-fuji",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/moneymaker-fuji",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  traderjoe-xyz/moneymaker-fuji moneymaker.fuji.yaml"
   }
 }

@@ -111,6 +111,11 @@
   resolved "https://registry.yarnpkg.com/@traderjoe-xyz/core/-/core-2.3.0.tgz#d43977920cf43c848126eaa021547f2925c6ed81"
   integrity sha512-8iZDTpjQgv0fbmfpIJ/NZAO1yxLRQdAR4/6hPWP3e6KGtCSS9RWKo99o3Iyg+YRZGBsd0p/99wLa5WhEfibjXw==
 
+"@traderjoe-xyz/core@^2.2.2":
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@traderjoe-xyz/core/-/core-2.4.6.tgz#d7657530cab4c5e10e6ba09bf955be76b918fa77"
+  integrity sha512-YmDEkxa8avXRlILFNT3p87vkXrQ1ONK/Hb3XJiUZxGktTPf4gaAHjAPtETn1LwDBAqLvs2ZhiZDSgHSdDivhNw==
+
 "@types/connect@^3.4.33":
   version "3.4.34"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.34.tgz#170a40223a6d666006d93ca128af2beb1d9b1901"
