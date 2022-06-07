@@ -1,0 +1,46 @@
+specVersion: 0.0.2
+schema:
+  file: ./boostedMasterChef.graphql
+dataSources:
+  - kind: ethereum
+    name: BoostedMasterChef
+    network: fuji
+    source:
+      address: '0xEE7B7871755bCe3CD1B0aa1d01320Dd311b08279'
+      abi: BoostedMasterChef
+      startBlock: 10451833
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - MasterChef
+        - Pool
+        - PoolHistory
+        - User
+        - Rewarder
+      abis:
+        - name: BoostedMasterChef
+          file: ./abis/BoostedMasterChef.json
+        - name: Factory
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+        - name: Pair
+          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+        - name: VeJoeToken
+          file: ../../node_modules/@traderjoe-xyz/core/abi/VeJoeToken.json
+        - name: ERC20
+          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+        - name: Rewarder
+          file: ../../node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
+      eventHandlers:
+        - event: Add(indexed uint256,uint256,uint256,indexed address,indexed address)
+          handler: handleAdd
+        - event: Deposit(indexed address,indexed uint256,uint256)
+          handler: handleDeposit
+        - event: EmergencyWithdraw(indexed address,indexed uint256,uint256)
+          handler: handleEmergencyWithdraw
+        - event: Set(indexed uint256,uint256,uint256,indexed address,bool)
+          handler: handleSet
+        - event: Withdraw(indexed address,indexed uint256,uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.ts

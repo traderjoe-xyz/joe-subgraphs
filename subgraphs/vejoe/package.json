@@ -1,19 +1,23 @@
 {
   "name": "vejoe",
+  "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
     "prepare:avax": "mustache config/avax.json vejoe.template.yaml > vejoe.avax.yaml",
     "prepare:rinkeby": "mustache config/rinkeby.json vejoe.template.yaml > vejoe.rinkeby.yaml",
+    "prepare:fuji": "mustache config/fuji.json vejoe.template.yaml > vejoe.fuji.yaml",
     "codegen:avax": "graph codegen vejoe.avax.yaml",
     "codegen:rinkeby": "graph codegen vejoe.rinkeby.yaml",
+    "codegen:fuji": "graph codegen vejoe.fuji.yaml",
     "build:avax": "graph build vejoe.avax.yaml",
     "build:rinkeby": "graph build vejoe.rinkeby.yaml",
+    "build:fuji": "graph build vejoe.fuji.yaml",
     "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/vejoe vejoe.avax.yaml",
     "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/vejoe-rinkeby vejoe.rinkeby.yaml",
     "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/vejoe-fuji vejoe.fuji.yaml",
-    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/vejoe --access-token ",
-    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/vejoe --access-token ",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/vejoe vejoe.fuji.yaml"
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/vejoe ",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/vejoe ",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/vejoe vejoe.fuji.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.26.0",
