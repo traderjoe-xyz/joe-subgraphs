@@ -1,31 +1,27 @@
 {
-    "name": "exchange",
-    "license": "MIT",
-    "version": "1.0.0",
-    "author": "Joe Defi",
-    "files": [
-        "generated"
-    ],
-    "scripts": {
-    	"graph:help": "graph deploy -h", 
-	    "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
-        "prepare:rinkeby": "mustache config/rinkeby.json exchange.template.yaml > exchange.rinkeby.yaml",
-        "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml",
-
-        "codegen:avax": "graph codegen exchange.avax.yaml",
-        "codegen:rinkeby": "graph codegen exchange.rinkeby.yaml",
-        "codegen:fuji": "graph codegen exchange.fuji.yaml",
-
-        "build:avax": "graph build exchange.avax.yaml",
-        "build:rinkeby": "graph build exchange.rinkeby.yaml",
-        "build:fuji": "graph build exchange.fuji.yaml",
-
-        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange exchange.avax.yaml",
-        "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-rinkeby-ii exchange.rinkeby.yaml",
-        "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-fuji exchange.fuji.yaml",
-
-        "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/exchange",
-        "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/exchange",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/exchange exchange.fuji.yaml"
-    }
+  "name": "exchange",
+  "license": "MIT",
+  "version": "1.0.0",
+  "author": "Joe Defi",
+  "files": [
+    "generated"
+  ],
+  "scripts": {
+    "graph:help": "graph deploy -h",
+    "prepare:avax": "mustache config/avax.json exchange.template.yaml > exchange.avax.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json exchange.template.yaml > exchange.rinkeby.yaml",
+    "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml",
+    "codegen:avax": "graph codegen exchange.avax.yaml",
+    "codegen:rinkeby": "graph codegen exchange.rinkeby.yaml",
+    "codegen:fuji": "graph codegen exchange.fuji.yaml",
+    "build:avax": "graph build exchange.avax.yaml",
+    "build:rinkeby": "graph build exchange.rinkeby.yaml",
+    "build:fuji": "graph build exchange.fuji.yaml",
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange exchange.avax.yaml",
+    "deploy:rinkeby": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-rinkeby-ii exchange.rinkeby.yaml",
+    "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/exchange-fuji exchange.fuji.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/exchange-fuji",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/exchange-fuji",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/exchange-fuji exchange.fuji.yaml"
+  }
 }

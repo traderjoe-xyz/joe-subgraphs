@@ -8,9 +8,9 @@ dataSources:
     name: Factory
     network: fuji
     source:
-      address: '0xc7e37A28bB17EdB59E99d5485Dc8c51BC87aE699'
+      address: '0xF5c7d9733e5f53abCC1695820c4818C59B457C2C'
       abi: Factory
-      startBlock: 800000
+      startBlock: 10220115
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
