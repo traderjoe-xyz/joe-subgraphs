@@ -8,12 +8,12 @@ type _Schema_
   #   include: [{ entity: "Token", fields: [{ name: "id" }, { name: "name" }, { name: "symbol" }] }]
   # )
   # Pair
-  # @fulltext(
-  #   name: "pairSearch"
-  #   language: en
-  #   algorithm: rank
-  #   include: [{ entity: "Pair", fields: [{ name: "id" }, { name: "name" }] }]
-  # )
+  @fulltext(
+    name: "pairSearch"
+    language: en
+    algorithm: rank
+    include: [{ entity: "Pair", fields: [{ name: "id" }, { name: "name" }] }]
+  )
   # User
   # @fulltext(name: "userSearch", language: en, algorithm: rank, include: [{ entity: "User", fields: [{ name: "id" }] }])
 
