@@ -20,17 +20,17 @@ dataSources:
         - Factory
       abis:
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: JoeToken
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeToken.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeToken.json
         - name: ERC20
-          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: ERC20SymbolBytes
-          file: ../../packages/abis/ERC20SymbolBytes.json
+          file: ./packages/abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
-          file: ../../packages/abis/ERC20NameBytes.json
+          file: ./packages/abis/ERC20NameBytes.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: onPairCreated
@@ -59,9 +59,9 @@ templates:
         - User
       abis:
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: onMint
