@@ -87,10 +87,10 @@ export const WHITELIST: string[] = [
 export const LOCKUP_BLOCK_NUMBER = BigInt.fromI32(10959148)
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
-export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('0')
+export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('80000')
 
 // minimum liquidity for price to get tracked
-export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('5')
+export const MINIMUM_LIQUIDITY_THRESHOLD_AVAX = BigDecimal.fromString('100')
 
 // MasterChefV2 precision
 export const ACC_JOE_PRECISION = BigInt.fromString('1000000000000')
