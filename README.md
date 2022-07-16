@@ -62,5 +62,15 @@ For any of the subgraphs:
 3. Run `graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>`
 4. Deploy via `yarn run deploy:[subgraph]`.
 
+## To setup local graph-node
+
+1. Install docker on local machine https://docs.docker.com/get-docker/)
+2. Run `yarn start:node` 
+3. Build constants: `cd packages/constants && yarn prepare:fuji`
+4. Build subgraph: `cd subgraphs/exchange && yarn prepare:fuji && yarn codegen:fuji && yarn build:fuji`
+5. Create local subgraph: `cd subgraphs/exchange && yarn create-local && yarn deploy-local`
+6. Subgraph endpoint available at http://localhost:8000/subgraphs/name/traderjoe-xyz/exchange-fuji 
+
+
 
 
