@@ -10,6 +10,7 @@ import {
   USDT_ADDRESS,
   JOE_TOKEN_ADDRESS,
   TRADERJOE_START_BLOCK,
+  MINIMUM_LIQUIDITY_THRESHOLD_AVAX
 } from 'const'
 import { Address, BigDecimal, ethereum, log } from '@graphprotocol/graph-ts'
 import { Pair, Token } from '../../generated/schema'
@@ -133,11 +134,11 @@ export function getAvaxRate(address: Address): BigDecimal {
 
     if (pairAddress != ADDRESS_ZERO) {
       const pair = Pair.load(pairAddress.toHex())
-      if (pair.token0 == address.toHexString()) {
+      if (pair.token0 == address.toHexString() && pair.reserveAVAX.gt(MINIMUM_LIQUIDITY_THRESHOLD_AVAX)) {
         const token1 = Token.load(pair.token1)
         return pair.token1Price.times(token1.derivedAVAX as BigDecimal) // return token1 per our token * AVAX per token 1
       }
-      if (pair.token1 == address.toHexString()) {
+      if (pair.token1 == address.toHexString() && pair.reserveAVAX.gt(MINIMUM_LIQUIDITY_THRESHOLD_AVAX)) {
         const token0 = Token.load(pair.token0)
         return pair.token0Price.times(token0.derivedAVAX as BigDecimal) // return token0 per our token * AVAX per token 0
       }
