@@ -66,3 +66,6 @@ typings/
 
 build/
 generated/
+
+# Data from local node ran by docker
+graph_data/

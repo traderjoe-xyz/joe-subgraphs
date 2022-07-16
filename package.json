@@ -13,7 +13,8 @@
     "codegen": "yarn workspaces run codegen",
     "prepare:avax": "yarn workspaces run prepare:avax",
     "prepare:fuji": "yarn workspaces run prepare:fuji",
-    "prepare:rinkeby": "yarn workspaces run prepare:rinkeby"
+    "prepare:rinkeby": "yarn workspaces run prepare:rinkeby",
+    "start:node": "docker-compose up -d"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.20.0",
