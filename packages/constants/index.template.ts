@@ -67,20 +67,17 @@ export const WBTC_ADDRESS = Address.fromString('{{ wbtc_address }}')
 export const MIM_ADDRESS = Address.fromString('{{ mim_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
-    '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
-    '{{ wavax_dai_pair_address }}', // WAVAX-DAI
     '{{ wavax_usdc_pair_address }}', // WAVAX-USDC
-    '{{ wavax_mim_pair_address }}', // WAVAX-USDC
+    '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
 ]
 
 export const WHITELIST: string[] = [
     '{{ wavax_address }}', // WAVAX
-    '{{ weth_address }}', // WETH
-    '{{ wbtc_address }}', // WBTC
+    '{{ weth_address }}', // WETH.e
+    '{{ wbtc_address }}', // WBTC.e
     '{{ usdt_address }}', // USDT
-    '{{ dai_address }}', // DAI
     '{{ usdc_address }}', // USDC
-    '{{ mim_address }}', // MIM
+    '{{ btc_b_address }}', // BTC.b
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
