@@ -23,5 +23,8 @@
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/masterchef",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/masterchef",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/masterchef masterchef.fuji.yaml"
+    },
+    "dependencies": {
+        "@traderjoe-xyz/core": "^2.3.0"
     }
 }
