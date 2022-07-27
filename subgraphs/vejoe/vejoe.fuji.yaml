@@ -23,7 +23,7 @@ dataSources:
         - name: VeJoeStaking
           file: ./abis/VeJoeStaking.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
       eventHandlers:
         - event: Claim(indexed address,uint256)
           handler: handleClaim
