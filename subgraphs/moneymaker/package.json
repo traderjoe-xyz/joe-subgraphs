@@ -19,5 +19,8 @@
     "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/moneymaker-fuji",
     "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/moneymaker-fuji",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  traderjoe-xyz/moneymaker-fuji moneymaker.fuji.yaml"
+  },
+  "dependencies": {
+    "@traderjoe-xyz/core": "^2.3.0"
   }
 }

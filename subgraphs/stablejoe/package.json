@@ -19,5 +19,7 @@
     "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/sjoe-fuji",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/sjoe-fuji stablejoe.fuji.yaml"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@traderjoe-xyz/core": "^2.3.0"
+  }
 }

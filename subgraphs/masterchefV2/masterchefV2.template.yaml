@@ -24,15 +24,15 @@ dataSources:
         - Rewarder
       abis:
         - name: MasterChefJoeV2
-          file: ../../node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV2.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/MasterChefJoeV2.json
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: ERC20
-          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Rewarder
-          file: ../../node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
       eventHandlers:
         - event: Deposit(indexed address,indexed uint256,uint256)
           handler: deposit

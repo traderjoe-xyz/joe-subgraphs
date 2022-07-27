@@ -22,5 +22,8 @@
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/maker --access-token ",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/maker --access-token ",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 --access-token traderjoe-xyz/maker maker.fuji.yaml"
+    },
+    "dependencies": {
+        "@traderjoe-xyz/core": "^2.3.0"
     }
 }

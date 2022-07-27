@@ -22,13 +22,13 @@ dataSources:
         - DayData
       abis:
         - name: MoneyMaker
-          file: ../../node_modules/@traderjoe-xyz/core/abi/MoneyMaker.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/MoneyMaker.json
         - name: ERC20
-          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
       eventHandlers:
         - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
           handler: handleLogConvert

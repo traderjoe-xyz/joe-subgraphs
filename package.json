@@ -1,10 +1,13 @@
 {
   "name": "@traderjoe-xyz/subgraphs",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "subgraphs/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "subgraphs/*"
+    ],
+    "nohoist": ["**/@traderjoe-xyz/core"]
+  },
   "resolutions": {
     "assemblyscript": "git+https://github.com/AssemblyScript/assemblyscript.git#v0.6"
   },

@@ -23,15 +23,15 @@ dataSources:
         - name: BoostedMasterChef
           file: ./abis/BoostedMasterChef.json
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: VeJoeToken
-          file: ../../node_modules/@traderjoe-xyz/core/abi/VeJoeToken.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/VeJoeToken.json
         - name: ERC20
-          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Rewarder
-          file: ../../node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/SimpleRewarderPerSec.json
       eventHandlers:
         - event: Add(indexed uint256,uint256,uint256,indexed address,indexed address)
           handler: handleAdd

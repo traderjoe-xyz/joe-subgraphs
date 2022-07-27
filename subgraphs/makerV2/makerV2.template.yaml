@@ -21,13 +21,13 @@ dataSources:
         - Serving
       abis:
         - name: JoeMakerV2
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeMakerV2.json
         - name: Pair
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoePair.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: ERC20
-          file: ../../node_modules/@traderjoe-xyz/core/abi/ERC20.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/ERC20.json
         - name: Factory
-          file: ../../node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
       eventHandlers:
         - event: LogConvert(indexed address,indexed address,indexed address,uint256,uint256,uint256)
           handler: handleLogConvert

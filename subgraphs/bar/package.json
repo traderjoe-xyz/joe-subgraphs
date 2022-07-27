@@ -22,5 +22,8 @@
         "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/bar",
         "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/bar",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/bar bar.fuji.yaml"
+    },
+    "dependencies": {
+        "@traderjoe-xyz/core": "^2.3.0"
     }
 }
