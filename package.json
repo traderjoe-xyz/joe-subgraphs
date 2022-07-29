@@ -6,7 +6,7 @@
       "packages/*",
       "subgraphs/*"
     ],
-    "nohoist": ["**/@traderjoe-xyz/core"]
+    "nohoist": ["**/@traderjoe-xyz/core", "**/@traderjoe-xyz/rocket-joe"]
   },
   "resolutions": {
     "assemblyscript": "git+https://github.com/AssemblyScript/assemblyscript.git#v0.6"

@@ -1,0 +1,25 @@
+# RocketJoe
+type RocketJoe @entity {
+  # Contract address
+  id: ID!
+
+  # Joe staked
+  joeStaked: BigDecimal!
+
+  # Joe staked USD
+  joeStakedUSD: BigDecimal!
+
+  # Last Updated At
+  updatedAt: BigInt!
+}
+
+# RocketJoeDayData
+type RocketJoeDayData @entity {
+  id: ID!
+  date: Int!
+  totalJoeStaked: BigDecimal!
+  joeStaked: BigDecimal!
+  joeStakedUSD: BigDecimal!
+  joeUnstaked: BigDecimal!
+  joeUnstakedUSD: BigDecimal!
+}

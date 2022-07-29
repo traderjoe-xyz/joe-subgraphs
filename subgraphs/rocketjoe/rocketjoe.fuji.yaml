@@ -1,0 +1,30 @@
+specVersion: 0.0.2
+description: RocketJoeStaking
+schema:
+  file: ./rocketjoe.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: RocketJoeStaking
+    network: fuji
+    source:
+      address: '0x1a1171b5faa9954A68F3679EF91E4dACd6D2c247'
+      abi: RocketJoeStaking
+      startBlock: 10472514
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/rocketjoe.ts
+      entities:
+        - RocketJoe
+        - RocketJoeDayData
+      abis:
+        - name: RocketJoeStaking
+          file: ./node_modules/@traderjoe-xyz/rocket-joe/abi/contracts/RocketJoeStaking.sol/RocketJoeStaking.json
+        - name: Pair
+          file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
+      eventHandlers:
+        - event: Deposit(indexed address,uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed address,uint256)
+          handler: handleWithdraw

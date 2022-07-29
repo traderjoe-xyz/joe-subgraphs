@@ -1,0 +1,23 @@
+{
+  "name": "RocketJoeStaking",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prepare:avax": "mustache config/avax.json rocketjoe.template.yaml > rocketjoe.avax.yaml",
+    "prepare:fuji": "mustache config/fuji.json rocketjoe.template.yaml > rocketjoe.fuji.yaml",
+    "codegen:avax": "graph codegen rocketjoe.avax.yaml",
+    "codegen:fuji": "graph codegen rocketjoe.fuji.yaml",
+    "build:avax": "graph build rocketjoe.avax.yaml",
+    "build:fuji": "graph build rocketjoe.fuji.yaml",
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/rjoe rocketjoe.avax.yaml",
+    "deploy:fuji": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/rjoe-fuji rocketjoe.fuji.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/rjoe-fuji",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/rjoe-fuji",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/rjoe-fuji rocketjoe.fuji.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.20.0",
+    "@traderjoe-xyz/core": "^2.3.0",
+    "@traderjoe-xyz/rocket-joe": "^1.0.0"
+  }
+}
