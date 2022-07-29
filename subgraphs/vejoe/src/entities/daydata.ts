@@ -12,6 +12,7 @@ export function getVeJoeDayData(eventAddress: Address, block: ethereum.Block): V
   if (dayData === null) {
     dayData = new VeJoeDayData(id)
     dayData.date = day * SECONDS_PER_DAY
+    dayData.totalJoeStaked = BIG_DECIMAL_ZERO
     dayData.joeStaked = BIG_DECIMAL_ZERO
     dayData.joeStakedUSD = BIG_DECIMAL_ZERO
     dayData.joeUnstaked = BIG_DECIMAL_ZERO

@@ -20,8 +20,6 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 traderjoe-xyz/vejoe vejoe.fuji.yaml"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.26.0",
-    "@graphprotocol/graph-ts": "0.24.1",
     "@traderjoe-xyz/core": "^2.3.0"
   }
 }

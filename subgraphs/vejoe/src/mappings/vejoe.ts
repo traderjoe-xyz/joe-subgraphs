@@ -143,6 +143,7 @@ export function handleDeposit(event: DepositEvent): void {
   log.debug('[handleDeposit] update day data {}', [event.address.toHexString()])
   // update day data
   let veJoeDayData = getVeJoeDayData(event.address, event.block)
+  veJoeDayData.totalJoeStaked = veJoe.joeStaked
   veJoeDayData.joeStaked = veJoeDayData.joeStaked.plus(convertAmountToDecimal(event.params.amount))
   veJoeDayData.joeStakedUSD = veJoeDayData.joeStaked.times(joePrice)
 
@@ -169,6 +170,7 @@ export function handleWithdraw(event: WithdrawEvent): void {
 
   // update day data
   let veJoeDayData = getVeJoeDayData(event.address, event.block)
+  veJoeDayData.totalJoeStaked = veJoe.joeStaked
   veJoeDayData.joeUnstaked = veJoeDayData.joeUnstaked.plus(convertAmountToDecimal(event.params.withdrawAmount))
   veJoeDayData.joeUnstakedUSD = veJoeDayData.joeUnstaked.times(joePrice)
   veJoeDayData.veJoeBurned = veJoeDayData.veJoeBurned.plus(convertAmountToDecimal(event.params.burnAmount))
