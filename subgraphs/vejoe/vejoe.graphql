@@ -55,6 +55,7 @@ type User @entity {
 type VeJoeDayData @entity {
   id: ID!
   date: Int!
+  totalJoeStaked: BigDecimal!
   joeStaked: BigDecimal!
   joeStakedUSD: BigDecimal!
   joeUnstaked: BigDecimal!

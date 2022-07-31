@@ -5,11 +5,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: VeJoeStaking
-    network: fuji
+    network: avalanche
     source:
-      address: '0x63064873AC2e94bbe82479265BD252417b34C462'
+      address: '0x25D85E17dD9e544F6E9F8D44F99602dbF5a97341'
       abi: VeJoeStaking
-      startBlock: 10451585
+      startBlock: 12199792
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
