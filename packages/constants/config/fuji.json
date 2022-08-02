@@ -34,5 +34,8 @@
   "wavax_dai_pair_address": "0xb6f0758f374b3c570e8073ec8f552c9b2db939f3",
   "wavax_mim_pair_address": "0x0c01abf914b0c4554d9da66167293b10c312fe57",
 
-  "zero_address": "0x0000000000000000000000000000000000000000"
+  "zero_address": "0x0000000000000000000000000000000000000000",
+
+  "minimum_usd_threshold_new_pairs": "0",
+  "minimum_liquidity_threshold_avax":"0"
 }

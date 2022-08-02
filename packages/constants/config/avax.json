@@ -34,5 +34,8 @@
   "wavax_usdc_pair_address": "0xa389f9430876455c36478deea9769b7ca4e3ddb1",
   "wavax_mim_pair_address": "0x781655d802670bba3c89aebaaea59d3182fd755d",
 
-  "zero_address": "0x0000000000000000000000000000000000000000"
+  "zero_address": "0x0000000000000000000000000000000000000000",
+
+  "minimum_usd_threshold_new_pairs": "80000",
+  "minimum_liquidity_threshold_avax":"100"
 }
