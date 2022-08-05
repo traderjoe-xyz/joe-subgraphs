@@ -55,6 +55,8 @@ export const JOE_MAKER_V2_ADDRESS = Address.fromString('{{ joe_makerV2_address }
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ wavax_usdt_pair_address }}')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')
+export const JOE_WAVAX_PAIR_ADDRESS = Address.fromString('{{ joe_wavax_pair_address }}')
+export const WAVAX_USDC_PAIR_ADDRESS = Address.fromString('{{ wavax_usdc_pair_address }}')
 
 // VEJOE 
 export const VEJOE_TOKEN_ADDRESS = Address.fromString('{{ vejoeToken_address }}')

@@ -16,6 +16,7 @@
 
   "joe_token_address": "0x477Fd10Db0D80eAFb773cF623B258313C3739413",
   "joe_usdt_pair_address": "0xd520cf33c013909afc9cf158d73f5460753b5ec4",
+  "joe_wavax_pair_address":"0x6ed081838c9025118e5726de9f1052dda487a050",
 
   "wavax_address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
   "wbtc_address": "0x106Dc78d638527b84572e5B077B76250adD0A988",
