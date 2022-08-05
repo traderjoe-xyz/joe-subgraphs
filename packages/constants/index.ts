@@ -55,6 +55,8 @@ export const JOE_MAKER_V2_ADDRESS = Address.fromString('0xC98C3C547DDbcc0029F38E
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('0x1643de2efb8e35374d796297a9f95f64c082a8ce')
+export const JOE_WAVAX_PAIR_ADDRESS = Address.fromString('0x454e67025631c065d3cfad6d71e6892f74487a15')
+export const WAVAX_USDC_PAIR_ADDRESS = Address.fromString('0xf4003f4efbe8691b60249e6afbd307abe7758adb')
 
 // VEJOE 
 export const VEJOE_TOKEN_ADDRESS = Address.fromString('0x3cabf341943Bc8466245e4d6F1ae0f8D071a1456')
@@ -69,7 +71,7 @@ export const MIM_ADDRESS = Address.fromString('0x130966628846bfd36ff31a822705796
 export const WAVAX_STABLE_PAIRS: string[] = [
     '0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256', // WAVAX-USDT
     '0x87dee1cc9ffd464b79e058ba20387c1984aed86a', // WAVAX-DAI
-    '0xa389f9430876455c36478deea9769b7ca4e3ddb1', // WAVAX-USDC
+    '0xf4003f4efbe8691b60249e6afbd307abe7758adb', // WAVAX-USDC
     '0x781655d802670bba3c89aebaaea59d3182fd755d', // WAVAX-USDC
 ]
 
