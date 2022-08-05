@@ -1,9 +1,10 @@
 import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
 import {
-  BIG_DECIMAL_1E18,
-  BIG_DECIMAL_1E6,
+  BIG_DECIMAL_1E12,
   BIG_DECIMAL_ZERO,
-  JOE_USDT_PAIR_ADDRESS,
+  JOE_WAVAX_PAIR_ADDRESS,
+  WAVAX_USDC_PAIR_ADDRESS,
+  WAVAX_ADDRESS,
   USDC_ADDRESS,
   USDC_E_ADDRESS,
 } from 'const'
@@ -18,18 +19,51 @@ import { Pair as PairContract } from '../../generated/StableJoeStaking/Pair'
 import { getStableJoeDayData } from '../entities'
 
 function getJoePrice(): BigDecimal {
-  const pair = PairContract.bind(JOE_USDT_PAIR_ADDRESS)
-  const reservesResult = pair.try_getReserves()
-  if (reservesResult.reverted) {
-    log.info('[getJoePrice] getReserves reverted', [])
+  
+  // get AVAX/JOE rate
+  const avaxJoePair = PairContract.bind(JOE_WAVAX_PAIR_ADDRESS)
+  const avaxJoeReserves = avaxJoePair.getReserves()
+  const avaxJoeToken0 = avaxJoePair.token0()
+
+  const avaxReserve =
+    avaxJoeToken0.toHexString() === WAVAX_ADDRESS.toHexString()
+      ? avaxJoeReserves.value0.toBigDecimal()
+      : avaxJoeReserves.value1.toBigDecimal() // 18 decimals
+
+  const joeReserve =
+    avaxJoeToken0.toHexString() === WAVAX_ADDRESS.toHexString()
+      ? avaxJoeReserves.value1.toBigDecimal()
+      : avaxJoeReserves.value0.toBigDecimal() // 18 decimals
+
+  if (joeReserve.equals(BIG_DECIMAL_ZERO)) {
     return BIG_DECIMAL_ZERO
   }
-  const reserves = reservesResult.value
-  if (reserves.value0.toBigDecimal().equals(BigDecimal.fromString('0'))) {
-    log.error('[getJoePrice] USDT reserve 0', [])
+
+  const avaxJoeRate = avaxReserve.div(joeReserve)
+
+  // get USDC/AVAX rate
+  const usdcAvaxPair = PairContract.bind(WAVAX_USDC_PAIR_ADDRESS)
+  const usdcAvaxReserves = usdcAvaxPair.getReserves()
+  const usdcAvaxToken0 = usdcAvaxPair.token0()
+
+  const usdcReserve =
+    usdcAvaxToken0.toHexString() === WAVAX_ADDRESS.toHexString()
+      ? usdcAvaxReserves.value1.toBigDecimal().times(BIG_DECIMAL_1E12)
+      : usdcAvaxReserves.value0.toBigDecimal().times(BIG_DECIMAL_1E12) // 6 + 12 decimals
+
+  const _avaxReserve =
+    usdcAvaxToken0.toHexString() === WAVAX_ADDRESS.toHexString()
+      ? usdcAvaxReserves.value0.toBigDecimal()
+      : usdcAvaxReserves.value1.toBigDecimal() // 18 decimals
+
+  if (_avaxReserve.equals(BIG_DECIMAL_ZERO)) {
     return BIG_DECIMAL_ZERO
   }
-  return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
+
+  const usdcAvaxRate = usdcReserve.div(_avaxReserve)
+
+  // return USDC/JOE rate
+  return avaxJoeRate.times(usdcAvaxRate)
 }
 
 export function convertAmountToDecimal(tokenAmount: BigInt): BigDecimal {
