@@ -1,10 +1,15 @@
-import { ADDRESS_ZERO, BIG_DECIMAL_ZERO, MASTER_CHEF_ADDRESS, MINIMUM_USD_THRESHOLD_NEW_PAIRS, WHITELIST } from 'const'
+import {
+  ADDRESS_ZERO,
+  BIG_DECIMAL_ZERO,
+  MINIMUM_USD_THRESHOLD_NEW_PAIRS,
+  MINIMUM_LIQUIDITY_PROVIDERS,
+  WHITELIST,
+} from 'const'
 import { Address, BigDecimal, BigInt, log, store } from '@graphprotocol/graph-ts'
 import { Burn, Mint, Pair, Swap, Token, Transaction } from '../../../generated/schema'
 import {
   Burn as BurnEvent,
   Mint as MintEvent,
-  Pair as PairContract,
   Swap as SwapEvent,
   Sync as SyncEvent,
   Transfer as TransferEvent,
@@ -42,7 +47,7 @@ export function getTrackedVolumeUSD(
   const price1 = token1.derivedAVAX.times(bundle.avaxPrice)
 
   // if less than 5 LPs, require high minimum reserve amount amount or return 0
-  if (pair.liquidityProviderCount.lt(BigInt.fromI32(5))) {
+  if (pair.liquidityProviderCount.lt(MINIMUM_LIQUIDITY_PROVIDERS)) {
     const reserve0USD = pair.reserve0.times(price0)
     const reserve1USD = pair.reserve1.times(price1)
     if (WHITELIST.includes(token0.id) && WHITELIST.includes(token1.id)) {
