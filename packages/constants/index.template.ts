@@ -64,7 +64,6 @@ export const USDT_ADDRESS = Address.fromString('{{ usdt_address }}')
 export const USDC_E_ADDRESS = Address.fromString('{{ usdc_e_address }}')
 export const USDC_ADDRESS = Address.fromString('{{ usdc_address }}')
 export const WBTC_ADDRESS = Address.fromString('{{ wbtc_address }}')
-export const MIM_ADDRESS = Address.fromString('{{ mim_address }}')
 
 export const WAVAX_STABLE_PAIRS: string[] = [
     '{{ wavax_usdt_pair_address }}', // WAVAX-USDT
@@ -80,7 +79,6 @@ export const WHITELIST: string[] = [
     '{{ usdt_address }}', // USDT
     '{{ dai_address }}', // DAI
     '{{ usdc_address }}', // USDC
-    '{{ mim_address }}', // MIM
 ]
 
 // LOCKUP -- TO BE DEPRECATED?
