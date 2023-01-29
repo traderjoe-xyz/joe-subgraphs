@@ -36,6 +36,7 @@ export const FACTORY_ADDRESS = Address.fromString('{{ factory_address }}')
 export const TRADERJOE_START_BLOCK = BigInt.fromI32({{ trader_joe_start_block }})
 
 export const JOE_TOKEN_ADDRESS = Address.fromString('{{ joe_token_address }}')
+export const JOE_DEX_LENS_ADDRESS = Address.fromString('{{ joe_dex_lens_address }}');
 
 // MASTER CHEF
 export const MASTER_CHEF_ADDRESS = Address.fromString('{{ masterchef_address }}')
