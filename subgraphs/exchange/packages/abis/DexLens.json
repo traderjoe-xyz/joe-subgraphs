@@ -1,0 +1,862 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract ILBRouter",
+        "name": "_routerV2",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IJoeFactory",
+        "name": "_factoryV1",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_wNative",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_usdc",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pair",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      }
+    ],
+    "name": "JoeDexLens__CollateralNotInPair",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "colateral",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "dataFeed",
+        "type": "address"
+      }
+    ],
+    "name": "JoeDexLens__DataFeedAlreadyAdded",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "colateral",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "dataFeed",
+        "type": "address"
+      }
+    ],
+    "name": "JoeDexLens__DataFeedNotInSet",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__InvalidChainLinkPrice",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__LengthsMismatch",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__NotEnoughLiquidity",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__NullWeight",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__PairsNotCreated",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__SameTokens",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pair",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "JoeDexLens__TokenNotInPair",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__UnknownDataFeedType",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JoeDexLens__WrongPair",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "prod1",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "offset",
+        "type": "uint256"
+      }
+    ],
+    "name": "Math512Bits__MulShiftOverflow",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "offset",
+        "type": "uint256"
+      }
+    ],
+    "name": "Math512Bits__OffsetOverflows",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PendingOwnable__AddressZero",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PendingOwnable__NoPendingOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PendingOwnable__NotOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PendingOwnable__NotPendingOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PendingOwnable__PendingOwnerAlreadySet",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct IJoeDexLens.DataFeed",
+        "name": "dataFeed",
+        "type": "tuple"
+      }
+    ],
+    "name": "DataFeedAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "dfAddress",
+        "type": "address"
+      }
+    ],
+    "name": "DataFeedRemoved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "dfAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "weight",
+        "type": "uint256"
+      }
+    ],
+    "name": "DataFeedsWeightSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "pendingOwner",
+        "type": "address"
+      }
+    ],
+    "name": "PendingOwnerSet",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed",
+        "name": "_dataFeed",
+        "type": "tuple"
+      }
+    ],
+    "name": "addNativeDataFeed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed[]",
+        "name": "_dataFeeds",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "addNativeDataFeeds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed",
+        "name": "_dataFeed",
+        "type": "tuple"
+      }
+    ],
+    "name": "addUSDDataFeed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed[]",
+        "name": "_dataFeeds",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "addUSDDataFeeds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "becomeOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getFactoryV1",
+    "outputs": [
+      {
+        "internalType": "contract IJoeFactory",
+        "name": "factoryV1",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getNativeDataFeeds",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed[]",
+        "name": "dataFeeds",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getRouterV2",
+    "outputs": [
+      {
+        "internalType": "contract ILBRouter",
+        "name": "routerV2",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getTokenPriceNative",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getTokenPriceUSD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokensPricesNative",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokensPricesUSD",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getUSDDataFeeds",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "dfAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "dfWeight",
+            "type": "uint88"
+          },
+          {
+            "internalType": "enum IJoeDexLens.dfType",
+            "name": "dfType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct IJoeDexLens.DataFeed[]",
+        "name": "dataFeeds",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingOwner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dfAddress",
+        "type": "address"
+      }
+    ],
+    "name": "removeNativeDataFeed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_dfAddresses",
+        "type": "address[]"
+      }
+    ],
+    "name": "removeNativeDataFeeds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dfAddress",
+        "type": "address"
+      }
+    ],
+    "name": "removeUSDDataFeed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_dfAddresses",
+        "type": "address[]"
+      }
+    ],
+    "name": "removeUSDDataFeeds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "revokePendingOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dfAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint88",
+        "name": "_newWeight",
+        "type": "uint88"
+      }
+    ],
+    "name": "setNativeDataFeedWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_dfAddresses",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint88[]",
+        "name": "_newWeights",
+        "type": "uint88[]"
+      }
+    ],
+    "name": "setNativeDataFeedsWeights",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "pendingOwner_",
+        "type": "address"
+      }
+    ],
+    "name": "setPendingOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dfAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint88",
+        "name": "_newWeight",
+        "type": "uint88"
+      }
+    ],
+    "name": "setUSDDataFeedWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_dfAddresses",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint88[]",
+        "name": "_newWeights",
+        "type": "uint88[]"
+      }
+    ],
+    "name": "setUSDDataFeedsWeights",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
