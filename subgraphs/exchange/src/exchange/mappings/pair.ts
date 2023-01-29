@@ -325,7 +325,7 @@ export function onSync(event: SyncEvent): void {
   // update AVAX price now that reserves could have changed
   const bundle = getBundle()
   // Pass the block so we can get accurate price data before migration
-  const avaxPrice = getAvaxPrice(event.block)
+  const avaxPrice = getAvaxPrice()
   bundle.avaxPrice = avaxPrice
   log.info('on sync block: {}, avaxPrice: {}', [event.block.number.toString(), avaxPrice.toString()])
 
