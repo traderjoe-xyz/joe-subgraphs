@@ -26,5 +26,6 @@
   "wavax_mim_pair_address": "0x781655d802670bba3c89aebaaea59d3182fd755d",
   "min_usd_threshold_new_pairs": "0",
   "min_liquidity_providers": "5",
-  "zero_address": "0x0000000000000000000000000000000000000000"
+  "zero_address": "0x0000000000000000000000000000000000000000",
+  "joe_dex_lens_address": "0x16978e42a9b14A19878161A7EdE255637ce361e0"
 }

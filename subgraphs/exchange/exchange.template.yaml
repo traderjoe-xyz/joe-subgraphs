@@ -31,6 +31,8 @@ dataSources:
           file: ./packages/abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
           file: ./packages/abis/ERC20NameBytes.json
+        - name: DexLens
+          file: ./packages/abis/DexLens.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: onPairCreated
@@ -62,6 +64,8 @@ templates:
           file: ./node_modules/@traderjoe-xyz/core/abi/JoePair.json
         - name: Factory
           file: ./node_modules/@traderjoe-xyz/core/abi/JoeFactory.json
+        - name: DexLens
+          file: ./packages/abis/DexLens.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: onMint
