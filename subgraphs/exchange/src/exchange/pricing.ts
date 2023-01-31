@@ -100,13 +100,13 @@ export function getAvaxRate(address: Address): BigDecimal {
   
       if (pairAddress != ADDRESS_ZERO) {
         const pair = Pair.load(pairAddress.toHex())
-        if (pair?.token0 == address.toHexString()) {
+        if (pair.token0 == address.toHexString()) {
           const token1 = Token.load(pair.token1)
-          return pair.token1Price.times(token1?.derivedAVAX as BigDecimal) // return token1 per our token * AVAX per token 1
+          return pair.token1Price.times(token1.derivedAVAX as BigDecimal) // return token1 per our token * AVAX per token 1
         }
-        if (pair?.token1 == address.toHexString()) {
+        if (pair.token1 == address.toHexString()) {
           const token0 = Token.load(pair.token0)
-          return pair.token0Price.times(token0?.derivedAVAX as BigDecimal) // return token0 per our token * AVAX per token 0
+          return pair.token0Price.times(token0.derivedAVAX as BigDecimal) // return token0 per our token * AVAX per token 0
         }
       }
     }
