@@ -13,7 +13,7 @@
     "prepare:fuji": "mustache config/fuji.json exchange.template.yaml > exchange.fuji.yaml",
     "prepare:arbgoerli": "mustache config/arbgoerli.json exchange.template.yaml > exchange.arbgoerli.yaml",
     "prepare:arbitrum": "mustache config/arbitrum.json exchange.template.yaml > exchange.arbitrum.yaml",
-    "prepare:bsc": "mustache config/bnbchain.json exchange.template.yaml > exchange.bsc.yaml",
+    "prepare:bsc": "mustache config/bsc.json exchange.template.yaml > exchange.bsc.yaml",
     "codegen:avax": "graph codegen exchange.avax.yaml",
     "codegen:rinkeby": "graph codegen exchange.rinkeby.yaml",
     "codegen:fuji": "graph codegen exchange.fuji.yaml",
