@@ -1,0 +1,18 @@
+{
+  "name": "FeeConverter",
+  "license": "MIT",
+  "version": "1.0.0",
+  "author": "Trader Joe",
+  "scripts": {
+    "prepare:avax": "mustache config/avax.json feeConverter.template.yaml > feeConverter.avax.yaml",
+    "codegen:avax": "graph codegen feeConverter.avax.yaml",
+    "build:avax": "graph build feeConverter.avax.yaml",
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/fee-converter feeConverter.avax.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/fee-converter",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/fee-converter",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  traderjoe-xyz/fee-converter feeConverter.avax.yaml"
+  },
+  "dependencies": {
+    "@traderjoe-xyz/core": "^2.4.6"
+  }
+}

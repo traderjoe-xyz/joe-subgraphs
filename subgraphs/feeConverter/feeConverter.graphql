@@ -1,0 +1,45 @@
+type FeeConverter @entity {
+  # address
+  id: ID!
+
+  swaps: [Swap!]! @derivedFrom(field: "feeConverter")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Swap @entity {
+  # source token + "-" + destination token + "-" + block number
+  id: ID!
+
+  feeConverter: FeeConverter!
+
+  tx: Bytes!
+
+  tokenIn: Bytes!
+  tokenInSymbol: String!
+
+  tokenOut: Bytes!
+  tokenOutSymbol: String!
+
+  amountIn: BigDecimal!
+  amountInUsd: BigDecimal!
+
+  amountOut: BigDecimal!
+  amountOutUsd: BigDecimal!
+
+  dayData: DayData!
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type DayData @entity {
+  # timestamp / 86400
+  id: ID!
+
+  date: Int!
+  usdRemitted: BigDecimal!
+
+  swaps: [Swap!] @derivedFrom(field: "dayData")
+}

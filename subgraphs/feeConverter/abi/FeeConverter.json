@@ -1,0 +1,153 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "feeManager", "type": "address" },
+      { "internalType": "address", "name": "v1Pair", "type": "address" },
+      { "internalType": "contract IERC20", "name": "redistributedToken", "type": "address" },
+      { "internalType": "address", "name": "receiver", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "Address__CallFailed", "type": "error" },
+  { "inputs": [], "name": "Address__NonContract", "type": "error" },
+  { "inputs": [], "name": "Address__SendFailed", "type": "error" },
+  { "inputs": [], "name": "BaseComponent__OnlyDelegateCall", "type": "error" },
+  { "inputs": [], "name": "BaseComponent__OnlyFeeManager", "type": "error" },
+  {
+    "inputs": [{ "internalType": "address", "name": "lpToken", "type": "address" }],
+    "name": "FeeConverter__HashMismatch",
+    "type": "error"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "lpToken", "type": "address" }],
+    "name": "FeeConverter__InsufficientBalance",
+    "type": "error"
+  },
+  { "inputs": [], "name": "FeeConverter__InsufficientRedistributedTokenBalance", "type": "error" },
+  { "inputs": [], "name": "FeeConverter__InvalidLength", "type": "error" },
+  { "inputs": [], "name": "FeeConverter__InvalidReceiver", "type": "error" },
+  { "inputs": [], "name": "FeeConverter__InvalidSrcToken", "type": "error" },
+  { "inputs": [], "name": "FeeConverter__ZeroAmount", "type": "error" },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "address", "name": "redistributedToken", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "Redistributed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "address", "name": "srcToken", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "dstToken", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "returnAmount", "type": "uint256" }
+    ],
+    "name": "Swap",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "executor", "type": "address" },
+      {
+        "components": [
+          { "internalType": "contract IERC20", "name": "srcToken", "type": "address" },
+          { "internalType": "contract IERC20", "name": "dstToken", "type": "address" },
+          { "internalType": "address payable", "name": "srcReceiver", "type": "address" },
+          { "internalType": "address payable", "name": "dstReceiver", "type": "address" },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint256", "name": "minReturnAmount", "type": "uint256" },
+          { "internalType": "uint256", "name": "flags", "type": "uint256" }
+        ],
+        "internalType": "struct IOneInchRouter.SwapDescription[]",
+        "name": "descs",
+        "type": "tuple[]"
+      },
+      { "internalType": "bytes[]", "name": "data", "type": "bytes[]" }
+    ],
+    "name": "batchConvert",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address[]", "name": "lpTokens", "type": "address[]" }],
+    "name": "batchUnwrapLpToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "executor", "type": "address" },
+      {
+        "components": [
+          { "internalType": "contract IERC20", "name": "srcToken", "type": "address" },
+          { "internalType": "contract IERC20", "name": "dstToken", "type": "address" },
+          { "internalType": "address payable", "name": "srcReceiver", "type": "address" },
+          { "internalType": "address payable", "name": "dstReceiver", "type": "address" },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint256", "name": "minReturnAmount", "type": "uint256" },
+          { "internalType": "uint256", "name": "flags", "type": "uint256" }
+        ],
+        "internalType": "struct IOneInchRouter.SwapDescription",
+        "name": "desc",
+        "type": "tuple"
+      },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "convert",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "target", "type": "address" },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "directCall",
+    "outputs": [{ "internalType": "bytes", "name": "returnData", "type": "bytes" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getFeeManager",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getOneInchRouter",
+    "outputs": [{ "internalType": "contract IOneInchRouter", "name": "", "type": "address" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getReceiver",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getRedistributedToken",
+    "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "inputs": [], "name": "redistribute", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  {
+    "inputs": [{ "internalType": "address", "name": "lpToken", "type": "address" }],
+    "name": "unwrapLpToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
