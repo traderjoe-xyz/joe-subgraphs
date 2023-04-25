@@ -2,6 +2,8 @@ type FeeBank @entity {
   # address
   id: ID!
 
+  usdRemitted: BigDecimal!
+
   swaps: [Swap!]! @derivedFrom(field: "feeBank")
 
   block: BigInt!

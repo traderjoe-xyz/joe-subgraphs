@@ -79,5 +79,6 @@ export function handleSwap(event: SwapEvent): void {
   swap.dayData = dayData.id
   swap.save()
 
+  feeBank.usdRemitted = feeBank.usdRemitted.plus(amountOutUsd)
   feeBank.save()
 }

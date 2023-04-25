@@ -1,5 +1,5 @@
 import { FeeBank } from '../../generated/schema'
-import { JOE_FEE_BANK } from 'const'
+import { BIG_DECIMAL_ZERO, JOE_FEE_BANK } from 'const'
 import { Address, ethereum } from '@graphprotocol/graph-ts'
 
 export function loadFeeBank(address: Address, block: ethereum.Block): FeeBank | null {
@@ -12,6 +12,7 @@ export function loadFeeBank(address: Address, block: ethereum.Block): FeeBank | 
 
   if (feeBank === null) {
     feeBank = new FeeBank(id)
+    feeBank.usdRemitted = BIG_DECIMAL_ZERO
   }
   feeBank.timestamp = block.timestamp
   feeBank.block = block.number
