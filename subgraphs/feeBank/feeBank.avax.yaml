@@ -1,15 +1,15 @@
-specVersion: 0.0.1
-description: FeeConverter
+specVersion: 0.0.2
+description: FeeBank
 schema:
-  file: ./feeConverter.graphql
+  file: ./feeBank.graphql
 dataSources:
   - kind: ethereum/contract
     name: FeeConverter
-    network: {{ network }}
+    network: avalanche
     source:
-      address: '{{ address }}'
+      address: '0x60233142BefcE7D4ed73e7793eaD2d6190fccAAB'
       abi: FeeConverter
-      startBlock: {{ startBlock }}
+      startBlock: 29178804
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

@@ -1,6 +1,6 @@
 import { DayData } from '../../generated/schema'
 import { ethereum, BigInt } from '@graphprotocol/graph-ts'
-import { BIG_DECIMAL_ZERO, BIG_INT_ZERO } from 'const'
+import { BIG_DECIMAL_ZERO } from 'const'
 
 export function loadDayData(block: ethereum.Block): DayData {
   const SECONDS_PER_DAY = 86400
