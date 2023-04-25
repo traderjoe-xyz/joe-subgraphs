@@ -1,8 +1,8 @@
-type FeeConverter @entity {
+type FeeBank @entity {
   # address
   id: ID!
 
-  swaps: [Swap!]! @derivedFrom(field: "feeConverter")
+  swaps: [Swap!]! @derivedFrom(field: "feeBank")
 
   block: BigInt!
   timestamp: BigInt!
@@ -12,7 +12,7 @@ type Swap @entity {
   # source token + "-" + destination token + "-" + block number
   id: ID!
 
-  feeConverter: FeeConverter!
+  feeBank: FeeBank!
 
   tx: Bytes!
 

@@ -53,8 +53,8 @@ export const JOE_BAR_ADDRESS = Address.fromString('0x57319d41f71e81f3c65f2a47ca4
 export const JOE_MAKER_ADDRESS = Address.fromString('0x861726bfe27931a4e22a7277bde6cb8432b65856')
 export const JOE_MAKER_V2_ADDRESS = Address.fromString('0xC98C3C547DDbcc0029F38E0383C645C202aD663d')
 
-// FEE CONVERTER
-export const JOE_FEE_CONVERTER = Address.fromString('0x363853dc997bD8276BbBf79E6CFCeD91f6B420BF')
+// FEE v2
+export const JOE_FEE_BANK = Address.fromString('0x60233142BefcE7D4ed73e7793eaD2d6190fccAAB')
 
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('0xed8cbd9f0ce3c6986b22002f03c6475ceb7a6256')

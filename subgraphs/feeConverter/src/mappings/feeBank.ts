@@ -1,9 +1,8 @@
 import { Address, BigDecimal, BigInt } from '@graphprotocol/graph-ts'
 import { Swap as SwapEvent } from '../../generated/FeeConverter/FeeConverter'
 import { Swap } from '../../generated/schema'
-import { loadDayData, loadFeeConverter } from '../entities'
+import { loadDayData, loadFeeBank } from '../entities'
 import { getUSDRate } from 'pricing'
-import { BIG_DECIMAL_1E12 } from 'const'
 import { ERC20 } from '../../generated/FeeConverter/ERC20'
 
 function getDecimals(address: Address): BigInt {
@@ -21,9 +20,21 @@ function getDecimals(address: Address): BigInt {
   return BigInt.fromI32(decimalValue as i32)
 }
 
+function getSymbol(address: Address): string {
+  const contract = ERC20.bind(address)
+  let symbol = ''
+
+  const symbolResult = contract.try_symbol()
+  if (!symbolResult.reverted) {
+    symbol = symbolResult.value
+  }
+
+  return symbol
+}
+
 export function handleSwap(event: SwapEvent): void {
-  const feeConverter = loadFeeConverter(event.address, event.block)
-  if (!feeConverter) {
+  const feeBank = loadFeeBank(event.address, event.block)
+  if (!feeBank) {
     return
   }
 
@@ -33,19 +44,26 @@ export function handleSwap(event: SwapEvent): void {
   const tokenInDecimals = getDecimals(tokenIn)
   const tokenOutDecimals = getDecimals(tokenOut)
 
-  const amountIn = event.params.amount.toBigDecimal().div(BigDecimal.fromString('1e' + tokenInDecimals.toString()))
-  const amountOut = event.params.returnAmount
-    .toBigDecimal()
-    .div(BigDecimal.fromString('1e' + tokenOutDecimals.toString()))
+  const tokenInSymbol = getSymbol(tokenIn)
+  const tokenOutSymbol = getSymbol(tokenOut)
 
-  const amountInUsd = amountIn.times(getUSDRate(tokenIn, event.block)).div(BIG_DECIMAL_1E12)
-  const amountOutUsd = amountOut.times(getUSDRate(tokenOut, event.block)).div(BIG_DECIMAL_1E12)
+  const amountIn = event.params.amountIn.toBigDecimal().div(BigDecimal.fromString('1e' + tokenInDecimals.toString()))
+  const amountOut = event.params.amountOut.toBigDecimal().div(BigDecimal.fromString('1e' + tokenOutDecimals.toString()))
+
+  const amountInUsd = amountIn
+    .times(getUSDRate(tokenIn, event.block))
+    .div(BigDecimal.fromString('1e' + BigInt.fromString('18').minus(tokenInDecimals).toString()))
+  const amountOutUsd = amountOut
+    .times(getUSDRate(tokenOut, event.block))
+    .div(BigDecimal.fromString('1e' + BigInt.fromString('18').minus(tokenOutDecimals).toString()))
 
   const swapId = tokenIn.toHex() + '-' + tokenOut.toHex() + '-' + event.block.number.toString()
   const swap = new Swap(swapId)
-  swap.feeConverter = feeConverter.id
+  swap.feeBank = feeBank.id
   swap.tokenIn = tokenIn
   swap.tokenOut = tokenOut
+  swap.tokenInSymbol = tokenInSymbol
+  swap.tokenOutSymbol = tokenOutSymbol
   swap.amountIn = amountIn
   swap.amountOut = amountOut
   swap.amountInUsd = amountInUsd
@@ -53,10 +71,13 @@ export function handleSwap(event: SwapEvent): void {
   swap.timestamp = event.block.timestamp
   swap.block = event.block.number
   swap.tx = event.transaction.hash
-  swap.save()
 
   const dayData = loadDayData(event.block)
   dayData.usdRemitted = dayData.usdRemitted.plus(amountOutUsd)
+  dayData.save()
 
-  feeConverter.save()
+  swap.dayData = dayData.id
+  swap.save()
+
+  feeBank.save()
 }
