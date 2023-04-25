@@ -7,10 +7,10 @@
     "prepare:avax": "mustache config/avax.json feeBank.template.yaml > feeBank.avax.yaml",
     "codegen:avax": "graph codegen feeBank.avax.yaml",
     "build:avax": "graph build feeBank.avax.yaml",
-    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ max-3-7/test-joe-v2 feeBank.avax.yaml",
-    "create-local": "graph create --node http://localhost:8020/ max-3-7/test-joe-v2",
-    "remove-local": "graph remove --node http://localhost:8020/ max-3-7/test-joe-v2",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  max-3-7/test-joe-v2 feeBank.avax.yaml"
+    "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ traderjoe-xyz/fee-collector-avax feeBank.avax.yaml",
+    "create-local": "graph create --node http://localhost:8020/ traderjoe-xyz/fee-collector-avax",
+    "remove-local": "graph remove --node http://localhost:8020/ traderjoe-xyz/fee-collector-avax",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  traderjoe-xyz/fee-collector-avax feeBank.avax.yaml"
   },
   "dependencies": {
     "@traderjoe-xyz/core": "^2.4.6"
