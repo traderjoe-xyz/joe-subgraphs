@@ -1,0 +1,47 @@
+type FeeBank @entity {
+  # address
+  id: ID!
+
+  usdRemitted: BigDecimal!
+
+  swaps: [Swap!]! @derivedFrom(field: "feeBank")
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type Swap @entity {
+  # source token + "-" + destination token + "-" + block number
+  id: ID!
+
+  feeBank: FeeBank!
+
+  tx: Bytes!
+
+  tokenIn: Bytes!
+  tokenInSymbol: String!
+
+  tokenOut: Bytes!
+  tokenOutSymbol: String!
+
+  amountIn: BigDecimal!
+  amountInUsd: BigDecimal!
+
+  amountOut: BigDecimal!
+  amountOutUsd: BigDecimal!
+
+  dayData: DayData!
+
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type DayData @entity {
+  # timestamp / 86400
+  id: ID!
+
+  date: Int!
+  usdRemitted: BigDecimal!
+
+  swaps: [Swap!] @derivedFrom(field: "dayData")
+}

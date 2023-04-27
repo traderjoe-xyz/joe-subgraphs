@@ -27,5 +27,6 @@
   "min_usd_threshold_new_pairs": "0",
   "min_liquidity_providers": "5",
   "zero_address": "0x0000000000000000000000000000000000000000",
-  "joe_dex_lens_address": "0x16978e42a9b14A19878161A7EdE255637ce361e0"
+  "joe_dex_lens_address": "0x16978e42a9b14A19878161A7EdE255637ce361e0",
+  "joe_fee_bank": "0x60233142BefcE7D4ed73e7793eaD2d6190fccAAB"
 }

@@ -53,6 +53,9 @@ export const JOE_BAR_ADDRESS = Address.fromString('{{ joe_bar_address }}')
 export const JOE_MAKER_ADDRESS = Address.fromString('{{ joe_maker_address }}')
 export const JOE_MAKER_V2_ADDRESS = Address.fromString('{{ joe_makerV2_address }}')
 
+// FEE v2
+export const JOE_FEE_BANK = Address.fromString('{{ joe_fee_bank }}')
+
 // PRICING
 export const TRADERJOE_WAVAX_USDT_PAIR_ADDRESS = Address.fromString('{{ wavax_usdt_pair_address }}')
 export const JOE_USDT_PAIR_ADDRESS = Address.fromString('{{ joe_usdt_pair_address }}')
