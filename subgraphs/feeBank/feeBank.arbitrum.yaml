@@ -5,7 +5,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: FeeConverter
-    network: avalanche
+    network: arbitrum-one
     source:
       address: '0x60233142BefcE7D4ed73e7793eaD2d6190fccAAB'
       abi: FeeConverter
